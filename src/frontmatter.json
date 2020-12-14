@@ -1,0 +1,26 @@
+{
+	"title": "How does the computer become a just superhero?",
+	"description": "A literature review of fairness in machine learning",
+	"password": "prove",
+	"authors": [
+		{
+			"author": "Amalie Broggaard Pauli, Niklas Kasenburg",
+			"affiliation": "Alexandra Institute, Alexandra Institute",
+			"affiliationURL": "https://alexandra.dk/uk, https://alexandra.dk/uk"
+		}
+	],
+	"katex": {
+		"delimiters": [
+			{
+				"left": "$",
+				"right": "$",
+				"display": false
+			},
+			{
+				"left": "$$",
+				"right": "$$",
+				"display": true
+			}
+		]
+	}
+}

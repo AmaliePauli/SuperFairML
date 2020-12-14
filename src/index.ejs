@@ -1,0 +1,324 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style id="distill-article-specific-styles">
+    <%=require("../static/styles.css") %>
+  </style>
+  <script src="https://distill.pub/template.v2.js"></script>
+</head>
+
+<body>
+
+  <d-front-matter>
+    <script type="text/json">
+      <%= JSON.stringify(require("./frontmatter.json"), null, 4) %>
+    </script>
+  </d-front-matter>
+
+  <d-title>
+    <h1>How does the computer become a just superhero?</h1>
+    <p>A review of fairness in machine learning </p>
+  </d-title>
+
+  <d-article>
+    <p>
+      Super cool machine learning systems should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or, the real question, how do we ensure models to be fair and just in their outcome when they have an impact on humans - It is like every other superhero movie, the plot is to save humanity. Or staying a bit more down to earth, this paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing some results from a small survey conducted about perception and comprehension in algorithmic fairness. It is presented in an illustrative way using 'superheroes' as an analogue and by playing with a superhero dataset from Kaggle as an example and by presenting results from the survey by asking the reader to take a stand and check comprehensive about fairness question during the read. The survey showed that [RESULTS]. The aim is to disseminate knowledge and have the reader think about trade-offs and challenges, such we know when and how fairness in Machine Learning is an essential concern.           
+  </p>
+<figure  style="text-align: center;">
+  <img src="NONE" alt="cartoon" style="width:400px;height:200px";>
+</figure>
+
+<h1>Introduction </h1>
+<h3>Please introduce us </h3>
+<p>
+     ... to this new universe of fairness.  Data-driven models like machine learning are more and more applied in society within a range of different areas and tasks from recommender systems, web search to criminal courts [REFERENCER]. However, with the rise of machine learning models, there have the latest years been an increased focus of fairness and transparency within the field <d-cite key=" chouldechova2020snapshot "></d-cite>. Several cases have even reached the media, where they have been heavily debated as unfair. One example is a United States criminal risk assessment system, COMPAS, used in courts for parole decisions. The system assigns a risk score to indicate the likelihood of a person to recommit a new crime. It was discovered by ProPublica in 2016 that black people, who truly would not commit a new crime, were more likely to get wrongly assigned a higher risk score than white people, and thereby getting a lesser chance of parole <d-cite key=" angwin2016machine "></d-cite>.
+Another example, showed an underrepresentation of women and gender stereotypes in occupations in image search (<d-cite key="kay2015unequal"></d-cite>).
+    , with the example hitting the news being the case that in 2015 the first female to appear on a Google Image search on 'CEO' was a barbie doll dressed in a suit several rows down
+    <d-footnote id="d-footnote 1">https://www.theverge.com/tldr/2015/4/9/8378745/i-see-white-people </d-footnote>.
+    </p>      
+    <h3>Every hero has a history </h3> 
+    <p>
+    … and so do bias in models. The common, and main concern of the above examples of algorithmic bias, is not that the models sometimes fail, and it is also not enough to understand the technical reasons behind it. It is according to Kate Crawford in her keynote <i> The Trouble with Bias</i> at NIPS 2017 (<d-cite key=" crawford2017keynote "></d-cite>) the fact that the models reproduce a cultural and historian bias present in society. The two cases above probably seem problematic because they are reproducing respectively discrimination of black people and inequality between genders in the labour market. With machine learning being put more and more into productions, we are potentially looking at a systematic and automatic way of reproducing discrimination or favouritism. It is like super-villains; we should understand their <i>history</i> to know why they became unjust. However, the solution to stop this is no way simple. The unanswered question remains, what is a fair model? No absolute answer can ever be given to this since it will change over time and cultural, but a lot of work has been done in the literature to try to mathematical formalize and address this question.  
+    </p> 
+    <h3>The plot </h3> 
+    <p>
+  … of this paper will be to circulate this question of what a fair model is by presenting an illustrative introduction to fairness in machine learning focussing on explaining different mathematical fairness criteria. The paper is looking at both the comprehension and the perception of fairness by presenting results from a small survey conducted with [XXX] participants. There is a focus on the following three mathematical fairness criteria, Demographic parity, Equalized Opportunity, Statistical Parity. One central purpose of the survey was to examine which mathematical fairness criteria people perceive as fair similar to the aim in <d-cite key="harrison2020empirica"></d-cite> and <d-cite key="srivastava2019mathematical"></d-cite>. However, <d-cite key="saha2019measuring"></d-cite> raise the question of laypeople comprehension of the metrics and conducted a survey examine this along with the sentiment towards the metrics. Therefore, the objective of this survey was likewise to measure the comprehension and link it to the perception of fairness, as well as examine the consistency of answers. The survey, like this paper, is presented with a play setting about super figures. This is to both give a story easy to relate to along avoiding a true or realistic case such the essence can be the structure of the setting at not the actual case. The storyline is formulated along the lines of a set of super figures, who can be either heroes or villains, all wanting to go to a party: they are assessed in the door e.g by an algorithm since only the figures who are “believed” to be heroes are allowed in. The focal question is how to secure that both the group of male and female figures are treated fair as well as what does this even mean. The details of the survey are outlined in [APPENDIX A]. 
+  </p>
+
+<figure  style="text-align: center;">
+  <img src="NONE" alt="cartoon" style="width:400px;height:200px";>
+</figure>
+
+    <p>
+Data from superhero dataset from Kaggle<d-footnote id="d-footnote 1"> https://www.kaggle.com/claudiodavi/superhero-set </d-footnote>  is used during the article as an example. A simple classification model has been trained on the datasets to distinguish between villains and heroes where features such as superpowers, names, publisher, height and weight have been accessible. Read more about in [APPENDIX B].
+The interactive illustrations of graph and questionaries are to invite the reader to take a stand about the fairness questions during the read, you can start by:
+</p> 
+ <div id="questionnaire-target-0" ></div>
+   <p></p> 
+<p>The main contributions of this paper are two-folded. First, it is to dissimilate knowledge of the current stage of fairness in machine learning trough a literature review presented as an interactive paper encouraging people to think about some of the issues with fairness.  Second, to demonstrate trough a survey that comprehensive and perception… [HIGLIGT conclusion on survey ].
+The paper is after this introduction divided into four main sections. The first section focus on understanding the notion of bias a why and how it can be an issue. The second, on defining fairness and methods to mitigate it. There will be a focus on three mathematical fairness criteria and the understanding of these. The third section then takes up the question of what is perceived as fair with a starting point in the three criteria as well as highlighting results from the survey. The last section sums up the challenges still ahead and concludes the main points of this paper.   
+    </p>
+
+<h1>The notion of bias</h1>
+<h3>It is the suit</h3>
+<p>
+… which gives identity. Kate Crawford presented in <d-cite key=" crawford2017keynote "></d-cite> a division of the notion of bias into the harm of allocation and harm of representation. Examining why representation bias can be harmful, invite us to think of the example with the image search on ‘CEO’ – and of the important role the suit for a super figure has. The point is that how we as groups or induvial are presented have an impact on how we are perceived by ourselves and others which links to identity (<d-cite key=" crawford2017keynote "></d-cite>). Therefore, it does matters when there are no images of females CEOs. Other examples on representational bias, is facial recognition systems working porer on darker skin (<d-cite key=" raji2019actionable"></d-cite>), it is gender stereotypes in occupations in word embeddings  (<d-cite key=" bolukbasi2016man"></d-cite>), it is the example of an afro American woman labelled as ‘gorilla’ by Google Photo  <d-footnote id="d-footnote 1"> https://twitter.com/jackyalcine/status/615329515909156865 </d-footnote>. Potential it could also be a recommender system not showing adds about the new superhero film to certain profiles e.g females even though they would like it. The issue is therefore not only that the performance level of systems differs between groups, it is also how they fail, which should raise concerns. 
+    </p>
+<figure  style="text-align: center;">
+  <img src="./images/barbie.PNG" alt="barbies" style="width:400px;height:200px";>
+  <figcaption>Barbies [TEKST] </figcaption>
+</figure>
+
+<h3> When powers are divided </h3>
+<p>
+… we are looking at an allocation problem. How resources and opportunities are allocated could potential be skewed and cause harm to an group, e.g. loan applications (<d-cite key="mukerjee2002multi "></d-cite>), or parole decisions (<d-cite key="dressel2018accuracy "></d-cite>). Often in an allocation problem, there is one outcome that is the beneficial outcome, which we will denote with the <i>positive</i> outcome versus the disadvantaged outcome which is denoted the <i>negative</i> outcome. Further, often we are looking at different groups which traditionally have been gender or race, and the aim is to protect the members of the group from discrimination or unfair treatment – we denote such notion of belonging to a group as <i>protected attributes</i>. A group subject to such treatment is denoted the <i>unprivileged</i> group. When using data and statistic, it can sometimes be a law requirement to not use any protected attributes in a system. In our super figure dataset example, we could simply not fit the classifier on gender. This would be denote ad <i>fairness through unawareness</i> <d-cite key=" gajane2017formalizing "></d-cite>. However, it can often be a problematic solution to the problem, since often the case occurs that the information of a protected attribute is latent present in other variables. For the super figure, imagine the gender is correlated with other variables such as  <i>weight</i> and <i>height</i>. 
+    </p>
+
+<h3> Another dimension </h3>
+<p>
+…of a division of the notion bias, would be not to divide on the potential harm it produced but divide it on the source of its occurrence. The paper <d-cite key="mitchell2018prediction "></d-cite> defines the terms <i>statistical bias</i> and <i>societal bias</i>. The first term is referring to errors or mistakes in the collections and use of data and model development in a way where reality is not represented in a proper manner. The latter is referring to social structures which are in fact presented in data but is perceived as unfair. This is an important distinction because it means if a model e.g. is treating two groups differently, it might not be an issue in the model but caused by an underlying structure in society. However, it could also be the case that societal bias is manifesting itself into the model in the form of stereotyping (<d-cite key=" carey2020blog "></d-cite> ). To understand this issue, lets us look at the blogpost by Valerie Carey <d-cite key=" carey2020blog "></d-cite> where the issue is well-explained through a “money lending” scenario where the system is accused of discriminating females. Take it as a fact, that females on average have lower income than males which perhaps could be due to societal bias caused by discrimination in education or workplace. However, the question at hand is whether the model itself is discriminating when it gives fewer or smaller loans to the group of females. Here the point is whether the model is fitting on income, which would be fair since it is reasonable to assume the income hold information about the ability to pay back a loan – or if the model instead is fitting of some proxy for gender, and thereby learning that females, in general, have lower income. Resulting in an unfair treatment since the fact of being a female then is affecting the chance of getting a loan. This is a case of stereotyping.   </p>
+  <p>
+ Both dimensions of understanding types of biases through either the impact or the occurrence find coherences in <d-cite key=" olteanu2019social "></d-cite>  examination of social data where they end up with a diagram both representing the sources of occurrences of bias and the manifestations and issue. However, they divide into a lot more subcategories of bias, and the same does <d-cite key=" mehrabi2019survey "></d-cite> which list 23 types.  In the next paragraph, we will address how bias can occur of bias a little closer without going through an extensive list.
+  </p>
+<h3> The villains are</h3>
+<p>
+… the data, the algorithm, and the user interactions <d-cite key=" mehrabi2019survey "></d-cite>. The data is probably the first suspect of bias introduced into a model, but the three things inflict each other. To list some of the “offences” by the data; a skew in the data collections, missingness in attributes, a skew in human annotations or an unbalance in examples. To stay in the play setting about super figures, one could imagine the case where the police historically have examine more male figures than females and therefore have found more villains, which then will be reinforced over time. Another case could be picturing missingness in self-reported attributes, where they could be missing for a reason related to a protected attribute like gender. Discrimination could also be put into the data by humans annotating the data. Or perhaps a so common thing as unbalanced training data could introduce a skewed into a model. In the case with the super figures play data from Kaggle, we are in fact looking at an unbalanced dataset with fewer females than males, making it potentially harder for a model to learn to generalise the classifications of females: 
+</p>
+<figure  style="text-align: center;">
+  <img src="./images/countplot_gender.svg" alt="unbalanced data" style="width:500px;height:300px";>
+  <figcaption> [TEKST] There is an unbalanced in the representation of males and females in the play dataset </figcaption>
+</figure>
+
+<p>
+An undesired skew can also be introduced into the model by the choice of the algorithm; imagine that one type of decision boundary is more suited for one group than the other.  A last but not least, how the model is put into production, and how humans interact with it can in itself be a source of bias, for example, if the models' suggestions are followed in a skewed way <d-cite key="selbst2019fairness "></d-cite>, <d-cite key=" green2019disparate "></d-cite>. Knowing this, imagine now you are a super figure wanting to go to the party, then you could take a stand on the following questions:
+</p>
+<figure>
+<div id="questionnaire-target-1" ></div>
+  <figcaption> [BESKRIVELSE] </figcaption>
+</figure>
+
+<h1>Defining fairness</h1>
+<h3> Joining Justice League</h3>
+<p>
+… by stating looking at what we mean with a just and fair model. Fairness is defined in the Cambridge Dictionary as  <i>the quality of treating people equally or in a way that is right or reasonable</i><d-footnote id="d-footnote 1">https://dictionary.cambridge.org/dictionary/english/fairness</d-footnote>. Exactly, what it means to treat people right and how it can be operationalized is what the fairness literature is trying to determine. But it is no easy question, looking at the examples of biased outcome in the introduction, we had the case of an image search on CEO revealing a barbie dull as the first female several rows down, but what a righteous result should yield is not given. Kate Crawford (<d-cite key=" crawford2017keynote "></d-cite>) raised the question if the proportion of male and female (and different ethnicity) images should resemble the current statistic of people contesting the job ‘CEO’, or should it be what people <i>think </i> is the right proportion since the images search is contributing to shaping reality. The other case from the introduction about criminal risk assessment, is heavily used as an example in the literature (e.g <d-cite key="berk2018fairness"></d-cite>, <d-cite key=" green2019disparate "></d-cite>, <d-cite key=" dressel2018accuracy "></d-cite> ) and it is a example of outcome fairness, where the goal is to determine in which way a desired outcome righteous should be distributed among groups or individuals.   In the introduction, it was mentioned that <d-cite key="angwin2016machine"> </d-cite>  found the system to be biased against blacks since the rate of <i>false positive</i> (people who wound not re-offend receiving wrongly a high risk score) was higher among black then white. However, the response to this from the makers of COMPAS was that it was wrong concluded and that the system was not biased against black since the <i>predictive parity</i> holds between the two groups   <d-cite key=" dieterich2016compas"></d-cite> - which means those who correctly are given a positive outcome out of all who were predicted a positive outcome, is the same. Now, the thing is, that these two measures are not necessarily compatible <d-cite key=" berk2018fairness "></d-cite>  and it therefor opens a discussion of what is most fair. However, this was just to give a motivating example, in the rest of this section will look into these mathematical fairness criteria as well as their trade-offs, and try to understand them better. We will start with an outline of how we can work with bias and fairness in data and models.   
+</p>
+<h3> Weapons to defend ourselves</h3>
+<p>
+…  against bias and unfairness. One of the weapons is the open source tool AI Fairness 360 by IBM <d-cite key="bellamy2018ai"></d-cite> which lists three types of algorithm to mitigate bias:  
+   <li>  <b>Pre-processing algorithms:</b> mitigating bias in the data before training, e.g. by reweighting datapoints (<d-cite key=" kamiran2012data"></d-cite>, <d-cite key=" cesaro2019measuring "></d-cite>) or learning a repressenation of the data omittigating information of protected attributes (<d-cite key=" zemel2013learning "></d-cite>) </li> 
+  <li>  <b>In-processing algorithms:</b> mitigating bias during training of the model, e.g by regularizations techniques, eg. <d-cite key=" hickey2020fairness "></d-cite>
+</li>
+  <li> <b>Post-processing algorithms: </b> Mitigating bias after the model has been trained, e.g by adjusting the output labels by optimizing after some metric, e.g. <d-cite key=" hardt2016equality"></d-cite>
+  </li>
+</p>
+
+<p>
+Non the less, the main challenges remain to first identify bias in the first place, and second to decide what then is a fair outcome. Especially in the cases of representational harm, it can be hard to discover undesired model behaviour, as well as defining more righteous behaviour. One example is an attempt made by<d-cite key="bolukbasi2016man"></d-cite>  where they compare occupational stereotype in word embeddings with human perception of  occupational stereotype through an Amazon Turk survey and mitigate the bias accordingly to the human perception. However, it is not a method that scales or remains absolute through time and culture. Regarding outcome fairness, a lot of work have been done trying to mathematically formalize fairness <d-cite key=" gajane2017formalizing "></d-cite> and in the literature over 70 <d-footnote id="d-footnote 1"> https://aif360.mybluemix.net/</d-footnote> different metrics have been defined. In the next subsection, we will have a focus on defining fairness for allocation problems. 
+</p>
+<h3> Listing superpowers</h3>
+<p>
+… aka defining mathematical fairness criteria. Mathematical fairness criteria concerning classification where certain treatment or outcomes are the desired output can be grouped together in different ways, however we will highlight four ideas on formalizing fairness partly based on <d-cite key=" gajane2017formalizing "></d-cite>, <d-cite key=" verma2018fairness "></d-cite>    and <d-cite key=" chouldechova2020snapshot"></d-cite> :
+</p>
+<li>  <b> Statisctical Measures</b>  A lot of focus in the literature have been on  statistical measures, where metrics for a predictor can be calculated by comparing the predictive classes and the actual classes. We denote the privileged outcome as <i>positive</i> and the unprivileged outcome as  <i>negative </i> and defined the following terms for a binary classifier: <p> </p>
+
+
+<style type="text/css">
+  .tg  {border:none;border-collapse:collapse;border-spacing:0;}
+  .tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
+    padding:10px 5px;word-break:normal;}
+  .tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
+    overflow:hidden;padding:10px 5px;word-break:normal;}
+  .tg .tg-ez6v{background-color: #9bd5e5;border-color:inherit;text-align:center;vertical-align:top}
+  .tg .tg-0u52{background-color: #edc375;border-color:inherit;text-align:center;vertical-align:top}
+  </style>
+  <table class="tg">
+  <thead>
+    <tr>
+      <th class="tg-0u52"><span style="font-weight:bold">True positive (TP):</span> <br>Cases where both the predicted and actual outcome is positive   <br></th>
+      <th class="tg-ez6v"><span style="font-weight:bold">False Positive (FP):</span><br>Cases where the predicted outcome is positive, but the actual outcome is negative<br></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="tg-ez6v"><span style="font-weight:bold">False Negative (FN):</span><br>Cases where the predicted outcome is negative, but the actual outcome is positive<br></td>
+      <td class="tg-0u52"><span style="font-weight:bold">True Negative (TN):</span><br>Cases where both the predicted and the actual outcome is negative<br></td>
+    </tr>
+  </tbody>
+  </table>
+<p>
+Using the above terms, different metrics can be calculated with the aim of achieving fairness between groups (e.g race or gender) . The requirements for fairness with such statistical measures is to (approximately) achieve a parity (i.e., equality) between groups for a defined measure (<d-cite key=" verma2018fairness "></d-cite>,    <d-cite key=" chouldechova2020snapshot"></d-cite> ). Some of the most know measures will be explained and discussed after this list, followed by a general discussion of this way of defining fairness. </li> 
+<li>  <b> Individual fairness </b> The idea is to constraint on individuals instead of group statistical measure.   It is formulated in <d-cite key=" dwork2012fairness "></d-cite>  as similar individuals should be treated similar. This should yield that members of different group which e.g. have similar attributes should receive the same outcome regardless of the protected group attribute. For our super figures, this could mean that if you have the same power of doing mass destruction, the outcome of the classifier should be the same regardless of you are male or female. However, the main shortcoming of this approach is the non-trivial questions of defining a similarity measure between individuals in different cases with the assumptions this requires (<d-cite key=" chouldechova2020snapshot"></d-cite>). Take a silly example, of how to compare years of super hero experience with the diaplomma from a super hero academy?   </li>
+<li>  <b> Preference-based Fairness </b> Is suggested by  <d-cite key=" zafar2017parity"></d-cite> and motivated by the term <i> envy-freeness</i> from the literature in economics. The intuition is not to look at achieving parity measures, but instead require farness by the fact that any group of users should <i> prefer </i> their own group-depended classifier instead of any others groups classifier. This idea leaves room for optimizing the classifiers within each group without having a parity constraint which might be incompatible with improving accuracy. In our super figure case, we could make two classifiers for respectively male and females and optimize performance for both so long as it would not makes sense for the group members to wanting to use the other groups classifier. However, the critic of this is that it is not easy in all domains to calculate such “preference” way of allocation (<d-cite key=" gajane2017formalizing "></d-cite>). </li>
+<li>  <b> Causal Reasoning </b> Using causual inference to achieve fairness is for example suggested by <d-cite key=" kusner2017counterfactual "></d-cite>, where they defined the idea of <i>counter-factual</i> to be;  individual of a protected group should receive the same outcome as if the group belonging where flip in a counter-factual setting . This means, we are looking at a female super figure and we wants to look at the male-version of this figure to see if they would get the same outcome. Hence we need to build a model that would learn the casual relations such we would know how the other attributes would changes with the “gender swap”. For example, properly attributes such as “weight” and “height” would changes for a male-version. However, it is not necessarily easy to accurately build such counter-factual models, and it might later inflict the actually causality which we actually are hoping to learn with the classification model. Lastly doing it might result in types of bias of wrongly evaluating on or convincing one of already known outcomes (<d-cite key=" gajane2017formalizing "></d-cite>). </li>
+<li>  <b> Fairness through explanations </b> Another approaches  to detect possible biases is to compare model explanations like feature attributions for different groups. The framework SHAP (<d-cite key=" lundberg2017unified"></d-cite>) uses shapely values to measure the marginal contribution of a feature’s impact on a prediction, and by looking at a “global” contribution on a test dataset, it is possible to detect if the model fits on the protected attribute for a group (<d-cite key="cesaro2019measuring "></d-cite>). The paper <d-cite key="cesaro2019measuring "></d-cite>) tries to validate the approach by comparing to static measures, and  <d-cite key="cesaro2019measuring "></d-cite> further suggest an in-processing algorithm for mitigating potential bias. Note, that this idea about accessing fairness through examining what features a black model is fitting on, is not restrict to harms of allocation problems. It could e.g. also be used on a text classifier for sentiment to ensure the model is not fitting on words which is not carrying sentimental meaning but perhaps instead meaning of racial or gender belongings.  
+   </li>
+
+<h3> Batman begins</h3>
+<p>… is by the way a great movie, but the reference here is that every super figure needs to learn to master their power in the beginning. We will therefor start by trying to understand some of the first, and most known statistical measure of fairness, before we discuss the advantages and disadvantages with this approaches.  
+</p>
+<h4><b>Demographic parity </b></h4>
+<p>Demographic parity or it is also sometimes called group fairness or statistical parity (<d-cite key=" verma2018fairness "></d-cite>, <d-cite key=" hardt2016equality"></d-cite>,  <d-cite key="dwork2012fairness "></d-cite>) incorporate the idea, that non-discrimination between groups is achieved if the chance of getting a positive outcome is equalized acrossed groups. This can mathematically for a binary classification task with two groups be formalized as: </p>
+<d-math block="">
+P(\hat{Y} |G=0)=P(\hat{Y} |G=1),
+</d-math block="">
+  <p>where the predictor <d-math> \hat{Y} \in \{0,1 \}  </d-math> and the protected group variable <d-math> G \in \{0,1 \}  </d-math>. It can also be thought of as the <i> Positive Rate </i> calculated as</p>
+<d-math block="">
+PR = \frac{TP+FP}{TP+FP+FN+FP} .
+</d-math block="">
+
+<p>In our super figure example this means the fraction of females and the fraction of males getting accepted to the party should be equalized, or in practice, stay close together. I the survey we tried peoples comprehensive of this fairness criterion, and you can check your own understanding as well: </p>
+  <figure>
+<div id="tester-target-10" ></div>
+      <figcaption> [BESKRIV DET RIGTIGE SVAR] </figcaption>
+<div id="tester-target-11" ></div>
+      <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
+<div id="tester-target-12" ></div>
+      <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
+    </figure>
+<p> The last question points to the critique of this measure made by <d-cite key=" hardt2016equality"></d-cite>, where it is pointed out that the metric does not account for a case where the true outcome (true hero or villain)  are correlated with the protected group which could lead us to be forced to accepted not-qualified figures in one group or dismiss qualified in the other group to achieve the parity. The criterion however can have its justice, if we are looking at a <i> societal bias</i> we actively want to change. Imagine a case of young super figures getting admitted into an academy, where the fact is that young male figures are less qualified than the females. However, we want to enforce a policy of even acceptance rate, because we want to adjust for this skewed since we believe it is a structural bias in society. (However, we then need to up qualify the males e.g. by extra classes in the beginning.) </p>
+
+<p> By playing with the superhero data from Kaggle and the classifier train to distinguish “hero” or “villain”, we can on the evaluation set, look at the difference in the positive rate for males and females for different threshold values for the classification. By choosing different threshold values, you can achieve parity for the positive rate and discover how it affects other measures in this case: 
+</p>
+
+  <figure>
+<div id="graph-target" ></div>
+<figcaption> [BESKRIVELSE Note, in the data example, “villain” is treated as the positive outcome; who wants a borrowing party?]  </figcaption>
+  </figure>
+
+<h4> <b>Equalized Opportunities</b> </h4>
+<p>Equalized Opportunities and Equalized Odds is proposed by <d-cite key="hardt2016equality"></d-cite> to be an alternatively fairer criterion than Demographic Parity. The idea behind Equalized Opportunities is that people who in fact should receive a positive outcome have equal chance of receiving it independent on their group belonging. It is a relaxation of Equalized Odds, which can be formalized for a binary predictor and in the case of binary group belonging as , </p>
+<d-math block="">
+P(\hat{Y} =1|Y=y,G=0)=P(\hat{Y}=1 |Y=y,G=1),
+</d-math block="">
+  <p>where <d-math> y \in \{0,1\} </d-math>, the predictor is noted with <d-math> hat{Y} \in \{0,1 \}  </d-math> and the protected group variable with <d-math> G \in \{0,1 \}  </d-math>. Relaxation the constraint to  <d-math> y =1</d-math>, where a value of 1 represent the positive outcome defines the criterion for Equalized Opportunities. This can also be formulated as requiring equal <i>True Positive Rate </i> (TPR), and calculated as</p>
+<d-math block="">
+TPR = \frac{TP}{TP+FN} .
+</d-math block="">
+ 
+<p>  In our super figure example, this means that the chance of getting accepted to the party when you, in fact, are a hero should be the same for both male and females. You can verify you own understanding of Equalized Opportunity as well as see the response from the participants in the surveys in the following questions: </p> 
+  <figure>
+<div id="tester-target-13" ></div>
+      <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
+<div id="tester-target-14" ></div>
+      <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
+<div id="tester-target-15" ></div>
+      <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
+    </figure>
+
+<p>Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the True Positive Rate by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  their formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier. As the question also asked, you can in this example see, that you can achive Demograhic Opportunity without achieving Demograhic parity:   </p> 
+  <figure>
+<div id="graph-target-2" ></div>
+<figcaption> [BESKRIVELSE Note, in the data example, “villain” is treated as the positive outcome; who wants a borrowing party?]  </figcaption>
+  </figure>
+	
+<h4> <b>Predictive parity</b> </h4>
+<p>
+Predictive parity also noted as outcome test is a statistical measure which requires that the probability of a correct prediction when predicted as the positive class is the same for all groups <d-cite key=" verma2018fairness "></d-cite>  For a binary predictor it can be defines as </p>
+<d-math block="">
+P(Y =1|\hat{Y} =1,G=0)=P(Y=1 |\hat{Y}=1,G=1),
+</d-math block="">
+  <p>where the predictor is noted with <d-math> \hat{Y} \in \{0,1 \}  </d-math> and the protected group variable with <d-math> G \in \{0,1 \}  </d-math> , <d-math> Y </d-math> is the true class, and a value of 1 indicate the positive outcome. It can also be thought of as achieving the same <i>Positive predicted value </i> (PPV) between the groups, which is calculated as</p>
+<d-math block="">
+PPV =  \frac{TP}{TP+FP}  .
+</d-math block="">
+For our super figures, this means the chance of a correct prediction for figures allowed into the party should be the same for both male and females. Once again, you can try verifying your understanding and the last question is asking for your opinion:
+  <figure>
+<div id="tester-target-16" ></div>
+      <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
+<div id="tester-target-17" ></div>
+      <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
+<div id="questionnaire-target-4" ></div>
+      <figcaption>[BESKRIVELSE]  </figcaption>
+
+    </figure>
+
+<h3> The hero’s lessons halfway through</h3>
+<p>
+… is perhaps that it is not going to be easy. In the above, we saw that in the super figure example it was not possible to simultaneous achieve parity for demographic parity, equalized opportunities, and predictive parity. This is not a special case. It is demonstrated that except in trivial cases many common know notion of fairness is incompatible and also conflict with optimizing accuracy <d-cite key=" kleinberg2016inherent "></d-cite> <d-cite key=" chouldechova2017fair "></d-cite> <d-cite key=" berk2018fairness "></d-cite> . Other critics against the approaches of statistical measures is that it only gives guarantees for the average of a group and not for individuals or even <i>subgroups</i> <d-cite key=" kearns2018preventing "></d-cite>. For example, imagine a case where we only accept female figures from the DC Comics and males from Marvels, then we could set it up such we comply with a fairness criterion for females versus males and DC Comics versus Marvels, but without having a fair treatment of males from DC Comics or females from marvel. This is showcase by  <d-cite key=" kearns2018preventing "></d-cite> both from a toy example and form a real cases. They suggest a framework to learn a fair classifier for a rich set of subgroups. However, it does not overcome the fact that it still is a division of people into groups. Others have raised critic of these statical measures for looking at the problem to static. <d-cite key=" liu2018delayed "></d-cite> made one step simulations for a lending scenario and revealed that complying with the fairness criteria demographic parity or equalised opportunities could lead the protected group to be worse off with respect to their underlying <i> credit scores </i> one step into the future.  At the same time, a policy of unconstrained maximation of profit for the “leading company”  would never lead to a scenario where the protected group were worse off one step in the future. Yet another critic comes from <d-cite key=" carey2020blog "></d-cite>  which demonstrate that fairness metrics cannot be used to distinguish if a model is stereotyping members of a group, or if it is fitting on reasonable attributes and the skew is not in the model but introduced elsewhere in society (See subsection Another dimension ). </p>
+<p>
+  Despite the challenges, the strength of using statistic measures of fairness is that it is an easy way to check for a disparity, and if applicable they are also easy to achieve. Both verifying and achieving it requires no assumption of the data which is not the case either for individual fairness and counterfactual. However, choosing a metric and interpreting any disparity requires thoughts about the bias occurrence and a discussion of whether to adjust a model to meet the parity. The next section will discuss how algorithmic fairness is perceived.       
+</p>
+
+
+<h1>Perceived algorithmic fairness</h1>
+<h3>Who are you favourite  hero</h3>
+<p> … or we mean which is your favourite fairness criterion.   
+</p>
+<figure>
+<div id="questionnaire-target1" ></div>
+  <figcaption>[BESKRIVELSE]  </figcaption>
+</figure>
+<p>
+The question of which statistical fairness measure laypeople perceive as more fair have previously been addressed in the literature. Studies of this have been motivated by the COMPAS debate between equalized opportunities and accuracy, as mention in section [SECTION]. The paper <d-cite key="srivastava2019mathematical "></d-cite> found trough an Amazon Turk survey that it actually was Demographic parity that was perceived as most fair compare to metrics like equalized opportunity and predictive parity (in the paper presented as False Negative Rate and Discovery Rate). However, the survey was conducted showing the participants ten figures which the true label along with the predicted label of two different algorithms, asking them to choose the most discriminating. Questions can be raised whether the participates fully understood the implications of the different “algorithmics”, and whether ten example figures was enough to generalize to a systematic bias.   The paper <d-cite key=" harrison2020empirical"></d-cite> also conducted an Amazon Turk survey comparing the perception of different fairness measure though trough a different design. They were showing participates histograms of two measures for two models where one measure was equalized in one model and the other measure in the other model, and then asked participants to choose between the models. They found a slight result pointing to that False Positive Rate was to prefer over accuracy in a criminal assessment setting. The rest of the pairwise comparison between different measure showed only a wide distribution of preferences. However, the same question can be asked again, of whether the participants fully understood the implication of the parity in the models.  The question about lay people’s comprehensive of fairness metrics is addressed by <d-cite key="saha2019measuring "></d-cite>, which showed that comprehensive can be measure through a multiple-choice survey. They found that in a hiring scenario that Equalized Opportunity was harder to understand than Demographic Parity and in general comprehension was correlated with education level.  However, an interesting founding was a tendency to people with low comprehensive score express less negative sentiment toward a criterion. This survey’s design with expressing the criteria as rules and asking multiple-choice questions have inspired the survey conducted in this paper. The survey of this paper tries to both measure the comprehensive and then compare people’s perception of different criterion based on their comprehensive. Let us look at some results. </p>
+<h4> Hvilke metric forstod folk best – udregn score for hver enkel og for samlet – sammenlign også med folks egen reporterede forståelse for hver metric</h4>
+<p>
+</p>
+<h4> Hvilken metric fortrak folk som forstod det versus ikke? (mest important) Kan vi se en correlation med sp ”likerly scale synes den er fair”  og comprehensive score? </h4>
+<p>
+</p>
+
+<h3> It is the whole setting</h3>
+<p>
+… that makes us like a superhero movie or not, and this also seems to be the case with algorithmic fairness. Instead of only looking at which statistical measure is perceived as most fair, we need to broaden or understanding.  For example,  <d-cite key="grgic2018beyond "></d-cite> suggest to shift the focus from looking at distributive fairness to <i> procedural fairness</i>, which instead of looking at the outcome focus on the process that leads to an outcome.  They operationalise a part of this by examining which input features people perceive as fair to use in different scenarios. In our super figure example, we could in easily imagine that this has a great impact on what is perceived as fair. For example, I might be alright to look at superpowers since we do not want a dangerous cocktail, however weight and height would seem less relevant and therefore discriminating to use, and this even though, it made me the case that it would help on the model's accuracy. Procedural fairness still leaves trade-offs that need to be made. Regarding procedural fairness, we discussed earlier how bias can be introduced in the step of interacting with the system, and hence the interaction with the system can also infect the perceived fairness of the system.  The next section would look at when people think it is fair to be assessed by using data.
+</p>
+<h3> Human or machine</h3>
+<p>
+… which would people preferably to be assessed by in different settings. This question was also raised in <d-cite key="harrison2020empirical"></d-cite> without any consensus in results. In this survey we try to see how additional information can make people changes opinion: </p>
+<figure>
+<div id="questionnaire-target-2" ></div>
+  <figcaption> [BESKRIVELSE]  </figcaption>
+<div id="questionnaire-target-3" ></div>
+  <figcaption>[BESKRIVELSE]  </figcaption>
+</figure>
+<h4> Tage sp fra tidligere om folk overhoved synes det er fair at bruge data og statistik, og derefter om de foretrækker person eller algoritme, og ved hilke ekstra information </h4>
+<p>
+</p>
+<h4> en funderet logik og umiddelbare retsføelse er ikke det samme -> peger mod at systemer skal forklares godt og være gennemskuelige</h4>
+<p>
+</p>
+<h1>The challenges ahead </h1>
+<h3>Out of the super figure sphere</h3>
+<p>
+… and out of the academic sphere of mathematical formulations to the challenges of the industry. The literature is focussing on too static settings which is not resembling the challenges faced by practitioners and industry (<d-cite key="holstein2019improving "></d-cite>, <d-cite key=" chouldechova2020snapshot "></d-cite>).  Some main points mentioned by <d-cite key="holstein2019improving "></d-cite> is the fact that, the literature often assumes the dataset as static and suggest changes to the model, but many practitioners point towards the idea of inferring already in the data collection process. Further, the debias methods and metrics often also not apply in a actual context, for example because there in practice is not asses to the sensitive attribute on individual level. In general, the problems in practice also include more dynamic problems than one-shot classification task, for example web search or chatbot and system that uses methods like online learning, reinforcement learning or bandit problems (<d-cite key="holstein2019improving "></d-cite>, <d-cite key=" chouldechova2020snapshot "></d-cite>).  There is a call for more methods to audit and monitor complex dynamic systems. One idea, processed for NLP in the paper <d-cite key=" ribeiro2020beyond "></d-cite>, is an analogy to “software testing”, or more precisely behaviour testing or black-box testing. The idea is to examine what the model is doing giving it a set of input-output test without looking at how the model is build.  This can be used to check for fairness in different scenario without the need for looking a metrics but instead by looking at concrete cases. For NLP this could for example be that the classification model for sentiment unwantedly associated specific names with sentiment. 
+</p>
+<h3> To be continue </h3>
+<p>
+… and summing up. 
+</p>
+
+
+    
+  </d-article>
+
+
+
+  <d-appendix>
+    <h3>Acknowledgments</h3>
+    <p>
+      We are deeply grateful to...
+    </p>
+
+    <p>
+      Many of our diagrams are based on...
+    </p>
+
+    <h3>Author Contributions</h3>
+    <p>
+      <b>Research:</b> Alex developed ...
+    </p>
+
+    <p>
+      <b>Writing & Diagrams:</b> The text was initially drafted by...
+    </p>
+
+
+    <d-footnote-list></d-footnote-list>
+    <d-citation-list></d-citation-list>
+  </d-appendix>
+
+  <!-- bibliography will be inlined during Distill pipeline's pre-rendering -->
+  <d-bibliography src="bibliography.bib"></d-bibliography>
+
+</body>
