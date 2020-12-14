@@ -1,3 +1,17 @@
+
+# Fairness Review paper
+Status: **first draft** missing review and read trough, and: 
+- Missing results from the survey
+- Missing conclusion
+- Missing appendixs
+- Missing minor things highlighted with []
+
+The paper can be accesd under public/index.html
+In addition to the setup desribed below, the following need to be installed:
+npm install chart.js --save
+
+
+# Original README from distill to help setting up:
 # Distill post--example
 
 Distill articles depend on [distillpub/template](https://github.com/distillpub/template) for styling and some functionality such as footnotes, citations, and math rendering. We built template as a standalone library of styles and [webcomponents](https://www.webcomponents.org/) to allow you to use any web development workflow you'd like. But what if you don't have strong opinions about that and just want a starter kit that works out of the box? This is such a starter kit.
