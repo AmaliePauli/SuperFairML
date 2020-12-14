@@ -7,6 +7,9 @@ Status: **first draft** missing review and read trough, and:
 - Missing minor things highlighted with []
 
 The paper can be accesd under public/index.html
+
+A copy of the survey can be seen under survey.html
+
 In addition to the setup desribed below, the following need to be installed:
 npm install chart.js --save
 
@@ -50,4 +53,5 @@ Additional information and first troubleshooting steps are [listed in the `draft
 This is a new template, and we don't yet have a lot of documentation on it. Please bear with us while we work to improve it!
 
 Please [join our Distill Community Slack workspace](https://join.slack.com/t/distillpub/shared_invite/enQtMzg1NzU3MzEzMTg3LWJkNmQ4Y2JlNjJkNDlhYTU2ZmQxMGFkM2NiMTI2NGVjNzJkOTdjNTFiOGZmNDBjNTEzZGUwM2U0Mzg4NDAyN2E) if you have any questions. [Open an issue](https://github.com/distillpub/post--example/issues) if you'd like to see something improved!
+
 # fairness_review
