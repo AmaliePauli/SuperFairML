@@ -80,21 +80,20 @@
   /* display:block;
   margin:0 auto; */
   padding:0.35em 1.2em;
-  border:0.1em solid #FFFFFF;
+  border:0.1em solid #007bff;
   border-radius: 0.15em;
   box-sizing: border-box;
   text-decoration:none;
-  font-weight: 300;
-  color: #4c82af; 
+  font-weight: 600;
+  color: #fff;
   text-align:center;
   transition: all 0.2s;
-  background-color: rgb(216, 215, 215);
+  background-color: #007bff;
 }
 
 .btn:hover {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #7abaff;
+  border-color: #fff;
 }
 </style>
 
