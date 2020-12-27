@@ -22,6 +22,8 @@
 
 <style>
 .box {
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 12px;
   border: none;
   /*border-style: solid;
