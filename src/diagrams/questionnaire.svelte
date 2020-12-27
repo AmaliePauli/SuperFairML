@@ -23,10 +23,11 @@
 <style>
 .box {
   padding: 12px;
-  border-style: solid;
+  border: none;
+  /*border-style: solid;
   border-width: 1px;
-  border-color: black;
-  border-radius: 5px;
+  border-color: black;*/
+  border-radius: 15px;
   background-color: rgb(203, 222, 243);
 }
 
@@ -36,11 +37,12 @@
 
 .answer-box {
   padding: 12px;
-  border-style: solid;
+  border: none;
+  /* border-style: solid;
   border-width: 1px;
-  border-color: white;
-  border-radius: 5px;
-  background-color: rgb(230, 227, 227);
+  border-color: white; */
+  border-radius: 10px;
+  background-color: #edf5ff;
 }
 
 .answer {
@@ -63,13 +65,13 @@
 
 .result-box {
   width: 100%;
-  background-color: #ddd;
+  background-color: #fff;
 }
 
 .result-bar {
   /* width: 10%; */
   height: 30px;
-  background-color: #4c82af;
+  background-color: #007bff;
   text-align: center;
   line-height: 30px;
   color: white;
