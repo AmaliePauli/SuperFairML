@@ -22,11 +22,11 @@
 
 <style>
 .box {
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
-  border-radius: 5px;
+  border: none;
+  border-radius: 15px;
   background-color: rgb(235, 184, 137);
 }
 
@@ -36,11 +36,9 @@
 
 .answer-box {
   padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: white;
-  border-radius: 5px;
-  background-color: rgb(230, 227, 227);
+  border: none;
+  border-radius: 10px;
+  background-color: #f5e9df;
 }
 
 .answer {
@@ -63,7 +61,7 @@
 
 .result-box {
   width: 100%;
-  background-color: #ddd;
+  background-color: #fff;
 }
 
 .result-bar {
@@ -80,21 +78,21 @@
   /* display:block;
   margin:0 auto; */
   padding:0.35em 1.2em;
-  border:0.1em solid #FFFFFF;
+  border: 0.1em solid #e88f1c;
   border-radius: 0.15em;
   box-sizing: border-box;
   text-decoration:none;
   font-weight: 300;
-  color: #dd8929a1; 
+  color: #fff; 
   text-align:center;
   transition: all 0.2s;
-  background-color: rgb(216, 215, 215);
+  background-color: #e88f1c;
 }
 
+
 .btn:hover {
-  color: #fff;
-  background-color:  #dd8929ef;
-  border-color:  #dd8929ef;
+  background-color:#deb076;
+  border-color:  #fff;
 } 
 </style>
 
