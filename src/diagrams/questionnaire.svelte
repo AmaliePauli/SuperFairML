@@ -22,11 +22,14 @@
 
 <style>
 .box {
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 12px;
-  border-style: solid;
+  border: none;
+  /*border-style: solid;
   border-width: 1px;
-  border-color: black;
-  border-radius: 5px;
+  border-color: black;*/
+  border-radius: 15px;
   background-color: rgb(203, 222, 243);
 }
 
@@ -36,11 +39,12 @@
 
 .answer-box {
   padding: 12px;
-  border-style: solid;
+  border: none;
+  /* border-style: solid;
   border-width: 1px;
-  border-color: white;
-  border-radius: 5px;
-  background-color: rgb(230, 227, 227);
+  border-color: white; */
+  border-radius: 10px;
+  background-color: #edf5ff;
 }
 
 .answer {
@@ -63,13 +67,13 @@
 
 .result-box {
   width: 100%;
-  background-color: #ddd;
+  background-color: #fff;
 }
 
 .result-bar {
   /* width: 10%; */
   height: 30px;
-  background-color: #4c82af;
+  background-color: #007bff;
   text-align: center;
   line-height: 30px;
   color: white;
@@ -80,21 +84,20 @@
   /* display:block;
   margin:0 auto; */
   padding:0.35em 1.2em;
-  border:0.1em solid #FFFFFF;
+  border:0.1em solid #007bff;
   border-radius: 0.15em;
   box-sizing: border-box;
   text-decoration:none;
-  font-weight: 300;
-  color: #4c82af; 
+  font-weight: 600;
+  color: #fff;
   text-align:center;
   transition: all 0.2s;
-  background-color: rgb(216, 215, 215);
+  background-color: #007bff;
 }
 
 .btn:hover {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #7abaff;
+  border-color: #fff;
 }
 </style>
 
