@@ -68,17 +68,7 @@ input[type=range]::-moz-range-thumb {
 input[type=range].female::-moz-range-thumb {
   background: #007bff;
 }
-/* IE */
-input[type=range]::-ms-thumb {
-  border: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 10px;
-  background: #e88f1c;
-}
-input[type=range].female::-ms-thumb {
-  background: #007bff;
-}
+
 
 /* Track */
 /* Chrome */
@@ -103,31 +93,7 @@ input[type=range]::-moz-range-track {
 input[type=range].female::-moz-range-track {
   border-color: #007bff;
 }
-/* IE */
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 8px;
-  background: transparent;
-  border-color: transparent;
-  /*border-width: 16px 0;*/
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: #e88f1c;
-  border: 0.2px solid #e88f1c;
-  border-radius: 8px;
-}
-input[type=range].female::-ms-fill-lower {
-  border-color: #007bff;
-}
-input[type=range]::-ms-fill-upper {
-  background: #e88f1c;
-  border: 0.2px solid #e88f1c;
-  border-radius: 8px;
-}
-input[type=range].female::-ms-fill-upper {
-  border-color: #007bff;
-}
+
 
 input[type=range]:focus {
   outline: none; /* Removes the blue border.*/
