@@ -23,44 +23,51 @@ let female_bubble;
 function bubble_position(bubble, threshold) {
   var newVal = Number(threshold * 100);
   // Sorta magic numbers based on size of the native UI thumb
-  bubble.style.left = `calc(${newVal}% + (${12 - newVal * 0.2}px))`;
+  bubble.style.left = `calc(${newVal}% + (${42*(0.5 - newVal/100)}px))`;
 }
 
 </script>
 
-<div>
-  <p> Threshold for male super figures: {male_threshold} </p>
- </div>
-<div class="slider">
-  <input class="male" type=range bind:value={male_threshold} on:input={bubble_position(male_bubble, male_threshold)} min=0.0 max=1.0 step=0.01>
-  <output class="bubble" bind:this={male_bubble}>{male_threshold}</output>
-</div>
-<div>
-  <p> Threshold for female super figures: {female_threshold} </p>
-</div>
-<div class="slider">
-  <input class="female" type=range bind:value={female_threshold} on:input={bubble_position(female_bubble, female_threshold)} min=0.0 max=1.0 step=0.01>
-  <output class="bubble female" bind:this={female_bubble}>{female_threshold}</output>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th> <strong>Male figures</strong> </th>
+      <th> <strong>Female figures</strong> </th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr class="slider">
+      <td>
+        <input class="male" type=range bind:value={male_threshold} on:input={bubble_position(male_bubble, male_threshold)} min=0.0 max=1.0 step=0.01>
+        <output class="bubble" bind:this={male_bubble}>{male_threshold}</output>
+      </td>
+      <td>
+        <input class="female" type=range bind:value={female_threshold} on:input={bubble_position(female_bubble, female_threshold)} min=0.0 max=1.0 step=0.01>
+        <output class="bubble female" bind:this={female_bubble}>{female_threshold}</output>
+      </td>
+      </tr>
+  </tbody>
+</table>
 
 <style>
 
-.slider {
-  margin-bottom: 34px;
+table {
+  width: 100%;
+  table-layout: fixed;
 }
 
-.bubble {
-  background: #e88f1c;
-  color: white;
-  margin-top: 1px;
-  padding: 2px 10px;
-  position: absolute;
-  border-radius: 4px;
-  left: 50%;
-  transform: translateX(-50%);
+table td, table th {
+  text-align: center;
+  border: none;
 }
-.bubble.female {
-  background: #007bff;
+
+table td {
+  position: relative;
+}
+
+tr.slider {
+  height: 70px;
+  vertical-align: top;
 }
 
 input[type=range] {
@@ -123,6 +130,20 @@ input[type=range].female::-moz-range-track {
 
 input[type=range]:focus {
   outline: none; /* Removes the blue border.*/
+}
+
+.bubble {
+  background: #e88f1c;
+  color: white;
+  margin-top: 1px;
+  padding: 2px 10px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bubble.female {
+  background: #007bff;
 }
 
 </style>
