@@ -48,11 +48,11 @@ input[type=range] {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 8px;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
   background: #e88f1c;
-  margin-top: -4px; /* You need to specify a margin in Chrome */
+  margin-top: -6px; /* You need to specify a margin in Chrome */
 }
 input[type=range].female::-webkit-slider-thumb {
   background: #007bff;
@@ -71,9 +71,9 @@ input[type=range].female::-moz-range-thumb {
 /* IE */
 input[type=range]::-ms-thumb {
   border: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 8px;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
   background: #e88f1c;
 }
 input[type=range].female::-ms-thumb {
