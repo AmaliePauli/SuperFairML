@@ -106,6 +106,8 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px"
 table {
   width: 100%;
   table-layout: fixed;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 table td, table th {
@@ -127,6 +129,7 @@ div.bar {
   z-index: 0;
   width: 160px;
   height: var(--bar-height);
+  margin: auto;
 }
 div.percentage_background {
   position: absolute;
