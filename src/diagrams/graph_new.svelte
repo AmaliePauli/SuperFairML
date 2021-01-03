@@ -74,6 +74,7 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px"
       </tr>
       <tr>
       <td>
+        Positive Rate
         <div class="bar">
           <div class="percentage_background"></div>
           <div class="percentage"></div>
@@ -81,6 +82,7 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px"
         </div>
       </td>
       <td>
+        Positive Rate
         <div class="bar">
           <div class="percentage_background female"></div>
           <div class="percentage female"></div>
@@ -100,7 +102,7 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px"
 :root {
   --male-color: #e88f1c;
   --female-color: #007bff;
-  --bar-background: lightgrey;
+  --bar-background: #EEEEEE;
 }
 
 table {
@@ -120,7 +122,7 @@ table td {
 }
 
 tr.slider {
-  height: 70px;
+  height: 90px;
   vertical-align: top;
 }
 
