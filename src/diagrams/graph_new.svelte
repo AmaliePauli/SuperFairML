@@ -1,5 +1,5 @@
 <script>
-import {onMount} from 'svelte';
+import {onMount} from 'svelte/internal';
 
 import data from '../data/classification.json';
 
@@ -46,10 +46,31 @@ function bubble_position(bubble, threshold) {
         <output class="bubble female" bind:this={female_bubble}>{female_threshold}</output>
       </td>
       </tr>
+      <tr>
+      <td class="bar">
+        <div class="percentage_background">
+        </div>
+        <div class="percentage">
+        </div>
+      </td>
+      <td class="bar">
+        <div class="percentage_background">
+        </div>
+        <div class="percentage female">
+        </div>
+      </td>
+      </tr>
   </tbody>
 </table>
 
 <style>
+
+:root {
+  --male-color: #e88f1c;
+  --female-color: #007bff;
+  --bar-height: 200px;
+  --bar-border: 5px;
+}
 
 table {
   width: 100%;
@@ -68,6 +89,36 @@ table td {
 tr.slider {
   height: 70px;
   vertical-align: top;
+}
+
+td.bar {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: calc(var(--bar-height) + var(--bar-border));
+}
+div.percentage_background {
+  position: absolute;
+  z-index: 2;
+  background-color: grey;
+  width: calc(100% - var(--bar-border));
+  height: 20px;
+  top: var(--bar-border);
+  left: var(--bar-border);
+  border: none;
+}
+div.percentage {
+  position: absolute;
+  z-index: 1;
+  background-color: var(--male-color);
+  width: calc(100% - var(--bar-border));
+  height: var(--bar-height);
+  top: var(--bar-border);
+  left: var(--bar-border);
+  border: none;
+}
+div.percentage.female {
+  background-color: var(--female-color);
 }
 
 input[type=range] {
