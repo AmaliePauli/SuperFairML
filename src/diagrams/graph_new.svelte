@@ -3,20 +3,34 @@ import {onMount} from 'svelte/internal';
 
 import data from '../data/classification.json';
 
+const male_predictions = []
+const female_predictions = []
+for (let i = 0; i < data.length; i++) {
+  if (data[i].gender == "male") {
+    male_predictions.push(data[i]);
+  }
+  else {
+    female_predictions.push(data[i]);
+  }
+}
+
 // Calculate positive rate
 function positive_rate(predictions, threshold) {
-  var total_positive = 0;
-  predictions.forEach(function(hero) {
+  var total_positive = 0.0;
+  for (let i = 0; i < predictions.length; i++) {
+    let hero = predictions[i]
     if(hero.prediction_probability > threshold) {
-        total_positive += item.predicted;
+        total_positive += 1.0;
     }
-  });
+  }
   return total_positive / predictions.length;
 }
 
-// Default threshold for classifier
+// Threshold for classifier
 let male_threshold = 0.5;
 let female_threshold = 0.5;
+
+// DOM for the bubble showing the threshold
 let male_bubble;
 let female_bubble;
 
@@ -25,6 +39,18 @@ function bubble_position(bubble, threshold) {
   // Sorta magic numbers based on size of the native UI thumb
   bubble.style.left = `calc(${newVal}% + (${42*(0.5 - newVal/100)}px))`;
 }
+
+// Positive rates
+$: male_pr = positive_rate(male_predictions, male_threshold)
+$: female_pr = positive_rate(female_predictions, female_threshold)
+
+let bar_height_int = 250;
+let bar_height = bar_height_int.toString() + "px";
+$: male_perc_bar_height_int = bar_height_int - bar_height_int * male_pr;
+$: male_bar_height = male_perc_bar_height_int.toString() + "px"
+$: female_perc_bar_height_int = bar_height_int - bar_height_int * female_pr;
+$: female_bar_height = female_perc_bar_height_int.toString() + "px"
+
 
 </script>
 
@@ -35,7 +61,7 @@ function bubble_position(bubble, threshold) {
       <th> <strong>Female figures</strong> </th>
     </tr>
   </thead>
-  <tbody>
+  <tbody style="--bar-height: {bar_height};--male-bar-height: {male_bar_height};--female-bar-height: {female_bar_height}">
       <tr class="slider">
       <td>
         <input class="male" type=range bind:value={male_threshold} on:input={bubble_position(male_bubble, male_threshold)} min=0.0 max=1.0 step=0.01>
@@ -47,18 +73,24 @@ function bubble_position(bubble, threshold) {
       </td>
       </tr>
       <tr>
-      <td class="bar">
-        <div class="percentage_background">
-        </div>
-        <div class="percentage">
-        </div>
-      </td>
-      <td class="bar">
-        <div class="percentage_background">
-        </div>
-        <div class="percentage female">
+      <td>
+        <div class="bar">
+          <div class="percentage_background"></div>
+          <div class="percentage"></div>
+          <div class="icon"></div>
         </div>
       </td>
+      <td>
+        <div class="bar">
+          <div class="percentage_background female"></div>
+          <div class="percentage female"></div>
+          <div class="icon"></div>
+        </div>
+      </td>
+      </tr>
+      <tr>
+        <td>{male_pr}</td>
+        <td>{female_pr}</td>
       </tr>
   </tbody>
 </table>
@@ -68,8 +100,7 @@ function bubble_position(bubble, threshold) {
 :root {
   --male-color: #e88f1c;
   --female-color: #007bff;
-  --bar-height: 200px;
-  --bar-border: 5px;
+  --bar-background: lightgrey;
 }
 
 table {
@@ -91,34 +122,49 @@ tr.slider {
   vertical-align: top;
 }
 
-td.bar {
+div.bar {
   position: relative;
   z-index: 0;
-  width: 100%;
-  height: calc(var(--bar-height) + var(--bar-border));
+  width: 160px;
+  height: var(--bar-height);
 }
 div.percentage_background {
   position: absolute;
   z-index: 2;
-  background-color: grey;
-  width: calc(100% - var(--bar-border));
-  height: 20px;
-  top: var(--bar-border);
-  left: var(--bar-border);
+  background-color: var(--bar-background);
+  width: 100%;
+  height: var(--male-bar-height);
+  top: 0;
+  left: 0;
   border: none;
+}
+div.percentage_background.female {
+  height: var(--female-bar-height);
 }
 div.percentage {
   position: absolute;
   z-index: 1;
   background-color: var(--male-color);
-  width: calc(100% - var(--bar-border));
-  height: var(--bar-height);
-  top: var(--bar-border);
-  left: var(--bar-border);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   border: none;
 }
 div.percentage.female {
   background-color: var(--female-color);
+}
+div.icon {
+  position: absolute;
+  z-index: 3;
+  top: -1px;
+  left: 0;
+  width: calc(100% + (1px));
+  height: calc(100% + (3px));
+  /* Remember to put preserveAspectRatio="none" into the svg file (to level svg tag)*/
+  background: url(../../images/superhero.svg);
+  background-size: 100% 100%;
+  border: none;
 }
 
 input[type=range] {
