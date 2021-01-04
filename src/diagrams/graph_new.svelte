@@ -26,6 +26,44 @@ function positive_rate(predictions, threshold) {
   return total_positive / predictions.length;
 }
 
+// Calculate true positive rate
+function true_positive_rate(predictions, threshold) {
+  var total_positives = 0;
+  var true_positives = 0;
+  for (let i = 0; i < predictions.length; i++) {
+    let hero = predictions[i]
+    total_positives += hero.class;
+    if(hero.prediction_probability > threshold) {
+        if (hero.class) {
+          true_positives += 1.0;
+        }
+    }
+  }
+  if (total_positives == 0) {
+    return 1.0;
+  }
+  return true_positives / total_positives;
+}
+
+// Calculate positive predictive value
+function positive_predictive_value(predictions, threshold) {
+  var total_predicted_positives = 0;
+  var true_positives = 0;
+  for (let i = 0; i < predictions.length; i++) {
+    let hero = predictions[i]
+    if(hero.prediction_probability > threshold) {
+        total_predicted_positives += 1;
+        if (hero.class) {
+          true_positives += 1.0;
+        }
+    }
+  }
+  if (total_predicted_positives == 0) {
+    return 1.0;
+  }
+  return true_positives / total_predicted_positives;
+}
+
 // Threshold for classifier
 let male_threshold = 0.5;
 let female_threshold = 0.5;
@@ -43,6 +81,12 @@ function bubble_position(bubble, threshold) {
 // Positive rates
 $: male_pr = positive_rate(male_predictions, male_threshold)
 $: female_pr = positive_rate(female_predictions, female_threshold)
+// TPR
+$: male_tpr = true_positive_rate(male_predictions, male_threshold)
+$: female_tpr = true_positive_rate(female_predictions, female_threshold)
+// PPV
+$: male_ppv = positive_predictive_value(male_predictions, male_threshold)
+$: female_ppv = positive_predictive_value(female_predictions, female_threshold)
 
 let bar_height_int = 250;
 let bar_height = bar_height_int.toString() + "px";
@@ -73,26 +117,36 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px"
       </td>
       </tr>
       <tr>
-      <td>
+      <td class="bar">
         Positive Rate
         <div class="bar">
           <div class="percentage_background"></div>
           <div class="percentage"></div>
           <div class="icon"></div>
+          <div class="text">
+            <b>{Math.round(male_pr*100)}%</b>
+          </div>
         </div>
       </td>
-      <td>
+      <td class="bar">
         Positive Rate
         <div class="bar">
           <div class="percentage_background female"></div>
           <div class="percentage female"></div>
           <div class="icon"></div>
+          <div class="text">
+            <b>{Math.round(female_pr*100)}%</b>
+          </div>
         </div>
       </td>
       </tr>
       <tr>
-        <td>{male_pr}</td>
-        <td>{female_pr}</td>
+        <td class="perc-rate">True positive rate: {Math.round(male_tpr*100)}%</td>
+        <td class="perc-rate">True positive rate: {Math.round(female_tpr*100)}%</td>
+      </tr>
+      <tr>
+        <td class="perc-rate">Positive predictive value: {Math.round(male_ppv*100)}%</td>
+        <td class="perc-rate">Positive predictive value: {Math.round(female_ppv*100)}%</td>
       </tr>
   </tbody>
 </table>
@@ -103,6 +157,8 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px"
   --male-color: #e88f1c;
   --female-color: #007bff;
   --bar-background: #EEEEEE;
+  --female-bar-background: #edf5ff;
+  --male-bar-background: #f5e9df;
 }
 
 table {
@@ -126,6 +182,9 @@ tr.slider {
   vertical-align: top;
 }
 
+td.bar {
+  padding-bottom: 15px;
+}
 div.bar {
   position: relative;
   z-index: 0;
@@ -136,7 +195,7 @@ div.bar {
 div.percentage_background {
   position: absolute;
   z-index: 2;
-  background-color: var(--bar-background);
+  background-color: var(--male-bar-background);
   width: 100%;
   height: var(--male-bar-height);
   top: 0;
@@ -145,6 +204,7 @@ div.percentage_background {
 }
 div.percentage_background.female {
   height: var(--female-bar-height);
+  background-color: var(--female-bar-background);
 }
 div.percentage {
   position: absolute;
@@ -170,6 +230,19 @@ div.icon {
   background: url(../../images/superhero.svg);
   background-size: 100% 100%;
   border: none;
+}
+div.text {
+  position: relative;
+  z-index: 4;
+  top: 20%;
+  left: 2%;
+  font-size: 17px;
+  text-align: center;
+  border: none;
+}
+
+td.perc-rate {
+  text-align: left;
 }
 
 input[type=range] {
@@ -203,7 +276,6 @@ input[type=range]::-moz-range-thumb {
 input[type=range].female::-moz-range-thumb {
   background: #007bff;
 }
-
 
 /* Track */
 /* Chrome */
