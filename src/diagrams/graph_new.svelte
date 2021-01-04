@@ -1,21 +1,193 @@
 <script>
 import {onMount} from 'svelte/internal';
-
+import {Chart} from 'chart.js';
+// Dataset containing the predictions
 import data from '../data/classification.json';
 
-const male_predictions = []
-const female_predictions = []
-for (let i = 0; i < data.length; i++) {
-  if (data[i].gender == "male") {
-    male_predictions.push(data[i]);
+
+
+var createPRChart = function() {
+
+  const predictions = separate_data(data);
+  // Compute recall and precision (TODO: double check)
+  const n = 100;
+  const precision_recall = {"male": [], "female": []}
+  const thresholds = {"male": [], "female": []}
+  let last_male_recall = 2.0;
+  let last_female_recall = 2.0;
+  for (let i = 0; i < n; i++) {
+    let threshold = i*0.01;
+    let precision_male = positive_predictive_value(predictions["male"], threshold).toFixed(2);
+    let precision_female = positive_predictive_value(predictions["female"], threshold).toFixed(2);
+    let recall_male = true_positive_rate(predictions["male"], threshold).toFixed(2);
+    let recall_female = true_positive_rate(predictions["female"], threshold).toFixed(2);
+    if (recall_male < last_male_recall && recall_male != 0.0) {
+      precision_recall["male"].push({x: recall_male, y: precision_male});
+      thresholds["male"].push(threshold);
+      last_male_recall = recall_male;
+    }
+    if (recall_female < last_female_recall && recall_male != 0.0) {
+      precision_recall["female"].push({x: recall_female, y: precision_female});
+      thresholds["female"].push(threshold);
+      last_female_recall = recall_female;
+    }
   }
-  else {
-    female_predictions.push(data[i]);
-  }
+  precision_recall["male"].push({x: 0.0, y: 1.0});
+  precision_recall["female"].push({x: 0.0, y: 1.0});
+
+  var prCurveTooltip = function(tooltipModel) {
+              // Tooltip Element
+              var tooltipEl = document.getElementById('chartjs-tooltip');
+
+              // Create element on first render
+              if (!tooltipEl) {
+                  tooltipEl = document.createElement('div');
+                  tooltipEl.id = 'chartjs-tooltip';
+                  tooltipEl.innerHTML = '<table></table>';
+                  document.body.appendChild(tooltipEl);
+              }
+
+              // Hide if no tooltip
+              if (tooltipModel.opacity === 0) {
+                  tooltipEl.style.opacity = 0;
+                  return;
+              }
+
+              // Set caret Position
+              tooltipEl.classList.remove('above', 'below', 'no-transform');
+              if (tooltipModel.yAlign) {
+                  tooltipEl.classList.add(tooltipModel.yAlign);
+              } else {
+                  tooltipEl.classList.add('no-transform');
+              }
+
+              function getBody(bodyItem) {
+                  return bodyItem.lines;
+              }
+
+              // Set Text
+              if (tooltipModel.body) {
+                  var titleLines = tooltipModel.title || [];
+                  var bodyLines = tooltipModel.body.map(getBody);
+
+                  var innerHtml = '<thead>';
+
+                  titleLines.forEach(function(title) {
+                      innerHtml += '<tr><th>' + title + '</th></tr>';
+                  });
+                  innerHtml += '</thead><tbody>';
+
+                  bodyLines.forEach(function(body, i) {
+                      var colors = tooltipModel.labelColors[i];
+                      var style = 'background:' + colors.backgroundColor;
+                      style += '; border-color:' + colors.borderColor;
+                      style += '; border-width: 2px';
+                      var span = '<span style="' + style + '"></span>';
+                      innerHtml += '<tr><td>' + span + body + '</td></tr>';
+                  });
+                  innerHtml += '</tbody>';
+
+                  var tableRoot = tooltipEl.querySelector('table');
+                  tableRoot.innerHTML = innerHtml;
+              }
+
+              // `this` will be the overall tooltip
+              var position = this._chart.canvas.getBoundingClientRect();
+
+              // Display, position, and set styles for font
+              tooltipEl.style.opacity = 1;
+              tooltipEl.style.position = 'absolute';
+              tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+              tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+              tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
+              tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
+              tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
+              tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
+              tooltipEl.style.pointerEvents = 'none';
+	};
+
+  let canvas = document.getElementById('pr-curve');
+  let ctx = canvas.getContext('2d');
+  let PRChart = new Chart(ctx, {
+     type: 'line',
+     data: {
+       datasets: [{
+         label: "male",
+         data: precision_recall["male"],
+         fill: false,
+         backgroundColor: "#e88f1c",
+         borderColor: "#e88f1c",
+         borderWidth: 1,
+         radius: 1.5,
+       },
+       {
+         label: "female",
+         data: precision_recall["female"],
+         fill: false,
+         backgroundColor: "#007bff",
+         borderColor: "#007bff",
+         borderWidth: 1,
+         radius: 1.5,
+       }
+      ]
+     },
+     options: {
+       scales: {
+            xAxes: [{
+                type: 'linear',
+                position: 'bottom',
+                ticks: {
+                  beginAtZero: true
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Recall (True Positive Rate)'
+                }
+            }],
+            yAxes: [{
+                type: 'linear',
+                position: 'bottom',
+                ticks: {
+                  beginAtZero: true
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Precision (Positive Predictive Value)'
+                }
+            }]
+        },
+        tooltips: {
+            mode: 'x',
+            intersect: false,
+            positioning: "nearest",
+            custom: prCurveTooltip,
+            callbacks: {
+                title: function(tooltipItem, data) {
+                  var title = "\tThreshold\tRecall\tPrecision";
+                  // for (let i = 0; i < tooltipItem.length; i++) {
+                  //   var gender = data.datasets[tooltipItem[i].datasetIndex].label;
+                  //   let thr = thresholds[gender][tooltipItem[i].index].toFixed(2);
+                  //   title += `\t${gender}: ${thr}\n`;
+                  // }
+                  // return title.slice(0, -2);
+                  return title;
+                },
+                label: function(tooltipItem, data) {
+                  var gender = data.datasets[tooltipItem.datasetIndex].label;
+                  let thr = thresholds[gender][tooltipItem.index].toFixed(2);
+                  let recall = tooltipItem.value;
+                  let precision = tooltipItem.label;
+                  var label = `\t${thr}\t${recall}\t${precision}`;
+                  return label;
+                }
+            }
+        },
+      }
+  });
 }
 
 // Calculate positive rate
-function positive_rate(predictions, threshold) {
+var positive_rate = function(predictions, threshold) {
   var total_positive = 0.0;
   for (let i = 0; i < predictions.length; i++) {
     let hero = predictions[i]
@@ -27,7 +199,7 @@ function positive_rate(predictions, threshold) {
 }
 
 // Calculate true positive rate
-function true_positive_rate(predictions, threshold) {
+var true_positive_rate = function(predictions, threshold) {
   var total_positives = 0;
   var true_positives = 0;
   for (let i = 0; i < predictions.length; i++) {
@@ -46,7 +218,7 @@ function true_positive_rate(predictions, threshold) {
 }
 
 // Calculate positive predictive value
-function positive_predictive_value(predictions, threshold) {
+var positive_predictive_value = function(predictions, threshold) {
   var total_predicted_positives = 0;
   var true_positives = 0;
   for (let i = 0; i < predictions.length; i++) {
@@ -64,6 +236,23 @@ function positive_predictive_value(predictions, threshold) {
   return true_positives / total_predicted_positives;
 }
 
+// Separate data into males and females
+var separate_data = function(dataset) {
+  const male_predictions = []
+  const female_predictions = []
+  for (let i = 0; i < dataset.length; i++) {
+    if (dataset[i].gender == "male") {
+      male_predictions.push(dataset[i]);
+    }
+    else {
+      female_predictions.push(dataset[i]);
+    }
+  }
+  return {"male": male_predictions, "female": female_predictions};
+}
+
+const predictions = separate_data(data);
+
 // Threshold for classifier
 let male_threshold = 0.5;
 let female_threshold = 0.5;
@@ -72,21 +261,21 @@ let female_threshold = 0.5;
 let male_bubble;
 let female_bubble;
 
-function bubble_position(bubble, threshold) {
+var bubble_position = function(bubble, threshold) {
   var newVal = Number(threshold * 100);
   // Sorta magic numbers based on size of the native UI thumb
   bubble.style.left = `calc(${newVal}% + (${42*(0.5 - newVal/100)}px))`;
 }
 
 // Positive rates
-$: male_pr = positive_rate(male_predictions, male_threshold)
-$: female_pr = positive_rate(female_predictions, female_threshold)
+$: male_pr = positive_rate(predictions.male, male_threshold)
+$: female_pr = positive_rate(predictions.female, female_threshold)
 // TPR
-$: male_tpr = true_positive_rate(male_predictions, male_threshold)
-$: female_tpr = true_positive_rate(female_predictions, female_threshold)
+$: male_tpr = true_positive_rate(predictions.male, male_threshold)
+$: female_tpr = true_positive_rate(predictions.female, female_threshold)
 // PPV
-$: male_ppv = positive_predictive_value(male_predictions, male_threshold)
-$: female_ppv = positive_predictive_value(female_predictions, female_threshold)
+$: male_ppv = positive_predictive_value(predictions.male, male_threshold)
+$: female_ppv = positive_predictive_value(predictions.female, female_threshold)
 
 let bar_height_int = 250;
 let bar_height = bar_height_int.toString() + "px";
@@ -95,6 +284,7 @@ $: male_bar_height = male_perc_bar_height_int.toString() + "px"
 $: female_perc_bar_height_int = bar_height_int - bar_height_int * female_pr;
 $: female_bar_height = female_perc_bar_height_int.toString() + "px"
 
+onMount(createPRChart);
 
 </script>
 
@@ -148,6 +338,14 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px"
         <td class="perc-rate">Positive predictive value: {Math.round(male_ppv*100)}%</td>
         <td class="perc-rate">Positive predictive value: {Math.round(female_ppv*100)}%</td>
       </tr>
+      <tr>
+        <td colspan="2" class="pr-curve">
+          Precision-Recall curve
+          <canvas id="pr-curve" width="100%" height="70px" aria-label="Precision-Recall curve" role="img">
+            <p>Precision-Recall curve for both male and female superfigures.</p>
+          </canvas>
+        </td>
+      </tr>
   </tbody>
 </table>
 
@@ -156,7 +354,6 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px"
 :root {
   --male-color: #e88f1c;
   --female-color: #007bff;
-  --bar-background: #EEEEEE;
   --female-bar-background: #edf5ff;
   --male-bar-background: #f5e9df;
 }
@@ -243,6 +440,11 @@ div.text {
 
 td.perc-rate {
   text-align: left;
+}
+
+td.pr-curve {
+  padding-top: 15px;
+  padding-bottom: 10px;
 }
 
 input[type=range] {
