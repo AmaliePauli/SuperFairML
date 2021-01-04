@@ -12,7 +12,8 @@ var createPRChart = function() {
   // Compute recall and precision (TODO: double check)
   const n = 100;
   const precision_recall = {"male": [], "female": []}
-  const thresholds = {"male": [], "female": []}
+  const thresholds = {0: [], 1: []};
+  const genders = ["male", "female"];
   let last_male_recall = 2.0;
   let last_female_recall = 2.0;
   for (let i = 0; i < n; i++) {
@@ -23,17 +24,19 @@ var createPRChart = function() {
     let recall_female = true_positive_rate(predictions["female"], threshold).toFixed(2);
     if (recall_male < last_male_recall && recall_male != 0.0) {
       precision_recall["male"].push({x: recall_male, y: precision_male});
-      thresholds["male"].push(threshold);
+      thresholds[0].push(threshold);
       last_male_recall = recall_male;
     }
     if (recall_female < last_female_recall && recall_male != 0.0) {
       precision_recall["female"].push({x: recall_female, y: precision_female});
-      thresholds["female"].push(threshold);
+      thresholds[1].push(threshold);
       last_female_recall = recall_female;
     }
   }
   precision_recall["male"].push({x: 0.0, y: 1.0});
+  thresholds[0].push(1.0);
   precision_recall["female"].push({x: 0.0, y: 1.0});
+  thresholds[1].push(1.0);
 
   var prCurveTooltip = function(tooltipModel) {
               // Tooltip Element
@@ -43,7 +46,7 @@ var createPRChart = function() {
               if (!tooltipEl) {
                   tooltipEl = document.createElement('div');
                   tooltipEl.id = 'chartjs-tooltip';
-                  tooltipEl.innerHTML = '<table></table>';
+                  tooltipEl.innerHTML = '<table style="border: none"></table>';
                   document.body.appendChild(tooltipEl);
               }
 
@@ -67,23 +70,31 @@ var createPRChart = function() {
 
               // Set Text
               if (tooltipModel.body) {
-                  var titleLines = tooltipModel.title || [];
                   var bodyLines = tooltipModel.body.map(getBody);
 
                   var innerHtml = '<thead>';
+                  innerHtml += '<tr style="text-align: center;">';
+                  for (let header of ["&nbsp;","Treshold", "Recall", "Precision"]) {
+                    innerHtml += '<th>' + header + '</th>';
+                  }
+                  innerHtml += '</tr></thead><tbody>';
 
-                  titleLines.forEach(function(title) {
-                      innerHtml += '<tr><th>' + title + '</th></tr>';
-                  });
-                  innerHtml += '</thead><tbody>';
-
-                  bodyLines.forEach(function(body, i) {
+                  tooltipModel.dataPoints.forEach(function(item, i) {
+                      innerHtml += '<tr style="text-align: center;">';
                       var colors = tooltipModel.labelColors[i];
                       var style = 'background:' + colors.backgroundColor;
-                      style += '; border-color:' + colors.borderColor;
-                      style += '; border-width: 2px';
-                      var span = '<span style="' + style + '"></span>';
-                      innerHtml += '<tr><td>' + span + body + '</td></tr>';
+                      style += '; border: none';
+                      style += '; width: 5px; height: 5px';
+                      //var span = '<span style="' + style + '"></span>';
+                      innerHtml += '<td style="' + style + '"></td>';
+                      var gender = genders[item.datasetIndex];
+                      let thr = thresholds[item.datasetIndex][item.index].toFixed(2);
+                      let recall = item.value;
+                      let precision = item.label;
+                      for (let value of [thr, recall, precision]) {
+                          innerHtml += '<td>' + value + '</td>';
+                      }
+                      innerHtml += '</tr>';
                   });
                   innerHtml += '</tbody>';
 
@@ -164,17 +175,11 @@ var createPRChart = function() {
             callbacks: {
                 title: function(tooltipItem, data) {
                   var title = "\tThreshold\tRecall\tPrecision";
-                  // for (let i = 0; i < tooltipItem.length; i++) {
-                  //   var gender = data.datasets[tooltipItem[i].datasetIndex].label;
-                  //   let thr = thresholds[gender][tooltipItem[i].index].toFixed(2);
-                  //   title += `\t${gender}: ${thr}\n`;
-                  // }
-                  // return title.slice(0, -2);
                   return title;
                 },
                 label: function(tooltipItem, data) {
-                  var gender = data.datasets[tooltipItem.datasetIndex].label;
-                  let thr = thresholds[gender][tooltipItem.index].toFixed(2);
+                  var gender = genders[tooltipItem.datasetIndex];
+                  let thr = thresholds[tooltipItem.datasetIndex][tooltipItem.index].toFixed(2);
                   let recall = tooltipItem.value;
                   let precision = tooltipItem.label;
                   var label = `\t${thr}\t${recall}\t${precision}`;
@@ -363,6 +368,7 @@ table {
   table-layout: fixed;
   margin-right: auto;
   margin-left: auto;
+  border: none;
 }
 
 table td, table th {
