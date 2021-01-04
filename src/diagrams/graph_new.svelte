@@ -282,7 +282,7 @@ $: female_tpr = true_positive_rate(predictions.female, female_threshold)
 $: male_ppv = positive_predictive_value(predictions.male, male_threshold)
 $: female_ppv = positive_predictive_value(predictions.female, female_threshold)
 
-let bar_height_int = 250;
+let bar_height_int = 150;
 let bar_height = bar_height_int.toString() + "px";
 $: male_perc_bar_height_int = bar_height_int - bar_height_int * male_pr;
 $: male_bar_height = male_perc_bar_height_int.toString() + "px"
@@ -346,7 +346,7 @@ onMount(createPRChart);
       <tr>
         <td colspan="2" class="pr-curve">
           Precision-Recall curve
-          <canvas id="pr-curve" width="100%" height="70px" aria-label="Precision-Recall curve" role="img">
+          <canvas id="pr-curve" width="100%" height="50px" aria-label="Precision-Recall curve" role="img">
             <p>Precision-Recall curve for both male and female superfigures.</p>
           </canvas>
         </td>
@@ -391,7 +391,7 @@ td.bar {
 div.bar {
   position: relative;
   z-index: 0;
-  width: 160px;
+  width: 96px;
   height: var(--bar-height);
   margin: auto;
 }
@@ -439,7 +439,7 @@ div.text {
   z-index: 4;
   top: 20%;
   left: 2%;
-  font-size: 17px;
+  font-size: 12px;
   text-align: center;
   border: none;
 }
