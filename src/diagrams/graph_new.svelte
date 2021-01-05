@@ -4,6 +4,10 @@ import {Chart} from 'chart.js';
 // Dataset containing the predictions
 import data from '../data/classification.json';
 
+var round2decimals = function(number) {
+  return Math.round(100*number) / 100;
+}
+
 var createPRChart = function() {
 
   const predictions = separate_data(data);
@@ -14,21 +18,37 @@ var createPRChart = function() {
   const genders = ["male", "female"];
   let last_male_recall = 2.0;
   let last_female_recall = 2.0;
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i <= n; i++) {
     let threshold = i*0.01;
-    let precision_male = positive_predictive_value(predictions["male"], threshold).toFixed(2);
-    let precision_female = positive_predictive_value(predictions["female"], threshold).toFixed(2);
-    let recall_male = true_positive_rate(predictions["male"], threshold).toFixed(2);
-    let recall_female = true_positive_rate(predictions["female"], threshold).toFixed(2);
-    if (recall_male < last_male_recall && recall_male != 0.0) {
-      precision_recall["male"].push({'x': recall_male, 'y': precision_male});
-      thresholds[0].push(threshold);
-      last_male_recall = recall_male;
+    let precision_male = round2decimals(positive_predictive_value(predictions["male"], threshold));
+    let precision_female = round2decimals(positive_predictive_value(predictions["female"], threshold));
+    let recall_male = round2decimals(true_positive_rate(predictions["male"], threshold));
+    let recall_female = round2decimals(true_positive_rate(predictions["female"], threshold));
+    if (recall_male > 0) {
+      if (recall_male != last_male_recall) {
+        precision_recall["male"].push({'x': recall_male, 'y': precision_male});
+        thresholds[0].push(threshold);
+        last_male_recall = recall_male;
+      }
+      else if (precision_recall["male"][precision_recall["male"].length-1]['y'] != precision_male) {
+      //  precision_recall["male"].pop();
+        //thresholds[0].pop();
+        precision_recall["male"].push({'x': recall_male, 'y': precision_male});
+        thresholds[0].push(threshold);
+      }
     }
-    if (recall_female < last_female_recall && recall_male != 0.0) {
-      precision_recall["female"].push({'x': recall_female, 'y': precision_female});
-      thresholds[1].push(threshold);
-      last_female_recall = recall_female;
+    if (recall_female > 0) {
+      if (recall_female != last_female_recall) {
+        precision_recall["female"].push({'x': recall_female, 'y': precision_female});
+        thresholds[1].push(threshold);
+        last_female_recall = recall_female;
+      }
+      else if (precision_recall["female"][precision_recall["female"].length-1]['y'] != precision_female) {
+      //  precision_recall["female"].pop();
+      //  thresholds[1].pop();
+        precision_recall["female"].push({'x': recall_female, 'y': precision_female});
+        thresholds[1].push(threshold);
+      }
     }
   }
   precision_recall["male"].push({'x': 0.0, 'y': 1.0});
@@ -36,7 +56,6 @@ var createPRChart = function() {
   precision_recall["female"].push({'x': 0.0, 'y': 1.0});
   thresholds[1].push(1.0);
 
-  //TODO: Fix tooltip when threshold point are shown.
   var prCurveTooltip = function(tooltipModel) {
               // Tooltip Element
               var tooltipEl = document.getElementById('chartjs-tooltip');
@@ -64,11 +83,17 @@ var createPRChart = function() {
                   tooltipEl.classList.add('no-transform');
               }
 
+              function getBody(bodyItem) {
+                    return bodyItem.lines;
+              }
+
               // Set Text
               if (tooltipModel.body) {
+                  var bodyLines = tooltipModel.body.map(getBody);
+
                   var innerHtml = '<thead>';
                   innerHtml += '<tr style="text-align: center;">';
-                  for (let header of ["&nbsp;","Treshold", "Recall", "Precision"]) {
+                  for (let header of ["&nbsp;","Threshold", "Recall", "Precision"]) {
                     innerHtml += '<th style="padding-right: 5px;">' + header + '</th>';
                   }
                   innerHtml += '</tr></thead><tbody>';
@@ -82,7 +107,8 @@ var createPRChart = function() {
                       //var span = '<span style="' + style + '"></span>';
                       innerHtml += '<td><div style="' + style + '"></div></td>';
                       var gender = genders[item.datasetIndex];
-                      let thr = thresholds[item.datasetIndex][item.index].toFixed(2);
+                      // Threshold is read from the tooltip body created with the callback.
+                      let thr = bodyLines[i];
                       let recall = item.label;
                       let precision = item.value;
                       for (let value of [thr, recall, precision]) {
@@ -114,7 +140,6 @@ var createPRChart = function() {
               tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
               tooltipEl.style.pointerEvents = 'none';
 	};
-
   let canvas = document.getElementById('pr-curve');
   let ctx = canvas.getContext('2d');
   let prChart = new Chart(ctx, {
@@ -129,6 +154,7 @@ var createPRChart = function() {
          borderWidth: 1,
          radius: 0,
          pointHoverRadius: 4,
+         lineTension: 0,
        },
        {
          label: "female",
@@ -139,7 +165,32 @@ var createPRChart = function() {
          borderWidth: 1,
          radius: 0,
          pointHoverRadius: 4,
-       }
+         lineTension: 0,
+       },
+       {
+         // "Store" thresholds to show in tooltip
+         label: "thresholds male",
+         data: thresholds[0],
+         fill: false,
+         backgroundColor: "grey",
+         borderColor: "grey",
+         borderWidth: 0,
+         radius: 0,
+         pointHoverRadius: 0,
+         pointHitRadius: 0,
+       },
+       {
+         // "Store" thresholds to show in tooltip
+         label: "thresholds female",
+         data: thresholds[1],
+         fill: false,
+         backgroundColor: "grey",
+         borderColor: "grey",
+         borderWidth: 0,
+         radius: 0,
+         pointHoverRadius: 0,
+         pointHitRadius: 0,
+       },
       ]
      },
      options: {
@@ -181,6 +232,16 @@ var createPRChart = function() {
             positioning: "nearest",
             enabled: false,
             custom: prCurveTooltip,
+            callbacks: {
+              // Stores the threshold in the tooltip body.
+              label: function(tooltipItem, data) {
+                let thr = "NA";
+                if ((tooltipItem.datasetIndex + 2) < data.datasets.length) {
+                  thr = data.datasets[tooltipItem.datasetIndex+2].data[tooltipItem.index].toFixed(2);
+                }
+                return thr;
+              }
+            }
         },
       }
   });
@@ -188,12 +249,13 @@ var createPRChart = function() {
   return prChart;
 }
 
-var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinates) {
+var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinates, male_threshold, female_threshold) {
   let canvas = document.getElementById('pr-curve');
   if (!canvas || !chart) {
     return;
   }
-  while (chart.data.datasets.length > 2) {
+  // Remove data for last chosen threshold
+  while (chart.data.datasets.length > 4) {
     chart.data.datasets.pop();
   }
   chart.data.datasets.push({
@@ -215,6 +277,30 @@ var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinat
        showLine: false,
        radius: 4,
        pointHoverRadius: 4,
+  });
+  // "Store" threshold to show in tooltip
+  chart.data.datasets.push({
+      label: "male threshold",
+      data: [male_threshold],
+      fill: false,
+      backgroundColor: "grey",
+      borderColor: "grey",
+      borderWidth: 0,
+      radius: 0,
+      pointHoverRadius: 0,
+      pointHitRadius: 0
+  });
+  // "Store" threshold to show in tooltip
+  chart.data.datasets.push({
+      label: "female threshold",
+      data: [female_threshold],
+      fill: false,
+      backgroundColor: "grey",
+      borderColor: "grey",
+      borderWidth: 0,
+      radius: 0,
+      pointHoverRadius: 0,
+      pointHitRadius: 0
   });
   chart.update(0);
 }
@@ -320,8 +406,10 @@ $: female_bar_height = female_perc_bar_height_int.toString() + "px";
 
 let prChart;
 $: addChosenThresholdPoint(prChart,
-  [{'x': male_tpr.toFixed(2), 'y': male_ppv.toFixed(2)}],
-  [{'x': female_tpr.toFixed(2), 'y': female_ppv.toFixed(2)}]
+  [{'x': round2decimals(male_tpr), 'y': round2decimals(male_ppv)}],
+  [{'x': round2decimals(female_tpr), 'y': round2decimals(female_ppv)}],
+  male_threshold,
+  female_threshold
 );
 
 onMount(() => {
