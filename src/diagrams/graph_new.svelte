@@ -292,8 +292,8 @@ onMount(createPRChart);
 <table>
   <thead>
     <tr>
-      <th> <strong>Male figures</strong> </th>
-      <th> <strong>Female figures</strong> </th>
+      <th style="font-size: 1.2em;"> <b>Male figures</b> </th>
+      <th style="font-size: 1.2em;"> <b>Female figures</b> </th>
     </tr>
   </thead>
   <tbody style="--bar-height: {bar_height};--male-bar-height: {male_bar_height};--female-bar-height: {female_bar_height}">
@@ -341,7 +341,7 @@ onMount(createPRChart);
       </tr>
       <tr>
         <td colspan="2" class="pr-curve">
-          Precision-Recall curve
+          <b>Precision-Recall curve</b>
           <canvas id="pr-curve" width="100%" height="50px" aria-label="Precision-Recall curve" role="img">
             <p>Precision-Recall curve for both male and female superfigures.</p>
           </canvas>
@@ -377,7 +377,7 @@ table td {
 }
 
 tr.slider {
-  height: 90px;
+  height: 75px;
   vertical-align: top;
 }
 
@@ -442,11 +442,13 @@ div.text {
 
 td.perc-rate {
   text-align: left;
+  font-size: 0.75em;
 }
 
 td.pr-curve {
-  padding-top: 15px;
+  padding-top: 25px;
   padding-bottom: 10px;
+  font-size: 1.2em;
 }
 
 input[type=range] {
