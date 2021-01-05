@@ -64,7 +64,7 @@ var createPRChart = function() {
               if (!tooltipEl) {
                   tooltipEl = document.createElement('div');
                   tooltipEl.id = 'chartjs-tooltip';
-                  const table_style = 'table-layout: fixed; margin-right: auto; margin-left: auto;';
+                  const table_style = 'table-layout: fixed; margin-right: auto; margin-left: auto; border-collapse: separate;';
                   tooltipEl.innerHTML = '<table style="' + table_style + '"></table>';
                   document.body.appendChild(tooltipEl);
               }
@@ -124,8 +124,8 @@ var createPRChart = function() {
               var position = this._chart.canvas.getBoundingClientRect();
 
               // Display, position, and set styles for font
-              tooltipEl.style.opacity = 0.8;
-              tooltipEl.style.backgroundColor = 'black';
+              tooltipEl.style.opacity = 1.0;
+              tooltipEl.style.backgroundColor = 'rgb(0,0,0,0.4)';
               tooltipEl.style.color = 'white';
               tooltipEl.style.border = 'none';
               tooltipEl.style.borderRadius = '10px';
@@ -499,6 +499,7 @@ table {
   table-layout: fixed;
   margin-right: auto;
   margin-left: auto;
+  border-collapse: separate;
   border: none;
 }
 
@@ -584,6 +585,9 @@ td.pr-curve {
   padding-top: 25px;
   padding-bottom: 10px;
   font-size: 1.2em;
+}
+canvas {
+  padding-top: 15px;
 }
 
 input[type=range] {
