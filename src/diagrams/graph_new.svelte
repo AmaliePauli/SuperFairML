@@ -89,8 +89,8 @@ var createPRChart = function() {
                       innerHtml += '<td style="' + style + '"></td>';
                       var gender = genders[item.datasetIndex];
                       let thr = thresholds[item.datasetIndex][item.index].toFixed(2);
-                      let recall = item.value;
-                      let precision = item.label;
+                      let recall = item.label;
+                      let precision = item.value;
                       for (let value of [thr, recall, precision]) {
                           innerHtml += '<td>' + value + '</td>';
                       }
@@ -129,7 +129,8 @@ var createPRChart = function() {
          backgroundColor: "#e88f1c",
          borderColor: "#e88f1c",
          borderWidth: 1,
-         radius: 1.5,
+         radius: 0,
+         pointHoverRadius: 4,
        },
        {
          label: "female",
@@ -138,7 +139,8 @@ var createPRChart = function() {
          backgroundColor: "#007bff",
          borderColor: "#007bff",
          borderWidth: 1,
-         radius: 1.5,
+         radius: 0,
+         pointHoverRadius: 4,
        }
       ]
      },
@@ -167,10 +169,19 @@ var createPRChart = function() {
                 }
             }]
         },
+        hover: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false,
+          positioning: "nearest",
+          animationDuration: 30,
+        },
         tooltips: {
-            mode: 'x',
+            mode: 'nearest',
+            axis: 'x',
             intersect: false,
             positioning: "nearest",
+            enabled: false,
             custom: prCurveTooltip,
             callbacks: {
                 title: function(tooltipItem, data) {
