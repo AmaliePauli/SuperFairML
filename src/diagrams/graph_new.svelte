@@ -46,7 +46,8 @@ var createPRChart = function() {
               if (!tooltipEl) {
                   tooltipEl = document.createElement('div');
                   tooltipEl.id = 'chartjs-tooltip';
-                  tooltipEl.innerHTML = '<table style="border: none"></table>';
+                  const table_style = 'table-layout: fixed; margin-right: auto; margin-left: auto;';
+                  tooltipEl.innerHTML = '<table style="' + table_style + '"></table>';
                   document.body.appendChild(tooltipEl);
               }
 
@@ -64,18 +65,12 @@ var createPRChart = function() {
                   tooltipEl.classList.add('no-transform');
               }
 
-              function getBody(bodyItem) {
-                  return bodyItem.lines;
-              }
-
               // Set Text
               if (tooltipModel.body) {
-                  var bodyLines = tooltipModel.body.map(getBody);
-
                   var innerHtml = '<thead>';
                   innerHtml += '<tr style="text-align: center;">';
                   for (let header of ["&nbsp;","Treshold", "Recall", "Precision"]) {
-                    innerHtml += '<th>' + header + '</th>';
+                    innerHtml += '<th style="padding-right: 5px;">' + header + '</th>';
                   }
                   innerHtml += '</tr></thead><tbody>';
 
@@ -84,9 +79,9 @@ var createPRChart = function() {
                       var colors = tooltipModel.labelColors[i];
                       var style = 'background:' + colors.backgroundColor;
                       style += '; border: none';
-                      style += '; width: 5px; height: 5px';
+                      style += '; width: 8px; height: 8px';
                       //var span = '<span style="' + style + '"></span>';
-                      innerHtml += '<td style="' + style + '"></td>';
+                      innerHtml += '<td><div style="' + style + '"></div></td>';
                       var gender = genders[item.datasetIndex];
                       let thr = thresholds[item.datasetIndex][item.index].toFixed(2);
                       let recall = item.label;
@@ -106,10 +101,14 @@ var createPRChart = function() {
               var position = this._chart.canvas.getBoundingClientRect();
 
               // Display, position, and set styles for font
-              tooltipEl.style.opacity = 1;
+              tooltipEl.style.opacity = 0.6;
+              tooltipEl.style.backgroundColor = 'black';
+              tooltipEl.style.color = 'white';
+              tooltipEl.style.border = 'none';
+              tooltipEl.style.borderRadius = '10px';
               tooltipEl.style.position = 'absolute';
-              tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
-              tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+              tooltipEl.style.left = position.left + window.pageXOffset + (position.width * 0.7) + tooltipModel.xPadding + 'px';
+              tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.yPadding + 'px';
               tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
               tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
               tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
@@ -183,20 +182,6 @@ var createPRChart = function() {
             positioning: "nearest",
             enabled: false,
             custom: prCurveTooltip,
-            callbacks: {
-                title: function(tooltipItem, data) {
-                  var title = "\tThreshold\tRecall\tPrecision";
-                  return title;
-                },
-                label: function(tooltipItem, data) {
-                  var gender = genders[tooltipItem.datasetIndex];
-                  let thr = thresholds[tooltipItem.datasetIndex][tooltipItem.index].toFixed(2);
-                  let recall = tooltipItem.value;
-                  let precision = tooltipItem.label;
-                  var label = `\t${thr}\t${recall}\t${precision}`;
-                  return label;
-                }
-            }
         },
       }
   });
