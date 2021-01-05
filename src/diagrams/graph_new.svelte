@@ -4,8 +4,6 @@ import {Chart} from 'chart.js';
 // Dataset containing the predictions
 import data from '../data/classification.json';
 
-
-
 var createPRChart = function() {
 
   const predictions = separate_data(data);
@@ -23,21 +21,22 @@ var createPRChart = function() {
     let recall_male = true_positive_rate(predictions["male"], threshold).toFixed(2);
     let recall_female = true_positive_rate(predictions["female"], threshold).toFixed(2);
     if (recall_male < last_male_recall && recall_male != 0.0) {
-      precision_recall["male"].push({x: recall_male, y: precision_male});
+      precision_recall["male"].push({'x': recall_male, 'y': precision_male});
       thresholds[0].push(threshold);
       last_male_recall = recall_male;
     }
     if (recall_female < last_female_recall && recall_male != 0.0) {
-      precision_recall["female"].push({x: recall_female, y: precision_female});
+      precision_recall["female"].push({'x': recall_female, 'y': precision_female});
       thresholds[1].push(threshold);
       last_female_recall = recall_female;
     }
   }
-  precision_recall["male"].push({x: 0.0, y: 1.0});
+  precision_recall["male"].push({'x': 0.0, 'y': 1.0});
   thresholds[0].push(1.0);
-  precision_recall["female"].push({x: 0.0, y: 1.0});
+  precision_recall["female"].push({'x': 0.0, 'y': 1.0});
   thresholds[1].push(1.0);
 
+  //TODO: Fix tooltip when threshold point are shown.
   var prCurveTooltip = function(tooltipModel) {
               // Tooltip Element
               var tooltipEl = document.getElementById('chartjs-tooltip');
@@ -118,7 +117,7 @@ var createPRChart = function() {
 
   let canvas = document.getElementById('pr-curve');
   let ctx = canvas.getContext('2d');
-  let PRChart = new Chart(ctx, {
+  let prChart = new Chart(ctx, {
      type: 'line',
      data: {
        datasets: [{
@@ -185,7 +184,41 @@ var createPRChart = function() {
         },
       }
   });
+
+  return prChart;
 }
+
+var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinates) {
+  let canvas = document.getElementById('pr-curve');
+  if (!canvas || !chart) {
+    return;
+  }
+  while (chart.data.datasets.length > 2) {
+    chart.data.datasets.pop();
+  }
+  chart.data.datasets.push({
+      label: "male (chosen_threshold)",
+      data: male_coordinates,
+      fill: false,
+      backgroundColor: "#e88f1c",
+      borderColor: "#e88f1c",
+      showLine: false,
+      radius: 4,
+      pointHoverRadius: 4,
+  });
+  chart.data.datasets.push({
+       label: "female (chosen_threshold)",
+       data: female_coordinates,
+       fill: false,
+       backgroundColor: "#007bff",
+       borderColor: "#007bff",
+       showLine: false,
+       radius: 4,
+       pointHoverRadius: 4,
+  });
+  chart.update(0);
+}
+
 
 // Calculate positive rate
 var positive_rate = function(predictions, threshold) {
@@ -281,11 +314,20 @@ $: female_ppv = positive_predictive_value(predictions.female, female_threshold)
 let bar_height_int = 150;
 let bar_height = bar_height_int.toString() + "px";
 $: male_perc_bar_height_int = bar_height_int - bar_height_int * male_pr;
-$: male_bar_height = male_perc_bar_height_int.toString() + "px"
+$: male_bar_height = male_perc_bar_height_int.toString() + "px";
 $: female_perc_bar_height_int = bar_height_int - bar_height_int * female_pr;
-$: female_bar_height = female_perc_bar_height_int.toString() + "px"
+$: female_bar_height = female_perc_bar_height_int.toString() + "px";
 
-onMount(createPRChart);
+let prChart;
+$: addChosenThresholdPoint(prChart,
+  [{'x': male_tpr.toFixed(2), 'y': male_ppv.toFixed(2)}],
+  [{'x': female_tpr.toFixed(2), 'y': female_ppv.toFixed(2)}]
+);
+
+onMount(() => {
+  const chart = createPRChart();
+  prChart = chart;
+});
 
 </script>
 
