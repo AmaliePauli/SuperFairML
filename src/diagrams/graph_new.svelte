@@ -83,13 +83,8 @@ var createPRChart = function() {
                   tooltipEl.classList.add('no-transform');
               }
 
-              function getBody(bodyItem) {
-                    return bodyItem.lines;
-              }
-
               // Set Text
               if (tooltipModel.body) {
-                  var bodyLines = tooltipModel.body.map(getBody);
 
                   var innerHtml = '<thead>';
                   innerHtml += '<tr style="text-align: center;">';
@@ -97,18 +92,21 @@ var createPRChart = function() {
                     innerHtml += '<th style="padding-right: 5px;">' + header + '</th>';
                   }
                   innerHtml += '</tr></thead><tbody>';
-
+                  var datasets = this._chart.data.datasets;
                   tooltipModel.dataPoints.forEach(function(item, i) {
                       innerHtml += '<tr style="text-align: center;">';
                       var colors = tooltipModel.labelColors[i];
                       var style = 'background:' + colors.backgroundColor;
                       style += '; border: none';
-                      style += '; width: 8px; height: 8px';
+                      style += '; width: 8px; height: 8px; border-radius: 4px;';
                       //var span = '<span style="' + style + '"></span>';
                       innerHtml += '<td><div style="' + style + '"></div></td>';
                       var gender = genders[item.datasetIndex];
-                      // Threshold is read from the tooltip body created with the callback.
-                      let thr = bodyLines[i];
+                      // Threshold is read from the chart data.
+                      let thr = "NA";
+                      if ((item.datasetIndex + 2) < datasets.length) {
+                        thr = datasets[item.datasetIndex+2].data[item.index].toFixed(2);
+                      }
                       let recall = item.label;
                       let precision = item.value;
                       for (let value of [thr, recall, precision]) {
@@ -126,14 +124,14 @@ var createPRChart = function() {
               var position = this._chart.canvas.getBoundingClientRect();
 
               // Display, position, and set styles for font
-              tooltipEl.style.opacity = 0.6;
+              tooltipEl.style.opacity = 0.8;
               tooltipEl.style.backgroundColor = 'black';
               tooltipEl.style.color = 'white';
               tooltipEl.style.border = 'none';
               tooltipEl.style.borderRadius = '10px';
               tooltipEl.style.position = 'absolute';
               tooltipEl.style.left = position.left + window.pageXOffset + (position.width * 0.7) + tooltipModel.xPadding + 'px';
-              tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.yPadding + 'px';
+              tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.yPadding - 20 + 'px';
               tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
               tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
               tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
@@ -178,6 +176,7 @@ var createPRChart = function() {
          radius: 0,
          pointHoverRadius: 0,
          pointHitRadius: 0,
+         hidden: true,
        },
        {
          // "Store" thresholds to show in tooltip
@@ -190,6 +189,7 @@ var createPRChart = function() {
          radius: 0,
          pointHoverRadius: 0,
          pointHitRadius: 0,
+         hidden: true,
        },
       ]
      },
@@ -232,17 +232,18 @@ var createPRChart = function() {
             positioning: "nearest",
             enabled: false,
             custom: prCurveTooltip,
-            callbacks: {
-              // Stores the threshold in the tooltip body.
-              label: function(tooltipItem, data) {
-                let thr = "NA";
-                if ((tooltipItem.datasetIndex + 2) < data.datasets.length) {
-                  thr = data.datasets[tooltipItem.datasetIndex+2].data[tooltipItem.index].toFixed(2);
-                }
-                return thr;
-              }
-            }
         },
+        legend: {
+            onClick: () => {},
+            labels: {
+              // Remove threshold data from legend
+              filter: function(legendItem, data) {
+                return !legendItem.hidden;
+              },
+              usePointStyle: true,
+            },
+            position: "bottom",
+        }
       }
   });
 
@@ -259,21 +260,23 @@ var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinat
     chart.data.datasets.pop();
   }
   chart.data.datasets.push({
-      label: "male (chosen_threshold)",
+      label: "chosen threshold",
       data: male_coordinates,
       fill: false,
-      backgroundColor: "#e88f1c",
-      borderColor: "#e88f1c",
+      backgroundColor: '#deb076',
+      borderColor: '#deb076',
+      borderWidth: 0,
       showLine: false,
       radius: 4,
       pointHoverRadius: 4,
   });
   chart.data.datasets.push({
-       label: "female (chosen_threshold)",
+       label: "chosen threshold",
        data: female_coordinates,
        fill: false,
-       backgroundColor: "#007bff",
-       borderColor: "#007bff",
+       backgroundColor: "#7abaff",
+       borderColor: "#7abaff",
+       borderWidth: 0,
        showLine: false,
        radius: 4,
        pointHoverRadius: 4,
@@ -288,7 +291,8 @@ var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinat
       borderWidth: 0,
       radius: 0,
       pointHoverRadius: 0,
-      pointHitRadius: 0
+      pointHitRadius: 0,
+      hidden: true,
   });
   // "Store" threshold to show in tooltip
   chart.data.datasets.push({
@@ -300,7 +304,8 @@ var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinat
       borderWidth: 0,
       radius: 0,
       pointHoverRadius: 0,
-      pointHitRadius: 0
+      pointHitRadius: 0,
+      hidden: true,
   });
   chart.update(0);
 }
