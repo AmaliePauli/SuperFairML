@@ -468,6 +468,8 @@ let bar_height_int = 150;
 let bar_height = bar_height_int.toString() + "px";
 $: male_perc = choose_perc(fairness_criteria, male_pr, male_tpr, male_ppv)
 $: female_perc = choose_perc(fairness_criteria, female_pr, female_tpr, female_ppv)
+// Decimal number in next line decides what difference is considered as reaching the fairness criteria
+$: icon = (Math.abs(male_perc - female_perc) <= 0.03) ? 'url(../../images/superhero_hands_up.svg)' : 'url(../../images/superhero_hands_down.svg)';
 $: male_perc_bar_height_int = bar_height_int - bar_height_int * male_perc;
 $: male_bar_height = male_perc_bar_height_int.toString() + "px";
 $: female_perc_bar_height_int = bar_height_int - bar_height_int * female_perc;
@@ -496,7 +498,7 @@ if (fairness_criteria === "predictive parity") {
       <th style="font-size: 1.2em;"> <b>Female figures</b> </th>
     </tr>
   </thead>
-  <tbody style="--bar-height: {bar_height};--male-bar-height: {male_bar_height};--female-bar-height: {female_bar_height}">
+  <tbody style="--bar-height: {bar_height}; --male-bar-height: {male_bar_height}; --female-bar-height: {female_bar_height}; --icon: {icon}">
       <tr class="slider">
       <td>
         <input class="male" type=range bind:value={male_threshold} on:input={bubble_position(male_bubble, male_threshold)} min=0.0 max=1.0 step=0.01>
@@ -610,7 +612,7 @@ td.bar {
 div.bar {
   position: relative;
   z-index: 0;
-  width: 96px;
+  width: 109px;
   height: var(--bar-height);
   margin: auto;
 }
@@ -649,7 +651,7 @@ div.icon {
   width: calc(100% + (1px));
   height: calc(100% + (3px));
   /* Remember to put preserveAspectRatio="none" into the svg file (to level svg tag)*/
-  background: url(../../images/superhero.svg);
+  background: var(--icon);
   background-size: 100% 100%;
   border: none;
 }
