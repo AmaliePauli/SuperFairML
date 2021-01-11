@@ -3,6 +3,33 @@ import {onMount} from 'svelte/internal';
 import {Chart} from 'chart.js';
 // Dataset containing the predictions
 import data from '../data/classification.json';
+// Props passed from the host script
+export let fairness_criteria;
+
+let fairness_criteria_text = "";
+if (fairness_criteria === "demographic parity") {
+  fairness_criteria_text = "Positive Rate";
+}
+else if (fairness_criteria === "equal opportunity") {
+  fairness_criteria_text = "True Positive Rate";
+}
+else if (fairness_criteria === "predictive parity") {
+  fairness_criteria_text = "Positive Predictive Value";
+}
+
+var choose_perc = function(fairness_criteria, pr, tpr, ppv) {
+  let perc = 0;
+  if (fairness_criteria === "demographic parity") {
+    perc = pr;
+  }
+  else if (fairness_criteria === "equal opportunity") {
+    perc = tpr;
+  }
+  else if (fairness_criteria === "predictive parity") {
+    perc = ppv;
+  }
+  return perc;
+}
 
 var round2decimals = function(number) {
   return Math.round(100*number) / 100;
@@ -310,8 +337,7 @@ var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinat
   chart.update(0);
 }
 
-// Performance metrics
-
+// Performance metrics TODO: use conf matrix
 // Calculate positive rate
 var positive_rate = function(predictions, threshold) {
   var total_positive = 0.0;
@@ -426,20 +452,25 @@ var bubble_position = function(bubble, threshold) {
 $: male_conf = confusion_matrix(predictions.male, male_threshold);
 $: female_conf = confusion_matrix(predictions.female, female_threshold);
 // Positive rates
+let male_pr; let female_pr;
 $: male_pr = positive_rate(predictions.male, male_threshold);
 $: female_pr = positive_rate(predictions.female, female_threshold);
 // TPR
+let male_tpr; let female_tpr;
 $: male_tpr = true_positive_rate(predictions.male, male_threshold);
 $: female_tpr = true_positive_rate(predictions.female, female_threshold);
 // PPV
+let male_ppv; let female_ppv;
 $: male_ppv = positive_predictive_value(predictions.male, male_threshold);
 $: female_ppv = positive_predictive_value(predictions.female, female_threshold);
 
 let bar_height_int = 150;
 let bar_height = bar_height_int.toString() + "px";
-$: male_perc_bar_height_int = bar_height_int - bar_height_int * male_pr;
+$: male_perc = choose_perc(fairness_criteria, male_pr, male_tpr, male_ppv)
+$: female_perc = choose_perc(fairness_criteria, female_pr, female_tpr, female_ppv)
+$: male_perc_bar_height_int = bar_height_int - bar_height_int * male_perc;
 $: male_bar_height = male_perc_bar_height_int.toString() + "px";
-$: female_perc_bar_height_int = bar_height_int - bar_height_int * female_pr;
+$: female_perc_bar_height_int = bar_height_int - bar_height_int * female_perc;
 $: female_bar_height = female_perc_bar_height_int.toString() + "px";
 
 let prChart;
@@ -449,11 +480,12 @@ $: addChosenThresholdPoint(prChart,
   male_threshold,
   female_threshold
 );
-
-onMount(() => {
-  const chart = createPRChart();
-  prChart = chart;
-});
+if (fairness_criteria === "predictive parity") {
+  onMount(() => {
+    const chart = createPRChart();
+    prChart = chart;
+  });
+}
 
 </script>
 
@@ -491,24 +523,24 @@ onMount(() => {
       </tr>
       <tr>
       <td class="bar">
-        <p style="font-weight: bold;"> Positive Rate </p>
+        <p style="font-weight: bold;"> {fairness_criteria_text} </p>
         <div class="bar">
           <div class="percentage_background"></div>
           <div class="percentage"></div>
           <div class="icon"></div>
           <div class="text">
-            <b>{Math.round(male_pr*100)}%</b>
+            <b>{Math.round(male_perc*100)}%</b>
           </div>
         </div>
       </td>
       <td class="bar">
-        <p style="font-weight: bold;"> Positive Rate </p>
+        <p style="font-weight: bold;"> {fairness_criteria_text} </p>
         <div class="bar">
           <div class="percentage_background female"></div>
           <div class="percentage female"></div>
           <div class="icon"></div>
           <div class="text">
-            <b>{Math.round(female_pr*100)}%</b>
+            <b>{Math.round(female_perc*100)}%</b>
           </div>
         </div>
       </td>
@@ -521,6 +553,7 @@ onMount(() => {
         <td class="perc-rate">Positive predictive value: {Math.round(male_ppv*100)}%</td>
         <td class="perc-rate">Positive predictive value: {Math.round(female_ppv*100)}%</td>
       </tr>
+      {#if fairness_criteria === "predictive parity"}
       <tr>
         <td colspan="2" class="pr-curve">
           <b>Precision-Recall curve</b>
@@ -529,6 +562,7 @@ onMount(() => {
           </canvas>
         </td>
       </tr>
+      {/if}
   </tbody>
 </table>
 
