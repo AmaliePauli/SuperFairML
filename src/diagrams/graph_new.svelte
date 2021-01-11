@@ -310,13 +310,14 @@ var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinat
   chart.update(0);
 }
 
+// Performance metrics
 
 // Calculate positive rate
 var positive_rate = function(predictions, threshold) {
   var total_positive = 0.0;
   for (let i = 0; i < predictions.length; i++) {
     let hero = predictions[i]
-    if(hero.prediction_probability > threshold) {
+    if(hero.prediction_probability >= threshold) {
         total_positive += 1.0;
     }
   }
@@ -330,7 +331,7 @@ var true_positive_rate = function(predictions, threshold) {
   for (let i = 0; i < predictions.length; i++) {
     let hero = predictions[i]
     total_positives += hero.class;
-    if(hero.prediction_probability > threshold) {
+    if(hero.prediction_probability >= threshold) {
         if (hero.class) {
           true_positives += 1.0;
         }
@@ -348,7 +349,7 @@ var positive_predictive_value = function(predictions, threshold) {
   var true_positives = 0;
   for (let i = 0; i < predictions.length; i++) {
     let hero = predictions[i]
-    if(hero.prediction_probability > threshold) {
+    if(hero.prediction_probability >= threshold) {
         total_predicted_positives += 1;
         if (hero.class) {
           true_positives += 1.0;
@@ -359,6 +360,35 @@ var positive_predictive_value = function(predictions, threshold) {
     return 1.0;
   }
   return true_positives / total_predicted_positives;
+}
+
+// Calculate confusion_matrix
+var confusion_matrix = function(predictions, threshold) {
+  var true_positives = 0.0;
+  var true_negatives = 0.0;
+  var false_positives = 0.0;
+  var false_negatives = 0.0
+  for (let i = 0; i < predictions.length; i++) {
+    let hero = predictions[i]
+    if(hero.prediction_probability >= threshold) {
+      if (hero.class) {
+        true_positives += 1.0;
+      }
+      else {
+        false_positives += 1.0;
+      }
+    }
+    else {
+      if (hero.class) {
+        false_negatives += 1.0;
+      }
+      else {
+        true_negatives += 1.0;
+      }
+    }
+  }
+  return {"tp": true_positives, "fp": false_positives,
+          "fn": false_negatives, "tn": true_negatives};
 }
 
 // Separate data into males and females
@@ -392,15 +422,18 @@ var bubble_position = function(bubble, threshold) {
   bubble.style.left = `calc(${newVal}% + (${42*(0.5 - newVal/100)}px))`;
 }
 
+// Accuracy
+$: male_conf = confusion_matrix(predictions.male, male_threshold);
+$: female_conf = confusion_matrix(predictions.female, female_threshold);
 // Positive rates
-$: male_pr = positive_rate(predictions.male, male_threshold)
-$: female_pr = positive_rate(predictions.female, female_threshold)
+$: male_pr = positive_rate(predictions.male, male_threshold);
+$: female_pr = positive_rate(predictions.female, female_threshold);
 // TPR
-$: male_tpr = true_positive_rate(predictions.male, male_threshold)
-$: female_tpr = true_positive_rate(predictions.female, female_threshold)
+$: male_tpr = true_positive_rate(predictions.male, male_threshold);
+$: female_tpr = true_positive_rate(predictions.female, female_threshold);
 // PPV
-$: male_ppv = positive_predictive_value(predictions.male, male_threshold)
-$: female_ppv = positive_predictive_value(predictions.female, female_threshold)
+$: male_ppv = positive_predictive_value(predictions.male, male_threshold);
+$: female_ppv = positive_predictive_value(predictions.female, female_threshold);
 
 let bar_height_int = 150;
 let bar_height = bar_height_int.toString() + "px";
@@ -443,8 +476,22 @@ onMount(() => {
       </td>
       </tr>
       <tr>
+        <td class="perf">
+          <p style="line-height: 1.5em;">
+            {male_conf.tp}/{male_conf.tp + male_conf.fn} ({Math.round((male_conf.tp / (male_conf.tp + male_conf.fn))*100)}%) superheros let in. <br>
+            {male_conf.fp}/{male_conf.tn + male_conf.fp} ({Math.round((male_conf.fp / (male_conf.tn + male_conf.fp))*100)}%) villains let in.
+          </p>
+        </td>
+        <td class="perf">
+          <p style="line-height: 1.5em;">
+            {female_conf.tp}/{female_conf.tp + female_conf.fn} ({Math.round((female_conf.tp / (female_conf.tp + female_conf.fn))*100)}%) superheros let in. <br>
+            {female_conf.fp}/{female_conf.tn + female_conf.fp} ({Math.round((female_conf.fp / (female_conf.tn + female_conf.fp))*100)}%) villains let in.
+          </p>
+        </td>
+      </tr>
+      <tr>
       <td class="bar">
-        Positive Rate
+        <p style="font-weight: bold;"> Positive Rate </p>
         <div class="bar">
           <div class="percentage_background"></div>
           <div class="percentage"></div>
@@ -455,7 +502,7 @@ onMount(() => {
         </div>
       </td>
       <td class="bar">
-        Positive Rate
+        <p style="font-weight: bold;"> Positive Rate </p>
         <div class="bar">
           <div class="percentage_background female"></div>
           <div class="percentage female"></div>
@@ -515,6 +562,12 @@ table td {
 tr.slider {
   height: 75px;
   vertical-align: top;
+}
+
+td.perf {
+  text-align: left;
+  font-size: 0.9em;
+  padding-bottom: 5px;
 }
 
 td.bar {
