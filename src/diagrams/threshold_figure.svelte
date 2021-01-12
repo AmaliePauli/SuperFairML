@@ -1,6 +1,9 @@
 <script>
-import {onMount} from 'svelte/internal';
-import {Chart} from 'chart.js';
+import { onMount } from 'svelte/internal';
+import { round2decimals } from "../utils.js";
+import { separate_data } from "../data/data.js";
+import { positive_rate, true_positive_rate, positive_predictive_value, confusion_matrix } from "../metrics.js";
+import { createPRChart, addChosenThresholdPoint } from "./pr_curve.js"
 // Dataset containing the predictions
 import data from '../data/superhero_classification.json';
 // Props passed from the host script
@@ -38,7 +41,7 @@ var choose_percs = function(fairness_criteria, pr, tpr, ppv) {
   }
   return perc;
 }
-// Construct a list with bar heights based
+// Construct a list with bar heights based on percentages
 var compute_bars = function(bar_height, secondary_bar_height, percs) {
   let bar_heights = [];
   for (let i = 0; i < percs.length; i++) {
@@ -68,422 +71,21 @@ var choose_icons = function(male_percs, female_percs, icons, thr=0.03) {
   return icon_list;
 }
 
-var round2decimals = function(number) {
-  return Math.round(100*number) / 100;
-}
-
-var createPRChart = function() {
-
-  const predictions = separate_data(data);
-  // Compute recall and precision (TODO: double check)
-  const n = 100;
-  const precision_recall = {"male": [], "female": []}
-  const thresholds = {0: [], 1: []};
-  const genders = ["male", "female"];
-  let last_male_recall = 2.0;
-  let last_female_recall = 2.0;
-  for (let i = 0; i <= n; i++) {
-    let threshold = i*0.01;
-    let precision_male = round2decimals(positive_predictive_value(predictions["male"], threshold));
-    let precision_female = round2decimals(positive_predictive_value(predictions["female"], threshold));
-    let recall_male = round2decimals(true_positive_rate(predictions["male"], threshold));
-    let recall_female = round2decimals(true_positive_rate(predictions["female"], threshold));
-    if (recall_male > 0) {
-      if (recall_male != last_male_recall) {
-        precision_recall["male"].push({'x': recall_male, 'y': precision_male});
-        thresholds[0].push(threshold);
-        last_male_recall = recall_male;
-      }
-      else if (precision_recall["male"][precision_recall["male"].length-1]['y'] != precision_male) {
-      //  precision_recall["male"].pop();
-        //thresholds[0].pop();
-        precision_recall["male"].push({'x': recall_male, 'y': precision_male});
-        thresholds[0].push(threshold);
-      }
-    }
-    if (recall_female > 0) {
-      if (recall_female != last_female_recall) {
-        precision_recall["female"].push({'x': recall_female, 'y': precision_female});
-        thresholds[1].push(threshold);
-        last_female_recall = recall_female;
-      }
-      else if (precision_recall["female"][precision_recall["female"].length-1]['y'] != precision_female) {
-      //  precision_recall["female"].pop();
-      //  thresholds[1].pop();
-        precision_recall["female"].push({'x': recall_female, 'y': precision_female});
-        thresholds[1].push(threshold);
-      }
-    }
-  }
-  precision_recall["male"].push({'x': 0.0, 'y': 1.0});
-  thresholds[0].push(1.0);
-  precision_recall["female"].push({'x': 0.0, 'y': 1.0});
-  thresholds[1].push(1.0);
-
-  var prCurveTooltip = function(tooltipModel) {
-              // Tooltip Element
-              var tooltipEl = document.getElementById('chartjs-tooltip');
-
-              // Create element on first render
-              if (!tooltipEl) {
-                  tooltipEl = document.createElement('div');
-                  tooltipEl.id = 'chartjs-tooltip';
-                  const table_style = 'table-layout: fixed; margin-right: auto; margin-left: auto; border-collapse: separate;';
-                  tooltipEl.innerHTML = '<table style="' + table_style + '"></table>';
-                  document.body.appendChild(tooltipEl);
-              }
-
-              // Hide if no tooltip
-              if (tooltipModel.opacity === 0) {
-                  tooltipEl.style.opacity = 0;
-                  return;
-              }
-
-              // Set caret Position
-              tooltipEl.classList.remove('above', 'below', 'no-transform');
-              if (tooltipModel.yAlign) {
-                  tooltipEl.classList.add(tooltipModel.yAlign);
-              } else {
-                  tooltipEl.classList.add('no-transform');
-              }
-
-              // Set Text
-              if (tooltipModel.body) {
-
-                  var innerHtml = '<thead>';
-                  innerHtml += '<tr style="text-align: center;">';
-                  for (let header of ["&nbsp;","Threshold", "Recall", "Precision"]) {
-                    innerHtml += '<th style="padding-right: 5px;">' + header + '</th>';
-                  }
-                  innerHtml += '</tr></thead><tbody>';
-                  var datasets = this._chart.data.datasets;
-                  tooltipModel.dataPoints.forEach(function(item, i) {
-                      innerHtml += '<tr style="text-align: center;">';
-                      var colors = tooltipModel.labelColors[i];
-                      var style = 'background:' + colors.backgroundColor;
-                      style += '; border: none';
-                      style += '; width: 8px; height: 8px; border-radius: 4px;';
-                      //var span = '<span style="' + style + '"></span>';
-                      innerHtml += '<td><div style="' + style + '"></div></td>';
-                      var gender = genders[item.datasetIndex];
-                      // Threshold is read from the chart data.
-                      let thr = "NA";
-                      if ((item.datasetIndex + 2) < datasets.length) {
-                        thr = datasets[item.datasetIndex+2].data[item.index].toFixed(2);
-                      }
-                      let recall = item.label;
-                      let precision = item.value;
-                      for (let value of [thr, recall, precision]) {
-                          innerHtml += '<td>' + value + '</td>';
-                      }
-                      innerHtml += '</tr>';
-                  });
-                  innerHtml += '</tbody>';
-
-                  var tableRoot = tooltipEl.querySelector('table');
-                  tableRoot.innerHTML = innerHtml;
-              }
-
-              // `this` will be the overall tooltip
-              var position = this._chart.canvas.getBoundingClientRect();
-
-              // Display, position, and set styles for font
-              tooltipEl.style.opacity = 1.0;
-              tooltipEl.style.backgroundColor = 'rgb(0,0,0,0.4)';
-              tooltipEl.style.color = 'white';
-              tooltipEl.style.border = 'none';
-              tooltipEl.style.borderRadius = '10px';
-              tooltipEl.style.position = 'absolute';
-              tooltipEl.style.left = position.left + window.pageXOffset + (position.width * 0.7) + tooltipModel.xPadding + 'px';
-              tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.yPadding - 20 + 'px';
-              tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
-              tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
-              tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
-              tooltipEl.style.padding = tooltipModel.yPadding + 'px ' + tooltipModel.xPadding + 'px';
-              tooltipEl.style.pointerEvents = 'none';
-	};
-  let canvas = document.getElementById('pr-curve');
-  let ctx = canvas.getContext('2d');
-  let prChart = new Chart(ctx, {
-     type: 'line',
-     data: {
-       datasets: [{
-         label: "male",
-         data: precision_recall["male"],
-         fill: false,
-         backgroundColor: "#e88f1c",
-         borderColor: "#e88f1c",
-         borderWidth: 1,
-         radius: 0,
-         pointHoverRadius: 4,
-         lineTension: 0,
-       },
-       {
-         label: "female",
-         data: precision_recall["female"],
-         fill: false,
-         backgroundColor: "#007bff",
-         borderColor: "#007bff",
-         borderWidth: 1,
-         radius: 0,
-         pointHoverRadius: 4,
-         lineTension: 0,
-       },
-       {
-         // "Store" thresholds to show in tooltip
-         label: "thresholds male",
-         data: thresholds[0],
-         fill: false,
-         backgroundColor: "grey",
-         borderColor: "grey",
-         borderWidth: 0,
-         radius: 0,
-         pointHoverRadius: 0,
-         pointHitRadius: 0,
-         hidden: true,
-       },
-       {
-         // "Store" thresholds to show in tooltip
-         label: "thresholds female",
-         data: thresholds[1],
-         fill: false,
-         backgroundColor: "grey",
-         borderColor: "grey",
-         borderWidth: 0,
-         radius: 0,
-         pointHoverRadius: 0,
-         pointHitRadius: 0,
-         hidden: true,
-       },
-      ]
-     },
-     options: {
-       scales: {
-            xAxes: [{
-                type: 'linear',
-                position: 'bottom',
-                ticks: {
-                  beginAtZero: true
-                },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Recall (True Positive Rate)'
-                }
-            }],
-            yAxes: [{
-                type: 'linear',
-                position: 'bottom',
-                ticks: {
-                  beginAtZero: true
-                },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Precision (Positive Predictive Value)'
-                }
-            }]
-        },
-        hover: {
-          mode: 'nearest',
-          axis: 'x',
-          intersect: false,
-          positioning: "nearest",
-          animationDuration: 30,
-        },
-        tooltips: {
-            mode: 'nearest',
-            axis: 'x',
-            intersect: false,
-            positioning: "nearest",
-            enabled: false,
-            custom: prCurveTooltip,
-        },
-        legend: {
-            onClick: () => {},
-            labels: {
-              // Remove threshold data from legend
-              filter: function(legendItem, data) {
-                return !legendItem.hidden;
-              },
-              usePointStyle: true,
-            },
-            position: "bottom",
-        }
-      }
-  });
-
-  return prChart;
-}
-
-var addChosenThresholdPoint = function(chart, male_coordinates, female_coordinates, male_threshold, female_threshold) {
-  let canvas = document.getElementById('pr-curve');
-  if (!canvas || !chart) {
-    return;
-  }
-  // Remove data for last chosen threshold
-  while (chart.data.datasets.length > 4) {
-    chart.data.datasets.pop();
-  }
-  chart.data.datasets.push({
-      label: "chosen threshold",
-      data: male_coordinates,
-      fill: false,
-      backgroundColor: '#deb076',
-      borderColor: '#deb076',
-      borderWidth: 0,
-      showLine: false,
-      radius: 4,
-      pointHoverRadius: 4,
-  });
-  chart.data.datasets.push({
-       label: "chosen threshold",
-       data: female_coordinates,
-       fill: false,
-       backgroundColor: "#7abaff",
-       borderColor: "#7abaff",
-       borderWidth: 0,
-       showLine: false,
-       radius: 4,
-       pointHoverRadius: 4,
-  });
-  // "Store" threshold to show in tooltip
-  chart.data.datasets.push({
-      label: "male threshold",
-      data: [male_threshold],
-      fill: false,
-      backgroundColor: "grey",
-      borderColor: "grey",
-      borderWidth: 0,
-      radius: 0,
-      pointHoverRadius: 0,
-      pointHitRadius: 0,
-      hidden: true,
-  });
-  // "Store" threshold to show in tooltip
-  chart.data.datasets.push({
-      label: "female threshold",
-      data: [female_threshold],
-      fill: false,
-      backgroundColor: "grey",
-      borderColor: "grey",
-      borderWidth: 0,
-      radius: 0,
-      pointHoverRadius: 0,
-      pointHitRadius: 0,
-      hidden: true,
-  });
-  chart.update(0);
-}
-
-// Performance metrics TODO: use conf matrix
-// Calculate positive rate
-var positive_rate = function(predictions, threshold) {
-  var total_positive = 0.0;
-  for (let i = 0; i < predictions.length; i++) {
-    let hero = predictions[i]
-    if(hero.prediction_probability >= threshold) {
-        total_positive += 1.0;
-    }
-  }
-  return total_positive / predictions.length;
-}
-
-// Calculate true positive rate
-var true_positive_rate = function(predictions, threshold) {
-  var total_positives = 0;
-  var true_positives = 0;
-  for (let i = 0; i < predictions.length; i++) {
-    let hero = predictions[i]
-    total_positives += hero.class;
-    if(hero.prediction_probability >= threshold) {
-        if (hero.class) {
-          true_positives += 1.0;
-        }
-    }
-  }
-  if (total_positives == 0) {
-    return 1.0;
-  }
-  return true_positives / total_positives;
-}
-
-// Calculate positive predictive value
-var positive_predictive_value = function(predictions, threshold) {
-  var total_predicted_positives = 0;
-  var true_positives = 0;
-  for (let i = 0; i < predictions.length; i++) {
-    let hero = predictions[i]
-    if(hero.prediction_probability >= threshold) {
-        total_predicted_positives += 1;
-        if (hero.class) {
-          true_positives += 1.0;
-        }
-    }
-  }
-  if (total_predicted_positives == 0) {
-    return 1.0;
-  }
-  return true_positives / total_predicted_positives;
-}
-
-// Calculate confusion_matrix
-var confusion_matrix = function(predictions, threshold) {
-  var true_positives = 0.0;
-  var true_negatives = 0.0;
-  var false_positives = 0.0;
-  var false_negatives = 0.0
-  for (let i = 0; i < predictions.length; i++) {
-    let hero = predictions[i]
-    if(hero.prediction_probability >= threshold) {
-      if (hero.class) {
-        true_positives += 1.0;
-      }
-      else {
-        false_positives += 1.0;
-      }
-    }
-    else {
-      if (hero.class) {
-        false_negatives += 1.0;
-      }
-      else {
-        true_negatives += 1.0;
-      }
-    }
-  }
-  return {"tp": true_positives, "fp": false_positives,
-          "fn": false_negatives, "tn": true_negatives};
-}
-
-// Separate data into males and females
-var separate_data = function(dataset) {
-  const male_predictions = []
-  const female_predictions = []
-  for (let i = 0; i < dataset.length; i++) {
-    if (dataset[i].gender == "male") {
-      male_predictions.push(dataset[i]);
-    }
-    else {
-      female_predictions.push(dataset[i]);
-    }
-  }
-  return {"male": male_predictions, "female": female_predictions};
-}
-
-const predictions = separate_data(data);
-
-// Threshold for classifier
+// Thresholds for classifier
 let male_threshold = 0.5;
 let female_threshold = 0.5;
-
-// DOM for the bubble showing the threshold
+// DOM for the bubbles showing the threshold
 let male_bubble;
 let female_bubble;
+// Updating the bubble position
 var bubble_position = function(bubble, threshold) {
   var newVal = Number(threshold * 100);
   // Sorta magic numbers based on size of the native UI thumb
   bubble.style.left = `calc(${newVal}% + (${42*(0.5 - newVal/100)}px))`;
 }
 
+const predictions = separate_data(data);
+// Metrics (updating based on the chosen threshold)
 // Accuracy
 $: male_conf = confusion_matrix(predictions.male, male_threshold);
 $: female_conf = confusion_matrix(predictions.female, female_threshold);
@@ -500,6 +102,7 @@ let male_ppv; let female_ppv;
 $: male_ppv = positive_predictive_value(predictions.male, male_threshold);
 $: female_ppv = positive_predictive_value(predictions.female, female_threshold);
 
+// Variables for the super figure bar charts
 let bar_height = 150;
 let bar_width = 109;
 let secondary_bar_height = bar_height / 2;
@@ -512,12 +115,7 @@ $: icons = choose_icons(male_percs, female_percs, {"up": "../../images/superhero
 $: male_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, male_percs);
 $: female_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, female_percs);
 
-$: {
-  console.log(fairness_criteria);
-  console.log(male_percs);
-  console.log(female_percs);
-}
-
+// Precision-Recall curve
 let prChart;
 $: addChosenThresholdPoint(prChart,
   [{'x': round2decimals(male_tpr), 'y': round2decimals(male_ppv)}],
@@ -527,7 +125,7 @@ $: addChosenThresholdPoint(prChart,
 );
 if (fairness_criteria === "predictive parity") {
   onMount(() => {
-    const chart = createPRChart();
+    const chart = createPRChart(data);
     prChart = chart;
   });
 }
@@ -628,7 +226,7 @@ if (fairness_criteria === "predictive parity") {
       <tr>
         <td colspan="2" class="pr-curve">
           <b>Precision-Recall curve</b>
-          <canvas id="pr-curve" width="100%" height="50px" aria-label="Precision-Recall curve" role="img">
+          <canvas id="pr-curve" width="100%" height="60px" aria-label="Precision-Recall curve" role="img">
             <p>Precision-Recall curve for both male and female superfigures.</p>
           </canvas>
         </td>
@@ -657,17 +255,13 @@ table td {
   position: relative;
 }
 
-tr.slider {
-  height: 75px;
-  vertical-align: top;
-}
-
 td.perf {
   text-align: left;
   font-size: 0.9em;
   padding-bottom: 5px;
 }
 
+/* Superfigure barchart */
 td.bar {
   padding-bottom: 5px;
 }
@@ -717,6 +311,7 @@ div.text.secondary {
   left: 5%;
 }
 
+/* Precision-Recall curve */
 td.pr-curve {
   padding-top: 25px;
   padding-bottom: 10px;
@@ -724,6 +319,13 @@ td.pr-curve {
 }
 canvas {
   padding-top: 15px;
+}
+
+/* Slider */
+
+tr.slider {
+  height: 75px;
+  vertical-align: top;
 }
 
 input[type=range] {
