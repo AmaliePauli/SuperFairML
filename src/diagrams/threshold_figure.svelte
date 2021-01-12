@@ -510,6 +510,12 @@ $: icons = choose_icons(male_percs, female_percs, {"up": "../../images/superhero
 $: male_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, male_percs);
 $: female_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, female_percs);
 
+$: {
+  console.log(fairness_criteria);
+  console.log(male_percs);
+  console.log(female_percs);
+}
+
 let prChart;
 $: addChosenThresholdPoint(prChart,
   [{'x': round2decimals(male_tpr), 'y': round2decimals(male_ppv)}],

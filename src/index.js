@@ -3,9 +3,7 @@
 import * as _unused from "raw-loader!./index.ejs";
 // TODO: disable before publishing
 
-import Graph from './diagrams/graph.svelte';
-import Graph2 from './diagrams/graph2.svelte';
-import NewGraph from './diagrams/graph_new.svelte'
+import ThresholdFigure from './diagrams/threshold_figure.svelte'
 import Questionnaire from './diagrams/questionnaire.svelte';
 import Testerques from './diagrams/testerques.svelte';
 
@@ -17,14 +15,19 @@ import Testerques from './diagrams/testerques.svelte';
 // 'rgb(255, 159, 64)', // orange
 // 'rgb(231,233,237)' // grey
 
-new NewGraph ({
-	target: document.getElementById("graph-target"),
+new ThresholdFigure ({
+	target: document.getElementById("interactive-dp"),
 	props: { "fairness_criteria": "demographic parity"}
 });
 
-new NewGraph ({
-	target: document.getElementById("graph-target-2"),
+new ThresholdFigure ({
+	target: document.getElementById("interactive-eq"),
 	props: { "fairness_criteria": "equal opportunity"}
+});
+
+new ThresholdFigure ({
+	target: document.getElementById("interactive-pp"),
+	props: { "fairness_criteria": "predictive parity"}
 });
 
 new Testerques({
