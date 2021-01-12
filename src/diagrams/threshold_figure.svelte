@@ -8,6 +8,8 @@ export let fairness_criteria;
 
 let male_color = "#e88f1c";
 let female_color = "#007bff";
+let male_color_weak = "#ebb889";
+let female_color_weak = "#cbdef3";
 let female_bar_background = "#edf5ff";
 let male_bar_background = "#f5e9df";
 
@@ -596,17 +598,17 @@ if (fairness_criteria === "predictive parity") {
                 {#each fairness_criteria_text as title, i}
                   {#if i > 0}
                     <td class="bar">
-                      <p> {fairness_criteria_text[i]} </p>
+                      <p style="font-size: 0.9em;"> {fairness_criteria_text[i]} </p>
                       <div style="height: {secondary_bar_height.toString() + 'px'}; width: {secondary_bar_width.toString() + 'px'};" class="bar">
                         {#if gender == "male"}
                           <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
-                          <div style="background-color: {male_color};" class="percentage"></div>
+                          <div style="background-color: {male_color_weak};" class="percentage"></div>
                         {:else}
                           <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
-                          <div style="background-color: {female_color};" class="percentage"></div>
+                          <div style="background-color: {female_color_weak};" class="percentage"></div>
                         {/if}
                         <div style="background: {icons[i]};" class="icon"></div>
-                        <div class="text">
+                        <div class="text secondary">
                           {#if gender == "male"}
                             <b>{Math.round(male_percs[i]*100)}%</b>
                           {:else}
@@ -621,14 +623,6 @@ if (fairness_criteria === "predictive parity") {
             </tr>
           </table>
         </td>
-      </tr>
-      <tr>
-        <td class="perc-rate">True positive rate: {Math.round(male_tpr*100)}%</td>
-        <td class="perc-rate">True positive rate: {Math.round(female_tpr*100)}%</td>
-      </tr>
-      <tr>
-        <td class="perc-rate">Positive predictive value: {Math.round(male_ppv*100)}%</td>
-        <td class="perc-rate">Positive predictive value: {Math.round(female_ppv*100)}%</td>
       </tr>
       {#if fairness_criteria === "predictive parity"}
       <tr>
@@ -675,7 +669,7 @@ td.perf {
 }
 
 td.bar {
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 div.bar {
   position: relative;
@@ -718,10 +712,9 @@ div.text {
   text-align: center;
   border: none;
 }
-
-td.perc-rate {
-  text-align: left;
-  font-size: 0.75em;
+div.text.secondary {
+  top: 100%;
+  left: 5%;
 }
 
 td.pr-curve {
