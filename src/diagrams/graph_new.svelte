@@ -2,7 +2,7 @@
 import {onMount} from 'svelte/internal';
 import {Chart} from 'chart.js';
 // Dataset containing the predictions
-import data from '../data/classification.json';
+import data from '../data/superhero_classification.json';
 // Props passed from the host script
 export let fairness_criteria;
 
