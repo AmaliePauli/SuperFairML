@@ -6,29 +6,64 @@ import data from '../data/classification.json';
 // Props passed from the host script
 export let fairness_criteria;
 
+let male_color = "#e88f1c";
+let female_color = "#007bff";
+let female_bar_background = "#edf5ff";
+let male_bar_background = "#f5e9df";
+
+// Construct a list with titles based on the fairness criteria
 let fairness_criteria_text = "";
 if (fairness_criteria === "demographic parity") {
-  fairness_criteria_text = "Positive Rate";
+  fairness_criteria_text = ["Positive Rate"];
 }
 else if (fairness_criteria === "equal opportunity") {
-  fairness_criteria_text = "True Positive Rate";
+  fairness_criteria_text = ["True Positive Rate", "Positive Rate"];
 }
 else if (fairness_criteria === "predictive parity") {
-  fairness_criteria_text = "Positive Predictive Value";
+  fairness_criteria_text = ["Positive Predictive Value", "True Positive Rate", "Positive Rate"];
 }
-
-var choose_perc = function(fairness_criteria, pr, tpr, ppv) {
-  let perc = 0;
+// Construct a list with percentages based on the fairness criteria
+var choose_percs = function(fairness_criteria, pr, tpr, ppv) {
+  let perc = [];
   if (fairness_criteria === "demographic parity") {
-    perc = pr;
+    perc = [pr];
   }
   else if (fairness_criteria === "equal opportunity") {
-    perc = tpr;
+    perc = [tpr, pr];
   }
   else if (fairness_criteria === "predictive parity") {
-    perc = ppv;
+    perc = [ppv, tpr, pr];
   }
   return perc;
+}
+// Construct a list with bar heights based
+var compute_bars = function(bar_height, secondary_bar_height, percs) {
+  let bar_heights = [];
+  for (let i = 0; i < percs.length; i++) {
+    let factor = 1.0 - percs[i];
+    //Primary bar
+    if (i === 0) {
+      bar_heights.push(Math.round(bar_height * factor));
+    }
+    // Secondary bars
+    else {
+      bar_heights.push(Math.round(secondary_bar_height * factor));
+    }
+  }
+  return bar_heights;
+}
+// Construct a list with icons (hands up or down) for each bar
+var choose_icons = function(male_percs, female_percs, icons, thr=0.03) {
+  let icon_list = [];
+  for (let i = 0; i < male_percs.length; i++) {
+    if (Math.abs(male_percs[i] - female_percs[i]) <= thr) {
+      icon_list.push('url(' + icons.up + ')');
+    }
+    else  {
+      icon_list.push('url(' + icons.down + ')');
+    }
+  }
+  return icon_list;
 }
 
 var round2decimals = function(number) {
@@ -441,7 +476,6 @@ let female_threshold = 0.5;
 // DOM for the bubble showing the threshold
 let male_bubble;
 let female_bubble;
-
 var bubble_position = function(bubble, threshold) {
   var newVal = Number(threshold * 100);
   // Sorta magic numbers based on size of the native UI thumb
@@ -464,16 +498,17 @@ let male_ppv; let female_ppv;
 $: male_ppv = positive_predictive_value(predictions.male, male_threshold);
 $: female_ppv = positive_predictive_value(predictions.female, female_threshold);
 
-let bar_height_int = 150;
-let bar_height = bar_height_int.toString() + "px";
-$: male_perc = choose_perc(fairness_criteria, male_pr, male_tpr, male_ppv)
-$: female_perc = choose_perc(fairness_criteria, female_pr, female_tpr, female_ppv)
+let bar_height = 150;
+let bar_width = 109;
+let secondary_bar_height = bar_height / 2;
+let secondary_bar_width = bar_width / 2;
+$: male_percs = choose_percs(fairness_criteria, male_pr, male_tpr, male_ppv);
+$: female_percs = choose_percs(fairness_criteria, female_pr, female_tpr, female_ppv);
 // Decimal number in next line decides what difference is considered as reaching the fairness criteria
-$: icon = (Math.abs(male_perc - female_perc) <= 0.03) ? 'url(../../images/superhero_hands_up.svg)' : 'url(../../images/superhero_hands_down.svg)';
-$: male_perc_bar_height_int = bar_height_int - bar_height_int * male_perc;
-$: male_bar_height = male_perc_bar_height_int.toString() + "px";
-$: female_perc_bar_height_int = bar_height_int - bar_height_int * female_perc;
-$: female_bar_height = female_perc_bar_height_int.toString() + "px";
+// Remember to put preserveAspectRatio="none" into the svg file (to level svg tag)
+$: icons = choose_icons(male_percs, female_percs, {"up": "../../images/superhero_hands_up.svg", "down": "../../images/superhero_hands_down.svg"});
+$: male_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, male_percs);
+$: female_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, female_percs);
 
 let prChart;
 $: addChosenThresholdPoint(prChart,
@@ -498,16 +533,16 @@ if (fairness_criteria === "predictive parity") {
       <th style="font-size: 1.2em;"> <b>Female figures</b> </th>
     </tr>
   </thead>
-  <tbody style="--bar-height: {bar_height}; --male-bar-height: {male_bar_height}; --female-bar-height: {female_bar_height}; --icon: {icon}">
+  <tbody>
       <tr class="slider">
-      <td>
-        <input class="male" type=range bind:value={male_threshold} on:input={bubble_position(male_bubble, male_threshold)} min=0.0 max=1.0 step=0.01>
-        <output class="bubble" bind:this={male_bubble}>{male_threshold}</output>
-      </td>
-      <td>
-        <input class="female" type=range bind:value={female_threshold} on:input={bubble_position(female_bubble, female_threshold)} min=0.0 max=1.0 step=0.01>
-        <output class="bubble female" bind:this={female_bubble}>{female_threshold}</output>
-      </td>
+        <td>
+          <input class="male" type=range bind:value={male_threshold} on:input={bubble_position(male_bubble, male_threshold)} min=0.0 max=1.0 step=0.01>
+          <output class="bubble" bind:this={male_bubble}>{male_threshold}</output>
+        </td>
+        <td>
+          <input class="female" type=range bind:value={female_threshold} on:input={bubble_position(female_bubble, female_threshold)} min=0.0 max=1.0 step=0.01>
+          <output class="bubble female" bind:this={female_bubble}>{female_threshold}</output>
+        </td>
       </tr>
       <tr>
         <td class="perf">
@@ -524,28 +559,62 @@ if (fairness_criteria === "predictive parity") {
         </td>
       </tr>
       <tr>
-      <td class="bar">
-        <p style="font-weight: bold;"> {fairness_criteria_text} </p>
-        <div class="bar">
-          <div class="percentage_background"></div>
-          <div class="percentage"></div>
-          <div class="icon"></div>
-          <div class="text">
-            <b>{Math.round(male_perc*100)}%</b>
-          </div>
-        </div>
-      </td>
-      <td class="bar">
-        <p style="font-weight: bold;"> {fairness_criteria_text} </p>
-        <div class="bar">
-          <div class="percentage_background female"></div>
-          <div class="percentage female"></div>
-          <div class="icon"></div>
-          <div class="text">
-            <b>{Math.round(female_perc*100)}%</b>
-          </div>
-        </div>
-      </td>
+        {#each ["male", "female"] as gender}
+          <td class="bar">
+            <p style="font-weight: bold;"> {fairness_criteria_text[0]} </p>
+            <div style="height: {bar_height.toString() + 'px'}; width: {bar_width.toString() + 'px'};" class="bar">
+              {#if gender == "male"}
+                <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
+                <div style="background-color: {male_color};" class="percentage"></div>
+              {:else}
+                <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
+                <div style="background-color: {female_color};" class="percentage"></div>
+              {/if}
+              <div style="background: {icons[0]};" class="icon"></div>
+              <div class="text">
+                {#if gender == "male"}
+                  <b>{Math.round(male_percs[0]*100)}%</b>
+                {:else}
+                  <b>{Math.round(female_percs[0]*100)}%</b>
+                {/if}
+              </div>
+            </div>
+          </td>
+        {/each}
+      </tr>
+      <tr>
+        <td colspan="2">
+          <table border="0">
+            <tr>
+              {#each ["male", "female"] as gender}
+                {#each fairness_criteria_text as title, i}
+                  {#if i > 0}
+                    <td class="bar">
+                      <p> {fairness_criteria_text[i]} </p>
+                      <div style="height: {secondary_bar_height.toString() + 'px'}; width: {secondary_bar_width.toString() + 'px'};" class="bar">
+                        {#if gender == "male"}
+                          <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
+                          <div style="background-color: {male_color};" class="percentage"></div>
+                        {:else}
+                          <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
+                          <div style="background-color: {female_color};" class="percentage"></div>
+                        {/if}
+                        <div style="background: {icons[i]};" class="icon"></div>
+                        <div class="text">
+                          {#if gender == "male"}
+                            <b>{Math.round(male_percs[i]*100)}%</b>
+                          {:else}
+                            <b>{Math.round(female_percs[i]*100)}%</b>
+                          {/if}
+                        </div>
+                      </div>
+                    </td>
+                  {/if}
+                {/each}
+              {/each}
+            </tr>
+          </table>
+        </td>
       </tr>
       <tr>
         <td class="perc-rate">True positive rate: {Math.round(male_tpr*100)}%</td>
@@ -569,13 +638,6 @@ if (fairness_criteria === "predictive parity") {
 </table>
 
 <style>
-
-:root {
-  --male-color: #e88f1c;
-  --female-color: #007bff;
-  --female-bar-background: #edf5ff;
-  --male-bar-background: #f5e9df;
-}
 
 table {
   width: 100%;
@@ -612,36 +674,24 @@ td.bar {
 div.bar {
   position: relative;
   z-index: 0;
-  width: 109px;
-  height: var(--bar-height);
   margin: auto;
 }
 div.percentage_background {
   position: absolute;
   z-index: 2;
-  background-color: var(--male-bar-background);
   width: 100%;
-  height: var(--male-bar-height);
   top: 0;
   left: 0;
   border: none;
 }
-div.percentage_background.female {
-  height: var(--female-bar-height);
-  background-color: var(--female-bar-background);
-}
 div.percentage {
   position: absolute;
   z-index: 1;
-  background-color: var(--male-color);
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   border: none;
-}
-div.percentage.female {
-  background-color: var(--female-color);
 }
 div.icon {
   position: absolute;
@@ -650,8 +700,6 @@ div.icon {
   left: 0;
   width: calc(100% + (1px));
   height: calc(100% + (3px));
-  /* Remember to put preserveAspectRatio="none" into the svg file (to level svg tag)*/
-  background: var(--icon);
   background-size: 100% 100%;
   border: none;
 }
