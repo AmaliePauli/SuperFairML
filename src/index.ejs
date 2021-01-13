@@ -32,6 +32,7 @@
    
   <h1>Introduction </h1>
   <h3>Please introduce us </h3>
+  
   <p>
      ... to this new universe of fairness. Data-driven models like machine learning models are more and more applied in society within a range of different areas and tasks from recommender systems [REF] over web search [REF] to criminal courts [REFERENCER]. With the rise of machine learning models, there have been an increased focus of fairness and transparency within the field  <d-cite key=" chouldechova2020snapshot "></d-cite>. Several cases of “unfair” machine learning have also been debated in the media. One example is a United States criminal risk assessment system, COMPAS, used in courts for parole decisions. The system assigns a risk score of recidivism, i.e. the likelihood of a person to recommit a new crime. It was discovered by ProPublica in 2016 that black people, who truly would not commit a new crime, were more likely to get wrongly assigned a higher risk score than white people, and thereby getting a lesser chance of parole <d-cite key=" angwin2016machine "></d-cite>.
   Another example showed an underrepresentation of women and gender stereotypes in occupations in image search <d-cite key="kay2015unequal"></d-cite>.
@@ -191,7 +192,7 @@
    </script>
    </figcaption>
   <div id="tester-target-12" ></div>
-      <figcaption> This true/false question is asking to derive an implication of using the fairness criterion demographic parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation. <br />
+      <figcaption>This true/false question is asking to derive an implication of using the fairness criterion demographic parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation. <br />
       <button  class="button" onclick="myFunction12()">Show explanation</button> 
      <div id="myDIV12" style="display:none;">
   The correct answer is true. The criterion is requiring equal acceptance rates between the groups no matter the underlying distribution of heroes and villains and therefore even though we do not deliberately seek it, we could be forced to reject a higher fraction of true heroes in one group than in the other to achieve the paity     </div>
@@ -304,31 +305,96 @@
   </figure>
   <p>
   The question of which statistical fairness measure people perceive as more fair has previously been addressed in the literature. The main bulk of studies in this regard have been motivated by the COMPAS debate between Equalized Opportunities and accuracy, as mentioned in section [SECTION]. In <d-cite key="srivastava2019mathematical "></d-cite> an Amazon Turk survey showed that Demographic Parity was perceived as most fair compared to metrics like Equalized Opportunity and Predictive Parity (in the paper presented as False Negative Rate and Discovery Rate). However, the survey was conducted by showing the participants ten figures together with the true label and the predicted label of two different algorithms, asking them to choose the most discriminating one. The question can be raised whether the participants fully understood the implications of the different “algorithms”, and whether ten example figures are enough to generalize to a systematic bias. In <d-cite key=" harrison2020empirical"></d-cite> an Amazon Turk survey comparing the perception of different fairness measure was evaluated through a different design. Here,  they showed participants histograms of two measures for two different models where one measure was equalized in one model and the other measure in the other model. Then participants were asked to choose between the models. The authors found a slight preference towards the False Positive Rate over accuracy in a criminal assessment setting. The other pairwise comparisons between different measures did not show any significant  preferences. However, again the same question can be asked, whether the participants fully understood the implication of the parity in the models. The question about people’s comprehension of fairness metrics is addressed by <d-cite key="saha2019measuring "></d-cite>, which showed that comprehension can be measured through a multiple-choice survey. They found that in a hiring scenario Equalized Opportunity was harder to understand than Demographic Parity, and that in general comprehension was correlated with the education level of the participants. An interesting finding was a tendency of people with low comprehension score to express less negative sentiment towards a criterion. This survey’s design where criteria are expressed as rules and where questions are asked through multiple-choice, has inspired the survey conducted in this paper. The survey of this paper aims at  both measuring the comprehension and then to compare people’s perception of different criteria based on their comprehensiveness. The following sections present the results of the survey. </p>
+  
+
+
+
+
   <h4> A measure of comprehension</h4>
-  <p> To measure the participants comprehension of each criterion a score is calculated as simple as percentage of correct answers to each criterion. This allows us to examine the median, mean score and standard deviation for each criterion reported in table [fig nr]. However, the observation for each criterion does not look as their a drawn from a gaussian distribution (se appendix A for arguments [A]), but since the variables is ordinary, we choose to use Mann whitney U test [REFERENCE] to examine whether we significantly can state a difference in comprehension between the different criteria. Formally, we test the null hypotheses H0: the comprehension is equal between two criteria. We choose a significant level on 0.05, and observe the following p-values:
+  <p> To measure the participants comprehension of each criterion a score is calculated as simple as percentage of correct answers to the comprehension questions for each criterion per participant. This yield an indication of how difficult the fairness criteria and its implications are to understand, and it allows for a comparison between the comprehension of the three criteria.  Figure [fig nr] shows boxplots for the participants comprehension score on each fairness criterion. </p>
+<figure>
+  <div class="row">
+    <div class="column">
+      <img src="./images/boxplot_comprehention_score.svg" alt="boxplot_comprehension_score" style="width:100%">
+    </div>
+    <div class="column">
+      <img src="./images/boxplot_raported_score.svg" alt="boxplot_raported_score"style="width:100%">
+    </div>
+  </div>
+  <figcaption style="text-align: center;"> [TEKST] </figcaption>
+</figure>
+ <p> The figure indicates participants found Demographic parity easiest to understand, and only a small difference in comprehension between Equalized Opportunities and Predictive parity only revealed trough a higher mean score for Equalized Opportunities. To test if any of these difference in comprehension is significant, a Mann whitney U test is preformed pairwise. This test static is chosen since the observations for each criterion does not seem to be drawn from a gaussian distribution (se appendix A for arguments [A]), but the variables is ordinary and independent and therefor fulfil the assumption for a Mann whitney U test. We test the null hypotheses H0: the distribution of comprehension scores between two criteria is equal. We choose a significant level on <d-math> \alpha=0.05</d-math>, and observe the following p-values:  </p>
+<UL style="font-size:14px"><UL>
+<li> Comprehension score between demographic parity and equalized opportunities: p_value: 0.020 </li>
+<li> Comprehension score between demographic parity and predictive parity: p_value: 0.006 </li>
+<li> Comprehension score  between equalized opportunities and predictive parity: p_value: 0.286 </li>
+</UL></UL>
+<p>In the first two cases we can reject the null hypothesis and conclude that demographic parity is easier to understand than both equalized opportunities and predictive parity in this setup. This is supporting the finding in <d-cite key="saha2019measuring "></d-cite> that equalized opportunity is harder to understand in demographic parity, however in a different setting.  Between Equalized Opportunities and predictive parity the difference is not significant. The survey also asked the participants to self-rapport their understanding of each criterion after answering the comprehension questions using a five-point Likert-scale (see example in [fig x]). Each point is assigned a numeric value where a higher value indicates a higher self-reported understanding. Boxplots over the distribution of self-raported understanding is presented in [Fig nr]. Again, since the data is ordinary, we can use the Mann whitney U test to test for difference in self-reported comprehension between pairs of criteria: </p>
+<UL style="font-size:14px"><UL>
+<li> Self-reported comprehension between demographic parity and equalized opportunities: p_value: 0.010</li>
+<li> Self-reported comprehension between demographic parity and predictive parity: p_value: 0.000</li>
+<li> Self-reported comprehension between equalized opportunities and predictive parity: p_value: 0.008</li>
+</UL></UL>
+<p>We can in all cases reject the null hypothesis and conclude people report different levels of self-reported understanding for the three measures. Like we saw and indication of with the comprehension score, the criteria order in comprehension goes from demographic parity, equalized opportunities to predictive parity. In the next we will examine if there is a correlation between the test-replies and self-reported comprehension</p>
+<h4> No significant association between the test-replies and self-reported comprehension </h4>
+<p>For each participant an average score of the self-reported and test-replies comprehension is calculated based on all tree criteria. In [fig nr] a satterplot is showing their association. The data does not look to come from a gaussian distribution (se [Appendix A]), but since it is ordinal the Spearman rank-order correlation coefficient [REF?] can be used to measure the direction and the strength of an association between the self-reported score and the test-replies comprehension score. We obtain a Spearman correlation on <d-math> \rho=0.199</d-math>, which indicates a slight indication that the two score increase together. However, the associated p-value is on   <d-math>0.057</d-math> which means we with a significant level on <d-math> \alpha=0.05</d-math> cannot reject the null hypotheses of a neutral correlation.  Hence, we can not conclude a significant association between what people report of understanding and what we measured of their understanding trough questions. It is somehow a remarkable result since the association was believed to be strong. It does not make the discussion of fairness easier if people are not aware of their own understanding. Examining the plot in [FiG 1], it looks like people is both over- and underconfident in their self-reported understanding. </p>
+<figure  style="text-align: center;">
+    <img src="./images/regresion_plot.svg" alt="Scatterplot" style="width:75%";>
+    <figcaption>[TEKST] </figcaption>
+  </figure>
 
-  </p>
+  <h4> The opinion towards the criteria </h4>
+<p>After the comprehension question of each criterion, the participants were asked to state their opinion of how fair they found the criterion on a five-point Likert-scale (see example in [fig X]). Hence, they were asked to evaluate the fairness of each criterion independent of the other criteria. The Likert-scale is transformed to numeric values, and the boxplots in [fig x] shows the different distributions.  Testing the significance of difference distribution pairwise for the criteria with a  Mann whitney U test, shows that for every pairwise comparison the null hypothesis can be rejected [see appendix]. Hence, there is a significant different in people’s attitude against the different criteria. Equalized opportunity is perceived as most fair in this setting, then predictive parity, and lastly demographic. </p>
+<figure  style="text-align: left;">
+    <img src="./images/boxplot_fair_score.svg" alt=" boxplot_fair_score" style="width:75%";>
+    <figcaption style="text-align: center;">[TEKST] </figcaption>
+  </figure>
+<h4> Association between what people perceive as fair and their comprehension </h4>
+<p>This paragraph report results trying to replicate the finding in <d-cite key="saha2019measuring"></d-cite> that people with low comprehension tend to have less negative opinion towards a fairness criterion. Similar as the paper, we calculate and test Spearmans correlation between perception and comprehension score per criteria: 
+</p>
+<UL style="font-size:14px"><UL>
+<li> Comprehension score compared to perception score for demographic parity: <d-math> \rho=-0.417</d-math> with p_value=0.000</li>
+<li> Comprehension score compared to perception score for equalized opportunities: <d-math> \rho=0.122</d-math> with p_value=0.248</li>
+<li> Comprehension score compared to perception score for predictive parity: <d-math> \rho=-0.137</d-math> with p_value=0.192</li>
+</UL></UL>
+<p> For demographic parity we can see a significant relation between understanding of the criterion and its implications and a negative opinion towards it, like in <d-cite key="saha2019measuring "></d-cite>. However, with any significance though, we see a small positive correlation between understanding and liking equalized opportunity in this setting meaning people who understand the criterion seems to like it more.   </p>
 
-   
-  <h3>Superheroes live in a multiverse</h3>
+
+
+
+
+<h3>Superheroes live in a multiverse</h3>
   <p>
-  … and so it seems to be the case with algorithmic fairness. Instead of only looking at which statistical measure is perceived as most fair, we need to broaden our understanding of the fairness universe.  For example, <d-cite key="grgic2018beyond "></d-cite> suggest to shift the focus from looking at distributive fairness to <i> procedural fairness</i>, which instead of looking at the outcome focusses on the process that leads to an outcome. They operationalise a part of the idea by examining which input features people perceive as fair when used in different scenarios. In our super figure example, we could easily imagine that this has a great impact on what is perceived as fair. Here, it is probably fair to look at superpowers, since we do not want a dangerous cocktail. However “weight” and “height” would seem less relevant and therefore discriminating to use, despite the fact that that it could increase the model's accuracy. Nevertheless, procedural fairness still requires trade-offs. As we discussed earlier, bias can be introduced in the step of interacting with the system, and hence the interaction with the system can also affect the perceived fairness of the system. The next section looks at whether people think it is fair to be assessed by using data at all.
+  … and so it seems to be the case with algorithmic fairness. Instead of only looking at which statistical measure is perceived as most fair, we need to broaden our understanding of the fairness universe.  For example, <d-cite key="grgic2018beyond "></d-cite> suggest to shift the focus from looking at distributive fairness to <i> procedural fairness</i>, which instead of looking at the outcome focusses on the process that leads to an outcome. They operationalise a part of the idea by examining which input features people perceive as fair when used in different scenarios. In our super figure example, we could easily imagine that this has a great impact on what is perceived as fair. Here, it is probably perceived fair to look at superpowers, since we do not want a dangerous cocktail. However, “weight” and “height” would seem less relevant and therefore discriminating to use, despite the fact that that it could increase the model's accuracy. Nevertheless, procedural fairness still requires trade-offs. As we discussed earlier, bias can be introduced in the step of interacting with the system, and hence the interaction with the system can also affect the perceived fairness of the system. In general, there seems to more fairness than mathematical formulations. In this section we therefor look at some more high-level questions of perceived fairness and we show trough survey results that logic consistence is not necessary presents.  
   </p>
-  <h3> Human or machine</h3>
+  <h4> The preference for human or algorithmic judgement is subject to change</h4>
   <p>
-  … which would people prefer to be assessed by in different settings. This question was also raised in <d-cite key="harrison2020empirical"></d-cite> without any consensus in results. In our survey we investigated how additional information can influence people’s opinion: </p>
+ Human or machine - which would people prefer to be assessed by in different settings. This question was also raised in <d-cite key="harrison2020empirical"></d-cite> which found a preference toward human judgment over a machine learning model. In our survey we investigated people’s opinion toward using algorithmic or human judgement in the superhero setting and how additional information can influence people’s opinion. In the survey it is tested trough three questions following each other (you found the first question up in [FIG X]):  </p>
   <figure>
   <div id="questionnaire-target-2" ></div>
     <figcaption> [BESKRIVELSE]  </figcaption>
   <div id="questionnaire-target-3" ></div>
     <figcaption>[BESKRIVELSE]  </figcaption>
   </figure>
-  <h4> Tage sp fra tidligere om folk overhoved synes det er fair at bruge data og statistik, og derefter om de foretrækker person eller algoritme, og ved hilke ekstra information </h4>
-  <p>
-  </p>
-  <h4> en funderet logik og umiddelbare retsføelse er ikke det samme -> peger mod at systemer skal forklares godt og være gennemskuelige</h4>
-  <p>
-  </p>
+<p> The answers from the survey shows that initially the majority on 77% prefer a human judgment that is supported by an algorithm when is assume both algorithm and human act reasonable. However, this changes when the extra information that occasionally the human is biased against one sex to have the majority on 55% preferring the algorithm even though it is still in general assumed that both are acting reasonable. The third question is assuming the algorithm to be much more accurate then the human but also to be a bit biased, this flip the preference for the majority back to preferring human judgment with algorithmic support on 71%. The number of participants in the survey is small and their representative of a population is not accounted for, so the interesting of this is not a conclusion of what people prefer, but how relatively easy it is to change opinion with some extra wage information of the system. In fact, 54% of the participant changes their choice throughout the questions. </p>
+
+<h4> Participants are not logical consistence throughout their answers </h4>
+<p> The paragraph above reported questions about the preference for human or algorithmic judgement, but the survey also ask a more high-level question (se [FIG X]) about if it is even fair to use “a system that uses data and statistic” in the superhero setting. To this question 22 out of 92 participants answered a clear “no”,  however when asked about if they preferred human or algorithmic judgment, only  6 out the 22 in the question in [fig c] choose solely to trust the human and the others choose on option which to some degree used an “algorithm”. This decreased to 3 out of 22 in the question in [fig x]. Strictly speaking, an “algorithm” can be built of rules without use of any data or statistic in which case the answers cannot be said to logically inconsistence – but that understand conflict with the introduction text of the survey. In might point towards people being easily affected by formulations. Further a logical inconsistency is found when people are asked to rank the three fairness criterion discussed previously though formulated differently. First, the participants are asked to rank the three criteria formulated as rules showed in the answer-options in [fig x] after what is most important to them. Immediately thereafter they are asked to rank what would be the worst case of unfairness that could occur, and here the options are describing the case of not complying with the three criteria – all there disadvantaging the same sex. The formulation can be seen as the answer-options in [fig x]  </p>
+
+<p>Logically the ranking should for each participant stay the same. However, this is not the case.  57% of the participants do not hold the same ranking between the three criteria. In search for a reason for this, it is examined if the group which is inconsistence in ranking have the same distribution of comprehension score as the group which is consistence. See the histogram in [FIG]. However, no significant difference in distribution can be conclude using the Mann whitney U test which yield a p-value on 0.061. Further it is tested if…    </p>
+<figure  style="text-align: center;">
+    <img src="./images/ranking_comprehension.svg" alt=" inconsistence_ranking_comprehension" style="width:75%";>
+    <figcaption style="text-align: center;">[TEKST] </figcaption>
+  </figure>
+
+
+
+
+   
+  
+
+
+
   <h1>The challenges ahead </h1>
   <h3>Leaving the superhero universe</h3>
   <p>
@@ -340,7 +406,7 @@
   … since every movie must come to an end and so does our article. We have provided an overview of different ways to evaluate and define algorithmic fairness, as well as, different methods to achieve fairness. We then discussed challenges with the currently proposed approaches with respect to people’s comprehension and perception, and application in practice. As seen in the previous section [link], the work on algorithmic fairness is far from down. As it is with superhero movies, one movie seldom comes alone. 
   </p>
   
-  
+
   
   
 
