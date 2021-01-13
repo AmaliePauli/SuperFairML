@@ -5,7 +5,7 @@
 <div class="criterium">
 
 	<div class="content">
-		<b>{criteriumData.title}</b>
+		<p class="title"><b>{criteriumData.title}</b></p>
 		<div>{@html criteriumData.description}</div>
 	</div>
 
@@ -15,6 +15,12 @@
 
 	.criterium {
 		padding-top: 1em;
+	}
+
+	.title {
+		margin-bottom: 0.5em;
+		border: none;
+		padding: 0;
 	}
 
 </style>
