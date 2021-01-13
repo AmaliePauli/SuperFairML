@@ -1,6 +1,6 @@
 .subgrid {
-  grid-column: screen; 
-  display: grid; 
+  grid-column: screen;
+  display: grid;
   grid-template-columns: inherit;
   grid-template-rows: inherit;
   grid-column-gap: inherit;

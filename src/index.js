@@ -3,6 +3,7 @@
 import * as _unused from "raw-loader!./index.ejs";
 // TODO: disable before publishing
 
+import CriteriaBox from "./diagrams/criteria_box/criteria_box.svelte"
 import Graph from './diagrams/graph.svelte';
 import Graph2 from './diagrams/graph2.svelte';
 import Questionnaire from './diagrams/questionnaire.svelte';
@@ -15,6 +16,10 @@ import Testerques from './diagrams/testerques.svelte';
 // 'rgb(153, 102, 255)', // purple
 // 'rgb(255, 159, 64)', // orange
 // 'rgb(231,233,237)' // grey
+
+new CriteriaBox({
+	target: document.getElementById('criteria-box')
+});
 
 new Graph({
 	target: document.getElementById("graph-target"),
@@ -152,7 +157,7 @@ new Graph({
 							tpr: 0.0 ,
 							et: 'Not defined'  ,
 						 },
-						 
+
 					],
 					color: '#e88f1c' // red
 		    },
@@ -285,12 +290,12 @@ new Graph({
 							tpr: 0.0 ,
 							et:'Not defined'  ,
 						 },
-						
+
 					],
 					color: '#007bff', // blue
 			},
 
-			
+
 
 		  ]
 		}
@@ -907,12 +912,12 @@ new Graph2({
 							tpr: 0.0 ,
 							et: 'Not defined',
 						 },
-						
+
 					],
 					color: '#007bff', // blue
 			},
 
-			
+
 
 		  ]
 		}
