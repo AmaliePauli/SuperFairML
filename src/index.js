@@ -612,6 +612,36 @@ new Questionnaire({
 	}
 });
 
+new Questionnaire({
+	target: document.getElementById("questionnaire-target-4.1"),
+	props: {
+		settings: {
+		  question: "Please state you own opinion on the following statement 'I find it difficult to understand preditive parity and the questions about it",
+		  answers: [
+		    {
+		      answer: "Strongly disagree",
+		      result: 5
+		    },
+		    {
+		      answer: "Disagree",
+		      result: 20
+		    },
+		    {
+		      answer: "Neither agree or disagree",
+		      result: 50
+			},
+			{
+				answer: "Agree",
+				result: 20
+			},
+			{
+				answer: "Strongly agree",
+				result: 5
+			},
+		  ]
+		}
+	}
+});
 
 
 new Questionnaire({
@@ -637,7 +667,28 @@ new Questionnaire({
 	}
 });
 
-
+new Questionnaire({
+	target: document.getElementById("questionnaire-target-5"),
+	props: { 
+		settings: {
+		  question: "Which of the following statements of what you think is the worst case that could occur and which results in unfairness in the  play setting about superfigures wanting to go to a party?",
+		  answers: [
+		    {
+		      answer: "Female figures that are true heroes are rejected more often than male figures that are true heroes",
+		      result: 6
+		    },
+		    {
+		      answer: "There are more males at the party who are wrongly accepted than females who are wrongly accepted",
+		      result: 23
+			},
+		    {
+		      answer: "Male figures have a higher chance of getting accepted to the party than females",
+		      result: 71
+		    }
+		  ]
+		}
+	}
+});
 
 new Graph2({
 	target: document.getElementById("graph-target-2"),
