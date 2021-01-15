@@ -287,7 +287,6 @@ input[type=range].female::-moz-range-track {
   border-color: #007bff;
 }
 
-
 input[type=range]:focus {
   outline: none; /* Removes the blue border.*/
 }
