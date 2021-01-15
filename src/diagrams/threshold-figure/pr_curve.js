@@ -1,7 +1,7 @@
 import { Chart } from 'chart.js';
-import { round2decimals } from "../utils.js";
-import { separate_data } from "../data/data.js";
-import { true_positive_rate, positive_predictive_value } from "../metrics.js";
+import { round2decimals } from "../../utils.js";
+import { separate_data } from "../../data/data.js";
+import { true_positive_rate, positive_predictive_value } from "../../metrics.js";
 
 let style = getComputedStyle(document.getElementsByTagName("d-article")[0]);
 const font_size = Math.floor(parseFloat(style.fontSize) * 0.8);

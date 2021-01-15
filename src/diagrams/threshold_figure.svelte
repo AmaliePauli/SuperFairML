@@ -1,10 +1,11 @@
 <script>
 import { onMount } from 'svelte/internal';
-import ConfusionMatrix from "./confusion_matrix.svelte"
+import ConfusionMatrix from "./threshold-figure/confusion_matrix.svelte"
+import PRCurve from "./threshold-figure/pr-curve.svelte"
 import { round2decimals } from "../utils.js";
 import { separate_data } from "../data/data.js";
 import { positive_rate, true_positive_rate, positive_predictive_value, confusion_matrix } from "../metrics.js";
-import { createPRChart, addChosenThresholdPoint } from "./pr_curve.js"
+import { createPRChart, addChosenThresholdPoint } from "./threshold-figure/pr_curve.js"
 // Dataset containing the predictions
 import data from '../data/superhero_classification.json';
 // Props passed from the host script
@@ -73,12 +74,10 @@ var choose_icons = function(male_percs, female_percs, icons, thr=0.03) {
 }
 
 // Thresholds for classifier
-let male_threshold = 0.5;
-let female_threshold = 0.5;
+let thresholds = {"male": 0.5, "female": 0.5}
 // DOM for the bubbles showing the threshold
-let male_bubble;
-let female_bubble;
-// Updating the bubble position
+let bubbles = {"male": null, "female": null};
+// Updating the bubble position of the slider
 var bubble_position = function(bubble, threshold) {
   var newVal = Number(threshold * 100);
   // Sorta magic numbers based on size of the native UI thumb
@@ -87,49 +86,34 @@ var bubble_position = function(bubble, threshold) {
 
 const predictions = separate_data(data);
 // Metrics (updating based on the chosen threshold)
-// Accuracy
-$: male_conf = confusion_matrix(predictions.male, male_threshold);
-$: female_conf = confusion_matrix(predictions.female, female_threshold);
+// Confusion matrix
+$: male_conf = confusion_matrix(predictions.male, thresholds.male);
+$: female_conf = confusion_matrix(predictions.female, thresholds.female);
 // Positive rates
-let male_pr; let female_pr;
-$: male_pr = positive_rate(predictions.male, male_threshold);
-$: female_pr = positive_rate(predictions.female, female_threshold);
+let prs;
+$: prs = {"male": positive_rate(predictions.male, thresholds.male),
+           "female": positive_rate(predictions.female, thresholds.female)};
 // TPR
-let male_tpr; let female_tpr;
-$: male_tpr = true_positive_rate(predictions.male, male_threshold);
-$: female_tpr = true_positive_rate(predictions.female, female_threshold);
+let tprs;
+$: tprs = {"male": true_positive_rate(predictions.male, thresholds.male),
+           "female": true_positive_rate(predictions.female, thresholds.female)};
 // PPV
-let male_ppv; let female_ppv;
-$: male_ppv = positive_predictive_value(predictions.male, male_threshold);
-$: female_ppv = positive_predictive_value(predictions.female, female_threshold);
+let ppvs;
+$: ppvs = {"male": positive_predictive_value(predictions.male, thresholds.male),
+           "female": positive_predictive_value(predictions.female, thresholds.female)};
 
 // Variables for the super figure bar charts
 let bar_height = 150;
 let bar_width = 109;
 let secondary_bar_height = bar_height / 2;
 let secondary_bar_width = bar_width / 2;
-$: male_percs = choose_percs(fairness_criteria, male_pr, male_tpr, male_ppv);
-$: female_percs = choose_percs(fairness_criteria, female_pr, female_tpr, female_ppv);
+$: male_percs = choose_percs(fairness_criteria, prs.male, tprs.male, ppvs.male);
+$: female_percs = choose_percs(fairness_criteria, prs.female, tprs.female, ppvs.female);
 // Decimal number in next line decides what difference is considered as reaching the fairness criteria
 // Remember to put preserveAspectRatio="none" into the svg file (to level svg tag)
 $: icons = choose_icons(male_percs, female_percs, {"up": "../../images/superhero_hands_up.svg", "down": "../../images/superhero_hands_down.svg"});
 $: male_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, male_percs);
 $: female_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, female_percs);
-
-// Precision-Recall curve
-let prChart;
-$: addChosenThresholdPoint(prChart,
-  [{'x': round2decimals(male_tpr), 'y': round2decimals(male_ppv)}],
-  [{'x': round2decimals(female_tpr), 'y': round2decimals(female_ppv)}],
-  male_threshold,
-  female_threshold
-);
-if (fairness_criteria === "predictive parity") {
-  onMount(() => {
-    const chart = createPRChart(data);
-    prChart = chart;
-  });
-}
 
 </script>
 
@@ -142,16 +126,13 @@ if (fairness_criteria === "predictive parity") {
   </thead>
   <tbody>
       <tr class="slider">
-        <td>
-          <p class="slider">Choose a threshold:</p>
-          <input class="male" type=range bind:value={male_threshold} on:input={bubble_position(male_bubble, male_threshold)} min=0.0 max=1.0 step=0.01>
-          <output class="bubble" bind:this={male_bubble}>{male_threshold}</output>
-        </td>
-        <td>
-          <p class="slider">Choose a threshold:</p>
-          <input class="female" type=range bind:value={female_threshold} on:input={bubble_position(female_bubble, female_threshold)} min=0.0 max=1.0 step=0.01>
-          <output class="bubble female" bind:this={female_bubble}>{female_threshold}</output>
-        </td>
+        {#each ["male", "female"] as gender}
+          <td>
+            <p class="slider">Choose a threshold:</p>
+            <input class="{gender}" type=range bind:value={thresholds[gender]} on:input={bubble_position(bubbles[gender], thresholds[gender])} min=0.0 max=1.0 step=0.01>
+            <output class="bubble {gender}" bind:this={bubbles[gender]}>{thresholds[gender]}</output>
+          </td>
+        {/each}
       </tr>
       <tr>
         <td class="perf">
@@ -238,11 +219,8 @@ if (fairness_criteria === "predictive parity") {
       </tr>
       {#if fairness_criteria === "predictive parity"}
       <tr>
-        <td colspan="2" class="pr-curve">
-          Precision-Recall curve
-          <canvas id="pr-curve" width="100%" height="60px" aria-label="Precision-Recall curve" role="img">
-            <p>Precision-Recall curve for both male and female superfigures.</p>
-          </canvas>
+        <td colspan="2">
+          <PRCurve thresholds={thresholds} tprs={tprs} ppvs={ppvs} />
         </td>
       </tr>
       {/if}
@@ -324,17 +302,6 @@ div.text {
 div.text.secondary {
   top: 100%;
   left: 5%;
-}
-
-/* Precision-Recall curve */
-td.pr-curve {
-  padding-top: 25px;
-  padding-bottom: 10px;
-  font-size: 1rem;
-  font-weight: bold;
-}
-canvas {
-  padding-top: 15px;
 }
 
 /* Slider */

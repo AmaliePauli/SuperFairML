@@ -1,7 +1,5 @@
 <script>
-  import { round2decimals } from "../utils.js";
   export let confusionMatrix;
-
   const total = confusionMatrix.tp + confusionMatrix.tn + confusionMatrix.fp + confusionMatrix.fn;
 </script>
 
