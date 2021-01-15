@@ -1,5 +1,6 @@
 <script>
 import { onMount } from 'svelte/internal';
+import ConfusionMatrix from "./confusion_matrix.svelte"
 import { round2decimals } from "../utils.js";
 import { separate_data } from "../data/data.js";
 import { positive_rate, true_positive_rate, positive_predictive_value, confusion_matrix } from "../metrics.js";
@@ -135,17 +136,19 @@ if (fairness_criteria === "predictive parity") {
 <table>
   <thead>
     <tr>
-      <th style="font-size: 1.2em;"> <b>Male figures</b> </th>
-      <th style="font-size: 1.2em;"> <b>Female figures</b> </th>
+      <th style="font-size: 1em;"> Male figures </th>
+      <th style="font-size: 1em;"> Female figures </th>
     </tr>
   </thead>
   <tbody>
       <tr class="slider">
         <td>
+          <p class="slider">Choose a threshold:</p>
           <input class="male" type=range bind:value={male_threshold} on:input={bubble_position(male_bubble, male_threshold)} min=0.0 max=1.0 step=0.01>
           <output class="bubble" bind:this={male_bubble}>{male_threshold}</output>
         </td>
         <td>
+          <p class="slider">Choose a threshold:</p>
           <input class="female" type=range bind:value={female_threshold} on:input={bubble_position(female_bubble, female_threshold)} min=0.0 max=1.0 step=0.01>
           <output class="bubble female" bind:this={female_bubble}>{female_threshold}</output>
         </td>
@@ -153,21 +156,32 @@ if (fairness_criteria === "predictive parity") {
       <tr>
         <td class="perf">
           <p style="line-height: 1.5em;">
-            {male_conf.tp}/{male_conf.tp + male_conf.fn} ({Math.round((male_conf.tp / (male_conf.tp + male_conf.fn))*100)}%) superheros let in. <br>
+            {male_conf.tp}/{male_conf.tp + male_conf.fn} ({Math.round((male_conf.tp / (male_conf.tp + male_conf.fn))*100)}%) superheroes let in. <br>
             {male_conf.fp}/{male_conf.tn + male_conf.fp} ({Math.round((male_conf.fp / (male_conf.tn + male_conf.fp))*100)}%) villains let in.
           </p>
         </td>
         <td class="perf">
           <p style="line-height: 1.5em;">
-            {female_conf.tp}/{female_conf.tp + female_conf.fn} ({Math.round((female_conf.tp / (female_conf.tp + female_conf.fn))*100)}%) superheros let in. <br>
+            {female_conf.tp}/{female_conf.tp + female_conf.fn} ({Math.round((female_conf.tp / (female_conf.tp + female_conf.fn))*100)}%) superheroes let in. <br>
             {female_conf.fp}/{female_conf.tn + female_conf.fp} ({Math.round((female_conf.fp / (female_conf.tn + female_conf.fp))*100)}%) villains let in.
           </p>
         </td>
       </tr>
       <tr>
         {#each ["male", "female"] as gender}
+          <td>
+            {#if gender == "male"}
+              <ConfusionMatrix confusionMatrix={male_conf} />
+            {:else}
+              <ConfusionMatrix confusionMatrix={female_conf} />
+            {/if}
+          </td>
+        {/each}
+      </tr>
+      <tr>
+        {#each ["male", "female"] as gender}
           <td class="bar">
-            <p style="font-weight: bold;"> {fairness_criteria_text[0]} </p>
+            <p style="font-size: 1rem;"> {fairness_criteria_text[0]} </p>
             <div style="height: {bar_height.toString() + 'px'}; width: {bar_width.toString() + 'px'};" class="bar">
               {#if gender == "male"}
                 <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
@@ -179,9 +193,9 @@ if (fairness_criteria === "predictive parity") {
               <div style="background: {icons[0]};" class="icon"></div>
               <div class="text">
                 {#if gender == "male"}
-                  <b>{Math.round(male_percs[0]*100)}%</b>
+                  {Math.round(male_percs[0]*100)}%
                 {:else}
-                  <b>{Math.round(female_percs[0]*100)}%</b>
+                  {Math.round(female_percs[0]*100)}%
                 {/if}
               </div>
             </div>
@@ -196,7 +210,7 @@ if (fairness_criteria === "predictive parity") {
                 {#each fairness_criteria_text as title, i}
                   {#if i > 0}
                     <td class="bar">
-                      <p style="font-size: 0.9em;"> {fairness_criteria_text[i]} </p>
+                      <p style="font-size: 0.8rem;"> {fairness_criteria_text[i]} </p>
                       <div style="height: {secondary_bar_height.toString() + 'px'}; width: {secondary_bar_width.toString() + 'px'};" class="bar">
                         {#if gender == "male"}
                           <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
@@ -208,9 +222,9 @@ if (fairness_criteria === "predictive parity") {
                         <div style="background: {icons[i]};" class="icon"></div>
                         <div class="text secondary">
                           {#if gender == "male"}
-                            <b>{Math.round(male_percs[i]*100)}%</b>
+                            {Math.round(male_percs[i]*100)}%
                           {:else}
-                            <b>{Math.round(female_percs[i]*100)}%</b>
+                            {Math.round(female_percs[i]*100)}%
                           {/if}
                         </div>
                       </div>
@@ -225,7 +239,7 @@ if (fairness_criteria === "predictive parity") {
       {#if fairness_criteria === "predictive parity"}
       <tr>
         <td colspan="2" class="pr-curve">
-          <b>Precision-Recall curve</b>
+          Precision-Recall curve
           <canvas id="pr-curve" width="100%" height="60px" aria-label="Precision-Recall curve" role="img">
             <p>Precision-Recall curve for both male and female superfigures.</p>
           </canvas>
@@ -257,7 +271,7 @@ table td {
 
 td.perf {
   text-align: left;
-  font-size: 0.9em;
+  font-size: 0.8rem;
   padding-bottom: 5px;
 }
 
@@ -302,7 +316,8 @@ div.text {
   z-index: 4;
   top: 20%;
   left: 2%;
-  font-size: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
   text-align: center;
   border: none;
 }
@@ -315,7 +330,8 @@ div.text.secondary {
 td.pr-curve {
   padding-top: 25px;
   padding-bottom: 10px;
-  font-size: 1.2em;
+  font-size: 1rem;
+  font-weight: bold;
 }
 canvas {
   padding-top: 15px;
@@ -324,8 +340,26 @@ canvas {
 /* Slider */
 
 tr.slider {
-  height: 75px;
+  height: 100px;
   vertical-align: top;
+}
+p.slider {
+  text-align: left;
+  margin-bottom: 0;
+}
+.bubble {
+  font-weight: bold;
+  background: #e88f1c;
+  color: white;
+  margin-top: 1px;
+  padding: 2px 10px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bubble.female {
+  background: #007bff;
 }
 
 input[type=range] {
@@ -387,20 +421,6 @@ input[type=range].female::-moz-range-track {
 
 input[type=range]:focus {
   outline: none; /* Removes the blue border.*/
-}
-
-.bubble {
-  background: #e88f1c;
-  color: white;
-  margin-top: 1px;
-  padding: 2px 10px;
-  position: absolute;
-  border-radius: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.bubble.female {
-  background: #007bff;
 }
 
 </style>
