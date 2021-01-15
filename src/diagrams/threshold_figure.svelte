@@ -1,6 +1,7 @@
 <script>
 import { onMount } from 'svelte/internal';
 import ConfusionMatrix from "./threshold-figure/confusion_matrix.svelte"
+import PerformanceText from "./threshold-figure/performance.svelte"
 import PRCurve from "./threshold-figure/pr-curve.svelte"
 import { round2decimals } from "../utils.js";
 import { separate_data } from "../data/data.js";
@@ -87,8 +88,9 @@ var bubble_position = function(bubble, threshold) {
 const predictions = separate_data(data);
 // Metrics (updating based on the chosen threshold)
 // Confusion matrix
-$: male_conf = confusion_matrix(predictions.male, thresholds.male);
-$: female_conf = confusion_matrix(predictions.female, thresholds.female);
+let confs;
+$: confs = {"male": confusion_matrix(predictions.male, thresholds.male),
+            "female": confusion_matrix(predictions.female, thresholds.female)};
 // Positive rates
 let prs;
 $: prs = {"male": positive_rate(predictions.male, thresholds.male),
@@ -134,31 +136,19 @@ $: female_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, fema
           </td>
         {/each}
       </tr>
-      <tr>
-        <td class="perf">
-          <p style="line-height: 1.5em;">
-            {male_conf.tp}/{male_conf.tp + male_conf.fn} ({Math.round((male_conf.tp / (male_conf.tp + male_conf.fn))*100)}%) superheroes let in. <br>
-            {male_conf.fp}/{male_conf.tn + male_conf.fp} ({Math.round((male_conf.fp / (male_conf.tn + male_conf.fp))*100)}%) villains let in.
-          </p>
-        </td>
-        <td class="perf">
-          <p style="line-height: 1.5em;">
-            {female_conf.tp}/{female_conf.tp + female_conf.fn} ({Math.round((female_conf.tp / (female_conf.tp + female_conf.fn))*100)}%) superheroes let in. <br>
-            {female_conf.fp}/{female_conf.tn + female_conf.fp} ({Math.round((female_conf.fp / (female_conf.tn + female_conf.fp))*100)}%) villains let in.
-          </p>
-        </td>
-      </tr>
-      <tr>
-        {#each ["male", "female"] as gender}
-          <td>
-            {#if gender == "male"}
-              <ConfusionMatrix confusionMatrix={male_conf} />
-            {:else}
-              <ConfusionMatrix confusionMatrix={female_conf} />
-            {/if}
-          </td>
-        {/each}
-      </tr>
+      {#each ["perf", "matrix"] as row_type}
+        <tr>
+          {#each ["male", "female"] as gender}
+            <td>
+              {#if row_type === "perf"}
+                <PerformanceText confusionMatrix={confs[gender]} />
+              {:else if row_type === "matrix"}
+                <ConfusionMatrix confusionMatrix={confs[gender]} />
+              {/if}
+            </td>
+          {/each}
+        </tr>
+      {/each}
       <tr>
         {#each ["male", "female"] as gender}
           <td class="bar">
@@ -245,12 +235,6 @@ table td, table th {
 
 table td {
   position: relative;
-}
-
-td.perf {
-  text-align: left;
-  font-size: 0.8rem;
-  padding-bottom: 5px;
 }
 
 /* Superfigure barchart */
