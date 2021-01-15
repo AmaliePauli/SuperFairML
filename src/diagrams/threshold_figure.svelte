@@ -127,93 +127,88 @@ $: female_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, fema
     </tr>
   </thead>
   <tbody>
-      <tr class="slider">
+    {#each ["slider", "perf", "matrix"] as row_type}
+      <tr>
         {#each ["male", "female"] as gender}
-          <td>
-            <p class="slider">Choose a threshold:</p>
-            <input class="{gender}" type=range bind:value={thresholds[gender]} on:input={bubble_position(bubbles[gender], thresholds[gender])} min=0.0 max=1.0 step=0.01>
-            <output class="bubble {gender}" bind:this={bubbles[gender]}>{thresholds[gender]}</output>
+          <td class="{row_type}">
+            {#if row_type === "slider"}
+              <p class="slider">Choose a threshold:</p>
+              <input class="{gender}" type=range bind:value={thresholds[gender]} on:input={bubble_position(bubbles[gender], thresholds[gender])} min=0.0 max=1.0 step=0.01>
+              <output class="bubble {gender}" bind:this={bubbles[gender]}>{thresholds[gender]}</output>
+            {:else if row_type === "perf"}
+              <PerformanceText confusionMatrix={confs[gender]} />
+            {:else if row_type === "matrix"}
+              <ConfusionMatrix confusionMatrix={confs[gender]} />
+            {/if}
           </td>
         {/each}
       </tr>
-      {#each ["perf", "matrix"] as row_type}
-        <tr>
-          {#each ["male", "female"] as gender}
-            <td>
-              {#if row_type === "perf"}
-                <PerformanceText confusionMatrix={confs[gender]} />
-              {:else if row_type === "matrix"}
-                <ConfusionMatrix confusionMatrix={confs[gender]} />
-              {/if}
-            </td>
-          {/each}
-        </tr>
-      {/each}
-      <tr>
-        {#each ["male", "female"] as gender}
-          <td class="bar">
-            <p style="font-size: 1rem;"> {fairness_criteria_text[0]} </p>
-            <div style="height: {bar_height.toString() + 'px'}; width: {bar_width.toString() + 'px'};" class="bar">
+    {/each}
+    <tr>
+      {#each ["male", "female"] as gender}
+        <td class="bar">
+          <p style="font-size: 1rem;"> {fairness_criteria_text[0]} </p>
+          <div style="height: {bar_height.toString() + 'px'}; width: {bar_width.toString() + 'px'};" class="bar">
+            {#if gender == "male"}
+              <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
+              <div style="background-color: {male_color};" class="percentage"></div>
+            {:else}
+              <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
+              <div style="background-color: {female_color};" class="percentage"></div>
+            {/if}
+            <div style="background: {icons[0]};" class="icon"></div>
+            <div class="text">
               {#if gender == "male"}
-                <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
-                <div style="background-color: {male_color};" class="percentage"></div>
+                {Math.round(male_percs[0]*100)}%
               {:else}
-                <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
-                <div style="background-color: {female_color};" class="percentage"></div>
+                {Math.round(female_percs[0]*100)}%
               {/if}
-              <div style="background: {icons[0]};" class="icon"></div>
-              <div class="text">
-                {#if gender == "male"}
-                  {Math.round(male_percs[0]*100)}%
-                {:else}
-                  {Math.round(female_percs[0]*100)}%
-                {/if}
-              </div>
             </div>
-          </td>
-        {/each}
-      </tr>
-      <tr>
-        <td colspan="2">
-          <table border="0">
-            <tr>
-              {#each ["male", "female"] as gender}
-                {#each fairness_criteria_text as title, i}
-                  {#if i > 0}
-                    <td class="bar">
-                      <p style="font-size: 0.8rem;"> {fairness_criteria_text[i]} </p>
-                      <div style="height: {secondary_bar_height.toString() + 'px'}; width: {secondary_bar_width.toString() + 'px'};" class="bar">
+          </div>
+        </td>
+      {/each}
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table border="0">
+          <tr>
+            {#each ["male", "female"] as gender}
+              {#each fairness_criteria_text as title, i}
+                {#if i > 0}
+                  <td class="bar">
+                    <p style="font-size: 0.8rem;"> {fairness_criteria_text[i]} </p>
+                    <div style="height: {secondary_bar_height.toString() + 'px'}; width: {secondary_bar_width.toString() + 'px'};" class="bar">
+                      {#if gender == "male"}
+                        <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
+                        <div style="background-color: {male_color_weak};" class="percentage"></div>
+                      {:else}
+                        <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
+                        <div style="background-color: {female_color_weak};" class="percentage"></div>
+                      {/if}
+                      <div style="background: {icons[i]};" class="icon"></div>
+                      <div class="text secondary">
                         {#if gender == "male"}
-                          <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
-                          <div style="background-color: {male_color_weak};" class="percentage"></div>
+                          {Math.round(male_percs[i]*100)}%
                         {:else}
-                          <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
-                          <div style="background-color: {female_color_weak};" class="percentage"></div>
+                          {Math.round(female_percs[i]*100)}%
                         {/if}
-                        <div style="background: {icons[i]};" class="icon"></div>
-                        <div class="text secondary">
-                          {#if gender == "male"}
-                            {Math.round(male_percs[i]*100)}%
-                          {:else}
-                            {Math.round(female_percs[i]*100)}%
-                          {/if}
-                        </div>
                       </div>
-                    </td>
-                  {/if}
-                {/each}
+                    </div>
+                  </td>
+                {/if}
               {/each}
-            </tr>
-          </table>
-        </td>
-      </tr>
-      {#if fairness_criteria === "predictive parity"}
-      <tr>
-        <td colspan="2">
-          <PRCurve thresholds={thresholds} tprs={tprs} ppvs={ppvs} />
-        </td>
-      </tr>
-      {/if}
+            {/each}
+          </tr>
+        </table>
+      </td>
+    </tr>
+    {#if fairness_criteria === "predictive parity"}
+    <tr>
+      <td colspan="2">
+        <PRCurve thresholds={thresholds} tprs={tprs} ppvs={ppvs} />
+      </td>
+    </tr>
+    {/if}
   </tbody>
 </table>
 
@@ -290,7 +285,7 @@ div.text.secondary {
 
 /* Slider */
 
-tr.slider {
+td.slider {
   height: 100px;
   vertical-align: top;
 }
