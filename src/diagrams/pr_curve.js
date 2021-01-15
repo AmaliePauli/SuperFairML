@@ -3,6 +3,12 @@ import { round2decimals } from "../utils.js";
 import { separate_data } from "../data/data.js";
 import { true_positive_rate, positive_predictive_value } from "../metrics.js";
 
+let style = getComputedStyle(document.getElementsByTagName("d-article")[0]);
+const font_size = Math.floor(parseFloat(style.fontSize) * 0.8);
+Chart.defaults.global.defaultFontSize = font_size;
+Chart.defaults.global.defaultFontFamily = style.fontFamily;
+Chart.defaults.global.defaultFontColor = style.color;
+
 export function createPRChart(data) {
 
   const predictions = separate_data(data);
@@ -190,6 +196,16 @@ export function createPRChart(data) {
      },
      options: {
        scales: {
+            ticks: {
+              fontSize: font_size,
+              fontColor: style.fontColor,
+              fontStyle: style.fontStyle,
+            },
+            scaleLabel: {
+              fontSize: font_size,
+              fontColor: style.fontColor,
+              fontStyle: style.fontStyle,
+            },
             xAxes: [{
                 type: 'linear',
                 position: 'bottom',
@@ -231,6 +247,9 @@ export function createPRChart(data) {
         legend: {
             onClick: () => {},
             labels: {
+              fontSize: font_size,
+              fontColor: style.fontColor,
+              fontFamily: style.fontFamily,
               // Remove threshold data from legend
               filter: function(legendItem, data) {
                 return !legendItem.hidden;
