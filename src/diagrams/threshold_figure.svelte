@@ -2,11 +2,11 @@
 import { onMount } from 'svelte/internal';
 import ConfusionMatrix from "./threshold-figure/confusion_matrix.svelte"
 import PerformanceText from "./threshold-figure/performance.svelte"
-import PRCurve from "./threshold-figure/pr-curve.svelte"
+import SuperheroBar from "./threshold-figure/superhero_bar.svelte"
+import PRCurve from "./threshold-figure/pr_curve.svelte"
 import { round2decimals } from "../utils.js";
 import { separate_data } from "../data/data.js";
 import { positive_rate, true_positive_rate, positive_predictive_value, confusion_matrix } from "../metrics.js";
-import { createPRChart, addChosenThresholdPoint } from "./threshold-figure/pr_curve.js"
 // Dataset containing the predictions
 import data from '../data/superhero_classification.json';
 // Props passed from the host script
@@ -18,6 +18,42 @@ let male_color_weak = "#ebb889";
 let female_color_weak = "#cbdef3";
 let female_bar_background = "#edf5ff";
 let male_bar_background = "#f5e9df";
+
+// Variables for the super figure bar charts
+let bar_height = 150;
+let bar_width = 109;
+let barSettings = {
+      "mode": "primary",
+      "height": bar_height,
+      "width": bar_width,
+      "fontSize": "1rem",
+      "color": {
+        "male": {
+          "foreground": male_color,
+          "background": male_bar_background,
+        },
+        "female": {
+          "foreground": female_color,
+          "background": female_bar_background,
+        }
+      }
+};
+let secondaryBarSettings = {
+      "mode": "secondary",
+      "height": bar_height / 2,
+      "width": bar_width / 2,
+      "fontSize": "0.8rem",
+      "color": {
+        "male": {
+          "foreground": male_color_weak,
+          "background": male_bar_background,
+        },
+        "female": {
+          "foreground": female_color_weak,
+          "background": female_bar_background,
+        }
+      }
+};
 
 // Construct a list with titles based on the fairness criteria
 let fairness_criteria_text = "";
@@ -44,27 +80,11 @@ var choose_percs = function(fairness_criteria, pr, tpr, ppv) {
   }
   return perc;
 }
-// Construct a list with bar heights based on percentages
-var compute_bars = function(bar_height, secondary_bar_height, percs) {
-  let bar_heights = [];
-  for (let i = 0; i < percs.length; i++) {
-    let factor = 1.0 - percs[i];
-    //Primary bar
-    if (i === 0) {
-      bar_heights.push(Math.round(bar_height * factor));
-    }
-    // Secondary bars
-    else {
-      bar_heights.push(Math.round(secondary_bar_height * factor));
-    }
-  }
-  return bar_heights;
-}
 // Construct a list with icons (hands up or down) for each bar
-var choose_icons = function(male_percs, female_percs, icons, thr=0.03) {
+var choose_icons = function(percs, icons, thr=0.03) {
   let icon_list = [];
-  for (let i = 0; i < male_percs.length; i++) {
-    if (Math.abs(male_percs[i] - female_percs[i]) <= thr) {
+  for (let i = 0; i < percs.male.length; i++) {
+    if (Math.abs(percs.male[i] - percs.female[i]) <= thr) {
       icon_list.push('url(' + icons.up + ')');
     }
     else  {
@@ -104,30 +124,28 @@ let ppvs;
 $: ppvs = {"male": positive_predictive_value(predictions.male, thresholds.male),
            "female": positive_predictive_value(predictions.female, thresholds.female)};
 
-// Variables for the super figure bar charts
-let bar_height = 150;
-let bar_width = 109;
-let secondary_bar_height = bar_height / 2;
-let secondary_bar_width = bar_width / 2;
-$: male_percs = choose_percs(fairness_criteria, prs.male, tprs.male, ppvs.male);
-$: female_percs = choose_percs(fairness_criteria, prs.female, tprs.female, ppvs.female);
+$: percs = {
+  "male": choose_percs(fairness_criteria, prs.male, tprs.male, ppvs.male),
+  "female": choose_percs(fairness_criteria, prs.female, tprs.female, ppvs.female)
+};
 // Decimal number in next line decides what difference is considered as reaching the fairness criteria
 // Remember to put preserveAspectRatio="none" into the svg file (to level svg tag)
-$: icons = choose_icons(male_percs, female_percs, {"up": "../../images/superhero_hands_up.svg", "down": "../../images/superhero_hands_down.svg"});
-$: male_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, male_percs);
-$: female_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, female_percs);
+$: icons = choose_icons(percs,
+  {"up": "../../images/superhero_hands_up.svg", "down": "../../images/superhero_hands_down.svg"},
+  0.03
+);
 
 </script>
 
 <table>
   <thead>
     <tr>
-      <th style="font-size: 1em;"> Male figures </th>
-      <th style="font-size: 1em;"> Female figures </th>
+      <th style="font-size: 1rem;"> Male figures </th>
+      <th style="font-size: 1rem;"> Female figures </th>
     </tr>
   </thead>
   <tbody>
-    {#each ["slider", "perf", "matrix"] as row_type}
+    {#each ["slider", "perf", "matrix", "bar", "secondary_bar"] as row_type}
       <tr>
         {#each ["male", "female"] as gender}
           <td class="{row_type}">
@@ -139,69 +157,25 @@ $: female_perc_bar_heights = compute_bars(bar_height, secondary_bar_height, fema
               <PerformanceText confusionMatrix={confs[gender]} />
             {:else if row_type === "matrix"}
               <ConfusionMatrix confusionMatrix={confs[gender]} />
+            {:else if row_type === "bar"}
+              <SuperheroBar title={fairness_criteria_text[0]} barSettings={barSettings} gender={gender} perc={percs[gender][0]} icon={icons[0]} />
+            {:else if row_type === "secondary_bar"}
+              <table border="0">
+                <tr>
+                  {#each fairness_criteria_text as title, i}
+                    {#if i > 0}
+                      <td class="bar">
+                        <SuperheroBar title={fairness_criteria_text[i]} barSettings={secondaryBarSettings} gender={gender} perc={percs[gender][i]} icon={icons[i]} />
+                      </td>
+                    {/if}
+                  {/each}
+                </tr>
+              </table>
             {/if}
           </td>
         {/each}
       </tr>
     {/each}
-    <tr>
-      {#each ["male", "female"] as gender}
-        <td class="bar">
-          <p style="font-size: 1rem;"> {fairness_criteria_text[0]} </p>
-          <div style="height: {bar_height.toString() + 'px'}; width: {bar_width.toString() + 'px'};" class="bar">
-            {#if gender == "male"}
-              <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
-              <div style="background-color: {male_color};" class="percentage"></div>
-            {:else}
-              <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[0].toString() + 'px'};" class="percentage_background"></div>
-              <div style="background-color: {female_color};" class="percentage"></div>
-            {/if}
-            <div style="background: {icons[0]};" class="icon"></div>
-            <div class="text">
-              {#if gender == "male"}
-                {Math.round(male_percs[0]*100)}%
-              {:else}
-                {Math.round(female_percs[0]*100)}%
-              {/if}
-            </div>
-          </div>
-        </td>
-      {/each}
-    </tr>
-    <tr>
-      <td colspan="2">
-        <table border="0">
-          <tr>
-            {#each ["male", "female"] as gender}
-              {#each fairness_criteria_text as title, i}
-                {#if i > 0}
-                  <td class="bar">
-                    <p style="font-size: 0.8rem;"> {fairness_criteria_text[i]} </p>
-                    <div style="height: {secondary_bar_height.toString() + 'px'}; width: {secondary_bar_width.toString() + 'px'};" class="bar">
-                      {#if gender == "male"}
-                        <div style="background-color: {male_bar_background}; height: {male_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
-                        <div style="background-color: {male_color_weak};" class="percentage"></div>
-                      {:else}
-                        <div style="background-color: {female_bar_background}; height: {female_perc_bar_heights[i].toString() + 'px'};" class="percentage_background"></div>
-                        <div style="background-color: {female_color_weak};" class="percentage"></div>
-                      {/if}
-                      <div style="background: {icons[i]};" class="icon"></div>
-                      <div class="text secondary">
-                        {#if gender == "male"}
-                          {Math.round(male_percs[i]*100)}%
-                        {:else}
-                          {Math.round(female_percs[i]*100)}%
-                        {/if}
-                      </div>
-                    </div>
-                  </td>
-                {/if}
-              {/each}
-            {/each}
-          </tr>
-        </table>
-      </td>
-    </tr>
     {#if fairness_criteria === "predictive parity"}
     <tr>
       <td colspan="2">
@@ -230,57 +204,6 @@ table td, table th {
 
 table td {
   position: relative;
-}
-
-/* Superfigure barchart */
-td.bar {
-  padding-bottom: 5px;
-}
-div.bar {
-  position: relative;
-  z-index: 0;
-  margin: auto;
-}
-div.percentage_background {
-  position: absolute;
-  z-index: 2;
-  width: 100%;
-  top: 0;
-  left: 0;
-  border: none;
-}
-div.percentage {
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  border: none;
-}
-div.icon {
-  position: absolute;
-  z-index: 3;
-  top: -1px;
-  left: 0;
-  width: calc(100% + (1px));
-  height: calc(100% + (3px));
-  background-size: 100% 100%;
-  border: none;
-}
-div.text {
-  position: relative;
-  z-index: 4;
-  top: 20%;
-  left: 2%;
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-}
-div.text.secondary {
-  top: 100%;
-  left: 5%;
 }
 
 /* Slider */
