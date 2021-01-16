@@ -23,9 +23,8 @@
     </d-title>
    
     <d-article>
-      
   <p>
-   Super cool machine learning systems should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or rather, how do we ensure models to be fair and just in their outcome when they have an impact on humans —  like every other superhero movie, the goal is to save humanity. Keeping it  down to earth, this paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing results from a small survey conducted about people’s perception and comprehension in algorithmic fairness. We use 'superheroes' as an illustrative analogue for fair models and a superhero dataset from Kaggle [REF] as an example throughout the paper. The interactive illustrations in the article are asking the reader to take a stand and check their comprehension about fairness in algorithms. The survey showed that [RESULTS]. The aim is to provide an overview of current work in fair machine learning and make the reader aware of trade-offs and challenges, such as to know when and how fairness in Machine Learning is an essential concern.          
+   Super cool machine learning systems should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or rather, how do we ensure models to be fair and just in their outcome when they have an impact on humans —  like every other superhero movie, the goal is to save humanity. Keeping it  down to earth, this paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing results from a small survey conducted about people’s perception and comprehension in algorithmic fairness. We use 'superheroes' as an illustrative analogue for fair models and a superhero dataset from Kaggle [REF] as an example throughout the paper. The interactive illustrations in the article are asking the reader to take a stand and check their comprehension about fairness in algorithms. The survey showed no significant association between peoples self-reported comprehension and their ability to answer comprehension questions correctly, which motivated the need for this paper. that [RESULTS]. The aim is to provide an overview of current work in fair machine learning and make the reader aware of trade-offs and challenges, such as to know when and how fairness in Machine Learning is an essential concern.          
     </p>
   <figure  style="text-align: center;">
     <img src="NONE" alt="cartoon" style="width:400px;height:200px";>
@@ -33,7 +32,6 @@
    
   <h1>Introduction </h1>
   <h3>Please introduce us </h3>
-  
   <p>
      ... to this new universe of fairness. Data-driven models like machine learning models are more and more applied in society within a range of different areas and tasks from recommender systems [REF] over web search [REF] to criminal courts [REFERENCER]. With the rise of machine learning models, there have been an increased focus of fairness and transparency within the field  <d-cite key=" chouldechova2020snapshot "></d-cite>. Several cases of “unfair” machine learning have also been debated in the media. One example is a United States criminal risk assessment system, COMPAS, used in courts for parole decisions. The system assigns a risk score of recidivism, i.e. the likelihood of a person to recommit a new crime. It was discovered by ProPublica in 2016 that black people, who truly would not commit a new crime, were more likely to get wrongly assigned a higher risk score than white people, and thereby getting a lesser chance of parole <d-cite key=" angwin2016machine "></d-cite>.
   Another example showed an underrepresentation of women and gender stereotypes in occupations in image search <d-cite key="kay2015unequal"></d-cite>.
@@ -42,69 +40,65 @@
   </p>      
   <h3>Every hero has a history</h3>
   <p>
-  … and so does bias in models. The main concern of the above examples of algorithmic bias, is not the chance of failure of the models or understanding the technical reasons behind it. According to Kate Crawford in her keynote <i> The Trouble with Bias</i> at NIPS 2017 <d-cite key=" crawford2017keynote "></d-cite>, it is the fact that the models reproduce a cultural and historian bias present in society. The two cases above seem problematic because they are reproducing respectively discrimination of black people and inequality between genders in the labour market. With machine learning becoming more prevalent in industry where it effects people’s lifes, we are potentially looking at a systematic and automatic way of reproducing discrimination or favouritism [REF?]. Like with super-villains there is often a <i>history</i>behind the unjustness, which we need to understand to turn super-villains into superheroes. However, the solution to stop unjustness is neither straight forward nor  simple. The unanswered question remains: what is a fair model? There can never be an absolute answer to this question, since it will change over time and depends on the culture. But a lot of work has been done in research to try to mathematical formalize and address this question [REFs?]. 
+  … and so does bias in models. The main concern of the above examples of algorithmic bias, is not the risk of failure of the models or understanding the technical reasons behind it. According to Kate Crawford in her keynote <i> The Trouble with Bias</i> at NIPS 2017 <d-cite key=" crawford2017keynote "></d-cite>, it is the fact that the models reproduce a cultural and historian bias present in society. The two cases above seem problematic because they are reproducing respectively discrimination of black people and inequality between genders in the labour market. With machine learning becoming more prevalent in industry where it effects people’s lifes, we are potentially looking at a systematic and automatic way of reproducing discrimination or favouritism [REF?]. Like with super-villains there is often a <i>history</i>behind the unjustness, which we need to understand to turn super-villains into superheroes. However, the solution to stop unjustness is neither straight forward nor  simple. The unanswered question remains: what is a fair model? There can never be an absolute answer to this question, since it will change over time and depends on the culture. But a lot of work has been done in research to try to mathematical formalize and address this question [REFs?]. 
   </p>
   <h3>The plot </h3>
   <p>
-    … of this paper will be to circulate the question of what a fair model is by presenting an illustrative introduction to fairness in machine learning focussing on explaining different mathematical fairness criteria. The paper is looking at both the comprehension and the perception of fairness by presenting results from a small survey conducted with [XXX] participants. We will focus on the following three mathematical fairness criteria: 1) Demographic parity, 2) Equalized Opportunity and 3) Statistical Parity. One central purpose of the survey was to examine which mathematical fairness criteria people perceive as fair similar to <d-cite key="harrison2020empirical"></d-cite> and <d-cite key="srivastava2019mathematical"></d-cite>. However, <d-cite key="saha2019measuring"></d-cite> raise the question of laypeople’s comprehension of the metrics and conducted a survey to examine this along with people’s sentiment towards the metrics. Therefore, the objective of this survey was likewise to measure the comprehension and link it to the perception of fairness, as well as examine the consistency in the answers. The survey, like this paper, uses play setting about super figures as an example. We chose this fictional setting to both give a story easy to relate to and to  avoid a true or realistic case to which people might be biased from the beginning, such that the essence of the survey can be algorithmic fairness in general and not the actual case. The storyline is formulated along the lines of a set of super figures, who can be either heroes or villains, all wanting to go to a party: they are assessed at the door, e.g by an algorithm, since only the figures who are “believed” to be heroes are allowed in. The focal question is how to secure that both the group of male and female figures are treated fair, as well as what fairness means in this setting. The details of the survey are outlined in [APPENDIX A].
+    … of this paper will be to circulate the question of what a fair model is by presenting an illustrative introduction to fairness in machine learning focussing on explaining different mathematical fairness criteria. The paper is looking at both the comprehension and the perception of fairness by presenting results from a small survey conducted with 92[XXX] participants. We will focus on the following three mathematical fairness criteria: 1) Demographic parity, 2) Equalized Opportunity and 3) Statistical Parity. One central purpose of the survey was to examine which mathematical fairness criteria people perceive as fair similar to <d-cite key="harrison2020empirical"></d-cite> and <d-cite key="srivastava2019mathematical"></d-cite>. However, <d-cite key="saha2019measuring"></d-cite> raise the question of laypeople’s comprehension of the metrics and conducted a survey to examine this along with people’s sentiment towards the metrics. Therefore, the objective of this survey was likewise to measure the comprehension and link it to the perception of fairness, as well as examine the consistency in the answers. The survey, like this paper, uses a play setting about super figures as an example. We chose this fictional setting to both give a story easy to relate to and to  avoid a true or realistic case to which people might be biased from the beginning, such that the essence of the survey can be algorithmic fairness in general and not the actual case. The storyline is formulated along the lines of a set of super figures, who can be either heroes or villains, all wanting to go to a party: they are assessed at the door, e.g by an algorithm, since only the figures who are “believed” to be heroes are allowed in. The focal question is how to secure that both the group of male and female figures are treated fair, as well as what fairness means in this setting. The details of the survey are outlined further in [APPENDIX A], and the infobox below summaries some brief details and introduce the point of the interactive questionnaires in the paper.
     </p>
    
-    <style type="text/css">
-      .tg  {border-collapse:collapse;border-spacing:0;}
-      .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;
-        overflow:hidden;padding:10px 5px;word-break:normal;}
-      .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;
-        font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;border-radius: 15px 15px 0 0;}
-      .tg .tg-vwdy{background-color:#cbdef3;border-color:#ffffff;text-align:left;vertical-align:top;}
-      .tg .tg-zcdj{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:center;vertical-align:top;}
-      .tg .tg-w3tl{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:left;vertical-align:top;}
-      .tg .tg-w3tl1{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:left;vertical-align:top;border-radius: 0px 0px 0 15px;}
-      .tg .tg-vwdy1{background-color:#cbdef3;border-color:#ffffff;text-align:left;vertical-align:top;border-radius: 0px 0px 15px 0;}
-      </style>
-      <table class="tg">
-      <thead>
-        <tr>
-          <th class="tg-zcdj" colspan="4">The survey and questionnaires in this paper</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="tg-w3tl" rowspan="3">Survey</td>
-          <td class="tg-vwdy" colspan="3" rowspan="3">The survey was conducted through 12/20-01/21 and had 92 participants with the following demographics:<br> <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512'%3e%3cpath fill='%23ffffff' d='M128 0c35.346 0 64 28.654 64 64s-28.654 64-64 64c-35.346 0-64-28.654-64-64S92.654 0 128 0m119.283 354.179l-48-192A24 24 0 0 0 176 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H80a24 24 0 0 0-23.283 18.179l-48 192C4.935 369.305 16.383 384 32 384h56v104c0 13.255 10.745 24 24 24h32c13.255 0 24-10.745 24-24V384h56c15.591 0 27.071-14.671 23.283-29.821z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 40% females   <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 512'%3e%3cpath fill='%23ffffff' d='M96 0c35.346 0 64 28.654 64 64s-28.654 64-64 64-64-28.654-64-64S60.654 0 96 0m48 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H48c-26.51 0-48 21.49-48 48v136c0 13.255 10.745 24 24 24h16v136c0 13.255 10.745 24 24 24h64c13.255 0 24-10.745 24-24V352h16c13.255 0 24-10.745 24-24V192c0-26.51-21.49-48-48-48z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 60% males   <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 496 512'%3e%3cpath fill='%23ffffff' d='M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm82.29 357.6c-3.9 3.88-7.99 7.95-11.31 11.28-2.99 3-5.1 6.7-6.17 10.71-1.51 5.66-2.73 11.38-4.77 16.87l-17.39 46.85c-13.76 3-28 4.69-42.65 4.69v-27.38c1.69-12.62-7.64-36.26-22.63-51.25-6-6-9.37-14.14-9.37-22.63v-32.01c0-11.64-6.27-22.34-16.46-27.97-14.37-7.95-34.81-19.06-48.81-26.11-11.48-5.78-22.1-13.14-31.65-21.75l-.8-.72a114.792 114.792 0 0 1-18.06-20.74c-9.38-13.77-24.66-36.42-34.59-51.14 20.47-45.5 57.36-82.04 103.2-101.89l24.01 12.01C203.48 89.74 216 82.01 216 70.11v-11.3c7.99-1.29 16.12-2.11 24.39-2.42l28.3 28.3c6.25 6.25 6.25 16.38 0 22.63L264 112l-10.34 10.34c-3.12 3.12-3.12 8.19 0 11.31l4.69 4.69c3.12 3.12 3.12 8.19 0 11.31l-8 8a8.008 8.008 0 0 1-5.66 2.34h-8.99c-2.08 0-4.08.81-5.58 2.27l-9.92 9.65a8.008 8.008 0 0 0-1.58 9.31l15.59 31.19c2.66 5.32-1.21 11.58-7.15 11.58h-5.64c-1.93 0-3.79-.7-5.24-1.96l-9.28-8.06a16.017 16.017 0 0 0-15.55-3.1l-31.17 10.39a11.95 11.95 0 0 0-8.17 11.34c0 4.53 2.56 8.66 6.61 10.69l11.08 5.54c9.41 4.71 19.79 7.16 30.31 7.16s22.59 27.29 32 32h66.75c8.49 0 16.62 3.37 22.63 9.37l13.69 13.69a30.503 30.503 0 0 1 8.93 21.57 46.536 46.536 0 0 1-13.72 32.98zM417 274.25c-5.79-1.45-10.84-5-14.15-9.97l-17.98-26.97a23.97 23.97 0 0 1 0-26.62l19.59-29.38c2.32-3.47 5.5-6.29 9.24-8.15l12.98-6.49C440.2 193.59 448 223.87 448 256c0 8.67-.74 17.16-1.82 25.54L417 274.25z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 10 nationalities, 88% Danish <br><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3e%3cpath fill='%23ffffff' d='M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 43% reported to be "Experienced/Vey Experienced" in statistic or machine learning</td>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-          <td class="tg-w3tl1" rowspan="4">Questionnaires </td>
-          <td class="tg-vwdy" colspan="3" rowspan="2">A selection of questions from the survey is shown in this paper to encourage <br>the reader to test own understanding and to take a stand of different issues <br>The percentage in the options shows the distributions of the answers from the survey<br></td>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-          <td class="tg-vwdy" colspan="3"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23f7bd1d' d='M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z'/%3e%3c/svg%3e" alt="Image" width="30" height="30">  Comprehension questions are orange</td>
-        </tr>
-        <tr>
-          <td class="tg-vwdy1" colspan="3"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23295eb3' d='M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z'/%3e%3c/svg%3e" alt="Image" width="30" height="30">  Opinion questions are blue</td>
-        </tr>
-      </tbody>
-      </table>
-      
+     <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;
+          overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;
+          font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;border-radius: 15px 15px 0 0;}
+        .tg .tg-vwdy{background-color:#cbdef3;border-color:#ffffff;text-align:left;vertical-align:top;}
+        .tg .tg-zcdj{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:center;vertical-align:top;}
+        .tg .tg-w3tl{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:left;vertical-align:top;}
+        .tg .tg-w3tl1{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:left;vertical-align:top;border-radius: 0px 0px 0 15px;}
+        .tg .tg-vwdy1{background-color:#cbdef3;border-color:#ffffff;text-align:left;vertical-align:top;border-radius: 0px 0px 15px 0;}
+        </style>
+        <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-zcdj" colspan="4">The survey and questionnaires in this paper</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-w3tl" rowspan="3">Survey</td>
+            <td class="tg-vwdy" colspan="3" rowspan="3">The survey was conducted through 12/20-01/21 and had 92 participants with the following demographics:<br> <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512'%3e%3cpath fill='%23ffffff' d='M128 0c35.346 0 64 28.654 64 64s-28.654 64-64 64c-35.346 0-64-28.654-64-64S92.654 0 128 0m119.283 354.179l-48-192A24 24 0 0 0 176 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H80a24 24 0 0 0-23.283 18.179l-48 192C4.935 369.305 16.383 384 32 384h56v104c0 13.255 10.745 24 24 24h32c13.255 0 24-10.745 24-24V384h56c15.591 0 27.071-14.671 23.283-29.821z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 40% females   <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 512'%3e%3cpath fill='%23ffffff' d='M96 0c35.346 0 64 28.654 64 64s-28.654 64-64 64-64-28.654-64-64S60.654 0 96 0m48 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H48c-26.51 0-48 21.49-48 48v136c0 13.255 10.745 24 24 24h16v136c0 13.255 10.745 24 24 24h64c13.255 0 24-10.745 24-24V352h16c13.255 0 24-10.745 24-24V192c0-26.51-21.49-48-48-48z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 60% males   <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 496 512'%3e%3cpath fill='%23ffffff' d='M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm82.29 357.6c-3.9 3.88-7.99 7.95-11.31 11.28-2.99 3-5.1 6.7-6.17 10.71-1.51 5.66-2.73 11.38-4.77 16.87l-17.39 46.85c-13.76 3-28 4.69-42.65 4.69v-27.38c1.69-12.62-7.64-36.26-22.63-51.25-6-6-9.37-14.14-9.37-22.63v-32.01c0-11.64-6.27-22.34-16.46-27.97-14.37-7.95-34.81-19.06-48.81-26.11-11.48-5.78-22.1-13.14-31.65-21.75l-.8-.72a114.792 114.792 0 0 1-18.06-20.74c-9.38-13.77-24.66-36.42-34.59-51.14 20.47-45.5 57.36-82.04 103.2-101.89l24.01 12.01C203.48 89.74 216 82.01 216 70.11v-11.3c7.99-1.29 16.12-2.11 24.39-2.42l28.3 28.3c6.25 6.25 6.25 16.38 0 22.63L264 112l-10.34 10.34c-3.12 3.12-3.12 8.19 0 11.31l4.69 4.69c3.12 3.12 3.12 8.19 0 11.31l-8 8a8.008 8.008 0 0 1-5.66 2.34h-8.99c-2.08 0-4.08.81-5.58 2.27l-9.92 9.65a8.008 8.008 0 0 0-1.58 9.31l15.59 31.19c2.66 5.32-1.21 11.58-7.15 11.58h-5.64c-1.93 0-3.79-.7-5.24-1.96l-9.28-8.06a16.017 16.017 0 0 0-15.55-3.1l-31.17 10.39a11.95 11.95 0 0 0-8.17 11.34c0 4.53 2.56 8.66 6.61 10.69l11.08 5.54c9.41 4.71 19.79 7.16 30.31 7.16s22.59 27.29 32 32h66.75c8.49 0 16.62 3.37 22.63 9.37l13.69 13.69a30.503 30.503 0 0 1 8.93 21.57 46.536 46.536 0 0 1-13.72 32.98zM417 274.25c-5.79-1.45-10.84-5-14.15-9.97l-17.98-26.97a23.97 23.97 0 0 1 0-26.62l19.59-29.38c2.32-3.47 5.5-6.29 9.24-8.15l12.98-6.49C440.2 193.59 448 223.87 448 256c0 8.67-.74 17.16-1.82 25.54L417 274.25z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 10 nationalities, 88% Danish <br><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3e%3cpath fill='%23ffffff' d='M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 43% reported to be "Experienced/Vey Experienced" in statistic or machine learning</td>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+            <td class="tg-w3tl1" rowspan="4">Questionnaires </td>
+            <td class="tg-vwdy" colspan="3" rowspan="2">A selection of questions from the survey is shown in this paper to encourage <br>the reader to test own understanding and to take a stand of different issues <br>The percentage in the options shows the distributions of the answers from the survey<br></td>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+            <td class="tg-vwdy" colspan="3"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23f7bd1d' d='M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z'/%3e%3c/svg%3e" alt="Image" width="30" height="30">  Comprehension questions are orange</td>
+          </tr>
+          <tr>
+            <td class="tg-vwdy1" colspan="3"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23295eb3' d='M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z'/%3e%3c/svg%3e" alt="Image" width="30" height="30">  Opinion questions are blue</td>
+          </tr>
+        </tbody>
+        </table>
    
   <p>
   Data from the Kaggle superhero dataset <d-footnote id="d-footnote 1"> https://www.kaggle.com/claudiodavi/superhero-set </d-footnote> is used during the article as an example. The Kaggle dataset is a collection of information about super figures extracted from the Superhero Database <d-footnote id="d-footnote shdb">https://www.superherodb.com/</d-footnote>. A simple classification model has been trained on the dataset to distinguish between villains and heroes where features such as superpowers, names, publisher, height and weight have been accessible. Read more about pre-processing, feature selection and model training in [APPENDIX B].
-  The interactive illustrations and questionaries are to invite the reader to take a stand on the fairness questions during the read. You can start with the following:
+  The interactive illustrations and questionnaires are to invite the reader to take a stand on the fairness questions during the read. You can start with the following:
   </p>
-
-
-  
   <figure>
   <div id="questionnaire-target-0" ></div>
     <figcaption> [BESKRIVELSE] </figcaption>
   </figure>
    p></p>
-  <p>The main contributions of this paper are two-folded. First, it is to summarize the current state of fairness in machine learning trough a literature review presented as an interactive paper encouraging people to think about the issues and challenges with algorithmic fairness.  Second, to demonstrate trough a survey that comprehensive and perception… [HIGLIGT conclusion on survey ].
+  <p>The main contributions of this paper are two-folded. First, it is to summarize the current state of fairness in machine learning through a literature review presented as an interactive paper encouraging people to think about the issues and challenges with algorithmic fairness.  Second, it demonstrates through a survey that it is easier to understand Demographic parity over Predictive parity and Equalized opportunity, and that Equalized opportunity is perceived most fair in the superhero setting. However, the survey results also point towards people being sensitive to formulations when giving opinion about fairness, and in some questions to a degree which demonstrates logical inconsistency in answers. Further, the survey results did not prove a statistical significance in association between peoples self-reported understanding and what could be measured through their answers to comprehension questions. This points to the need of being careful in the debate about fairness since formulations and wrongly estimated self understanding may skew it.   
   The paper is divided into four main sections. The first section focuses on understanding the notion of bias. The second, on definition of fairness and methods to mitigate bias. Here, we will focus on three mathematical fairness criteria. The third section discusses the perception of fairness with a starting point in the three criteria as well as highlighting results from the survey. The last section sums up the remaining challenges and concludes the main points of this paper.   
   </p>
    
@@ -131,7 +125,7 @@
     </p>
   <h3> The villains are</h3>
   <p>
-  … the data, the algorithm, and the user interactions <d-cite key=" mehrabi2019survey "></d-cite>. Data is usually the first suspect of bias introduced into a model, but all three inflict each other. To list some of the “offences” by data: 1) a skew in the data collections, 2) missingness in attributes, 3) a skew in human annotations or 4) an imbalance in examples. To stay in the super figure setting, one could imagine the case where the police historically have examined more male figures than females and therefore have found more villains among men, which then will be reinforced over time. Another case could be picturing missingness in self-reported attributes, where they could be missing for a reason related to a protected attribute like gender. Discrimination can also be induces into the data by human annotations. Or an unbalanced training data can introduce a skew into a model. In our super figure example data data from Kaggle, we have in fact an unbalanced dataset with fewer females than males [see Figure X], making it potentially harder for a model to generalise well on the classifications of females.
+  … the data, the algorithm, and the user interactions <d-cite key=" mehrabi2019survey "></d-cite>. Data is usually the first suspect of bias introduced into a model, but all three inflict each other. To list some of the “offences” by data: 1) a skew in the data collections, 2) missingness in attributes, 3) a skew in human annotations or 4) an imbalance in examples. To stay in the super figure setting, one could imagine the case where the police historically have examined more male figures than females and therefore have found more villains among men, which then will be reinforced over time. Another case could be picturing missingness in self-reported attributes, where they could be missing for a reason related to a protected attribute like gender. Discrimination can also be induces into the data by human annotations. Or an unbalanced training data can introduce a skew into a model. In our super figure example data data from Kaggle, we have in fact an unbalanced dataset with fewer females than males [see Figure X], making it potentially harder for a model to generalise well on the classifications of females villains.
   </p>
   <figure  style="text-align: center;">
     <img src="./images/countplot_gender.svg" alt="unbalanced data" style="width:500px;height:300px";>
@@ -145,6 +139,7 @@
   <div id="questionnaire-target-1" ></div>
     <figcaption> [BESKRIVELSE] </figcaption>
   </figure>
+  
    
   <h1>Defining fairness</h1>
   <h3> Joining the Justice League</h3>
