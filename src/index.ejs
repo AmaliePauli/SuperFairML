@@ -74,26 +74,20 @@ The paper is after this introduction divided into four main sections. The first 
 <h3> When powers are divided </h3>
 <p>
 … can be denoted as an allocation problem. How resources and opportunities are allocated could potential be skewed and cause harm to a group, e.g. loan applications <d-cite key="mukerjee2002multi "></d-cite>, or parole decisions <d-cite key="dressel2018accuracy "></d-cite>. Often in an allocation problem, there is one outcome that is the beneficial outcome, which we will denote with the <i>positive</i> outcome versus the disadvantaged outcome which is denoted the <i>negative</i> outcome. Further, often we are looking at different groups which traditionally have been gender or race, and the aim is to protect the members of the group from discrimination or unfair treatment – we denote such notion of belonging to a group as <i>protected attributes</i>. A group subject to such treatment is denoted the <i>unprivileged</i> group. When using data and statistic, it can sometimes be a law requirement to not use any protected attributes in a system. In our super figure dataset example, we could simply not fit the classifier on gender. This would be denote ad <i>fairness through unawareness</i> <d-cite key=" gajane2017formalizing "></d-cite>. However, it can often be a problematic solution to the problem, since often the case occurs that the information of a protected attribute is latent present in other variables. For the super figures, imagine the gender is correlated with other variables such as  <i>weight</i> and <i>height</i>.
-    </p>
-
-<h3> Another dimension </h3>
-<p>
-…of a division of the notion bias, would be not to divide on the potential harm it produced but divide it on the source of its occurrence. The paper <d-cite key="mitchell2018prediction "></d-cite> defines the terms <i>statistical bias</i> and <i>societal bias</i>. The first term is referring to errors or mistakes in the collections and use of data and model development in a way where reality is not represented in a proper manner. The latter is referring to social structures which are in fact presented in data but is perceived as unfair. This is an important distinction because it means if a model e.g. is treating two groups differently, it might not be an issue in the model but caused by an underlying structure in society. However, it could also be the case that societal bias is manifesting itself into the model in the form of stereotyping <d-cite key=" carey2020blog "></d-cite> . To understand this issue, lets us look at the blogpost by Valerie Carey <d-cite key=" carey2020blog "></d-cite> where the issue is well-explained through a “money lending” scenario where the system is accused of discriminating females. Take it as a fact, that females on average have lower income than males which perhaps could be due to societal bias caused by discrimination in education or workplace. However, the question at hand is whether the model itself is discriminating when it gives fewer or smaller loans to the group of females. Here the point is whether the model is fitting on income, which would be fair since it is reasonable to assume that income hold information about the ability to pay back a loan – or if the model instead is fitting of some proxy for gender, and thereby learning that females, in general, have lower income. Resulting in an unfair treatment since the fact of being a female then is affecting the chance of getting a loan. This is a case of stereotyping.   </p>
+</p>
+  <h3> The villains are</h3>
   <p>
- Both dimensions of understanding types of biases through either the impact or the occurrence find coherences in <d-cite key=" olteanu2019social "></d-cite>  examination of social data where they end up with a diagram both representing the sources of occurrences of bias and the manifestations and issues. However, they divide into a lot more subcategories of bias, and the same does <d-cite key=" mehrabi2019survey "></d-cite> which list 23 types.  In the next paragraph, we will address how bias can occur a little closer without going through an extensive list.
+  … the data, the algorithm, and the user interactions <d-cite key=" mehrabi2019survey "></d-cite>. Data is usually the first suspect of bias introduced into a model, but all three inflict each other. To list some of the “offences” by data: 1) a skew in the data collections, 2) missingness in attributes, 3) a skew in human annotations or 4) an imbalance in examples. To stay in the super figure setting, one could imagine the case where the police historically have examined more male figures than females and therefore have found more villains among men, which then will be reinforced over time. Another case could be picturing missingness in self-reported attributes, where they could be missing for a reason related to a protected attribute like gender. Discrimination can also be induces into the data by human annotations. Or an unbalanced training data can introduce a skew into a model. In our super figure example data data from Kaggle, we have in fact an unbalanced dataset with fewer females than males [see Figure X], making it potentially harder for a model to generalise well on the classifications of females.
   </p>
-<h3> The villains are</h3>
-<p>
-… the data, the algorithm, and the user interactions <d-cite key=" mehrabi2019survey "></d-cite>. The data is probably the first suspect of bias introduced into a model, but the three things inflict each other. To list some of the “offences” by the data; a skew in the data collections, missingness in attributes, a skew in human annotations or an unbalance in examples. To stay in the play setting about super figures, one could imagine the case where the police historically have examine more male figures than females and therefore have found more villains, which then will be reinforced over time. Another case could be picturing missingness in self-reported attributes, where they could be missing for a reason related to a protected attribute like gender. Discrimination could also be put into the data by humans annotating the data. Or perhaps a so common thing as unbalanced training data could introduce a skewed into a model. In the case with the super figures play data from Kaggle, we are in fact looking at an unbalanced dataset with fewer females than males, making it potentially harder for a model to learn to generalise the classifications of females:
-</p>
-<figure  style="text-align: center;">
-  <img src="./images/countplot_gender.svg" alt="unbalanced data" style="width:500px;height:300px";>
-  <figcaption> [TEKST] There is an unbalanced in the representation of males and females in the play dataset </figcaption>
-</figure>
+  <figure  style="text-align: center;">
+    <img src="./images/countplot_gender.svg" alt="unbalanced data" style="width:500px;height:300px";>
+    <figcaption> [TEKST] There is an imbalance in the representation of males and females in the example dataset </figcaption>
+  </figure>
+   
+  <p>
+  An undesired skew can also be introduced into the model by the choice of the algorithm: imagine that one type of decision boundary is more suited for one group than the other. Last but not least, how the model is set into production and how users interact with it can in itself be a source of bias, e.g. following the models' suggestions in a skewed way <d-cite key="selbst2019fairness "></d-cite>, <d-cite key=" green2019disparate "></d-cite>. Knowing the different sources of bias and imagine you are a super figure wanting to go to the party, we invite you to take a stand on the following question:
+  </p>
 
-<p>
-An undesired skew can also be introduced into the model by the choice of the algorithm; imagine that one type of decision boundary is more suited for one group than the other.  A last but not least, how the model is put into production, and how humans interact with it can in itself be a source of bias, for example, if the models' suggestions are followed in a skewed way <d-cite key="selbst2019fairness "></d-cite>, <d-cite key=" green2019disparate "></d-cite>. Knowing this, imagine now you are a super figure wanting to go to the party, then you could take a stand on the following questions:
-</p>
 <figure>
 <div id="questionnaire-target-1" ></div>
   <figcaption> [BESKRIVELSE] </figcaption>
@@ -169,14 +163,16 @@ PR = \frac{TP+FP}{TP+FP+FN+FP} .
 </d-math block="">
 
 <p>In our super figure example this means the fraction of females and the fraction of males getting accepted to the party should be equalized, or in practice, stay close together. I the survey we tried peoples comprehensive of this fairness criterion, and you can check your own understanding as well: </p>
-  <figure>
-<div id="tester-target-10" ></div>
-      <figcaption> [BESKRIV DET RIGTIGE SVAR] </figcaption>
-<div id="tester-target-11" ></div>
+
+<figure>
+  <div id="tester-target-10" ></div>
+        <figcaption> [BESKRIV DET RIGTIGE SVAR] </figcaption>
+  <div id="tester-target-11" ></div>
       <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
-<div id="tester-target-12" ></div>
+  <div id="tester-target-12" ></div>
       <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
     </figure>
+
 <p> The last question points to the critique of this measure made by <d-cite key=" hardt2016equality"></d-cite>, where it is pointed out that the metric does not account for a case where the true outcome (true hero or villain)  are correlated with the protected group. Such a case could force us to accept not-qualified figures in one group or dismiss qualified in the other group to achieve the parity. The criterion however can have its justice, if we are looking at a <i> societal bias</i> we actively want to change. Imagine a case of young super figures getting admitted into an academy, where the fact is that young male figures are less qualified than the females. However, we want to enforce a policy of even acceptance rate, because we want to adjust for this skewed since we believe it is a structural bias in society. (However, we then need to up qualify the males e.g. by extra classes in the beginning.) </p>
 
 <p> By playing with the superhero data from Kaggle and the classifier train to distinguish “hero” or “villain”, we can on the evaluation set, look at the difference in the positive rate for males and females for different threshold values for the classification. By choosing different threshold values, you can achieve parity for the positive rate and discover how it affects other measures in this case:
@@ -198,14 +194,15 @@ TPR = \frac{TP}{TP+FN} .
 </d-math block="">
 
 <p>  In our super figure example, this means that the chance of getting accepted to the party when you, in fact, are a hero should be the same for both male and females. You can verify you own understanding of Equalized Opportunity as well as see the response from the participants in the surveys in the following questions: </p>
-  <figure>
+<figure>
 <div id="tester-target-13" ></div>
       <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
-<div id="tester-target-14" ></div>
+  <div id="tester-target-14" ></div>
       <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
-<div id="tester-target-15" ></div>
+  <div id="tester-target-15" ></div>
       <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
-    </figure>
+ </figure>
+
 
 <p>Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the True Positive Rate by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier. As the question also asked, you can in this example see, that you can achive Demograhic Opportunity without achieving Demograhic parity:   </p>
 
@@ -225,7 +222,7 @@ P(Y =1|\hat{Y} =1,G=0)=P(Y=1 |\hat{Y}=1,G=1),
 PPV =  \frac{TP}{TP+FP}  .
 </d-math block="">
 For our super figures, this means the chance of a correct prediction for figures allowed into the party should be the same for both male and females. Once again, you can try verifying your understanding and the last question is asking for your opinion:
-  <figure>
+<figure>
 <div id="tester-target-16" ></div>
       <figcaption>[BESKRIV DET RIGTIGE SVAR] </figcaption>
 <div id="tester-target-17" ></div>
@@ -233,7 +230,7 @@ For our super figures, this means the chance of a correct prediction for figures
 <div id="questionnaire-target-4" ></div>
       <figcaption>[BESKRIVELSE]  </figcaption>
 
-    </figure>
+</figure>
 
 <p> Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the Positive Predictive Value by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier.</p> 
 
@@ -296,8 +293,7 @@ The question of which statistical fairness measure laypeople perceive as more fa
 … and summing up.
 </p>
 
-
-  </d-article>
+</d-article>
 
 
 
