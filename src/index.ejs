@@ -246,7 +246,7 @@ The correct answer is true. The criterion is requiring equal acceptance rates be
 	</figure>
 <p> The last question points to the critique to Demographic Parity by <d-cite key=" hardt2016equality"></d-cite>, where it is pointed out that the metric does not account for a case where the true outcome (true hero or villain) is correlated with the protected group. Such a case could force us to accept not-qualified figures in one group or dismiss qualified figures in the other group to achieve Demographic Parity. The criterion can, however, be justified, if we are looking at a <i> societal bias</i> we actively want to change. Imagine a case of young super figures getting admitted into an academy. Furthermore, assume that young male figures are less qualified than females. However, we want to enforce a policy of even acceptance rate, i.e. adjust for this skewness, since we believe it is a structural bias in society. (However, we then need to up qualify the males e.g. by extra classes in the beginning.) </p>
  
-<p> Using the superhero example data from Kaggle and the trained classifier train to distinguish “hero” or “villain”, we can look at the difference in the positive rate for males and females for different threshold values for the classification. Try to achieve Demographic parity by choosing different threshold values and discover how it affects other measures:
+<p> By playing with the superhero data from Kaggle and the classifier train to distinguish “hero” or “villain”, we can on the evaluation set, look at the difference in the positive rate for males and females for different threshold values for the classification. By choosing different threshold values, you can achieve parity for the positive rate and discover how it affects other measures in this case:
 </p>
  
  <figure>
@@ -292,13 +292,15 @@ The correct answer is true. Under this criterion, we do not take into account th
  </figcaption>
 </figure>
  
-<p>Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the True Positive Rate by setting a different threshold value for the two groups:   </p>
+
+<p>Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the True Positive Rate by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier. As the question also asked, you can in this example see, that you can achive Demograhic Opportunity without achieving Demograhic parity:   </p>
+
 <figure>
-  <div id="interactive-eq" ></div>
-  <figcaption> [BESKRIVELSE]  </figcaption>
+ <div id="interactive-eq" ></div>
+ <figcaption> [BESKRIVELSE ]  </figcaption>
 </figure>
 
-<p> In <d-cite key=" hardt2016equality"></d-cite>  they formalized an optimization problem that would find results find the threshold that satisfies Equalized Opportunity between two groups. This approach is an example of a post-processing algorithm to achieve fairness as described earlier. Playing around with the example you might have seen that it is possible to achieve Equalized Opportunity without achieving Demograhic Parity.</p>
+
 <h4> <b>Predictive parity</b> </h4>
 <p>
 Predictive parity also described as outcome test is a statistical measure which requires that the probability of a correct prediction (constrained to prediction as the positive class) is the same for all groups <d-cite key=" verma2018fairness "></d-cite>. For a binary predictor it can be defined as </p>

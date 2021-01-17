@@ -396,6 +396,7 @@ new Questionnaire({
 		  ]
 		}
 	}
+});
 
 
 new Questionnaire({
