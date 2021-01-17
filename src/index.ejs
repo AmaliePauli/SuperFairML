@@ -18,6 +18,7 @@
   </d-front-matter>
 
 
+
  
 <d-title>
 	<h1>How does the computer become a just superhero?</h1>
@@ -27,10 +28,12 @@
   <d-article>
 <p>
  Super cool machine learning systems should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or rather, how do we ensure models to be fair and just in their outcome when they have an impact on humans —  like every other superhero movie, the goal is to save humanity. Keeping it  down to earth, this paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing results from a small survey conducted about people’s perception and comprehension in algorithmic fairness. We use 'superheroes' as an illustrative analogue for fair models and a superhero dataset from Kaggle [REF] as an example throughout the paper. The interactive illustrations in the article are asking the reader to take a stand and check their comprehension about fairness in algorithms. The survey showed no significant association between peoples self-reported comprehension and their ability to answer comprehension questions correctly, which motivated the need for this paper. . The aim is to provide an overview of current work in fair machine learning and make the reader aware of trade-offs and challenges, such as to know when and how fairness in Machine Learning is an essential concern.          
+
   </p>
 <figure  style="text-align: center;">
   <img src="NONE" alt="cartoon" style="width:400px;height:200px";>
 </figure>
+
  
 <h1>Introduction </h1>
 <h3>Please introduce us </h3>
@@ -109,10 +112,12 @@ The paper is divided into four main sections. The first section focuses on under
 <p>
 … which gives identity. Kate Crawford presented in <d-cite key=" crawford2017keynote "></d-cite> a division of the notion of bias into the harm of allocation and harm of representation. Examining why representation bias can be harmful, invites us to think of the ‘CEO’ image search example – and of the important role the suit for a super figure has. The point is that how we as groups or individuals are presented has an impact on how we are perceived by ourselves and others, which links to our identity <d-cite key=" crawford2017keynote "></d-cite>. Therefore, it does matter when there are no images of female CEOs. Other examples on representational bias are 1) facial recognition systems working poorer on faces with darker skin <d-cite key=" raji2019actionable"></d-cite>, 2) gender stereotypes in occupations in word embeddings <d-cite key=" bolukbasi2016man"></d-cite>, 3) the example of an Afro-American woman labelled as ‘gorilla’ by Google Photo <d-footnote id="d-footnote 1"> https://twitter.com/jackyalcine/status/615329515909156865 </d-footnote>. Potentially harm of allocation could also occur in recommender systems not showing adds about the new superhero film to certain profiles, e.g. females, even though gender is not a factor for whether you would like it or not. The issue is, therefore, not only that the performance level of systems differs between groups, but it is also how they way they fail that should raise concerns.
 </p>
+
 <figure  style="text-align: center;">
   <img src="./images/barbie.PNG" alt="barbies" style="width:400px;height:200px";>
   <figcaption>Barbies [TEKST] </figcaption>
 </figure>
+
  
 <h3> The division of powers </h3>
 <p>
@@ -244,10 +249,10 @@ The correct answer is true. The criterion is requiring equal acceptance rates be
 <p> Using the superhero example data from Kaggle and the trained classifier train to distinguish “hero” or “villain”, we can look at the difference in the positive rate for males and females for different threshold values for the classification. Try to achieve Demographic parity by choosing different threshold values and discover how it affects other measures:
 </p>
  
-  <figure>
-<div id="graph-target" ></div>
-<figcaption>  The graph shows the positive rate for different thresholds for the classification of either hero or villain on the test data set divided on the group for females and males.  Normally, our logistic regression classifier would use a threshold of 0.5 probability for the positive class (hero). But since we want to equalize the positive rate between the group of females and males we can set different thresholds for the groups to achieve the parity. For example, if both groups use a threshold on 0.5 we get a disparity in the  positive rate between 0.82 and 0.96. However, if we look at the y-axis we can find similar positive rates for the two groups and read the different thresholds. For example, a threshold of 0.45 for males and 0.60 for females would yield a decrease in disparity in positive rate between 0.85 and 0.86.   </figcaption>
-  </figure>
+ <figure>
+  <div id="interactive-dp" ></div>
+  <figcaption> [BESKRIVELSE]  </figcaption>
+</figure>
  
 <h4> <b>Equalized Opportunities</b> </h4>
 <p>Equalized Opportunities and Equalized Odds is proposed by <d-cite key="hardt2016equality"></d-cite> to be an alternative criterion to Demographic Parity. The idea behind Equalized Opportunities is that people who in fact should receive a positive outcome have an equal chance of receiving it independent of their group membership. It is a relaxation of the Equalized Odds criteria, which can be formalized for a binary predictor and in the case of binary group membership as, </p>
@@ -288,10 +293,11 @@ The correct answer is true. Under this criterion, we do not take into account th
 </figure>
  
 <p>Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the True Positive Rate by setting a different threshold value for the two groups:   </p>
-  <figure>
-<div id="graph-target-2" ></div>
-<figcaption> The graph shows the true positive rate for different thresholds for the classification of either hero or villain on the test data set divided on the group for females and males.  Normally, our logistic regression classifier would use a threshold of 0.5 probability for the positive class (hero). But since we want to equalize the true positive rate between the group of females and males we can set different thresholds for the groups to achieve the parity. For example, if both groups use a threshold on 0.5 we get a disparity in true positive rate between 0.87 and 0.96. However, if we look at the y-axis we can find similar true positive rates for the two groups and read the different thresholds. For example, changing the threshold for males to 0.4, and for females to 0.55 would give both groups a true positive rate on 0.91.</figcaption>
-  </figure>
+<figure>
+  <div id="interactive-eq" ></div>
+  <figcaption> [BESKRIVELSE]  </figcaption>
+</figure>
+
 <p> In <d-cite key=" hardt2016equality"></d-cite>  they formalized an optimization problem that would find results find the threshold that satisfies Equalized Opportunity between two groups. This approach is an example of a post-processing algorithm to achieve fairness as described earlier. Playing around with the example you might have seen that it is possible to achieve Equalized Opportunity without achieving Demograhic Parity.</p>
 <h4> <b>Predictive parity</b> </h4>
 <p>
@@ -326,6 +332,12 @@ The correct answer is true. In this criterion we are looking at the fraction of 
    <div id="questionnaire-target-4.1" ></div>
 	<figcaption><b> Figure x.</b> Opinion-question: Similar questions were asked in the survey after the comprehension questions of each fairness criteria</figcaption>
 
+</figure>
+<p> Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the Positive Predictive Value by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier.</p> 
+
+<figure>
+  <div id="interactive-pp" ></div>
+  <figcaption> [BESKRIVELSE Note, in the data example, “villain” is treated as the positive outcome; who wants a borrowing party?]  </figcaption>
 </figure>
  
 <h3> The hero’s path</h3>
@@ -477,6 +489,7 @@ For example, <d-cite key="grgic2018beyond "></d-cite> suggests shifting the focu
 
 
 
+
   <d-appendix>
     <h3>Acknowledgments</h3>
     <p>
@@ -505,6 +518,6 @@ For example, <d-cite key="grgic2018beyond "></d-cite> suggests shifting the focu
 
   <!-- bibliography will be inlined during Distill pipeline's pre-rendering -->
   <d-bibliography src="bibliography.bib"></d-bibliography>
- 
+
 
 </body>
