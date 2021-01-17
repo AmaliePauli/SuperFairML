@@ -38,12 +38,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "25",
-			  result: 88,
+			  result: 96,
 			  color: "green"
 		    },
 		    {
 		      answer: "50",
-			  result: 12,
+			  result: 3,
 			  color: "darkred"
 		    },
 		    {
@@ -53,7 +53,7 @@ new Testerques({
 			},
 			{
 				answer: "100",
-				result: 0,
+				result: 1,
 				color: "darkred"
 			  },
 		  ]
@@ -69,12 +69,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 32,
+			  result: 21,
 			  color: "darkred"
 		    },
 		    {
 		      answer: "False",
-			  result: 68,
+			  result: 79,
 			  color: "green"
 		    },
 		  ]
@@ -90,12 +90,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 60,
+			  result: 57,
 			  color: "green"
 		    },
 		    {
 		      answer: "False",
-			  result: 40,
+			  result: 44,
 			  color: "darkred"
 		    },
 		  ]
@@ -111,22 +111,22 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "25",
-			  result: 0,
+			  result: 2,
 			  color: "darkred"
 		    },
 		    {
 		      answer: "50",
-			  result: 85,
+			  result: 90,
 			  color: "green"
 		    },
 		    {
 		      answer: "75",
-			  result: 10,
+			  result: 7,
 			  color: "darkred"
 			},
 			{
 				answer: "100",
-				result: 5,
+				result: 1,
 				color: "darkred"
 			  },
 		  ]
@@ -142,12 +142,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 70,
+			  result: 55,
 			  color: "green"
 		    },
 		    {
 		      answer: "False",
-			  result: 30,
+			  result: 45,
 			  color: "darkred"
 		    },
 		  ]
@@ -162,12 +162,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 70,
+			  result: 61,
 			  color: "green"
 		    },
 		    {
 		      answer: "False",
-			  result: 30,
+			  result: 39,
 			  color: "darkred"
 		    },
 		  ]
@@ -204,12 +204,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 55,
+			  result: 48,
 			  color: "green"
 		    },
 		    {
 		      answer: "False",
-			  result: 45,
+			  result: 52,
 			  color: "darkred"
 		    },
 		  ]
@@ -229,11 +229,11 @@ new Questionnaire({
 		    },
 		    {
 		      answer: "I trust that the algorithm will make the best and most fair decision",
-		      result: 15
+		      result: 13
 		    },
 		    {
 		      answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
-		      result: 75
+		      result: 77
 			},
 		  ]
 		}
@@ -248,15 +248,15 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "I trust that the person will make the best and most fair decision",
-		      result: 5
+		      result: 4
 		    },
 		    {
 		      answer: "I trust that the algorithm will make the best and most fair decision",
-		      result: 75
+		      result: 56
 		    },
 		    {
 		      answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
-		      result: 20
+		      result: 40
 			},
 		  ]
 		}
@@ -271,15 +271,15 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "I trust that the person will make the best and most fair decision",
-		      result: 5
+		      result: 9
 		    },
 		    {
 		      answer: "I trust that the algorithm will make the best and most fair decision",
-		      result: 35
+		      result: 20
 		    },
 		    {
 		      answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
-		      result: 60
+		      result: 71
 			},
 		  ]
 		}
@@ -294,19 +294,19 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "Yes",
-		      result: 23
+		      result: 13
 		    },
 		    {
 		      answer: "No",
-		      result: 61
+		      result: 24
 		    },
 		    {
 		      answer: "Maybe. It depends mostly on the risk to other people if not using this information from system.",
-		      result: 6
+		      result: 13
 			},
 			{
 				answer: "Maybe. It depends mostly on the rights of the individual being assessed when using the information from the system.",
-				result: 10
+				result: 50
 			  },
 		  ]
 		}
@@ -320,29 +320,59 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "Strongly disagree",
-		      result: 5
+		      result: 6
 		    },
 		    {
 		      answer: "Disagree",
-		      result: 20
+		      result: 12
 		    },
 		    {
 		      answer: "Neither agree or disagree",
-		      result: 50
+		      result: 45
 			},
 			{
 				answer: "Agree",
-				result: 20
+				result: 27
 			},
 			{
 				answer: "Strongly agree",
-				result: 5
+				result: 10
 			},
 		  ]
 		}
 	}
 });
 
+new Questionnaire({
+	target: document.getElementById("questionnaire-target-4.1"),
+	props: {
+		settings: {
+		  question: "Please state you own opinion on the following statement 'I find it difficult to understand preditive parity and the questions about it",
+		  answers: [
+		    {
+		      answer: "Strongly disagree",
+		      result: 5
+		    },
+		    {
+		      answer: "Disagree",
+		      result: 24
+		    },
+		    {
+		      answer: "Neither agree or disagree",
+		      result: 24
+			},
+			{
+				answer: "Agree",
+				result: 37
+			},
+			{
+				answer: "Strongly agree",
+				result: 10
+			},
+		  ]
+		}
+	}
+});
 
 
 new Questionnaire({
@@ -353,17 +383,43 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "The chance of getting accepted to the party should be the same for both males and of females",
-		      result: 6
+		      result: 15
 		    },
 		    {
 		      answer: "The chance of a correct prediction when you are allowed into the party should be the same for both males and females",
-		      result: 23
+		      result: 21
 			},
 		    {
 		      answer: "The chance of getting accepted to the party when you, in fact, are a hero should be the same for both males and females",
-		      result: 71
+		      result: 54
 		    }
 		  ]
 		}
 	}
 });
+
+
+new Questionnaire({
+	target: document.getElementById("questionnaire-target-5"),
+	props: { 
+		settings: {
+		  question: "Which of the following statements of what you think is the worst case that could occur and which results in unfairness in the  play setting about superfigures wanting to go to a party?",
+		  answers: [
+		    {
+		      answer: "Female figures that are true heroes are rejected more often than male figures that are true heroes",
+		      result: 68
+		    },
+		    {
+		      answer: "There are more males at the party who are wrongly accepted than females who are wrongly accepted",
+		      result: 17
+			},
+		    {
+		      answer: "Male figures have a higher chance of getting accepted to the party than females",
+		      result: 15
+		    }
+		  ]
+		}
+	}
+});
+
+
