@@ -69,9 +69,9 @@
 <style>
 
   .box {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 12px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
     border: none;
     border-radius: 15px;
     background-color: var(--box-color);

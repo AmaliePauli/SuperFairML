@@ -2,10 +2,15 @@
 import * as _unused from "raw-loader!./index.ejs";
 // TODO: disable before publishing
 
-import ThresholdFigure from './diagrams/threshold_figure.svelte'
+import SurveyInfo from './diagrams/survey_info.svelte';
+import ThresholdFigure from './diagrams/threshold_figure.svelte';
 import Question from './diagrams/survey_questions.svelte';
 
 import { questions } from './diagrams/surveys.js';
+
+new SurveyInfo ({
+	target: document.getElementById("survey-info"),
+});
 
 new ThresholdFigure ({
 	target: document.getElementById("interactive-dp"),
