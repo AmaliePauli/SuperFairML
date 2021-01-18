@@ -3,8 +3,6 @@ import * as _unused from "raw-loader!./index.ejs";
 // TODO: disable before publishing
 
 import ThresholdFigure from './diagrams/threshold_figure.svelte'
-import Questionnaire from './diagrams/questionnaire.svelte';
-import Testerques from './diagrams/testerques.svelte';
 import Question from './diagrams/survey_questions.svelte';
 
 import { questions } from './diagrams/surveys.js';
