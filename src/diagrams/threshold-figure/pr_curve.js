@@ -2,6 +2,7 @@ import { Chart } from 'chart.js';
 import { round2decimals } from "../../utils.js";
 import { separate_data } from "../../data/data.js";
 import { true_positive_rate, positive_predictive_value } from "../../metrics.js";
+import { male_color, male_color_weak, female_color, female_color_weak } from "./colors.js";
 
 let style = getComputedStyle(document.getElementsByTagName("d-article")[0]);
 const font_size = Math.floor(parseFloat(style.fontSize) * 0.8);
@@ -145,22 +146,22 @@ export function createPRChart(data) {
      type: 'line',
      data: {
        datasets: [{
-         label: "male",
+         label: "Male",
          data: precision_recall["male"],
          fill: false,
-         backgroundColor: "#e88f1c",
-         borderColor: "#e88f1c",
+         backgroundColor: male_color,
+         borderColor: male_color,
          borderWidth: 1,
          radius: 0,
          pointHoverRadius: 4,
          lineTension: 0,
        },
        {
-         label: "female",
+         label: "Female",
          data: precision_recall["female"],
          fill: false,
-         backgroundColor: "#007bff",
-         borderColor: "#007bff",
+         backgroundColor: female_color,
+         borderColor: female_color,
          borderWidth: 1,
          radius: 0,
          pointHoverRadius: 4,
@@ -275,22 +276,22 @@ export function addChosenThresholdPoint(chart, male_coordinates, female_coordina
     chart.data.datasets.pop();
   }
   chart.data.datasets.push({
-      label: "chosen threshold",
+      label: "Chosen threshold (male)",
       data: male_coordinates,
       fill: false,
-      backgroundColor: '#deb076',
-      borderColor: '#deb076',
+      backgroundColor: male_color_weak,
+      borderColor: male_color_weak,
       borderWidth: 0,
       showLine: false,
       radius: 4,
       pointHoverRadius: 4,
   });
   chart.data.datasets.push({
-       label: "chosen threshold",
+       label: "Chosen threshold (female)",
        data: female_coordinates,
        fill: false,
-       backgroundColor: "#7abaff",
-       borderColor: "#7abaff",
+       backgroundColor: female_color_weak,
+       borderColor: female_color_weak,
        borderWidth: 0,
        showLine: false,
        radius: 4,
