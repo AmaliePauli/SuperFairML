@@ -59,6 +59,11 @@
       <input class="btn" type="button" value= "Submit" on:click={onSubmit} disabled={selected === null}/>
     {/if}
   </div>
+  {#if question.type === "check" && submitted}
+    <div class="explanation">
+      Explanation: {@html question.explanation}
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -74,11 +79,12 @@
 
   .box > p {
     white-space: pre-wrap;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   p.question {
     font-weight: bold;
-    font-size: 1rem;
   }
 
   .answer-box {
@@ -152,6 +158,12 @@
   .btn:hover {
     background-color: var(--button-hover-color);
     border-color: white;
+  }
+
+  .explanation {
+    margin-top: 1em;
+    line-height: 1.5em;
+    font-size: 13px;
   }
 
 </style>

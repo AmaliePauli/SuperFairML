@@ -196,7 +196,8 @@ export const questions = [
         percentage: 1,
         right: false,
       },
-    ]
+    ],
+    explanation: "The criterion requires equal acceptance rates, and since the acceptance rate for the male group is <d-math>50/200=0.25</d-math>, we also need to accept 25% of the females figures trying to get into the party which would yield that <d-math>100*0.25=25</d-math> females should get accepted.",
   },
   {
     type: "check",
@@ -213,7 +214,8 @@ export const questions = [
         percentage: 79,
         right: true
       },
-    ]
+    ],
+    explanation: "The correct answer is false. Under this criterion we are forced to have an equal acceptance rate between the two groups no matter the underlying distribution of heroes and villains in the two groups. This is an important implication of this criterion that even though there is a smaller percentage of heroes in one group than in the other we are forced to accept the same percentage in each group.",
   },
   {
     type: "check",
@@ -230,7 +232,8 @@ export const questions = [
         percentage: 44,
         right: false
       },
-    ]
+    ],
+    explanation: "The correct answer is true. The criterion is requiring equal acceptance rates between the groups no matter the underlying distribution of heroes and villains and therefore even though we do not deliberately seek it, we could be forced to reject a higher fraction of true heroes in one group than in the other to achieve the parity.",
   },
   {
     type: "check",
@@ -257,7 +260,8 @@ export const questions = [
         percentage: 1,
         right: false
       },
-    ]
+    ],
+    explanation: "The criterion requires us to accept the same fraction of the true heroes in both groups. In the male group we have 150 who are truly heroes and we accept 100 of these which give a true positive rate of  <d-math> 100/150=\\frac{2}{3} </d-math>. Hence we need to accept <d-math> \\frac{2}{3} </d-math> of the true heros in the female group: <d-math>75*\\frac{2}{3}=50</d-math>.",
   },
   {
     type: "check",
@@ -274,7 +278,8 @@ export const questions = [
         percentage: 45,
         right: false
       },
-    ]
+    ],
+    explanation: "The correct answer is true. We are not restricted to have equal acceptance rates, and in fact the number example in the question above is revealing different acceptance rates between the groups, hence we do not necessarily fulfill demographic parity.",
   },
   {
     type: "check",
@@ -291,7 +296,8 @@ export const questions = [
         percentage: 39,
         right: false
       },
-    ]
+    ],
+    explanation: "The correct answer is true. Under this criterion, we do not take into account the fraction of correct predictions we make of the figures we accept. We are only looking at the set of true heroes. Therefore an extreme case could be that we in addition to the equal fraction of accepting true heroes  that we in one of the group accepted all the villains as heroes as well.",
   },
   {
     type: "check",
@@ -308,7 +314,8 @@ export const questions = [
         percentage: 55,
         right: true
       },
-    ]
+    ],
+    explanation: "The correct answer is false. The criterion requires us to have an equal rate of correct predictions of the figures we accept and the rate of misqualified figures we accept is given with 1 minus this rate.",
   },
   {
     type: "check",
@@ -325,6 +332,7 @@ export const questions = [
         percentage: 52,
         right: false
       },
-    ]
+    ],
+    explanation: "The correct answer is true. In this criterion we are looking at the fraction of true heroes out of the set of figures we predict to be heroes, but it is not restricting us on the numbers of true heroes we reject which is the case in equalized opportunities which looks at the fraction of predicted heroes out of the set of true heros.",
   },
 ];
