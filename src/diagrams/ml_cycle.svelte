@@ -72,7 +72,7 @@
 
   .ml-cycle {
     grid-column: page;
-    margin: 1rem;
+    margin-bottom: 1rem;
     padding: 1rem;
     padding-bottom: 0;
     border: 1px solid hsla(0, 0%, 0%, 0.1);
@@ -81,7 +81,7 @@
   }
   @media(max-width: 768px) {
     .ml-cycle {
-      grid-column: screen;
+      grid-column: text;
     }
   }
 
