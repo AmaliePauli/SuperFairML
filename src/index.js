@@ -6,6 +6,7 @@ import * as _unused from "raw-loader!./index.ejs";
 import ThresholdFigure from './diagrams/threshold_figure.svelte'
 import Questionnaire from './diagrams/questionnaire.svelte';
 import Testerques from './diagrams/testerques.svelte';
+import MLCycle from './diagrams/ml_cycle.svelte';
 
 // 'rgb(255, 99, 132)', // red
 // 'rgb(54, 162, 235)', // blue
@@ -14,6 +15,11 @@ import Testerques from './diagrams/testerques.svelte';
 // 'rgb(153, 102, 255)', // purple
 // 'rgb(255, 159, 64)', // orange
 // 'rgb(231,233,237)' // grey
+
+new MLCycle ({
+	target: document.getElementById("ml-cycle"),
+	props: {}
+});
 
 new ThresholdFigure ({
 	target: document.getElementById("interactive-dp"),
@@ -401,7 +407,7 @@ new Questionnaire({
 
 new Questionnaire({
 	target: document.getElementById("questionnaire-target-5"),
-	props: { 
+	props: {
 		settings: {
 		  question: "Which of the following statements of what you think is the worst case that could occur and which results in unfairness in the  play setting about superfigures wanting to go to a party?",
 		  answers: [
@@ -421,5 +427,3 @@ new Questionnaire({
 		}
 	}
 });
-
-
