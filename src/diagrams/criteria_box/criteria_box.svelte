@@ -1,7 +1,7 @@
 <script>
 	import { Tabs, TabList, TabPanel, Tab } from './tabs/tabs.js';
 	import Criteria from "./criteria.svelte"
-	import criteriaData from "../../../static/criteria.json"
+	import { criteriaData } from "./criteria.js"
 </script>
 
 <Tabs>
