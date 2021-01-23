@@ -1,23 +1,17 @@
 <script>
 import { onMount } from 'svelte/internal';
-import ConfusionMatrix from "./threshold-figure/confusion_matrix.svelte"
-import PerformanceText from "./threshold-figure/performance.svelte"
-import SuperheroBar from "./threshold-figure/superhero_bar.svelte"
-import PRCurve from "./threshold-figure/pr_curve.svelte"
+import ConfusionMatrix from "./threshold-figure/confusion_matrix.svelte";
+import PerformanceText from "./threshold-figure/performance.svelte";
+import SuperheroBar from "./threshold-figure/superhero_bar.svelte";
+import PRCurve from "./threshold-figure/pr_curve.svelte";
 import { round2decimals } from "../utils.js";
 import { separate_data } from "../data/data.js";
 import { positive_rate, true_positive_rate, positive_predictive_value, confusion_matrix } from "../metrics.js";
+import { male_color, male_color_weak, male_bar_background, female_color, female_color_weak, female_bar_background } from "./threshold-figure/colors.js";
 // Dataset containing the predictions
 import data from '../data/superhero_classification.json';
 // Props passed from the host script
 export let fairness_criteria;
-
-let male_color = "#e88f1c";
-let female_color = "#007bff";
-let male_color_weak = "#ebb889";
-let female_color_weak = "#cbdef3";
-let female_bar_background = "#edf5ff";
-let male_bar_background = "#f5e9df";
 
 // Variables for the super figure bar charts
 let bar_height = 150;
@@ -218,7 +212,7 @@ p.slider {
 }
 .bubble {
   font-weight: bold;
-  background: #e88f1c;
+  background: var(--first-color);
   color: white;
   margin-top: 1px;
   padding: 2px 10px;
@@ -228,7 +222,7 @@ p.slider {
   transform: translateX(-50%);
 }
 .bubble.female {
-  background: #007bff;
+  background: var(--second-color);;
 }
 
 input[type=range] {
@@ -245,11 +239,11 @@ input[type=range]::-webkit-slider-thumb {
   height: 20px;
   width: 20px;
   border-radius: 10px;
-  background: #e88f1c;
+  background: var(--first-color);
   margin-top: -6px; /* You need to specify a margin in Chrome */
 }
 input[type=range].female::-webkit-slider-thumb {
-  background: #007bff;
+  background: var(--second-color);
 }
 /* Firefox */
 input[type=range]::-moz-range-thumb {
@@ -257,10 +251,10 @@ input[type=range]::-moz-range-thumb {
   height: 20px;
   width: 20px;
   border-radius: 10px;
-  background: #e88f1c;
+  background: var(--first-color);
 }
 input[type=range].female::-moz-range-thumb {
-  background: #007bff;
+  background: var(--second-color);
 }
 
 /* Track */
@@ -268,23 +262,23 @@ input[type=range].female::-moz-range-thumb {
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 8px;
-  background: #fff;
+  background: white;
   border-radius: 8px;
-  border: 0.2px solid #e88f1c;
+  border: 0.2px solid var(--first-color);
 }
 input[type=range].female::-webkit-slider-runnable-track {
-  border-color: #007bff;
+  border-color: var(--second-color);
 }
 /* Firefox */
 input[type=range]::-moz-range-track {
   width: 100%;
   height: 8px;
-  background: #fff;
+  background: white;
   border-radius: 8px;
-  border: 0.2px solid #e88f1c;
+  border: 0.2px solid var(--first-color);
 }
 input[type=range].female::-moz-range-track {
-  border-color: #007bff;
+  border-color: var(--second-color);
 }
 
 input[type=range]:focus {
