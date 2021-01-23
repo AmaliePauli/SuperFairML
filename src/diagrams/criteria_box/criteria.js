@@ -61,15 +61,40 @@ export const criteriaData = [
     {
       title: "Individual Fairness",
       description: `<p> The idea is to focus on individuals instead of group statistical measures.
-      <d-cite key='dwork2012fairness'></d-cite> describe it as: “similar individuals should be treated similar”.
+      Dwork et al. describe it as: “similar individuals should be treated similar” <d-cite key='dwork2012fairness'></d-cite>.
       This should yield that members of different groups which have similar attributes should receive the same
       outcome regardless of the protected group attribute. For our super figures, this means that if you have the
       same power of doing mass destruction, the outcome of the classifier should be the same regardless of whether
       you are male or female. However, the main shortcoming of this approach is the non-trivial question of
       defining a similarity measure between individuals <d-cite key='chouldechova2020snapshot, kim2018fairness'></d-cite>.
       Take the example of how to compare years of superhero experience with the diploma from a superhero academy? Work has
-      been done to try to relaxing the criterion e.g by looking a subpopulations <d-cite key='kim2018fairness'></d-cite>.</p>`,
+      been done to try to relaxing the criterion e.g by looking a subpopulations <d-cite key='kim2018fairness'></d-cite>.
+      [Should mention <d-cite key="Binns2020"></d-cite>]</p>`,
       examples: [
+        {
+          name: "Lipschitz property",
+          references: ["dwork2012fairness"],
+        },
+        {
+          name: "Metric multifairness",
+          references: ["kim2018fairness"],
+        },
+        {
+          name: "Probably Approximately Correct and Fair learning",
+          references: ["GalYona2018"],
+        },
+        {
+          name: "Empirical Risk Minimization",
+          references: ["Jung2019"],
+        },
+        {
+          name: "Inequality Indices",
+          references: ["Speicher2018"],
+        },
+        {
+          name: "FlipTest",
+          references: ["Black2020"],
+        },
       ],
       resources: [
       ],
