@@ -46,13 +46,13 @@ export const criteriaData = [
         },
         {
           "title": "Tutorial: 21 fairness definitions and their politics",
-          "caption": `Recording of the FAT* 2018 turotial on fairness definitions.`,
+          "caption": `Recording of the FAT* 2018 turotial on fairness definitions [REF].`,
           "url": "https://www.youtube.com/watch?v=jIXIuYdnyyk",
           "image": "fairness21.jpg",
         },
         {
           "title": "Fairness and machine learning, Chapter 2",
-          "caption": `Chapter 2 of the fairness and machine learning book about classification.`,
+          "caption": `Chapter 2 of the fairness and machine learning book about classification [REF].`,
           "url": "https://fairmlbook.org/classification.html",
           "image": "fairmlbook.png",
         },
@@ -111,12 +111,34 @@ export const criteriaData = [
       this approach is that it is not easy to calculate a “preference” way of allocation in all domains
       <d-cite key='gajane2017formalizing'></d-cite>. </p>`,
       examples: [
+        {
+          name: "Preferred treatment / impact",
+          references: ["zafar2017parity"],
+        },
+        {
+          name: "Preference-Informed Individual Fairness",
+          references: ["Kim2019"],
+        },
       ],
       resources: [
+        {
+          "title": "Preferential fairness",
+          "caption": `Github repository accompanying the paper by Zafar et al. that introduced
+          <i>Preference Based Fairness</i> <d-cite key='zafar2017parity'></d-cite>.`,
+          "url": "https://github.com/mbilalzafar/fair-classification/tree/master/preferential_fairness",
+          "image": "pref_fairness.png",
+        },
+        {
+          "title": "From Parity to Preference-based Notions of Fairness in Classification",
+          "caption": `Recording of a KDD 2017 talk of the main author from
+          <d-cite key='zafar2017parity'></d-cite>.`,
+          "url": "https://www.youtube.com/watch?v=Zz8iqVWdD_g",
+          "image": "kdd_pref_fairness.jpg",
+        },
       ],
     },
     {
-      title: "Causal Reasoning",
+      title: "Counterfactual and Causal Fairness",
       description: `<p> Using causal inference to achieve fairness is for example suggested by
       <d-cite key='kusner2017counterfactual'></d-cite>, where they define the idea of <i>counter-factual fairness</i>:
       individuals of a protected group should receive the same outcome as if the group membership was flipped in a
