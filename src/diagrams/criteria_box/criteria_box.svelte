@@ -13,8 +13,22 @@
 			let cur_refs = citations[j].match(/(?<=\s+key\=)[\"\'].*[\"\']/g);
 			cur_refs = cur_refs[0].slice(1,-1).split(",");
 			for (var k in cur_refs) {
-				console.log(cur_refs[k].trim());
 				refs = refs.add(cur_refs[k].trim());
+			}
+		}
+	}
+	// Finding references in resource descriptions
+	for (var i in criteriaData) {
+		let resources = criteriaData[i].resources;
+		for (var j in resources) {
+			let text = resources[j].caption;
+			let citations = text.match(/\<d-cite[^>]*\>/g);
+			for (var k in citations) {
+				let cur_refs = citations[k].match(/(?<=\s+key\=)[\"\'].*[\"\']/g);
+				cur_refs = cur_refs[0].slice(1,-1).split(",");
+				for (var l in cur_refs) {
+					refs = refs.add(cur_refs[l].trim());
+				}
 			}
 		}
 	}
