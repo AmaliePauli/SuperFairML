@@ -36,9 +36,9 @@
 	for (var i in criteriaData) {
 		let criterion = criteriaData[i];
 		for (var j in criterion.examples) {
-			let examples = criterion.examples[j];
-			for (var k in examples) {
-				refs = refs.add(examples[k]);
+			let cur_refs = criterion.examples[j].references;
+			for (var k in cur_refs) {
+				refs = refs.add(cur_refs[k]);
 			}
 		}
 	}
