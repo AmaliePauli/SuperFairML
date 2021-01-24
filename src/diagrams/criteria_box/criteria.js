@@ -139,16 +139,46 @@ export const criteriaData = [
     },
     {
       title: "Counterfactual and Causal Fairness",
-      description: `<p> Using causal inference to achieve fairness is for example suggested by
-      <d-cite key='kusner2017counterfactual'></d-cite>, where they define the idea of <i>counter-factual fairness</i>:
+      description: `<p> Using causal models <d-cite key='Pearl2000'></d-cite> to achieve fairness is for example suggested by
+      Kusner et al., where they define the idea of <i>counter-factual fairness</i> <d-cite key='kusner2017counterfactual'></d-cite>:
       individuals of a protected group should receive the same outcome as if the group membership was flipped in a
       counter-factual setting. When we are looking at a female super figure, a male-version of this figure should receive the
       same outcome. This requires building a model that learns the causal relations, such that we know how the other attributes
       would change with regard to the “gender swap”. For example, property attributes such as <i>weight</i> and <i>height</i>
-      would change for a male-version. However, it is not necessarily easy to accurately build such causal  models, and it might
-      later inflict the causality which we are hoping to learn with the classification model. Lastly, building a causal model can
-      result in types of bias of wrongly evaluating on or convincing one of already known outcomes <d-cite key='gajane2017formalizing'></d-cite>. </p>`,
+      would change for a male version. However, it is not necessarily easy to accurately build such causal models or to well define
+      the counterfactual setting <d-cite key='mitchell2018prediction, KohlerHausmann2019'></d-cite>, and it might later impact the causality
+      which we are hoping to learn with the classification model <d-cite key='gajane2017formalizing'></d-cite>. Lastly,
+      counterfactual reasoning can lead to types of biases, e.g. wrong evaluation of the model's decision when outcomes are
+      already known <d-cite key='gajane2017formalizing'></d-cite>. </p>`,
       examples: [
+        {
+          name: "Counterfactual Fairness",
+          references: ["kusner2017counterfactual"],
+        },
+        {
+          name: "Path-Specific Counterfactual Fairness",
+          references: ["Chiappa2019"],
+        },
+        {
+          name: "Counterfactual Token Fairness",
+          references: ["Garg2019"],
+        },
+        {
+          name: "Proxy Discrimination",
+          references: ["Kilbertus2017"],
+        },
+        {
+          name: "Fair Inference",
+          references: ["Nabi2018"],
+        },
+        {
+          name: "Causal Explanation Formula",
+          references: ["JunzheZhang2018"],
+        },
+        {
+          name: "Controlled Direct Effect",
+          references: ["Stefano2020"],
+        },
       ],
       resources: [
       ],
@@ -157,15 +187,23 @@ export const criteriaData = [
       title: "Fairness Through Explanations",
       description: `<p> Another approach to detect possible biases is to compare model explanations, like feature attributions,
       for different groups. The framework SHAP <d-cite key='lundberg2017unified'></d-cite> uses Shapely values to measure the marginal
-      contribution of a feature’s impact on a prediction. This can be used to decompose the differences in a statistical measure down
+      contribution of a feature’s impact on a prediction. This can be used to decompose the differences in a statistical fairness measure down
       to input features to better understand what generates the differences <d-cite key='lundberg2020blog'></d-cite>. It can also be
       used to detect if a model fits on the protected attribute for a group by looking at a “global” contribution on a test dataset
-      <d-cite key='cesaro2019measuring'></d-cite>. The paper <d-cite key='cesaro2019measuring'></d-cite> tries to validate the approach
-      by comparing to static measures, and  <d-cite key='hickey2020fairness'></d-cite> further suggest an in-processing algorithm for
-      mitigating potential bias. Note, this idea about accessing fairness through examining what features a black-box model is fitting on,
-      is not restricted to harms of allocation problems. It could also be used on a text classifier for sentiment analysis to ensure that
-      the model is not fitting on words which do not carry sentimental meaning but  instead meaning of racial or gender belongings. <p>`,
+      <d-cite key='cesaro2019measuring'></d-cite>. Here, Cesaro et al. try to validate the approach
+      by comparing to static fairness measures, and Hickey et al. <d-cite key='hickey2020fairness'></d-cite> further suggest an in-processing
+      algorithm for mitigating potential bias. Note, this idea about accessing fairness through examining what features a black-box model is
+      fitting on, is not restricted to harms of allocation problems. It could also be used on a text classifier for sentiment analysis to
+      ensure that the model is not fitting on words which do not carry sentimental meaning but instead meaning of racial or gender belongings. <p>`,
       examples: [
+        {
+          name: "Fairness Through Feature Importance",
+          references: ["cesaro2019measuring"],
+        },
+        {
+          name: "Fairness by Explicability",
+          references: ["hickey2020fairness"],
+        },
       ],
       resources: [
       ],
