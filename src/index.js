@@ -3,18 +3,14 @@
 import * as _unused from "raw-loader!./index.ejs";
 // TODO: disable before publishing
 
-import ThresholdFigure from './diagrams/threshold_figure.svelte'
+import CriteriaBox from "./diagrams/criteria_box/criteria_box.svelte"
 import Questionnaire from './diagrams/questionnaire.svelte';
 import Testerques from './diagrams/testerques.svelte';
 import MLCycle from './diagrams/ml_cycle.svelte';
 
-// 'rgb(255, 99, 132)', // red
-// 'rgb(54, 162, 235)', // blue
-// 'rgb(255, 205, 86)', // yellow
-// 'rgb(75, 192, 192)', // green
-// 'rgb(153, 102, 255)', // purple
-// 'rgb(255, 159, 64)', // orange
-// 'rgb(231,233,237)' // grey
+new CriteriaBox({
+	target: document.getElementById('criteria-box')
+});
 
 new MLCycle ({
 	target: document.getElementById("ml-cycle"),

@@ -17,9 +17,6 @@
     </script>
   </d-front-matter>
 
-
-
-
 <d-title>
 	<h1>How does the computer become a just superhero?</h1>
 	<p>A review of fairness in machine learning </p>
@@ -169,6 +166,9 @@ Nonetheless, the main challenge remains to identify and define bias in the first
 <p>
 … aka defining mathematical fairness criteria. Mathematical fairness criteria with respect to classification where a certain treatment or outcomes are the desired output can be grouped together in different ways. Here, we will highlight four ideas on formalizing fairness partly based on <d-cite key=" gajane2017formalizing "></d-cite>, <d-cite key=" verma2018fairness "></d-cite> and <d-cite key=" chouldechova2020snapshot"></d-cite> :
 </p>
+
+<div id="criteria-box" class="subgrid"></div>
+
 <li>  <b> Statistical Measures:</b>  A lot of focus in the literature has been on  statistical measures where metrics for a predictor can be calculated by comparing the predicted classes and the actual classes. We denote the privileged outcome as <i>positive</i> and the unprivileged outcome as <i>negative </i> and defined the following terms for a binary classifier, i.e. where the outcome is either positive or negative: <p> </p>
 <style type="text/css">
   .tg  {border:none;border-collapse:collapse;border-spacing:0;border-radius: 25px;}
@@ -387,67 +387,7 @@ style="text-align: center;">
     <figcaption style="text-align:left;"> Figure nr: Scatterplot between self-reported and computed comprehension score. The two variables have a Spearman correlation on (<d-math> \rho=0.198</d-math>) with  the associated p-value (<d-math>0.058 \nless 0.05</d-math>). Hence, the association is not strong enough to conclude a correlation between people’s self-reported and computed comprehension.  </figcaption>
   </figure>
 
-  <h4> The opinion towards the criteria </h4>
-<p>After the comprehension questions of each criterion, the participants were asked to state how fair they perceive the criterion on a five-point Likert-scale (see example in [fig X]), i.e. they were asked to evaluate the fairness of each criterion independent of the other criteria. The Likert-scale is transformed to numeric values, and the boxplots in [fig x] shows the different distributions. The fairness assessment resulted significantly in the following ranking: 1.) Equalized Opportunity, 2.) Predictive Parity, 3.) Demographic Parity.  </p>
-<figure
-style="text-align: left;">
-    <img src="./images/boxplot_fair_score.svg" alt=" boxplot_fair_score" style="width:75%";>
-    <figcaption style="text-align: left;">Figure nr. Boxplots showing distribution over participants reported opinion on each criterion when asked on a 5-point Likert-scale whether they think the criterion was fair to use. Using a Mann whitney U test to test the null hypothesis that the pairwise distribution of perception scores are equal yield for DP-EO a p-value on<d-math>0.000 \less 0.05</d-math>, DP-PP a p-value on <d-math>0.001 \less 0.05</d-math> and for EO-PP a p-value on <d-math>0.022 \less 0.05</d-math>. With a significant level of 0.05, it can be concluded for alle pairs that the distribution of perception scores are different.    </figcaption>
-  </figure>
-
-<p>In <d-cite key="saha2019measuring"></d-cite>, Saha et al. found in their survey that people with low comprehension tend to have less negative opinion towards a fairness criterion. To investigate if the same trend is visible in the survey conducted here, we calculate the Spearman's correlation between perception and the computed comprehension score per criteria:
-
-</p>
-<figure>
-  <style type="text/css">
-    .tg2  {border-collapse:collapse;border-spacing:0;   margin-left: auto;
-  margin-right: auto;}
-    .tg2 td{border-color:#ffffff;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
-      overflow:hidden;padding:10px 5px;word-break:normal;}
-    .tg2 th{border-color:#ffffff;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
-      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-    .tg2 .tg2-cbmx{background-color:rgb(203, 222, 243);text-align:center;vertical-align:top}
-    .tg2 .tg2-32u0{background-color:rgb(203, 222, 243);font-weight:bold;text-align:left;vertical-align:top; border-radius: 15px 0 0 0;}
-    .tg2 .tg2-32u01{background-color:rgb(203, 222, 243);font-weight:bold;text-align:left;vertical-align:top;}
-    .tg2 .tg2-v90m{background-color:rgb(203, 222, 243);font-weight:bold;text-align:center;vertical-align:top; border-radius: 0 15px 0 0;}
-    .tg2 .tg2-v90m1{background-color:rgb(203, 222, 243);font-weight:bold;text-align:center;vertical-align:top;}
-    .tg2 .tg2-msxt{background-color:rgb(235, 184, 137);font-weight:bold;text-align:left;vertical-align:top;}
-    .tg2 .tg2-msxt1{background-color:rgb(235, 184, 137);font-weight:bold;text-align:left;vertical-align:top; border-radius: 0 0 0 15px;}
-    .tg2 .tg2-6vnk{background-color:rgb(235, 184, 137);text-align:center;vertical-align:top;}
-    .tg2 .tg2-6vnk1{background-color:rgb(235, 184, 137);text-align:center;vertical-align:top;border-radius: 0 0 15px 0;}
-    </style>
-    <table class="tg2">
-    <thead>
-      <tr>
-        <th class="tg2-32u0"></th>
-        <th class="tg2-v90m1"> Spearman correlation  </th>
-        <th class="tg2-v90m">p-value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="tg2-msxt">Demographic Parity</td>
-        <td class="tg2-6vnk">-0.417</td>
-        <td class="tg2-6vnk">0.000</td>
-      </tr>
-      <tr>
-        <td class="tg2-32u01">Equalized Opportunity</td>
-        <td class="tg2-cbmx">0.122</td>
-        <td class="tg2-cbmx">0.248</td>
-      </tr>
-      <tr>
-        <td class="tg2-msxt1">Predictive Parity</td>
-        <td class="tg2-6vnk">-0.142</td>
-        <td class="tg2-6vnk1">0.177</td>
-      </tr>
-    </tbody>
-    </table>
-    <figcaption style="text-align: left;">Figure nr. Spearman correlation between comprehension and perception scores. It is only the association between comprehension and perception sore for Demographic parity with a  p-value over 0.05 that is significant.  </figcaption>
-  </figure>
-
 <p> For Demographic Parity we can see a significant, negative correlation between comprehension and perception, i.e.  the better people understand the criterion the less they perceive it as fair (see Table x). This is in accordance with the results from Saha et al <d-cite key="saha2019measuring "></d-cite>. A weaker negative correlation can be also seen for Predictive Parity, but it is not significant (p=0.177). In contrast, for Equalized Opportunity there is a small positive correlation between comprehension and perception  (not significant with p=0.248), i.e. people who understand the criterion seem to like it more. </p>
-
-
 
 <h3>Superheroes live in a multiverse</h3>
   <p>
@@ -474,6 +414,7 @@ For example, <d-cite key="grgic2018beyond "></d-cite> suggests shifting the focu
     <figcaption><b> Figure x.</b> Opinion-question: In the survey the participants were asked to rank the statements after what they found to be the worst scenario that could occur</figcaption>
   </figure>
   <p>
+
 <p>We expect that the ranking of the three criteria should be the same for each participant between the two questions. However, 57% of the participants do not keep the same ranking between the three criteria, when they are formulated in different ways. We observed no significant difference between the comprehension of participants who rank consistently versus the group of participants who rank inconsistently (p=0.061), despite a slightly higher comprehension of the consistent group (mean on 0.75 vs mean on 0.68 ). </p>
 
 <h1>The challenges ahead </h1>
