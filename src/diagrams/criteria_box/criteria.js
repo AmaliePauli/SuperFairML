@@ -2,14 +2,16 @@ export const criteriaData = [
     {
       title: "Statistical Measures",
       description: `<p> A lot of focus in the literature has been on statistical measures where metrics for a
-      predictor can be calculated by comparing the predicted classes and the actual classes. In a binary
-      classification problem, one (privileged) outcome is typically defined as <i>positive</i> and
-      the other (unprivileged) outcome as <i>negative</i>. The number of correctly and wrongly predicted positive
-      and negative examples form the so called confusion matrix [TABLE]. Using terms derived from the confusion matrix,
-      different metrics can be calculated with the aim of achieving fairness between groups, e.g race or gender
-      (see <d-cite key="verma2018fairness, mitchell2018prediction, mehrabi2019survey"></d-cite> for summaries of different metrics).
-      The requirements for fairness with such statistical measures is to (approximately) achieve a parity, i.e. equality,
-      between groups for a defined measure. </p>`,
+      predictor can be calculated by comparing the predicted classes and the actual classes
+      <d-cite key="verma2018fairness, mitchell2018prediction, mehrabi2019survey"></d-cite>. In addition, Heidari et al.
+      have shown that most statistical fairness measures have underlying moral assumptions when formulated under economic models of
+      Equality of Opportunity <d-cite key="Heidari2019"></d-cite>. <br>
+      Statistical fairness measures are defined in a binary classification problem, where there is typically one (privileged)
+      outcome defined as <i>positive</i> and another (unprivileged) outcome defined as <i>negative</i>. The number of correctly
+      and wrongly predicted positive and negative examples form the so called confusion matrix [TABLE]. Using terms derived
+      from the confusion matrix, different metrics can be calculated with the aim of achieving fairness between groups,
+      e.g race or gender. The requirements for fairness with such statistical measures is to (approximately) achieve a
+      parity, i.e. equality, between groups for a defined measure. </p>`,
       examples: [
         {
           name: "Demograhic Parity",
@@ -84,19 +86,30 @@ export const criteriaData = [
           references: ["GalYona2018"],
         },
         {
-          name: "Empirical Risk Minimization",
-          references: ["Jung2019"],
-        },
-        {
           name: "Inequality Indices",
           references: ["Speicher2018"],
+        },
+        {
+          name: "Empirical Risk Minimization",
+          references: ["Jung2019"],
         },
         {
           name: "FlipTest",
           references: ["Black2020"],
         },
+        {
+          name: "Learning Certified Individually Fair Representations",
+          references: ["Ruoss2020"],
+        },
       ],
       resources: [
+        {
+          "title": "LCIFR",
+          "caption": `Implementation of the 'Learning Certified Individually Fair Representations'
+          framework <d-cite key='Ruoss2020'></d-cite>.`,
+          "url": "https://github.com/eth-sri/lcifr",
+          "image": "LCIFR.png",
+        },
       ],
     },
     {
