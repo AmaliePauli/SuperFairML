@@ -6,6 +6,7 @@ import * as _unused from "raw-loader!./index.ejs";
 import CriteriaBox from "./diagrams/criteria_box/criteria_box.svelte"
 import Questionnaire from './diagrams/questionnaire.svelte';
 import Testerques from './diagrams/testerques.svelte';
+import ThresholdFigure from './diagrams/threshold_figure.svelte';
 import MLCycle from './diagrams/ml_cycle.svelte';
 
 new CriteriaBox({
