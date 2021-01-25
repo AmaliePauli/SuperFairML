@@ -9,20 +9,22 @@
     {
       id: "preparation",
       title: "Data preparation",
-      text: `Discrimination or bias can be mitigating as part of the data preparation, e.g. by reweighting
-      datapoints <d-cite key="kamiran2012data, SaraHajian2013, cesaro2019measuring"></d-cite>
-      or learning a representation or transformations of the data to omit information of protected attributes
+      text: `Discrimination or bias can be mitigating as part of the data preparation (also called pre-processing
+      <d-cite key="bellamy2018ai"></d-cite>), e.g. by reweighting datapoints
+      <d-cite key="kamiran2012data, SaraHajian2013, cesaro2019measuring"></d-cite> or learning a
+      representation or transformations of the data to omit information of protected attributes
       <d-cite key="zemel2013learning, Feldman2015, Louizos2015, Calmon2017, Moyer2018"></d-cite>.`,
     },
     {
       id: "training",
       title: "Model training",
-      text: `Bias can also be mitigated during training of the model. This can be achieved
+      text: `Bias can also be mitigated during training of the model through so called in-processing
+      algorithms <d-cite key="bellamy2018ai"></d-cite>. This can be achieved
       by specifically designed training algorithms or models, e.g. using adversarial learning
       <d-cite key="Zhang2018, Lahoti2020"></d-cite>, fairness specific regularization techniques
       <d-cite key="Kamishima2012, Berk2017, hickey2020fairness, Stefano2020"></d-cite>, a modified hyperparameter tuning
       <d-cite key="Perrone2020"></d-cite>, reformulating the optimization problem
-      <d-cite key="Woodworth2017, Goel2018, Zafar2019"></d-cite> or re-weighting of datapoints during
+      <d-cite key="Woodworth2017, Agarwal2018a, Goel2018, kearns2018preventing, Zafar2019"></d-cite> or re-weighting of datapoints during
       training <d-cite key="Amini2019"></d-cite>.`,
     },
     {
@@ -36,15 +38,18 @@
       id: "deploy",
       title: "Model implementation",
       text: `Before implementing a trained model a potential bias can be mitigated through post-processing steps,
-      e.g. by adjusting the output labels by optimizing after a defined metric <d-cite key="hardt2016equality, Woodworth2017"></d-cite>.
-      In addition, one should be aware of a deployment bias when the model is used different from the initial, intential use
+      e.g. by adjusting the output labels by optimizing after a defined metric
+      <d-cite key="hardt2016equality, Woodworth2017, Pleiss2017"></d-cite>. In addition, one should be aware of a
+      so called deployment bias when the model is used different from the initial, intential use
       case <d-cite key="Suresh2019"></d-cite>.`,
     },
     {
       id: "monitoring",
       title: "Model monitoring",
       text: `A model can, for example, be monitored for bias by logging and observing statistical
-      fairness measures or other fairness definitions (see <a href="#criteria-box">the criteria box.</a>).`,
+      fairness measures or other fairness definitions (see <a href="#criteria-box">the criteria box.</a>). There
+      exist different libraries for meausring discrimination of a model, e.g. AI Fairness 360 [FOOTNOTE]
+      <d-cite key="bellamy2018ai"></d-cite>, Fairlearn [FOOTNOTE] or LiFT [FOOTNOTE].`,
     },
   ];
 
