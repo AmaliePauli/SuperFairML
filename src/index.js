@@ -4,305 +4,33 @@ import * as _unused from "raw-loader!./index.ejs";
 // TODO: disable before publishing
 
 import CriteriaBox from "./diagrams/criteria_box/criteria_box.svelte"
-import Graph from './diagrams/graph.svelte';
-import Graph2 from './diagrams/graph2.svelte';
 import Questionnaire from './diagrams/questionnaire.svelte';
 import Testerques from './diagrams/testerques.svelte';
-
-// 'rgb(255, 99, 132)', // red
-// 'rgb(54, 162, 235)', // blue
-// 'rgb(255, 205, 86)', // yellow
-// 'rgb(75, 192, 192)', // green
-// 'rgb(153, 102, 255)', // purple
-// 'rgb(255, 159, 64)', // orange
-// 'rgb(231,233,237)' // grey
+import MLCycle from './diagrams/ml_cycle.svelte';
 
 new CriteriaBox({
 	target: document.getElementById('criteria-box')
 });
 
-new Graph({
-	target: document.getElementById("graph-target"),
-	props: {
-		settings: {
-		  labels: [0.  , 0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 , 0.35, 0.4 , 0.45, 0.5 ,
-			0.55, 0.6 , 0.65, 0.7 , 0.75, 0.8 , 0.85, 0.9 , 0.95, 1.],
-		  datasets: [
-		    {
-		      label: 'Male',
-					data: [
-						{
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.66 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.66 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.67 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.67 ,
-						 },
-						 {
-							value: 0.95 ,
-							pr: 0.95 ,
-							tpr: 0.97 ,
-							et: 0.67 ,
-						 },
-						 {
-							value: 0.93 ,
-							pr: 0.93 ,
-							tpr: 0.95 ,
-							et: 0.68 ,
-						 },
-						 {
-							value: 0.92 ,
-							pr: 0.92 ,
-							tpr: 0.94 ,
-							et: 0.68 ,
-						 },
-						 {
-							value: 0.88 ,
-							pr: 0.88 ,
-							tpr: 0.92 ,
-							et: 0.69 ,
-						 },
-						 {
-							value: 0.87 ,
-							pr: 0.87 ,
-							tpr: 0.91 ,
-							et: 0.7 ,
-						 },
-						 {
-							value: 0.85 ,
-							pr: 0.85 ,
-							tpr: 0.89 ,
-							et: 0.7 ,
-						 },
-						 {
-							value: 0.82 ,
-							pr: 0.82 ,
-							tpr: 0.87 ,
-							et: 0.71 ,
-						 },
-						 {
-							value: 0.76 ,
-							pr: 0.76 ,
-							tpr: 0.82 ,
-							et: 0.72 ,
-						 },
-						 {
-							value: 0.69 ,
-							pr: 0.69 ,
-							tpr: 0.73 ,
-							et: 0.7 ,
-						 },
-						 {
-							value: 0.64 ,
-							pr: 0.64 ,
-							tpr: 0.69 ,
-							et: 0.72 ,
-						 },
-						 {
-							value: 0.55 ,
-							pr: 0.55 ,
-							tpr: 0.62 ,
-							et: 0.74 ,
-						 },
-						 {
-							value: 0.44 ,
-							pr: 0.44 ,
-							tpr: 0.51 ,
-							et: 0.77 ,
-						 },
-						 {
-							value: 0.34 ,
-							pr: 0.34 ,
-							tpr: 0.4 ,
-							et: 0.78 ,
-						 },
-						 {
-							value: 0.23 ,
-							pr: 0.23 ,
-							tpr: 0.27 ,
-							et: 0.8 ,
-						 },
-						 {
-							value: 0.11 ,
-							pr: 0.11 ,
-							tpr: 0.13 ,
-							et: 0.83 ,
-						 },
-						 {
-							value: 0.04 ,
-							pr: 0.04 ,
-							tpr: 0.06 ,
-							et: 'Not defined'  ,
-						 },
-						 {
-							value: 0.0 ,
-							pr: 0.0 ,
-							tpr: 0.0 ,
-							et: 'Not defined'  ,
-						 },
-
-					],
-					color: '#e88f1c' // red
-		    },
-		    {
-		      label: 'Female',
-					data: [
-						{
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 0.99 ,
-							pr: 0.99 ,
-							tpr: 1.0 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.99 ,
-							pr: 0.99 ,
-							tpr: 1.0 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.98 ,
-							pr: 0.98 ,
-							tpr: 0.99 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.97 ,
-							pr: 0.97 ,
-							tpr: 0.97 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.96 ,
-							pr: 0.96 ,
-							tpr: 0.96 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.9 ,
-							pr: 0.9 ,
-							tpr: 0.91 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.86 ,
-							pr: 0.86 ,
-							tpr: 0.86 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 0.79 ,
-							pr: 0.79 ,
-							tpr: 0.8 ,
-							et: 0.86 ,
-						 },
-						 {
-							value: 0.63 ,
-							pr: 0.63 ,
-							tpr: 0.66 ,
-							et: 0.88 ,
-						 },
-						 {
-							value: 0.53 ,
-							pr: 0.53 ,
-							tpr: 0.55 ,
-							et: 0.88 ,
-						 },
-						 {
-							value: 0.44 ,
-							pr: 0.44 ,
-							tpr: 0.47 ,
-							et: 0.9 ,
-						 },
-						 {
-							value: 0.34 ,
-							pr: 0.34 ,
-							tpr: 0.36 ,
-							et: 0.87 ,
-						 },
-						 {
-							value: 0.18 ,
-							pr: 0.18 ,
-							tpr: 0.18 ,
-							et: 0.88 ,
-						 },
-						 {
-							value: 0.08 ,
-							pr: 0.08 ,
-							tpr: 0.08 ,
-							et: 0.86 ,
-						 },
-						 {
-							value: 0.0 ,
-							pr: 0.0 ,
-							tpr: 0.0 ,
-							et:'Not defined'  ,
-						 },
-
-					],
-					color: '#007bff', // blue
-			},
-
-
-
-		  ]
-		}
-	}
+new MLCycle ({
+	target: document.getElementById("ml-cycle"),
+	props: {}
 });
 
+new ThresholdFigure ({
+	target: document.getElementById("interactive-dp"),
+	props: { "fairness_criteria": "demographic parity"}
+});
 
+new ThresholdFigure ({
+	target: document.getElementById("interactive-eq"),
+	props: { "fairness_criteria": "equal opportunity"}
+});
+
+new ThresholdFigure ({
+	target: document.getElementById("interactive-pp"),
+	props: { "fairness_criteria": "predictive parity"}
+});
 
 new Testerques({
 	target: document.getElementById("tester-target-10"),
@@ -312,12 +40,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "25",
-			  result: 88,
+			  result: 96,
 			  color: "green"
 		    },
 		    {
 		      answer: "50",
-			  result: 12,
+			  result: 3,
 			  color: "darkred"
 		    },
 		    {
@@ -327,7 +55,7 @@ new Testerques({
 			},
 			{
 				answer: "100",
-				result: 0,
+				result: 1,
 				color: "darkred"
 			  },
 		  ]
@@ -343,12 +71,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 32,
+			  result: 21,
 			  color: "darkred"
 		    },
 		    {
 		      answer: "False",
-			  result: 68,
+			  result: 79,
 			  color: "green"
 		    },
 		  ]
@@ -364,12 +92,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 60,
+			  result: 57,
 			  color: "green"
 		    },
 		    {
 		      answer: "False",
-			  result: 40,
+			  result: 44,
 			  color: "darkred"
 		    },
 		  ]
@@ -385,22 +113,22 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "25",
-			  result: 0,
+			  result: 2,
 			  color: "darkred"
 		    },
 		    {
 		      answer: "50",
-			  result: 85,
+			  result: 90,
 			  color: "green"
 		    },
 		    {
 		      answer: "75",
-			  result: 10,
+			  result: 7,
 			  color: "darkred"
 			},
 			{
 				answer: "100",
-				result: 5,
+				result: 1,
 				color: "darkred"
 			  },
 		  ]
@@ -416,12 +144,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 70,
+			  result: 55,
 			  color: "green"
 		    },
 		    {
 		      answer: "False",
-			  result: 30,
+			  result: 45,
 			  color: "darkred"
 		    },
 		  ]
@@ -436,12 +164,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 70,
+			  result: 61,
 			  color: "green"
 		    },
 		    {
 		      answer: "False",
-			  result: 30,
+			  result: 39,
 			  color: "darkred"
 		    },
 		  ]
@@ -478,12 +206,12 @@ new Testerques({
 		  answers: [
 		    {
 		      answer: "True",
-			  result: 55,
+			  result: 48,
 			  color: "green"
 		    },
 		    {
 		      answer: "False",
-			  result: 45,
+			  result: 52,
 			  color: "darkred"
 		    },
 		  ]
@@ -503,11 +231,11 @@ new Questionnaire({
 		    },
 		    {
 		      answer: "I trust that the algorithm will make the best and most fair decision",
-		      result: 15
+		      result: 13
 		    },
 		    {
 		      answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
-		      result: 75
+		      result: 77
 			},
 		  ]
 		}
@@ -522,15 +250,15 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "I trust that the person will make the best and most fair decision",
-		      result: 5
+		      result: 4
 		    },
 		    {
 		      answer: "I trust that the algorithm will make the best and most fair decision",
-		      result: 75
+		      result: 56
 		    },
 		    {
 		      answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
-		      result: 20
+		      result: 40
 			},
 		  ]
 		}
@@ -545,15 +273,15 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "I trust that the person will make the best and most fair decision",
-		      result: 5
+		      result: 9
 		    },
 		    {
 		      answer: "I trust that the algorithm will make the best and most fair decision",
-		      result: 35
+		      result: 20
 		    },
 		    {
 		      answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
-		      result: 60
+		      result: 71
 			},
 		  ]
 		}
@@ -568,19 +296,19 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "Yes",
-		      result: 23
+		      result: 13
 		    },
 		    {
 		      answer: "No",
-		      result: 61
+		      result: 24
 		    },
 		    {
 		      answer: "Maybe. It depends mostly on the risk to other people if not using this information from system.",
-		      result: 6
+		      result: 13
 			},
 			{
 				answer: "Maybe. It depends mostly on the rights of the individual being assessed when using the information from the system.",
-				result: 10
+				result: 50
 			  },
 		  ]
 		}
@@ -594,29 +322,59 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "Strongly disagree",
-		      result: 5
+		      result: 6
 		    },
 		    {
 		      answer: "Disagree",
-		      result: 20
+		      result: 12
 		    },
 		    {
 		      answer: "Neither agree or disagree",
-		      result: 50
+		      result: 45
 			},
 			{
 				answer: "Agree",
-				result: 20
+				result: 27
 			},
 			{
 				answer: "Strongly agree",
-				result: 5
+				result: 10
 			},
 		  ]
 		}
 	}
 });
 
+new Questionnaire({
+	target: document.getElementById("questionnaire-target-4.1"),
+	props: {
+		settings: {
+		  question: "Please state you own opinion on the following statement 'I find it difficult to understand preditive parity and the questions about it",
+		  answers: [
+		    {
+		      answer: "Strongly disagree",
+		      result: 5
+		    },
+		    {
+		      answer: "Disagree",
+		      result: 24
+		    },
+		    {
+		      answer: "Neither agree or disagree",
+		      result: 24
+			},
+			{
+				answer: "Agree",
+				result: 37
+			},
+			{
+				answer: "Strongly agree",
+				result: 10
+			},
+		  ]
+		}
+	}
+});
 
 
 new Questionnaire({
@@ -627,15 +385,15 @@ new Questionnaire({
 		  answers: [
 		    {
 		      answer: "The chance of getting accepted to the party should be the same for both males and of females",
-		      result: 6
+		      result: 15
 		    },
 		    {
 		      answer: "The chance of a correct prediction when you are allowed into the party should be the same for both males and females",
-		      result: 23
+		      result: 21
 			},
 		    {
 		      answer: "The chance of getting accepted to the party when you, in fact, are a hero should be the same for both males and females",
-		      result: 71
+		      result: 54
 		    }
 		  ]
 		}
@@ -643,282 +401,24 @@ new Questionnaire({
 });
 
 
-
-new Graph2({
-	target: document.getElementById("graph-target-2"),
+new Questionnaire({
+	target: document.getElementById("questionnaire-target-5"),
 	props: {
 		settings: {
-		  labels: [0.  , 0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 , 0.35, 0.4 , 0.45, 0.5 ,
-			0.55, 0.6 , 0.65, 0.7 , 0.75, 0.8 , 0.85, 0.9 , 0.95, 1.],
-		  datasets: [
+		  question: "Which of the following statements of what you think is the worst case that could occur and which results in unfairness in the  play setting about superfigures wanting to go to a party?",
+		  answers: [
 		    {
-		      label: 'Male',
-					data: [
-						{
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.66 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.66 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.67 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.67 ,
-						 },
-						 {
-							value: 0.97 ,
-							pr: 0.95 ,
-							tpr: 0.97 ,
-							et: 0.67 ,
-						 },
-						 {
-							value: 0.95 ,
-							pr: 0.93 ,
-							tpr: 0.95 ,
-							et: 0.68 ,
-						 },
-						 {
-							value: 0.94 ,
-							pr: 0.92 ,
-							tpr: 0.94 ,
-							et: 0.68 ,
-						 },
-						 {
-							value: 0.92 ,
-							pr: 0.88 ,
-							tpr: 0.92 ,
-							et: 0.69 ,
-						 },
-						 {
-							value: 0.91 ,
-							pr: 0.87 ,
-							tpr: 0.91 ,
-							et: 0.7 ,
-						 },
-						 {
-							value: 0.89 ,
-							pr: 0.85 ,
-							tpr: 0.89 ,
-							et: 0.7 ,
-						 },
-						 {
-							value: 0.87 ,
-							pr: 0.82 ,
-							tpr: 0.87 ,
-							et: 0.71 ,
-						 },
-						 {
-							value: 0.82 ,
-							pr: 0.76 ,
-							tpr: 0.82 ,
-							et: 0.72 ,
-						 },
-						 {
-							value: 0.73 ,
-							pr: 0.69 ,
-							tpr: 0.73 ,
-							et: 0.7 ,
-						 },
-						 {
-							value: 0.69 ,
-							pr: 0.64 ,
-							tpr: 0.69 ,
-							et: 0.72 ,
-						 },
-						 {
-							value: 0.62 ,
-							pr: 0.55 ,
-							tpr: 0.62 ,
-							et: 0.74 ,
-						 },
-						 {
-							value: 0.51 ,
-							pr: 0.44 ,
-							tpr: 0.51 ,
-							et: 0.77 ,
-						 },
-						 {
-							value: 0.4 ,
-							pr: 0.34 ,
-							tpr: 0.4 ,
-							et: 0.78 ,
-						 },
-						 {
-							value: 0.27 ,
-							pr: 0.23 ,
-							tpr: 0.27 ,
-							et: 0.8 ,
-						 },
-						 {
-							value: 0.13 ,
-							pr: 0.11 ,
-							tpr: 0.13 ,
-							et: 0.83 ,
-						 },
-						 {
-							value: 0.06 ,
-							pr: 0.04 ,
-							tpr: 0.06 ,
-							et: 'Not defined' ,
-						 },
-						 {
-							value: 0.0 ,
-							pr: 0.0 ,
-							tpr: 0.0 ,
-							et: 'Not defined' ,
-						 },
-					],
-					color: '#e88f1c' // red
+		      answer: "Female figures that are true heroes are rejected more often than male figures that are true heroes",
+		      result: 68
 		    },
 		    {
-		      label: 'Female',
-					data: [
-						{
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 1.0 ,
-							tpr: 1.0 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 0.99 ,
-							tpr: 1.0 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 1.0 ,
-							pr: 0.99 ,
-							tpr: 1.0 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.99 ,
-							pr: 0.98 ,
-							tpr: 0.99 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.97 ,
-							pr: 0.97 ,
-							tpr: 0.97 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.96 ,
-							pr: 0.96 ,
-							tpr: 0.96 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.91 ,
-							pr: 0.9 ,
-							tpr: 0.91 ,
-							et: 0.85 ,
-						 },
-						 {
-							value: 0.86 ,
-							pr: 0.86 ,
-							tpr: 0.86 ,
-							et: 0.84 ,
-						 },
-						 {
-							value: 0.8 ,
-							pr: 0.79 ,
-							tpr: 0.8 ,
-							et: 0.86 ,
-						 },
-						 {
-							value: 0.66 ,
-							pr: 0.63 ,
-							tpr: 0.66 ,
-							et: 0.88 ,
-						 },
-						 {
-							value: 0.55 ,
-							pr: 0.53 ,
-							tpr: 0.55 ,
-							et: 0.88 ,
-						 },
-						 {
-							value: 0.47 ,
-							pr: 0.44 ,
-							tpr: 0.47 ,
-							et: 0.9 ,
-						 },
-						 {
-							value: 0.36 ,
-							pr: 0.34 ,
-							tpr: 0.36 ,
-							et: 0.87 ,
-						 },
-						 {
-							value: 0.18 ,
-							pr: 0.18 ,
-							tpr: 0.18 ,
-							et: 0.88 ,
-						 },
-						 {
-							value: 0.08 ,
-							pr: 0.08 ,
-							tpr: 0.08 ,
-							et: 0.86 ,
-						 },
-						 {
-							value: 0.0 ,
-							pr: 0.0 ,
-							tpr: 0.0 ,
-							et: 'Not defined',
-						 },
-
-					],
-					color: '#007bff', // blue
+		      answer: "There are more males at the party who are wrongly accepted than females who are wrongly accepted",
+		      result: 17
 			},
-
-
-
+		    {
+		      answer: "Male figures have a higher chance of getting accepted to the party than females",
+		      result: 15
+		    }
 		  ]
 		}
 	}

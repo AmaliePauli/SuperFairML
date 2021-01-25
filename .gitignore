@@ -62,3 +62,6 @@ typings/
 
 # bibtext
 *.bib.bak
+
+# notebook checkpoints
+*/.ipynb_checkpoints
