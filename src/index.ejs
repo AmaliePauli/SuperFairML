@@ -49,47 +49,7 @@ In 2015 hitting the news  with an example, where the first female to appear on a
   … of this paper will be to circulate the question of what a fair model is by presenting an illustrative introduction to fairness in machine learning focussing on explaining different mathematical fairness criteria. The paper is looking at both the comprehension and the perception of fairness by presenting results from a small survey conducted with 92[XXX] participants. We will focus on the following three mathematical fairness criteria: 1) Demographic parity, 2) Equalized Opportunity and 3) Statistical Parity. One central purpose of the survey was to examine which mathematical fairness criteria people perceive as fair similar to <d-cite key="harrison2020empirical"></d-cite> and <d-cite key="srivastava2019mathematical"></d-cite>. However, <d-cite key="saha2019measuring"></d-cite> raise the question of laypeople’s comprehension of the metrics and conducted a survey to examine this along with people’s sentiment towards the metrics. Therefore, the objective of this survey was likewise to measure the comprehension and link it to the perception of fairness, as well as examine the consistency in the answers. The survey, like this paper, uses a play setting about super figures as an example. We chose this fictional setting to both give a story easy to relate to and to  avoid a true or realistic case to which people might be biased from the beginning, such that the essence of the survey can be algorithmic fairness in general and not the actual case. The storyline is formulated along the lines of a set of super figures, who can be either heroes or villains, all wanting to go to a party: they are assessed at the door, e.g by an algorithm, since only the figures who are “believed” to be heroes are allowed in. The focal question is how to secure that both the group of male and female figures are treated fair, as well as what fairness means in this setting. The details of the survey are outlined further in [APPENDIX A], and the infobox below summaries some brief details and introduce the point of the interactive questionnaires in the paper
   </p>
 
-   <style type="text/css">
-      .tg  {border-collapse:collapse;border-spacing:0;}
-      .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;
-        overflow:hidden;padding:10px 5px;word-break:normal;}
-      .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:13px;
-        font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;border-radius: 15px 15px 0 0;}
-      .tg .tg-vwdy{background-color:#cbdef3;border-color:#ffffff;text-align:left;vertical-align:top;}
-      .tg .tg-zcdj{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:center;vertical-align:top;}
-      .tg .tg-w3tl{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:left;vertical-align:top;}
-      .tg .tg-w3tl1{background-color:#cbdef3;border-color:#ffffff;font-weight:bold;text-align:left;vertical-align:top;border-radius: 0px 0px 0 15px;}
-      .tg .tg-vwdy1{background-color:#cbdef3;border-color:#ffffff;text-align:left;vertical-align:top;border-radius: 0px 0px 15px 0;}
-      </style>
-      <table class="tg">
-      <thead>
-        <tr>
-          <th class="tg-zcdj" colspan="4">The survey and questionnaires in this paper</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="tg-w3tl" rowspan="3">Survey</td>
-          <td class="tg-vwdy" colspan="3" rowspan="3">The survey was conducted through 12/20-01/21 and had 92 participants with the following demographics:<br> <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512'%3e%3cpath fill='%23ffffff' d='M128 0c35.346 0 64 28.654 64 64s-28.654 64-64 64c-35.346 0-64-28.654-64-64S92.654 0 128 0m119.283 354.179l-48-192A24 24 0 0 0 176 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H80a24 24 0 0 0-23.283 18.179l-48 192C4.935 369.305 16.383 384 32 384h56v104c0 13.255 10.745 24 24 24h32c13.255 0 24-10.745 24-24V384h56c15.591 0 27.071-14.671 23.283-29.821z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 40% females   <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 512'%3e%3cpath fill='%23ffffff' d='M96 0c35.346 0 64 28.654 64 64s-28.654 64-64 64-64-28.654-64-64S60.654 0 96 0m48 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H48c-26.51 0-48 21.49-48 48v136c0 13.255 10.745 24 24 24h16v136c0 13.255 10.745 24 24 24h64c13.255 0 24-10.745 24-24V352h16c13.255 0 24-10.745 24-24V192c0-26.51-21.49-48-48-48z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 60% males   <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 496 512'%3e%3cpath fill='%23ffffff' d='M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm82.29 357.6c-3.9 3.88-7.99 7.95-11.31 11.28-2.99 3-5.1 6.7-6.17 10.71-1.51 5.66-2.73 11.38-4.77 16.87l-17.39 46.85c-13.76 3-28 4.69-42.65 4.69v-27.38c1.69-12.62-7.64-36.26-22.63-51.25-6-6-9.37-14.14-9.37-22.63v-32.01c0-11.64-6.27-22.34-16.46-27.97-14.37-7.95-34.81-19.06-48.81-26.11-11.48-5.78-22.1-13.14-31.65-21.75l-.8-.72a114.792 114.792 0 0 1-18.06-20.74c-9.38-13.77-24.66-36.42-34.59-51.14 20.47-45.5 57.36-82.04 103.2-101.89l24.01 12.01C203.48 89.74 216 82.01 216 70.11v-11.3c7.99-1.29 16.12-2.11 24.39-2.42l28.3 28.3c6.25 6.25 6.25 16.38 0 22.63L264 112l-10.34 10.34c-3.12 3.12-3.12 8.19 0 11.31l4.69 4.69c3.12 3.12 3.12 8.19 0 11.31l-8 8a8.008 8.008 0 0 1-5.66 2.34h-8.99c-2.08 0-4.08.81-5.58 2.27l-9.92 9.65a8.008 8.008 0 0 0-1.58 9.31l15.59 31.19c2.66 5.32-1.21 11.58-7.15 11.58h-5.64c-1.93 0-3.79-.7-5.24-1.96l-9.28-8.06a16.017 16.017 0 0 0-15.55-3.1l-31.17 10.39a11.95 11.95 0 0 0-8.17 11.34c0 4.53 2.56 8.66 6.61 10.69l11.08 5.54c9.41 4.71 19.79 7.16 30.31 7.16s22.59 27.29 32 32h66.75c8.49 0 16.62 3.37 22.63 9.37l13.69 13.69a30.503 30.503 0 0 1 8.93 21.57 46.536 46.536 0 0 1-13.72 32.98zM417 274.25c-5.79-1.45-10.84-5-14.15-9.97l-17.98-26.97a23.97 23.97 0 0 1 0-26.62l19.59-29.38c2.32-3.47 5.5-6.29 9.24-8.15l12.98-6.49C440.2 193.59 448 223.87 448 256c0 8.67-.74 17.16-1.82 25.54L417 274.25z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 10 nationalities, 88% Danish <br><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3e%3cpath fill='%23ffffff' d='M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z'/%3e%3c/svg%3e" alt="Image" width="30" height="30"> 43% reported to be "Experienced/Vey Experienced" in statistic or machine learning</td>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-          <td class="tg-w3tl1" rowspan="4">Questionnaires </td>
-          <td class="tg-vwdy" colspan="3" rowspan="2">A selection of questions from the survey is shown in this paper to encourage <br>the reader to test own understanding and to take a stand of different issues <br>The percentage in the options shows the distributions of the answers from the survey<br></td>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-          <td class="tg-vwdy" colspan="3"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23f7bd1d' d='M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z'/%3e%3c/svg%3e" alt="Image" width="30" height="30">  Comprehension questions are orange</td>
-        </tr>
-        <tr>
-          <td class="tg-vwdy1" colspan="3"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3e%3cpath fill='%23295eb3' d='M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z'/%3e%3c/svg%3e" alt="Image" width="30" height="30">  Opinion questions are blue</td>
-        </tr>
-      </tbody>
-      </table>
+<div id="survey-info" class="subgrid"></div>
 
 <p>
 Data from the Kaggle superhero dataset <d-footnote id="d-footnote 1"> https://www.kaggle.com/claudiodavi/superhero-set </d-footnote> is used during the article as an example. The Kaggle dataset is a collection of information about super figures extracted from the Superhero Database <d-footnote id="d-footnote shdb">https://www.superherodb.com/</d-footnote>. A simple classification model has been trained on the dataset to distinguish between villains and heroes where features such as superpowers, names, publisher, height and weight have been accessible. Read more about pre-processing, feature selection and model training in [APPENDIX B].
@@ -218,38 +178,35 @@ PR = \frac{TP+FP}{TP+FP+FN+FP} .
 </d-math block="">
 
 <p>In our super figure example this means that the fraction of females and the fraction of males getting accepted to the party should be equalized, or in practice, be similar. In the survey we investigated people’s comprehension of this fairness criterion. You can check your own understanding as well: </p>
-  <figure>
-<div id="tester-target-10" ></div>
-       <figcaption>  The question is verifying the understanding of demographic parity by asking to calculate the amount of females that ought to get accepted under the described conditions.The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the reds are wrong. After submitting your answer you can read the explanation. <br />
-    <button  class="button" onclick="myFunction10()">Show explanation</button>
-   <div id="myDIV10" style="display:none;">
-The criterion requires equal acceptance rates, and since the acceptance rate for the male group is <d-math> 50/200=0.25 </d-math>, we also need to accept 25% of the females figures trying to get into the party which would yield that <d-math>100*0.25=25</d-math> females should get accepted.  </div>
- <script> function myFunction10() {var x = document.getElementById("myDIV10"); if (x.style.display === "none") { x.style.display = "block";} else { x.style.display = "none";}}
- </script>
+
+<figure>
+  <div id="tester-target-10" ></div>
+  <figcaption>
+    The question is verifying the understanding of demographic parity by asking to calculate the amount of females that ought to get accepted under the described conditions.The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the reds are wrong. After submitting your answer you can read the explanation.
+  </figcaption>
+</figure>
+
+<figure>
+  <div id="tester-target-11" ></div>
+  <figcaption>
+    This true/false question is asking to derive an implication of using the fairness criterion demographic parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
  </figcaption>
-<div id="tester-target-11" ></div>
-<figcaption> This true/false question is asking to derive an implication of using the fairness criterion demographic parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation. <br />
-    <button  class="button" onclick="myFunction11()">Show explanation</button>
-   <div id="myDIV11" style="display:none;">
-The correct answer is false. Under this criterion we are forced to have an equal acceptance rate between the two groups no matter the underlying distribution of heroes and villains in the two groups. This is an important implication of this criterion that even though there is a smaller percentage of heroes in one group than in the other we are forced to accept the same percentage in each group.  </div>
- <script> function myFunction11() {var x = document.getElementById("myDIV11"); if (x.style.display === "none") { x.style.display = "block";} else { x.style.display = "none";}}
- </script>
- </figcaption>
-<div id="tester-target-12" ></div>
-  	<figcaption> This true/false question is asking to derive an implication of using the fairness criterion demographic parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation. <br />
-    <button  class="button" onclick="myFunction12()">Show explanation</button>
-   <div id="myDIV12" style="display:none;">
-The correct answer is true. The criterion is requiring equal acceptance rates between the groups no matter the underlying distribution of heroes and villains and therefore even though we do not deliberately seek it, we could be forced to reject a higher fraction of true heroes in one group than in the other to achieve the paity     </div>
- <script> function myFunction12() {var x = document.getElementById("myDIV12"); if (x.style.display === "none") { x.style.display = "block";} else { x.style.display = "none";}}
- </script>
- </figcaption>
-	</figure>
+</figure>
+
+<figure>
+  <div id="tester-target-12" ></div>
+  <figcaption>
+    This true/false question is asking to derive an implication of using the fairness criterion demographic parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
+  </figcaption>
+</figure>
+
 <p> The last question points to the critique to Demographic Parity by <d-cite key=" hardt2016equality"></d-cite>, where it is pointed out that the metric does not account for a case where the true outcome (true hero or villain) is correlated with the protected group. Such a case could force us to accept not-qualified figures in one group or dismiss qualified figures in the other group to achieve Demographic Parity. The criterion can, however, be justified, if we are looking at a <i> societal bias</i> we actively want to change. Imagine a case of young super figures getting admitted into an academy. Furthermore, assume that young male figures are less qualified than females. However, we want to enforce a policy of even acceptance rate, i.e. adjust for this skewness, since we believe it is a structural bias in society. (However, we then need to up qualify the males e.g. by extra classes in the beginning.) </p>
 
 <p> By playing with the superhero data from Kaggle and the classifier train to distinguish “hero” or “villain”, we can on the evaluation set, look at the difference in the positive rate for males and females for different threshold values for the classification. By choosing different threshold values, you can achieve parity for the positive rate and discover how it affects other measures in this case:
 </p>
 
- <figure>
+
+<figure>
   <div id="interactive-dp" ></div>
   <figcaption> [BESKRIVELSE]  </figcaption>
 </figure>
@@ -265,31 +222,26 @@ TPR = \frac{TP}{TP+FN} .
 </d-math block="">
 
 <p>  In our super figure example, this means that the chance of getting accepted to the party when you in fact are a hero should be the same for both males and females. You can verify your own understanding of Equalized Opportunity as well as see the response from the participants in the surveys with the following questions: </p>
-  <figure>
-<div id="tester-target-13" ></div>
-         <figcaption>  The question is verifying the understanding of equalized opportunities by asking to calculate the amount of females that ought to get accepted under the described conditions.The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the reds are wrong. After submitting your answer you can read the explanation. <br />
-    <button  class="button" onclick="myFunction13()">Show explanation</button>
-   <div id="myDIV13" style="display:none;">
-The criterion requires us to accept the same fraction of the true heroes in both groups. In the male group we have 150 who are truly heroes and we accept 100 of these which give a true positive rate of  <d-math> 100/150=\frac{2}{3} </d-math>. Hence we need to accept <d-math> \frac{2}{3} </d-math> of the true heros in the female group:  <d-math>75*\frac{2}{3}=50</d-math>. </div>
- <script> function myFunction13() {var x = document.getElementById("myDIV13"); if (x.style.display === "none") { x.style.display = "block";} else { x.style.display = "none";}}
- </script>
- </figcaption>
-<div id="tester-target-14" ></div>
-  	<figcaption> This true/false question is asking to derive an implication of using the fairness criterion equalized opportunities. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation. <br />
-    <button  class="button" onclick="myFunction14()">Show explanation</button>
-   <div id="myDIV14" style="display:none;">
-The correct answer is true. We are not restricted to have equal acceptance rates, and in fact the number example in the question above is revealing different acceptance rates between the groups, hence we do not necessarily fulfill demographic parity.    </div>
- <script> function myFunction14() {var x = document.getElementById("myDIV14"); if (x.style.display === "none") { x.style.display = "block";} else { x.style.display = "none";}}
- </script>
- </figcaption>
-<div id="tester-target-15" ></div>
- 	<figcaption> This true/false question is asking to derive an implication of using the fairness criterion equalized opportunities. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation. <br />
-    <button  class="button" onclick="myFunction15()">Show explanation</button>
-   <div id="myDIV15" style="display:none;">
-The correct answer is true. Under this criterion, we do not take into account the fraction of correct predictions we make of the figures we accept. We are only looking at the set of true heroes. Therefore an extreme case could be that we in addition to the equal fraction of accepting true heroes  that we in one of the group accepted all the villains as heroes as well.      </div>
- <script> function myFunction15() {var x = document.getElementById("myDIV15"); if (x.style.display === "none") { x.style.display = "block";} else { x.style.display = "none";}}
- </script>
- </figcaption>
+
+<figure>
+  <div id="tester-target-13" ></div>
+  <figcaption>
+    The question is verifying the understanding of equalized opportunities by asking to calculate the amount of females that ought to get accepted under the described conditions.The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the reds are wrong. After submitting your answer you can read the explanation.
+  </figcaption>
+</figure>
+
+<figure>
+  <div id="tester-target-14" ></div>
+  <figcaption>
+    This true/false question is asking to derive an implication of using the fairness criterion equalized opportunities. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
+  </figcaption>
+<figure>
+
+<figure>
+  <div id="tester-target-15" ></div>
+ 	<figcaption>
+    This true/false question is asking to derive an implication of using the fairness criterion equalized opportunities. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
+  </figcaption>
 </figure>
 
 
@@ -312,29 +264,31 @@ P(Y =1|\hat{Y} =1,G=0)=P(Y=1 |\hat{Y}=1,G=1),
 PPV =  \frac{TP}{TP+FP}  .
 </d-math block="">
 For our super figure examples, this means that the chance of a correct prediction for figures allowed into the party should be the same for both males and females. Once again, you can try verifying your understanding and see people’s opinion with the following questions:
-  <figure>
-<div id="tester-target-16" ></div>
-   	<figcaption> This true/false question is asking to derive an implication of using the fairness criterion predictive parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation. <br />
-    <button  class="button" onclick="myFunction16()">Show explanation</button>
-   <div id="myDIV16" style="display:none;">
-The correct answer is false. The criterion requires us to have an equal rate of correct predictions of the figures we accept and the rate of misqualified figures we accept is given with 1 minus this rate.  </div>
- <script> function myFunction16() {var x = document.getElementById("myDIV16"); if (x.style.display === "none") { x.style.display = "block";} else { x.style.display = "none";}}
- </script>
- </figcaption>
-<div id="tester-target-17" ></div>
-  <figcaption> This true/false question is asking to derive an implication of using the fairness criterion predictive parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation. <br />
-    <button  class="button" onclick="myFunction17()">Show explanation</button>
-   <div id="myDIV17" style="display:none;">
-The correct answer is true. In this criterion we are looking at the fraction of true heroes out of the set of figures we predict to be heroes, but it is not restricting us on the numbers of true heroes we reject which is the case in equalized opportunities which looks at the fraction of predicted heroes out of the set of true heros. </div>
- <script> function myFunction17() {var x = document.getElementById("myDIV17"); if (x.style.display === "none") { x.style.display = "block";} else { x.style.display = "none";}}
- </script>
- </figcaption>
-<div id="questionnaire-target-4" ></div>
-      <figcaption><b> Figure x.</b> Opinion-question: Similar questions asking to report ones own understanding were asked in the survey after the comprehension questions of each fairness criteria  </figcaption>
-   <div id="questionnaire-target-4.1" ></div>
-	<figcaption><b> Figure x.</b> Opinion-question: Similar questions were asked in the survey after the comprehension questions of each fairness criteria</figcaption>
 
+<figure>
+  <div id="tester-target-16" ></div>
+  <figcaption>
+    This true/false question is asking to derive an implication of using the fairness criterion predictive parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
+ </figcaption>
 </figure>
+
+<figure>
+  <div id="tester-target-17" ></div>
+  <figcaption>
+    This true/false question is asking to derive an implication of using the fairness criterion predictive parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
+  </figcaption>
+</figure>
+
+<figure>
+  <div id="questionnaire-target-4" ></div>
+  <figcaption>
+    <b> Figure x.</b> Opinion-question: Similar questions asking to report ones own understanding were asked in the survey after the comprehension questions of each fairness criteria.
+  </figcaption>
+  <div id="questionnaire-target-4.1" ></div>
+	<figcaption><b> Figure x.</b> Opinion-question: Similar questions were asked in the survey after the comprehension questions of each fairness criteria.
+  </figcaption>
+</figure>
+
 <p> Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the Positive Predictive Value by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier.</p>
 
 <figure>
@@ -355,7 +309,7 @@ The correct answer is true. In this criterion we are looking at the fraction of 
 <p> … or in other words, which is your favourite fairness criterion?
 </p>
 <figure>
-<div id="questionnaire-target1" ></div>
+<div id="questionnaire-target-5" ></div>
   <figcaption>[BESKRIVELSE]  </figcaption>
 </figure>
 <p>
@@ -387,7 +341,67 @@ style="text-align: center;">
     <figcaption style="text-align:left;"> Figure nr: Scatterplot between self-reported and computed comprehension score. The two variables have a Spearman correlation on (<d-math> \rho=0.198</d-math>) with  the associated p-value (<d-math>0.058 \nless 0.05</d-math>). Hence, the association is not strong enough to conclude a correlation between people’s self-reported and computed comprehension.  </figcaption>
   </figure>
 
+
+  <h4> The opi </h4>
+<p>After the comprehension questions of each criterion, the participants were asked to state how fair they perceive the criterion on a five-point Likert-scale (see example in [fig X]), i.e. they were asked to evaluate the fairness of each criterion independent of the other criteria. The Likert-scale is transformed to numeric values, and the boxplots in [fig x] shows the different distributions. The fairness assessment resulted significantly in the following ranking: 1.) Equalized Opportunity, 2.) Predictive Parity, 3.) Demographic Parity.  </p>
+<figure
+style="text-align: left;">
+    <img src="./images/boxplot_fair_score.svg" alt=" boxplot_fair_score" style="width:75%";>
+    <figcaption style="text-align: left;">Figure nr. Boxplots showing distribution over participants reported opinion on each criterion when asked on a 5-point Likert-scale whether they think the criterion was fair to use. Using a Mann whitney U test to test the null hypothesis that the pairwise distribution of perception scores are equal yield for DP-EO a p-value on<d-math>0.000 \less 0.05</d-math>, DP-PP a p-value on <d-math>0.001 \less 0.05</d-math> and for EO-PP a p-value on <d-math>0.022 \less 0.05</d-math>. With a significant level of 0.05, it can be concluded for alle pairs that the distribution of perception scores are different.    </figcaption>
+  </figure>
+
+<p>In <d-cite key="saha2019measuring"></d-cite>, Saha et al. found in their survey that people with low comprehension tend to have less negative opinion towards a fairness criterion. To investigate if the same trend is visible in the survey conducted here, we calculate the Spearman's correlation between perception and the computed comprehension score per criteria:
+
+</p>
+<figure>
+  <style type="text/css">
+    .tg2  {border-collapse:collapse;border-spacing:0;   margin-left: auto;
+  margin-right: auto;}
+    .tg2 td{border-color:#ffffff;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
+      overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg2 th{border-color:#ffffff;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
+      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg2 .tg2-cbmx{background-color:rgb(203, 222, 243);text-align:center;vertical-align:top}
+    .tg2 .tg2-32u0{background-color:rgb(203, 222, 243);font-weight:bold;text-align:left;vertical-align:top; border-radius: 15px 0 0 0;}
+    .tg2 .tg2-32u01{background-color:rgb(203, 222, 243);font-weight:bold;text-align:left;vertical-align:top;}
+    .tg2 .tg2-v90m{background-color:rgb(203, 222, 243);font-weight:bold;text-align:center;vertical-align:top; border-radius: 0 15px 0 0;}
+    .tg2 .tg2-v90m1{background-color:rgb(203, 222, 243);font-weight:bold;text-align:center;vertical-align:top;}
+    .tg2 .tg2-msxt{background-color:rgb(235, 184, 137);font-weight:bold;text-align:left;vertical-align:top;}
+    .tg2 .tg2-msxt1{background-color:rgb(235, 184, 137);font-weight:bold;text-align:left;vertical-align:top; border-radius: 0 0 0 15px;}
+    .tg2 .tg2-6vnk{background-color:rgb(235, 184, 137);text-align:center;vertical-align:top;}
+    .tg2 .tg2-6vnk1{background-color:rgb(235, 184, 137);text-align:center;vertical-align:top;border-radius: 0 0 15px 0;}
+    </style>
+    <table class="tg2">
+    <thead>
+      <tr>
+        <th class="tg2-32u0"></th>
+        <th class="tg2-v90m1"> Spearman correlation  </th>
+        <th class="tg2-v90m">p-value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tg2-msxt">Demographic Parity</td>
+        <td class="tg2-6vnk">-0.417</td>
+        <td class="tg2-6vnk">0.000</td>
+      </tr>
+      <tr>
+        <td class="tg2-32u01">Equalized Opportunity</td>
+        <td class="tg2-cbmx">0.122</td>
+        <td class="tg2-cbmx">0.248</td>
+      </tr>
+      <tr>
+        <td class="tg2-msxt1">Predictive Parity</td>
+        <td class="tg2-6vnk">-0.142</td>
+        <td class="tg2-6vnk1">0.177</td>
+      </tr>
+    </tbody>
+    </table>
+    <figcaption style="text-align: left;">Figure nr. Spearman correlation between comprehension and perception scores. It is only the association between comprehension and perception sore for Demographic parity with a  p-value over 0.05 that is significant.  </figcaption>
+  </figure>
+
 <p> For Demographic Parity we can see a significant, negative correlation between comprehension and perception, i.e.  the better people understand the criterion the less they perceive it as fair (see Table x). This is in accordance with the results from Saha et al <d-cite key="saha2019measuring "></d-cite>. A weaker negative correlation can be also seen for Predictive Parity, but it is not significant (p=0.177). In contrast, for Equalized Opportunity there is a small positive correlation between comprehension and perception  (not significant with p=0.248), i.e. people who understand the criterion seem to like it more. </p>
+
 
 <h3>Superheroes live in a multiverse</h3>
   <p>
@@ -397,12 +411,12 @@ For example, <d-cite key="grgic2018beyond "></d-cite> suggests shifting the focu
   <h4> The preference for human or algorithmic judgement is subject to change</h4>
   <p>
  Human or machine - which would people prefer to be assessed by in different settings. This question was also raised in <d-cite key="harrison2020empirical"></d-cite> which found a slight preference towards human judgment over a machine learning model. In our survey we investigated people’s opinion about using algorithmic or human judgement in the superhero setting, and explored how additional information can influence people’s opinion using the following three questions (the first question is replicated in [FIG X]): : </p>
-  <figure>
+<figure>
   <div id="questionnaire-target-2" ></div>
-    <figcaption> [BESKRIVELSE] </figcaption>
+  <figcaption>
+    [BESKRIVELSE]
+  </figcaption>
   <div id="questionnaire-target-3" ></div>
-    <figcaption>[BESKRIVELSE]
-</figcaption>
 </figure>
 
 <p> The answers show that, initially, the majority (77%) of participants preferred the option of a ‘human judgment supported by an algorithm’ when it is assumed that both the algorithm and the human act reasonably. However, this changes with the extra information that occasionally the human is biased against one sex. Under this assumption the majority (56%) of participants preferred the algorithm, even though it is still, in general, assumed that both are acting reasonably. The third question assumes that the algorithm is  much more accurate than the human but also biased. This shifts the preference of the majority (71%) back to preferring 'human judgment with algorithmic support'. Our survey consists  of a small sample size and the representativeness is not accounted for. Nevertheless it is  interesting how relatively easy people’s opinion can be changed by adding some vague information about the system. In fact, 54% of the participants changed their choice throughout the three questions [see Appendix]. </p>
@@ -410,7 +424,7 @@ For example, <d-cite key="grgic2018beyond "></d-cite> suggests shifting the focu
 <h4> Participants are not consistent throughout their answers </h4>
 <p> In addition to people’s preference for human or algorithmic judgement, the survey also asked a more high-level question (see [FIG X]) regarding whether it is fair to use “a system that uses data and statistics” in the superhero setting. To this question, 22 out of 92 participants answered a clear “no”, but when asked about if they preferred human or algorithmic judgement, only 6 out of the 22 choose to solely trust the human. This number further decreased to 3 out of 22 when asked the question in [fig x]. Although it can be argued that this does not reflect inconsistency depending on how the formulations are understood, it might point towards that people are easily affected by the formulation of the question. However, an actual logical inconsistency is found when people are asked to rank the three fairness criteria discussed previously. First, the participants are asked to rank the three criteria formulated as rules shown in the answer-options in [fig x] according to importance. Immediately thereafter they are asked to rank what would be the worst case of unfairness that could occur (see [fig x]). Here, the options are formulated as cases that  do not comply  or contradict with one of the three criteria – all three disadvantaging the same sex.</p>
   <figure>
-  <div id="questionnaire-target-5" ></div>
+  <div id="questionnaire-target-6" ></div>
     <figcaption><b> Figure x.</b> Opinion-question: In the survey the participants were asked to rank the statements after what they found to be the worst scenario that could occur</figcaption>
   </figure>
   <p>
