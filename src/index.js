@@ -2,15 +2,25 @@
 import * as _unused from "raw-loader!./index.ejs";
 // TODO: disable before publishing
 
+import CriteriaBox from "./diagrams/criteria_box/criteria_box.svelte"
+import MLCycle from './diagrams/ml_cycle.svelte';
 import SurveyInfo from './diagrams/survey_info.svelte';
 import ThresholdFigure from './diagrams/threshold_figure.svelte';
 import Question from './diagrams/survey_questions.svelte';
-
 import { questions } from './diagrams/surveys.js';
 
 new SurveyInfo ({
 	target: document.getElementById("survey-info"),
 });
+
+new CriteriaBox({
+	target: document.getElementById('criteria-box')
+});
+
+new MLCycle ({
+	target: document.getElementById("ml-cycle"),
+	props: {}
+}); 
 
 new ThresholdFigure ({
 	target: document.getElementById("interactive-dp"),
@@ -43,3 +53,4 @@ for (let i = 0; i < questions.length; i++) {
 		}
 	});
 };
+
