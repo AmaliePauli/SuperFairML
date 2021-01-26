@@ -11,7 +11,7 @@ import { questions } from './diagrams/surveys.js';
 
 new SurveyInfo ({
 	target: document.getElementById("survey-info"),
-
+});
 
 new CriteriaBox({
 	target: document.getElementById('criteria-box')
