@@ -310,47 +310,50 @@ For our super figure examples, this means that the chance of a correct predictio
 </figure>
 <p>
 The question of which statistical fairness measure people perceive as more fair has previously been addressed in the literature. The main bulk of studies in this regard have been motivated by the COMPAS debate between Equalized Opportunities and accuracy, as mentioned in section [SECTION]. In <d-cite key="srivastava2019mathematical "></d-cite> an Amazon Turk survey showed that Demographic Parity was perceived as most fair compared to metrics like Equalized Opportunity and Predictive Parity (in the paper presented as False Negative Rate and Discovery Rate). However, the survey was conducted by showing the participants ten figures together with the true label and the predicted label of two different algorithms, asking them to choose the most discriminating one. The question can be raised whether the participants fully understood the implications of the different “algorithms”, and whether ten example figures are enough to generalize to a systematic bias. In <d-cite key=" harrison2020empirical"></d-cite> an Amazon Turk survey comparing the perception of different fairness measures was evaluated through a different design. Here, they showed participants histograms of two measures for two different models where one measure was equalized in one model and the other measure in the other model. Then participants were asked to choose between the models. The authors found a slight preference towards the False Positive Rate over accuracy in a criminal assessment setting. The other pairwise comparisons between different measures did not show any significant  preferences. However, again the same question can be asked, whether the participants fully understood the implication of the parity in the models. The question about people’s comprehension of fairness metrics is addressed by <d-cite key="saha2019measuring "></d-cite>, which showed that comprehension can be measured through a multiple-choice survey. They found that in a hiring scenario Equalized Opportunity was harder to understand than Demographic Parity, and that in general comprehension was correlated with the education level of the participants. An interesting finding was a tendency of people with low comprehension score to express less negative sentiment towards a criterion. This survey’s design where criteria are expressed as rules and where questions are asked through multiple-choice, has inspired the survey conducted in this paper. The survey of this paper aims at  both measuring the comprehension and to compare people’s perception of different criteria. The following sections present the results of the survey. </p>
+
+
 <h4> A measure of comprehension</h4>
   <p> To measure the participants comprehension of each criterion a score is calculated as the percentage of correct answers to the comprehension questions. This yields an indication of the participant's understanding of the fairness criterion and it allows for a comparison of the comprehension between the three criteria. Figure [fig nr] shows distributions of the participants comprehension score on each fairness criterion. </p>
 <figure>
   <div class="row">
     <div class="column">
       <img src="./images/boxplot_comprehention_score.svg" alt="boxplot_comprehension_score" style="width:100%">
-
+   
 </div>
     <div class="column">
       <img src="./images/boxplot_raported_score.svg" alt="boxplot_raported_score"style="width:100%">
-
+   
 </div>
-
+ 
 </div>
-
+ 
 <figcaption style="text-align: left;"> <b> Figure x.</b> Figure nr. Boxplots showing both distribution over participants calculated and self-reported comprehension on each criterion. Using a Mann whitney U test to test the null hypothesis that the pairwise distribution of perception scores are equal yield for the calculated score the following p-values: DP-EO<d-math>0.020 \less 0.05</d-math>, DP-PP <d-math> 0.007   \less 0.05</d-math> EO-PP <d-math>0.305  \nless 0.05</d-math>. Hence, with a significant level of 0.05, we can reject the null hypothesis and conclude that DP is easier to understand than both OE and PP. We uses the same test statistic to test differences in distributions for the self-reported comprehension scores and get the following p-values: DP-EO<d-math>0.010 \less 0.05</d-math>, DP-PP <d-math> 0.000   \less 0.05</d-math> EO-PP <d-math>0.008  \less 0.05</d-math> . Hence, the difference is significant for all pairs.   </figcaption>
 </figure>
  <p> The distributions indicate that participants found Demographic Parity easiest to understand. A pairwise performed Mann-Whitney U test reveals that the difference is significant between Demographic Parity and the two other criteria (p=0.020 for Equalized Opportunity and p=0.007 for Predictive Parity), but not between Equalized Opportunity and Predictive Parity. We can therefore conclude that Demographic Parity is easier to understand than both Equalized Opportunity and Predictive Parity in this survey.
 
 This supports the finding in <d-cite key="saha2019measuring "></d-cite> that Equalized Opportunity is harder to understand than Demographic Parity, albeit the different setting. </p>
 <p> We also asked the participants to self-report their understanding of each criterion after answering the comprehension questions using a five-point Likert-scale (see example in [fig x]). Each point is assigned a numeric value where a higher value indicates a higher self-reported understanding. The distribution over the self-reported understanding is presented as boxplots in [Fig nr].  The pairwise comparisons all show a significant difference between self-reported comprehension (DP-EQ: p=0.010, DP-PP: p=0.000, EQ-PP: p=0.008), meaning that people report different levels of understanding for the three measures. Similar to the computed comprehension scores, the self-reported comprehension has the following order: 1) Demographic Parity, 2) Equalized Opportunities 3) Predictive Parity.  Figure [FIG] shows the average self-reported score plotted  against  the average computed comprehension score. Both the Spearman correlation (<d-math> \rho=0.198</d-math>) and the associated p-value (<d-math>0.058</d-math>) do not show a strong correlation between the self-reported and computed comprehension score.. Hence, we can not conclude a significant association between how people perceive their understanding and how well they actually understand the criteria. One would expect a strong correlation and the results show that it is difficult to discuss fairness if people are not aware of their own understanding. Furthermore, there is no clear trend towards over- or underrating oneself (see [FiG 1]) </p>
-<figure
+<figure 
 style="text-align: center;">
     <img src="./images/regresion_plot.svg" alt="Scatterplot" style="width:75%";>
-    <figcaption style="text-align:left;"> Figure nr: Scatterplot between self-reported and computed comprehension score. The two variables have a Spearman correlation on (<d-math> \rho=0.198</d-math>) with  the associated p-value (<d-math>0.058 \nless 0.05</d-math>). Hence, the association is not strong enough to conclude a correlation between people’s self-reported and computed comprehension.  </figcaption>
+    <figcaption style="text-align: left;"> Figure nr: Scatterplot between self-reported and computed comprehension score. The two variables have a Spearman correlation on (<d-math> \rho=0.198</d-math>) with  the associated p-value (<d-math>0.058 \nless 0.05</d-math>). Hence, the association is not strong enough to conclude a correlation between people’s self-reported and computed comprehension.  </figcaption>
   </figure>
-
+ 
   <h4> The opinion towards the criteria </h4>
 <p>After the comprehension questions of each criterion, the participants were asked to state how fair they perceive the criterion on a five-point Likert-scale (see example in [fig X]), i.e. they were asked to evaluate the fairness of each criterion independent of the other criteria. The Likert-scale is transformed to numeric values, and the boxplots in [fig x] shows the different distributions. The fairness assessment resulted significantly in the following ranking: 1.) Equalized Opportunity, 2.) Predictive Parity, 3.) Demographic Parity.  </p>
-<figure
+<figure 
 style="text-align: left;">
     <img src="./images/boxplot_fair_score.svg" alt=" boxplot_fair_score" style="width:75%";>
     <figcaption style="text-align: left;">Figure nr. Boxplots showing distribution over participants reported opinion on each criterion when asked on a 5-point Likert-scale whether they think the criterion was fair to use. Using a Mann whitney U test to test the null hypothesis that the pairwise distribution of perception scores are equal yield for DP-EO a p-value on<d-math>0.000 \less 0.05</d-math>, DP-PP a p-value on <d-math>0.001 \less 0.05</d-math> and for EO-PP a p-value on <d-math>0.022 \less 0.05</d-math>. With a significant level of 0.05, it can be concluded for alle pairs that the distribution of perception scores are different.    </figcaption>
   </figure>
 
-<p>In <d-cite key="saha2019measuring"></d-cite>, Saha et al. found in their survey that people with low comprehension tend to have less negative opinion towards a fairness criterion. To investigate if the same trend is visible in the survey conducted here, we calculate the Spearman's correlation between perception and the computed comprehension score per criteria:
+
+<p>In <d-cite key="saha2019measuring"></d-cite>, Saha et al. found in their survey that people with low comprehension tend to have less negative opinion towards a fairness criterion. To investigate if the same trend is visible in the survey conducted here, we calculate the Spearman's correlation between perception and the computed comprehension score per criteria: 
 
 </p>
 <figure>
   <style type="text/css">
-    .tg2  {border-collapse:collapse;border-spacing:0;   margin-left: auto;
+    .tg2  {border-collapse:collapse;border-spacing:0;   margin-left: auto; 
   margin-right: auto;}
     .tg2 td{border-color:#ffffff;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
       overflow:hidden;padding:10px 5px;word-break:normal;}
@@ -398,7 +401,6 @@ style="text-align: left;">
 <p> For Demographic Parity we can see a significant, negative correlation between comprehension and perception, i.e.  the better people understand the criterion the less they perceive it as fair (see Table x). This is in accordance with the results from Saha et al <d-cite key="saha2019measuring "></d-cite>. A weaker negative correlation can be also seen for Predictive Parity, but it is not significant (p=0.177). In contrast, for Equalized Opportunity there is a small positive correlation between comprehension and perception  (not significant with p=0.248), i.e. people who understand the criterion seem to like it more. </p>
 
 
-
 <h3>Superheroes live in a multiverse</h3>
   <p>
   … and so it seems to be the case with algorithmic fairness. Instead of only looking at which statistical measure is perceived as most fair, we need to broaden our understanding of the fairness universe.
@@ -440,39 +442,40 @@ For example, <d-cite key="grgic2018beyond "></d-cite> suggests shifting the focu
 … since every movie must come to an end and so does our article. We have provided an overview of different ways to evaluate and define algorithmic fairness, as well as, different methods to achieve fairness. We then discussed challenges with the currently proposed approaches with respect to people’s comprehension and perception, and application in practice. As seen in the previous section [link], the work on algorithmic fairness is far from down. As it is with superhero movies, one movie seldom comes alone.
 </p>
 
-  </d-article>
+
+</d-article>
 
 
 
 
-  <d-appendix>
-    <h3>Acknowledgments</h3>
-    <p>
-      We are deeply grateful to...
-    </p>
+<d-appendix>
+  <h3>Acknowledgments</h3>
+  <p>
+    We are deeply grateful to...
+  </p>
 
-    <p>
-      Many of our diagrams are based on...
-    </p>
+  <p>
+    Many of our diagrams are based on...
+  </p>
 
-    <h3>Author Contributions</h3>
-    <p>
-      <b>Research:</b> Alex developed ...
-    </p>
+  <h3>Author Contributions</h3>
+  <p>
+    <b>Research:</b> Alex developed ...
+  </p>
 
-    <p>
-      <b>Writing & Diagrams:</b> The text was initially drafted by...
-    </p>
-
-
-    <d-footnote-list></d-footnote-list>
-    <d-citation-list></d-citation-list>
-  </d-appendix>
+  <p>
+    <b>Writing & Diagrams:</b> The text was initially drafted by...
+  </p>
 
 
+  <d-footnote-list></d-footnote-list>
+  <d-citation-list></d-citation-list>
+</d-appendix>
 
-  <!-- bibliography will be inlined during Distill pipeline's pre-rendering -->
-  <d-bibliography src="bibliography.bib"></d-bibliography>
+
+
+<!-- bibliography will be inlined during Distill pipeline's pre-rendering -->
+<d-bibliography src="bibliography.bib"></d-bibliography>
 
 
 </body>
