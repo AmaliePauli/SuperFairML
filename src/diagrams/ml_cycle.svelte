@@ -114,9 +114,9 @@
     margin-bottom: 1rem;
     padding: 1rem;
     padding-bottom: 0;
-    border: 1px solid hsla(0, 0%, 0%, 0.1);
+    border: 1px solid var(--box-border);
     border-radius: 5px;
-    background-color: hsl(0, 0%, 97%);
+    background-color: var(--box-color);
   }
   @media(max-width: 768px) {
     .ml-cycle {
