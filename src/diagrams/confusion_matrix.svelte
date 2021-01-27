@@ -2,13 +2,13 @@
 
   let tp = "True Positive (TP)";
   let fp = "False Positive (FP)";
-  let tn = "False Negative (FN)";
-  let fn = "True Negative (TN)";
+  let tn = "True Negative (TN)";
+  let fn = "False Negative (FN)";
 
   let tp_full = "Number of cases where both the predicted and actual outcome is positive.";
   let fp_full = "Number of cases where the predicted outcome is positive, but the actual outcome is negative.";
-  let tn_full = "Number of cases where the predicted outcome is negative, but the actual outcome is positive.";
-  let fn_full = "Number of cases where both the predicted and the actual outcome is negative.";
+  let tn_full = "Number of cases where both the predicted and the actual outcome is negative.";
+  let fn_full = "Number of cases where the predicted outcome is negative, but the actual outcome is positive.";
 
   let tp_text = tp;
   let fp_text = fp;
