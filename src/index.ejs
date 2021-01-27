@@ -127,34 +127,15 @@ Nonetheless, the main challenge remains to identify and define bias in the first
 … aka defining mathematical fairness criteria. Mathematical fairness criteria with respect to classification where a certain treatment or outcomes are the desired output can be grouped together in different ways. In the following box we will highlight five ideas on formalizing fairness partly based on <d-cite key=" gajane2017formalizing, verma2018fairness, mitchell2018prediction, mehrabi2019survey"></d-cite> :
 </p>
 <div id="criteria-box" class="subgrid"></div>
+
 <h3> Batman begins</h3>
 <p>… is by the way a great movie, and like Batman every super figure needs to learn to master their powers in the beginning. We will therefore start by understanding the first, and most known statistical measure of fairness, before we discuss the advantages and disadvantages of the statistical approach.  </p>
 <p> As described in <a href="#criteria-box">the box above</a>, statistical measures are derived from the so called confusion matrix. The confusion matrix is a way to sort all examples in a dataset according to their true class and predicted class in a binary classification setting. The following table shows a confusion matrix and its components and describes the terminology needed for the definition of the specific statistical fairness criteria: </p>
-<style type="text/css">
-  .tg  {border:none;border-collapse:collapse;border-spacing:0;border-radius: 25px;}
-  .tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
-    padding:10px 5px;word-break:normal; }
-  .tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
-    overflow:hidden;padding:10px 5px;word-break:normal;}
-  .tg .tg-ez6v{background-color: rgb(203, 222, 243);border-color:inherit;text-align:center;vertical-align:top;border-radius: 0 15px 0 0;}
-  .tg .tg-ez7v{background-color: rgb(203, 222, 243);border-color:inherit;text-align:center;vertical-align:top;border-radius:  0 0 0 15px;}
-  .tg .tg-0u52{background-color: rgb(235, 184, 137);border-color:inherit;text-align:center;vertical-align:top;border-radius: 15px 0 0 0;}
-  .tg .tg-0u72{background-color: rgb(235, 184, 137);border-color:inherit;text-align:center;vertical-align:top;border-radius: 0 0 15px 0;}
-  </style>
-  <table class="tg">
-  <thead>
-    <tr>
-      <th class="tg-0u52"><span style="font-weight:bold">True positive (TP):</span> <br>Cases where both the predicted and actual outcome is positive   <br></th>
-      <th class="tg-ez6v"><span style="font-weight:bold">False Positive (FP):</span><br>Cases where the predicted outcome is positive, but the actual outcome is negative<br></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="tg-ez7v"><span style="font-weight:bold">False Negative (FN):</span><br>Cases where the predicted outcome is negative, but the actual outcome is positive<br></td>
-      <td class="tg-0u72"><span style="font-weight:bold">True Negative (TN):</span><br>Cases where both the predicted and the actual outcome is negative<br></td>
-    </tr>
-  </tbody>
-  </table>
+
+<figure>
+  <figcaption align="center"> Caption </figcaption>
+  <div id="confusion-matrix"></div>
+</figure>
 
 <h4><b>Demographic parity </b></h4>
 <p>Demographic parity also called group fairness or statistical parity (<d-cite key=" verma2018fairness "></d-cite>, <d-cite key=" hardt2016equality"></d-cite>,  <d-cite key="dwork2012fairness "></d-cite>) incorporates the idea, that non-discrimination between groups is achieved if the chance of getting a positive outcome is equalized acrossed groups. Given a binary classification task and two groups this can mathematically formalized as: </p>
