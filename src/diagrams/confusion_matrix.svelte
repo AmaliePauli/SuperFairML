@@ -6,7 +6,7 @@
   let fn = "True Negative (TN)";
 
   let tp_full = "Number of cases where both the predicted and actual outcome is positive.";
-  let fp_full = "Number of Cases where the predicted outcome is positive, but the actual outcome is negative.";
+  let fp_full = "Number of cases where the predicted outcome is positive, but the actual outcome is negative.";
   let tn_full = "Number of cases where the predicted outcome is negative, but the actual outcome is positive.";
   let fn_full = "Number of cases where both the predicted and the actual outcome is negative.";
 
