@@ -9,7 +9,7 @@
   Chart.defaults.global.defaultFontColor = style.color;
 
   const male_color = getComputedStyle(document.documentElement).getPropertyValue("--first-color");
-  const female_color = getComputedStyle(document.documentElement).getPropertyValue("--second-color")
+  const female_color = getComputedStyle(document.documentElement).getPropertyValue("--second-color");
 
   var barChartData = {
     labels: ['Hero', 'Villain'],
@@ -17,6 +17,7 @@
       {
         label: 'Male',
         backgroundColor: male_color,
+        hoverBackgroundColor: male_color,
         data: [
           197,
           101,
@@ -25,6 +26,7 @@
       {
         label: 'Female',
         backgroundColor: female_color,
+        hoverBackgroundColor: female_color,
         data: [
           88,
           24,
@@ -155,6 +157,7 @@
 
 <figure style="text-align: center;">
   <canvas id="hero-villain-barchart" width="100%" height="50px" aria-label="Barchart showing number of superheroes and villains for each gender." role="img">
+     <p>Barchart showing number of superheroes and villains for each gender.</p>
   </canvas>
   <figcaption> [TEKST] There is an imbalance in the representation of males and females in the example dataset. </figcaption>
 </figure>
