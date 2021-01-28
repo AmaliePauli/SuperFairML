@@ -10,6 +10,7 @@ import Question from './diagrams/survey_questions.svelte';
 import { questions } from './diagrams/surveys.js';
 import ConfusionMatrix from './diagrams/confusion_matrix.svelte';
 import SpearmanTable from './diagrams/spearman_correlation.svelte';
+import HeroVillainBar from './diagrams/hero_villain_bar.svelte';
 
 new SurveyInfo ({
 	target: document.getElementById("survey-info"),
@@ -62,4 +63,8 @@ new ConfusionMatrix({
 
 new SpearmanTable({
 	target: document.getElementById('spearman-correlation')
+});
+
+new HeroVillainBar({
+	target: document.getElementById('hero-villain-bar-figure')
 });

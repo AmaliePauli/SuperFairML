@@ -91,10 +91,8 @@ Both dimensions of understanding types of biases through either the impact or th
 <p>
 … the data, the algorithm, and the user interactions <d-cite key=" mehrabi2019survey "></d-cite>. Data is usually the first suspect of bias introduced into a model, but all three inflict each other. To list some of the “offences” by data: 1) a skew in the data collections, 2) missingness in attributes, 3) a skew in human annotations or 4) an imbalance in examples. To stay in the super figure setting, one could imagine the case where the police historically have examined more male figures than females and therefore have found more villains among men, which then will be reinforced over time. Another case could be picturing missingness in self-reported attributes, where they could be missing for a reason related to a protected attribute like gender. Discrimination can also be induces into the data by human annotations. Or an unbalanced training data can introduce a skew into a model. In our super figure example data data from Kaggle, we have in fact an unbalanced dataset with fewer females than males [see Figure X], making it potentially harder for a model to generalise well on the classifications of females villains.
 </p>
-<figure  style="text-align: center;">
-  <img src="./images/countplot_gender.svg" alt="unbalanced data" style="width:500px;height:300px";>
-  <figcaption> [TEKST] There is an imbalance in the representation of males and females in the example dataset </figcaption>
-</figure>
+
+<div id="hero-villain-bar-figure" ></div>
 
 <p>
 An undesired skew can also be introduced into the model by the choice of the algorithm: imagine that one type of decision boundary is more suited for one group than the other. Last but not least, how the model is set into production and how users interact with it can in itself be a source of bias, e.g. following the models' suggestions in a skewed way <d-cite key="selbst2019fairness "></d-cite>, <d-cite key=" green2019disparate "></d-cite>. Knowing the different sources of bias and imagine you are a super figure wanting to go to the party, we invite you to take a stand on the following question:
