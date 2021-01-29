@@ -2,14 +2,19 @@
 
   import { onMount } from 'svelte/internal';
 
+  // Use global style for the chart
   let style = getComputedStyle(document.getElementsByTagName("d-article")[0]);
   const font_size = Math.floor(parseFloat(style.fontSize) * 0.8);
   Chart.defaults.global.defaultFontSize = font_size;
   Chart.defaults.global.defaultFontFamily = style.fontFamily;
   Chart.defaults.global.defaultFontColor = style.color;
-
+  // Use globally defined colors
   const male_color = getComputedStyle(document.documentElement).getPropertyValue("--first-color");
   const female_color = getComputedStyle(document.documentElement).getPropertyValue("--second-color");
+
+  // Male and female numbers
+  const males = [197, 101];
+  const females = [88, 24];
 
   var barChartData = {
     labels: ['Hero', 'Villain'],
@@ -18,19 +23,13 @@
         label: 'Male',
         backgroundColor: male_color,
         hoverBackgroundColor: male_color,
-        data: [
-          197,
-          101,
-        ]
+        data: males,
       },
       {
         label: 'Female',
         backgroundColor: female_color,
         hoverBackgroundColor: female_color,
-        data: [
-          88,
-          24,
-        ]
+        data: females,
       },
     ]
   };
@@ -159,7 +158,11 @@
   <canvas id="hero-villain-barchart" width="100%" height="50px" aria-label="Barchart showing number of superheroes and villains for each gender." role="img">
      <p>Barchart showing number of superheroes and villains for each gender.</p>
   </canvas>
-  <figcaption> [TEKST] There is an imbalance in the representation of males and females in the example dataset. </figcaption>
+  <figcaption style="text-align: left;">
+    <b>Figure [Number]:</b> Barchart showing number of superheroes and villains for each gender.
+    There is both an imbalance between superheroes ({males[0]+females[0]}) and villains ({males[1]+females[1]}),
+    and males ({males[0]+males[1]}) and females ({females[0]+females[1]}) in the example dataset.
+  </figcaption>
 </figure>
 
 <style>
