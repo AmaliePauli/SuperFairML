@@ -24,10 +24,9 @@
     </d-title>
    
     <d-article>
-      <p>
-        Super cool machine learning systems should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or rather, how do we ensure models to be fair and just in their outcome when they have an impact on humans —  like every other superhero movie, the goal is to save humanity. Keeping it  down to earth, this paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing results from a small survey conducted about people’s perception and comprehension in algorithmic fairness. We use 'superheroes' as an illustrative analogue for fair models and a superhero dataset from Kaggle<d-footnote id="d-footnote 1"> https://www.kaggle.com/claudiodavi/superhero-set </d-footnote> as an example throughout the paper. The interactive illustrations in the article are asking the reader to take a stand and check their comprehension about fairness in algorithms. The survey showed no significant association between peoples self-reported comprehension and their ability to answer comprehension questions correctly, which motivated the need for this paper. The aim is to provide an overview of current work in fair machine learning and make the reader aware of trade-offs and challenges, such as to know when and how fairness in Machine Learning is an essential concern.          
-         </p>
-
+  <p>
+   Super cool machine learning systems should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or rather, how do we ensure models to be fair and just in their outcome when they have an impact on humans —  like every other superhero movie, the goal is to save humanity. Keeping it down to earth, this paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing results from a small survey conducted about people’s perception and comprehension in algorithmic fairness. We use 'superheroes' as an illustrative analogue for fair models and a superhero dataset from Kaggle<d-footnote id="d-footnote 1"> https://www.kaggle.com/claudiodavi/superhero-set </d-footnote> as an example throughout the paper. The interactive illustrations in the article are asking the reader to take a stand and check their comprehension about fairness in algorithms. The survey showed no significant association between peoples self-reported comprehension and their ability to answer comprehension questions correctly, which motivated the need for this paper. The aim is to provide an overview of current work in fair machine learning and make the reader aware of trade-offs and challenges, such as to know when and how fairness in Machine Learning is an essential concern.          
+    </p>
    
   <h1>Introduction </h1>
   <h3>Please introduce us </h3>
@@ -40,11 +39,10 @@
   <h3>Every hero has a history</h3>
   <p>
   … and so does bias in models. The main concern of the above examples of algorithmic bias, is not the risk of failure of the models or understanding the technical reasons behind it. According to Kate Crawford in her keynote <i> The Trouble with Bias</i> at NIPS 2017 <d-cite key=" crawford2017keynote "></d-cite>, it is the fact that the models reproduce a cultural and historian bias present in society. The two cases above seem problematic because they are reproducing respectively discrimination of black people and inequality between genders in the labour market. With machine learning becoming more prevalent in industry where it effects people’s lifes, we are potentially looking at a systematic and automatic way of reproducing discrimination or favouritism <d-cite key=" crawford2017keynote "></d-cite>. Like with super-villains there is often a <i>history</i>behind the unjustness, which we need to understand to turn super-villains into superheroes. However, the solution to stop unjustness is neither straight forward nor  simple. The unanswered question remains: what is a fair model? There can never be an absolute answer to this question, since it will change over time and depends on the culture. But a lot of work has been done in research to try to mathematical formalize and address this question  <d-cite key="mitchell2018prediction,gajane2017formalizing"></d-cite>. 
-
   </p>
   <h3>The plot </h3>
   <p>
-    … of this paper will be to circulate the question of what a fair model is by presenting an illustrative introduction to fairness in machine learning focussing on explaining different mathematical fairness criteria. The paper is looking at both the comprehension and the perception of fairness with a starting point in these criteria by presenting results from a small survey conducted with 92 participants. We will focus on the following three mathematical fairness criteria: 1) Demographic parity, 2) Equalized Opportunity and 3) Statistical Parity. One central purpose of the survey was to examine which mathematical fairness criteria people perceive as fair similar to <d-cite key="harrison2020empirical"></d-cite> and <d-cite key="srivastava2019mathematical"></d-cite>. However, <d-cite key="saha2019measuring"></d-cite> raise the question of laypeople’s comprehension of the metrics and conducted a survey to examine this along with people’s sentiment towards the metrics. Therefore, the objective of this survey was likewise to measure the comprehension and link it to the perception of fairness, as well as examine the consistency in the answers. The survey, like this paper, uses a play setting about super figures as an example. We chose this fictional setting to both give a story easy to relate to and to  avoid a true or realistic case to which people might be biased from the beginning, such that the essence of the survey can be algorithmic fairness in general and not the actual case. The storyline is formulated along the lines of a set of super figures, who can be either heroes or villains, all wanting to go to a party: they are assessed at the door, e.g by an algorithm, since only the figures who are “believed” to be heroes are allowed in. The focal question is how to secure that both the group of male and female figures are treated fair, as well as what fairness means in this setting. The details of the survey are outlined further in Appendix A, and the infobox below summaries some brief details and introduces the point of the interactive questionnaires in the paper.
+    … of this paper will be to circulate the question of what a fair model is by presenting an illustrative introduction to fairness in machine learning focussing on explaining different mathematical fairness criteria. The paper is looking at both the comprehension and the perception of fairness with a starting point in these criteria by presenting results from a small survey conducted with 92 participants. We will focus on the following three mathematical fairness criteria: 1) Demographic parity, 2) Equalized Opportunity and 3) Statistical Parity. One central purpose of the survey was to examine which mathematical fairness criteria people perceive as fair similar to <d-cite key="harrison2020empirical"></d-cite> and <d-cite key="srivastava2019mathematical"></d-cite>. However, <d-cite key="saha2019measuring"></d-cite> raise the question of laypeople’s comprehension of the metrics and conducted a survey to examine this along with people’s sentiment towards the metrics. Therefore, the objective of this survey was likewise to measure the comprehension and link it to the perception of fairness, as well as examine the consistency in the answers. The survey, like this paper, uses a play setting about super figures as an example. We chose this fictional setting both to give a story easy to relate to and to avoid a true or realistic case to which people might be biased from the beginning, such that the essence of the survey can be algorithmic fairness in general and not the actual case. The storyline is formulated along the lines of a set of super figures, who can be either heroes or villains, all wanting to go to a party: they are assessed at the door, e.g by an algorithm, since only the figures who are “believed” to be heroes are allowed in. The focal question is how to secure that both the group of male and female figures are treated fair, as well as what fairness means in this setting. The details of the survey are outlined further in Appendix A, and the infobox below summaries some brief details and introduces the point of the interactive questionnaires in the paper.
     </p>
    
   <div id="survey-info" class="subgrid"></div>
@@ -53,10 +51,7 @@
   Data from the Kaggle superhero dataset <d-footnote id="d-footnote 1"> https://www.kaggle.com/claudiodavi/superhero-set </d-footnote> is used during the article as an example. The Kaggle dataset is a collection of information about super figures extracted from the Superhero Database <d-footnote id="d-footnote shdb">https://www.superherodb.com/</d-footnote>. A simple classification model has been trained on the dataset to distinguish between villains and heroes where features such as superpowers, names, publisher, height and weight have been accessible. Read more about pre-processing, feature selection and model training in Appendix B.
   The interactive illustrations and questionnaires are to invite the reader to take a stand on the fairness questions during the read. You can start with the following:
   </p>
-  
   <div id="questionnaire-target-0" ></div>
- 
-   </p>
   <p>The main contributions of this paper are two-folded. First, it is to summarize the current state of fairness in machine learning through a literature review presented as an interactive paper encouraging people to think about the issues and challenges with algorithmic fairness.  Second, it demonstrates through a survey people’s comprehension and perception of different fairness criteria in the superhero setting. The survey results also point towards people being sensitive to formulations when giving opinion about fairness, and in some questions to a degree which demonstrates inconsistency in answers. Further, the survey results did not prove a statistical significance in association between peoples self-reported understanding and what could be measured through their answers to comprehension questions. This points to the need of being careful in the debate about fairness since formulations and wrongly estimated self understanding may skew it.   
   The paper is divided into four main sections. The first section focuses on understanding the notion of bias. The second, on definition of fairness and methods to mitigate bias. Here, we will focus on three mathematical fairness criteria. The third section discusses the perception of fairness with a starting point in the three criteria as well as highlighting results from the survey. The last section sums up the remaining challenges and concludes the main points of this paper.   
   </p>
@@ -86,252 +81,208 @@
   <p>
   … the data, the algorithm, and the user interactions <d-cite key=" mehrabi2019survey "></d-cite>. Data is usually the first suspect of bias introduced into a model, but all three inflict each other. To list some of the “offences” by data: 1) a skew in the data collections, 2) missingness in attributes, 3) a skew in human annotations or 4) an imbalance in examples. To stay in the super figure setting, one could imagine the case where the police historically have examined more male figures than females and therefore have found more villains among men, which then will be reinforced over time. Another case could be picturing missingness in self-reported attributes, where they could be missing for a reason related to a protected attribute like gender. Discrimination can also be induces into the data by human annotations. Or an unbalanced training data can introduce a skew into a model. In our super figure example data data from Kaggle, we have in fact an unbalanced dataset with fewer females than males [see Figure X], making it potentially harder for a model to generalise well on the classifications of females villains.
   </p>
-  
   <div id="hero-villain-bar-figure" ></div>
-   
   <p>
   An undesired skew can also be introduced into the model by the choice of the algorithm: imagine that one type of decision boundary is more suited for one group than the other. Last but not least, how the model is set into production and how users interact with it can in itself be a source of bias, e.g. following the models' suggestions in a skewed way <d-cite key="selbst2019fairness "></d-cite>, <d-cite key=" green2019disparate "></d-cite>. Knowing the different sources of bias and imagine you are a super figure wanting to go to the party, we invite you to take a stand on the following question:
   </p>
-
   <div id="questionnaire-target-1" ></div>
- 
-   
+  
+  <h1>Defining fairness</h1>
   <h3> Joining the Justice League</h3>
   <p>
   … by stating what we mean with a just and fair model. Fairness is defined in the Cambridge Dictionary as <i>the quality of treating people equally or in a way that is right or reasonable</i><d-footnote id="d-footnote 1">https://dictionary.cambridge.org/dictionary/english/fairness</d-footnote>. Exactly, what it means to treat people right and how it can be operationalised is what the fairness literature is trying to determine. But it is no easy question: looking at the "CEO" image search example, where the first female revealed is a Barbie doll several rows down, it is not clear what a righteous result should yield. Kate Crawford raised the question if the proportion of male and female (and different ethnicities) images should resemble the current statistic of people contesting the job "CEO", or whether it should be what people <i>think </i> is the right proportion. After all, image search is contributing to shaping reality <d-cite key=" crawford2017keynote "></d-cite>.
   </p>
   <p>
-   The other case from the introduction about criminal risk assessment is heavily used as an example in the literature, e.g <d-cite key="berk2018fairness"></d-cite>, <d-cite key=" green2019disparate "></d-cite>, <d-cite key=" dressel2018accuracy "></d-cite>. It is an example of outcome fairness, where the goal is to determine how a desired outcome should be righteously distributed among groups or individuals.  For example, <d-cite key= "angwin2016machine"> </d-cite> found the system to be biased against Afro-Americans, since the rate of <i>false negatives</i>, i.e. people who would not re-offend receiving wrongly a high risk score, was higher among black then white. However, in the response from the developers of COMPAS it was concluded that the system is not biased against black, since the <i>predictive parity</i> is the same between the two groups <d-cite key=" dieterich2016compas"></d-cite>, i.e. the fraction of subjects that correctly are given a positive outcome among all who were predicted a positive outcome, is the same between groups. The problem here is that these two measures are not necessarily compatible <d-cite key=" berk2018fairness"></d-cite> and it, therefore, opens a discussion of which of the two is most fair. 
+   The other case from the introduction about criminal risk assessment is heavily used as an example in the literature, e.g <d-cite key="berk2018fairness"></d-cite>, <d-cite key=" green2019disparate "></d-cite>, <d-cite key=" dressel2018accuracy "></d-cite>. It is an example of outcome fairness, where the goal is to determine how a desired outcome should be righteously distributed among groups or individuals. For example, <d-cite key= "angwin2016machine"> </d-cite> found the system to be biased against Afro-Americans, since the rate of <i>false negatives</i>, i.e. people who would not re-offend receiving wrongly a high risk score, was higher among black then white. However, in the response from the developers of COMPAS it was concluded that the system is not biased against black, since the <i>predictive parity</i> is the same between the two groups <d-cite key=" dieterich2016compas"></d-cite>, i.e. the fraction of subjects that correctly are given a positive outcome among all who were predicted a positive outcome, is the same between groups. The problem here is that these two measures are not necessarily compatible <d-cite key=" berk2018fairness"></d-cite> and it, therefore, opens a discussion of which of the two is most fair. 
   </p>
   <p>
-  These two examples illustrate a challenge in defining and deciding what a fair model is before work can be done on mitigating undesired model behaviour. Clear definitions of biases are also essential to be able to spot and identify biases in the first place  - without it is not clear what to look for when examining systems. Especially in the cases of representational harm, it can be hard to discover undesired model behaviour, as well as defining more righteous behaviour. However, an example of an attempt  regarding stereotypes in word embeddings is made by <d-cite key="bolukbasi2016man"></d-cite>. Here the authors first compare occupational stereotype in word embeddings with human perception of occupational stereotype through an Amazon Turk survey and then mitigate the model bias according to the human perception. But it is not a method that scales in practice or remains robust through time and cultural change. On the other hand, regarding outcome fairness, a lot of work has been conducted on formalising fairness mathematically <d-cite key=" gajane2017formalizing"></d-cite>. In the literature over 70 <d-footnote id="d-footnote 1"> https://aif360.mybluemix.net/</d-footnote> different metrics have been defined. In the rest of this section, we will look into mathematical fairness criteria for allocation problems and their trade-offs.  
+  These two examples illustrate a challenge in defining and deciding what a fair model is before work can be done on mitigating undesired model behaviour. Clear definitions of biases are also essential to be able to spot and identify biases in the first place - without it is not clear what to look for when examining systems. Especially in the cases of representational harm, it can be hard to discover undesired model behaviour, as well as defining more righteous behaviour. However, an example of an attempt regarding stereotypes in word embeddings is made by <d-cite key="bolukbasi2016man"></d-cite>. Here the authors first compare occupational stereotype in word embeddings with human perception of occupational stereotype through an Amazon Turk survey and then mitigate the model bias according to the human perception. But it is not a method that scales in practice or remains robust through time and cultural change. On the other hand, regarding outcome fairness, a lot of work has been conducted on formalising fairness mathematically <d-cite key=" gajane2017formalizing"></d-cite>. In the literature over 70 <d-footnote id="d-footnote 1"> https://aif360.mybluemix.net/</d-footnote> different metrics have been defined. In the rest of this section, we will look into mathematical fairness criteria for allocation problems and their trade-offs.  
   </p>
-  
-  
-<h3> Listing superpowers</h3>
-<p>
-… aka defining mathematical fairness criteria. Mathematical fairness criteria with respect to classification where a certain treatment or outcomes are the desired output can be grouped together in different ways. In the following box we will highlight five ideas on formalizing fairness partly based on <d-cite key=" gajane2017formalizing, verma2018fairness, mitchell2018prediction, mehrabi2019survey"></d-cite> :
-</p>
-<div id="criteria-box" class="subgrid"></div>
-
-<h3> Batman begins</h3>
-<p>… is by the way a great movie, and like Batman every super figure needs to learn to master their powers in the beginning. We will therefore start by understanding the first, and most known statistical measure of fairness, before we discuss the advantages and disadvantages of the statistical approach.  </p>
-<p> As described in <a href="#criteria-box">the box above</a>, statistical measures are derived from the so called confusion matrix. The confusion matrix is a way to sort all examples in a dataset according to their true class and predicted class in a binary classification setting. The following table shows a confusion matrix and its components and describes the terminology needed for the definition of the specific statistical fairness criteria: </p>
-
-<figure>
-  <figcaption align="justify">
-    <b>Table 1:</b> Confusion matrix for a binary classification problem with a positive (typically defined as 1) and
-    a negative (typically defined as 0) outcome. Hover or click on a particular cell to get a more detailed
-    explanation of the corresponding term.
-  </figcaption>
-  <div id="confusion-matrix"></div>
-</figure>
-
-<h4><b>Demographic parity </b></h4>
-<p>Demographic parity also called group fairness or statistical parity (<d-cite key=" verma2018fairness "></d-cite>, <d-cite key=" hardt2016equality"></d-cite>,  <d-cite key="dwork2012fairness "></d-cite>) incorporates the idea, that non-discrimination between groups is achieved if the chance of getting a positive outcome is equalized acrossed groups. Given a binary classification task and two groups this can mathematically formalized as: </p>
-<d-math block="">
-P(\hat{Y} |G=0)=P(\hat{Y} |G=1),
-</d-math block="">
-  <p>where <d-math> \hat{Y} \in \{0,1 \}  </d-math> is the predictor’s outcome  <d-math> G \in \{0,1 \}  </d-math> is the group membership (the protected group variable)  and <d-math> P </d-math> is the conditional probability. It can also be thought of as the <i> Positive Rate </i>, which is calculated as</p>
-<d-math block="">
-PR = \frac{TP+FP}{TP+FP+FN+FP} .
-</d-math block="">
-
-<p>In our super figure example this means that the fraction of females and the fraction of males getting accepted to the party should be equalized, or in practice, be similar. In the survey we investigated people’s comprehension of this fairness criterion. You can check your own understanding as well: </p>
-
-
-  <div id="tester-target-10" ></div>
-
-  <div id="tester-target-11" ></div>
-
-  <div id="tester-target-12" ></div>
-
-
-<p> The last question points to the critique to Demographic Parity by <d-cite key=" hardt2016equality"></d-cite>, where it is pointed out that the metric does not account for a case where the true outcome (true hero or villain) is correlated with the protected group. Such a case could force us to accept not-qualified figures in one group or dismiss qualified figures in the other group to achieve Demographic Parity. The criterion can, however, be justified, if we are looking at a <i> societal bias</i> we actively want to change. Imagine a case of young super figures getting admitted into an academy. Furthermore, assume that young male figures are less qualified than females. However, we want to enforce a policy of even acceptance rate, i.e. adjust for this skewness, since we believe it is a structural bias in society. (However, we then need to up qualify the males e.g. by extra classes in the beginning.) </p>
-
-<p> By playing with the superhero data from Kaggle and the classifier train to distinguish “hero” or “villain”, we can on the evaluation set, look at the difference in the positive rate for males and females for different threshold values for the classification. By choosing different threshold values, you can achieve parity for the positive rate and discover how it affects other measures in this case:
-</p>
-
-
-<figure>
-  <div id="interactive-dp" ></div>
-  <figcaption> [BESKRIVELSE]  </figcaption>
-</figure>
-
-<h4> <b>Equalized Opportunities</b> </h4>
-<p>Equalized Opportunities and Equalized Odds is proposed by <d-cite key="hardt2016equality"></d-cite> to be an alternative criterion to Demographic Parity. The idea behind Equalized Opportunities is that people who in fact should receive a positive outcome have an equal chance of receiving it independent of their group membership. It is a relaxation of the Equalized Odds criteria, which can be formalized for a binary predictor and in the case of binary group membership as, </p>
-<d-math block="">
-P(\hat{Y} =1|Y=y,G=0)=P(\hat{Y}=1 |Y=y,G=1),
-</d-math block="">
-  <p>where <d-math> y \in \{0,1\} </d-math> is the true class, <d-math> \hat{Y} \in \{0,1 \}  </d-math> is the the predictor’s outcome and <d-math> G \in \{0,1 \}  </d-math> is the group membership (the protected group variable). Relaxing the formulation to <d-math> y =1</d-math>, where a value of 1 represents the positive class, defines the criterion of Equalized Opportunities. This can also be formulated as requiring equal <i>True Positive Rate </i> (TPR), which is calculated as</p>
-<d-math block="">
-TPR = \frac{TP}{TP+FN} .
-</d-math block="">
-
-<p>  In our super figure example, this means that the chance of getting accepted to the party when you in fact are a hero should be the same for both males and females. You can verify your own understanding of Equalized Opportunity as well as see the response from the participants in the surveys with the following questions: </p>
-
-
-  <div id="tester-target-13" ></div>
-
-  <div id="tester-target-14" ></div>
-
-  <div id="tester-target-15" ></div>
-
-
-
-<p>Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the True Positive Rate by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier. As the question also asked, you can in this example see, that you can achive Demograhic Opportunity without achieving Demograhic parity:   </p>
-
-<figure>
- <div id="interactive-eq" ></div>
- <figcaption> [BESKRIVELSE ]  </figcaption>
-</figure>
-
-
-<h4> <b>Predictive parity</b> </h4>
-<p>
-Predictive parity also described as outcome test is a statistical measure which requires that the probability of a correct prediction (constrained to prediction as the positive class) is the same for all groups <d-cite key=" verma2018fairness "></d-cite>. For a binary predictor it can be defined as </p>
-<d-math block="">
-P(Y =1|\hat{Y} =1,G=0)=P(Y=1 |\hat{Y}=1,G=1),
-</d-math block="">
-  <p> <d-math> \hat{Y} \in \{0,1 \}  </d-math> is the the predictor’s outcome ,<d-math> G \in \{0,1 \}  </d-math> is the group membership (the protected group variable) and <d-math> Y </d-math> is the true class, where a value of 1 indicates the positive class. It can also be thought of as achieving the same <i>Positive Predicted Value </i> (PPV) between the groups, which is calculated as</p>
-<d-math block="">
-PPV =  \frac{TP}{TP+FP}  .
-</d-math block="">
-<p>For our super figure examples, this means that the chance of a correct prediction for figures allowed into the party should be the same for both males and females. Once again, you can try verifying your understanding and see people’s opinion with the following questions:
-</p>
-
-  <div id="tester-target-16" ></div>
-
-  <div id="tester-target-17" ></div>
-
-  <div id="questionnaire-target-4" ></div>
-
-  <div id="questionnaire-target-4.1" ></div>
-
-
-<p> Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the Positive Predictive Value by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier.</p>
-
-<figure>
-  <div id="interactive-pp" ></div>
-  <figcaption> [BESKRIVELSE Note, in the data example, “villain” is treated as the positive outcome; who wants a borrowing party?]  </figcaption>
-</figure>
-
-<h3> The hero’s path</h3>
-<p>
-… is not going to be easy. In the previous section, we see that it is not possible to simultaneously achieve demographic parity, equalized opportunities and predictive parity in the super figure example. This is not a special case. It is proven that, except in trivial cases, many common known notions of fairness are incompatible with each other and furthermore conflict with optimizing accuracy <d-cite key=" kleinberg2016inherent "></d-cite> <d-cite key=" chouldechova2017fair "></d-cite> <d-cite key=" berk2018fairness "></d-cite>. Others criticize that the statistical approach only gives guarantees for the average of a group and not for individuals or even <i>subgroups</i> <d-cite key=" kearns2018preventing "></d-cite>. Imagine a case where we only accept female figures from the DC Comics and males from the Marvel universe Here, we could set up the scenario such that we comply with a fairness criterion for females versus males or DC figures versus Marvel figures, but without having a fair treatment for males from DC Comics or females from the Marvel universe. This problem is showcases by <d-cite key=" kearns2018preventing "></d-cite> both in from of a toy example (like here) and in form of a real case. The authors suggest a framework to learn a fair classifier for a rich set of subgroups to alleviate the problem. However, it does not overcome the fact that a division of people into groups is required. Others have raised criticism of these statistical for being too static [REF the FAT* article with simulation]. <d-cite key=" liu2018delayed "></d-cite> made one step simulations for a lending scenario and revealed that complying with Demographic Parity or Equalised Opportunities could lead the protected group to be worse off with respect to their underlying <i> credit scores </i> one step into the future. At the same time, a policy of unconstrained maximization of profit for the “leading company”  would never lead to a scenario where the protected group was worse off one step in the future. Yet another critic comes from <d-cite key=" carey2020blog "></d-cite> which demonstrate that fairness metrics cannot be used to distinguish if a model is stereotyping members of a group, or if it is fitting on reasonable attributes, like income, and the bias is not apparent in the model but introduced elsewhere in society, e.g. that women receive lower income than men (see subsection Another dimension [link]). </p>
-<p>
-  Despite its caveats, the strength of statistical measures of fairness is the easy way to check for a disparity, and if applicable they are also easy to achieve, e.g. by adjusting the classifier threshold. Both the verification and adjustment does not require assumptions of the data, in contrast to  individual fairness and counterfactual fairness. However, choosing and interpreting  any disparity metric requires understanding the bias occurrence and a discussion of whether adjustment of the model to meet the parity is the desired outcome.     
-</p>
-<p>
-  We will return to the three statistical metrics worked with through this section to examine the perceptions of them and investigate the comprehension based on the survey results in the section Perceived Algorithmic Fairness. But first, the next paragraphs will show a process for mitigating biases.   
-</p>
-
-<h3>Circularize an orbit</h3>
-<p>… to defend it with all our superhero weapons. Until now this paper has  <a href="#criteria-box">listed different ways of defining fairness</a>  and specially, there has been a focus on statistical measures in the form of three parity metrics. But now it is time to show the weapons for mitigating and monitoring biases. In the <a href="#ml-cycle">circle below</a>, we illustrate a process of developing a machine learning system with phases of where there can be intervened to mitigate biases. By clicking on the different phases, references are shown for dealing with biases at the current stages. Notice that the process is circular. Even though a system is in production and is in the Model Monitoring phase, it might be beneficial to revisit the Data Gathering's phase to better deal with unwanted behaviour. 
-</p>
-<div id="ml-cycle" class="subgrid"></div>
-<p>
-</p>
-
-
-
-
-<h1>Perceived algorithmic fairness</h1>
-<h3>What is you favourite super power</h3>
-<p> … or in other words, which is your favourite fairness criterion?   
-</p>
-
-<div id="questionnaire-target-5" ></div>
-
-<p>
-The question of which statistical fairness measure people perceive as more fair has previously been addressed in the literature. The main bulk of studies in this regard have been motivated by the COMPAS debate between Equalized Opportunities and accuracy, as mentioned in section [SECTION]. In <d-cite key="srivastava2019mathematical "></d-cite> an Amazon Turk survey showed that Demographic Parity was perceived as most fair compared to metrics like Equalized Opportunity and Predictive Parity (in the paper presented as False Negative Rate and Discovery Rate). However, the survey was conducted by showing the participants ten figures together with the true label and the predicted label of two different algorithms, asking them to choose the most discriminating one. The question can be raised whether the participants fully understood the implications of the different “algorithms”, and whether ten example figures are enough to generalize to a systematic bias. In <d-cite key=" harrison2020empirical"></d-cite> an Amazon Turk survey comparing the perception of different fairness measures was evaluated through a different design. Here, they showed participants histograms of two measures for two different models where one measure was equalized in one model and the other measure in the other model. Then participants were asked to choose between the models. The authors found a slight preference towards the False Positive Rate over accuracy in a criminal assessment setting. The other pairwise comparisons between different measures did not show any significant  preferences. However, again the same question can be asked, whether the participants fully understood the implication of the parity in the models. The question about people’s comprehension of fairness metrics is addressed by <d-cite key="saha2019measuring "></d-cite>, which showed that comprehension can be measured through a multiple-choice survey. They found that in a hiring scenario Equalized Opportunity was harder to understand than Demographic Parity, and that in general comprehension was correlated with the education level of the participants. An interesting finding was a tendency of people with low comprehension score to express less negative sentiment towards a criterion. This survey’s design where criteria are expressed as rules and where questions are asked through multiple-choice, has inspired the survey conducted in this paper. The survey of this paper aims at  both measuring the comprehension and to compare people’s perception of different criteria. The following sections present the results of the survey. </p>
-<h4> A measure of comprehension</h4>
-  <p> To measure the participants comprehension of each criterion a score is computed as the percentage of correct answers to the comprehension questions. This yields an indication of the participant's understanding of the fairness criterion and it allows for a comparison of the comprehension between the three criteria. Figure [fig nr] shows distributions of the participants comprehension score on each fairness criterion. </p>
-<figure>
-  <div class="row">
-    <div class="column">
-      <img src="./images/boxplot_comprehention_score.svg" alt="boxplot_comprehension_score" style="width:100%">
-   
-</div>
-    <div class="column">
-      <img src="./images/boxplot_raported_score.svg" alt="boxplot_raported_score"style="width:100%">
-   
-</div>
- 
-</div>
- 
-<figcaption style="text-align: left;"> <b> Figure x.</b> Figure nr. Boxplots showing both distribution over participants calculated and self-reported comprehension on each criterion. Using a Mann whitney U test to test the null hypothesis that the pairwise distribution of perception scores are equal yield for the calculated score the following p-values: DP-EO<d-math>0.020 \less 0.05</d-math>, DP-PP <d-math> 0.007   \less 0.05</d-math> EO-PP <d-math>0.305  \nless 0.05</d-math>. Hence, with a significant level of 0.05, we can reject the null hypothesis and conclude that DP is easier to understand than both OE and PP. We uses the same test statistic to test differences in distributions for the self-reported comprehension scores and get the following p-values: DP-EO<d-math>0.010 \less 0.05</d-math>, DP-PP <d-math> 0.000   \less 0.05</d-math> EO-PP <d-math>0.008  \less 0.05</d-math> . Hence, the difference is significant for all pairs.   </figcaption>
-</figure>
- <p> The distributions indicate that participants found Demographic Parity easiest to understand. A pairwise performed Mann-Whitney U test <d-cite key="mann1947test"></d-cite> reveals that the difference is significant between Demographic Parity and the two other criteria (p=0.020 for Equalized Opportunity and p=0.007 for Predictive Parity), but not between Equalized Opportunity and Predictive Parity. We can therefore conclude that Demographic Parity is easier to understand than both Equalized Opportunity and Predictive Parity in this survey.
-
-This supports the finding in <d-cite key="saha2019measuring "></d-cite> that Equalized Opportunity is harder to understand than Demographic Parity, albeit the different setting. </p>
-
-<p> We also asked the participants to self-report their understanding of each criterion after answering the comprehension questions using a five-point Likert-scale (see example in [fig x]). Each point is assigned a numeric value where a higher value indicates a higher self-reported understanding. The distribution over the self-reported understanding is presented as boxplots in [Fig nr].  The pairwise comparisons all show a significant difference between self-reported comprehension (DP-EQ: p=0.010, DP-PP: p=0.000, EQ-PP: p=0.008), meaning that people report different levels of understanding for the three measures. Similar to the computed comprehension scores, the self-reported comprehension has the following order: 1) Demographic Parity, 2) Equalized Opportunities 3) Predictive Parity.  Figure [FIG] shows the average self-reported score plotted  against  the average computed comprehension score. A calculation of the Spearman correlation <d-cite key="spearman1987proof"></d-cite> (<d-math> \rho=0.198</d-math>) and the associated p-value (<d-math>0.058</d-math>) do not show a strong correlation between the self-reported and computed comprehension score (see Appendix A). Hence, we can not conclude a significant association between how people perceive their understanding and how well they actually understand the criteria. One would expect a strong correlation and the results show that it is difficult to discuss fairness if people are not aware of their own understanding. No clear trend towards over- or underrating oneself was found in the data. </p>
- 
-  <h4> The opinion towards the criteria </h4>
-
-<p>After the comprehension questions of each criterion, the participants were asked to state how fair they perceive the criterion on a five-point Likert-scale (see example in [fig X]), i.e. they were asked to evaluate the fairness of each criterion independent of the other criteria. The Likert-scale is transformed to numeric values, and the boxplots in [fig x] shows the different distributions. The fairness assessment resulted significantly in the following ranking: 1.) Equalized Opportunity, 2.) Predictive Parity, 3.) Demographic Parity.  </p>
-<figure 
-style="text-align: left;">
-    <img src="./images/boxplot_fair_score.svg" alt=" boxplot_fair_score" style="width:75%";>
-    <figcaption style="text-align: left;">Figure nr. Boxplots showing distribution over participants reported opinion on each criterion when asked on a 5-point Likert-scale whether they think the criterion was fair to use. Using a Mann whitney U test to test the null hypothesis that the pairwise distribution of perception scores are equal yield for DP-EO a p-value on<d-math>0.000 \less 0.05</d-math>, DP-PP a p-value on <d-math>0.001 \less 0.05</d-math> and for EO-PP a p-value on <d-math>0.022 \less 0.05</d-math>. With a significant level of 0.05, it can be concluded for alle pairs that the distribution of perception scores are different.    </figcaption>
+  <h3> Listing superpowers</h3>
+  <p>
+  … aka defining mathematical fairness criteria. Mathematical fairness criteria with respect to classification where a certain treatment or outcomes are the desired output can be grouped together in different ways. In the following box we will highlight five ideas on formalizing fairness partly based on <d-cite key=" gajane2017formalizing, verma2018fairness, mitchell2018prediction, mehrabi2019survey"></d-cite> :
+  </p>
+  <div id="criteria-box" class="subgrid"></div>
+  <h3> Batman begins</h3>
+  <p>… is by the way a great movie, and like Batman every super figure needs to learn to master their powers in the beginning. We will therefore start by understanding the first, and most known statistical measure of fairness, before we discuss the advantages and disadvantages of the statistical approach.  </p>
+  <p> As described in <a href="#criteria-box">the box above</a>, statistical measures are derived from the so called confusion matrix. The confusion matrix is a way to sort all examples in a dataset according to their true class and predicted class in a binary classification setting. The following table shows a confusion matrix and its components and describes the terminology needed for the definition of the specific statistical fairness criteria: </p>
+  <figure>
+    <figcaption align="justify"> 
+  <b>Table 1:</b> Confusion matrix for a binary classification problem with a positive (typically defined as 1) and a negative (typically defined as 0) outcome. Hover or click on a particular cell to get a more detailed explanation of the corresponding term.
+   </figcaption>
+   <div id="confusion-matrix"></div>
   </figure>
-
-
-<p>In <d-cite key="saha2019measuring"></d-cite>, Saha et al. found in their survey that people with low comprehension tend to have less negative opinion towards a fairness criterion. To investigate if the same trend is visible in the survey conducted here, we calculate the Spearman's correlation between perception and the computed comprehension score per criteria: 
-
-</p>
-
-<figure>
-  <figcaption>
-    <b>Table 2</b>: Spearman correlation between comprehension and perception scores for three different statistical fairness criteria.
-  </figcaption>
-  <div id="spearman-correlation"></div>
-  <figcaption style="text-align: center;"> *Significant correlation with a <i>p</i>-value below 0.05. </figcaption>
-</figure>
-
-
-<p> For Demographic Parity we can see a significant, negative correlation between comprehension and perception, i.e.  the better people understand the criterion the less they perceive it as fair (see Table x). This is in accordance with the results from Saha et al <d-cite key="saha2019measuring "></d-cite>. A weaker negative correlation can be also seen for Predictive Parity, but it is not significant (p=0.177). In contrast, for Equalized Opportunity there is a small positive correlation between comprehension and perception  (not significant with p=0.248), i.e. people who understand the criterion seem to like it more. </p>
-
-
-<h3>Superheroes live in a multiverse</h3>
-  <p>
-  … and so it seems to be the case with algorithmic fairness. Instead of only looking at which statistical measure is perceived as most fair, we need to broaden our understanding of the fairness universe. 
-For example, <d-cite key="grgic2018beyond, grgic2016case"></d-cite> suggests shifting the focus from looking at distributive fairness to <i> procedural fairness</i>, which instead of looking at the outcome focusses on the process that leads to an outcome. They operationalise a part of the idea by examining which input features people perceive as fair when used in different scenarios. In our super figure example, we could easily imagine that this has a great impact on what is perceived as fair. Here, it is probably perceived fair to look at superpowers, since we do not want a dangerous cocktail. However, “weight” and “height” would seem less relevant and therefore discriminating to use, despite the fact that it could increase the model's accuracy. Nevertheless, procedural fairness still requires trade-offs. As we discussed earlier, bias can be introduced in the step of interacting with the system, and hence the interaction with the system can also affect the perceived fairness of the system. In general, there seems to be more to fairness than mathematical formulations. In this section, we, therefore, touch on some more high-level questions of perceived fairness and we show through survey results that logical consistency is not necessarily present.  
+  
+  
+  <h4><b>Demographic parity </b></h4>
+  <p>Demographic parity also called group fairness or statistical parity (<d-cite key="dwork2012fairness, zliobaite2015, verma2018fairness"></d-cite>) incorporates the idea, that non-discrimination between groups is achieved if the chance of getting a positive outcome is equalized acrossed groups. Given a binary classification task and two groups this can mathematically formalized as: </p>
+  <d-math block="">
+  P(\hat{Y} |G=0)=P(\hat{Y} |G=1),
+  </d-math block="">
+    <p>where <d-math> \hat{Y} \in \{0,1 \}  </d-math> is the predictor’s outcome  <d-math> G \in \{0,1 \}  </d-math> is the group membership (the protected group variable)  and <d-math> P </d-math> is the conditional probability. It can also be thought of as the <i> Positive Rate </i>, which is calculated as</p>
+  <d-math block="">
+  PR = \frac{TP+FP}{TP+FP+FN+FP} .
+  </d-math block="">
+  
+  <p>In our super figure example this means that the fraction of females and the fraction of males getting accepted to the party should be equalized, or in practice, be similar. In the survey we investigated people’s comprehension of this fairness criterion. You can check your own understanding as well: </p>
+  
+  <div id="tester-target-10" ></div>
+   <div id="tester-target-11" ></div>
+    <div id="tester-target-12" ></div>
+  
+  <p> The last question points to the critique to Demographic Parity by <d-cite key=" hardt2016equality"></d-cite>, where it is pointed out that the metric does not account for a case where the true outcome (true hero or villain) is correlated with the protected group. Such a case could force us to accept not-qualified figures in one group or dismiss qualified figures in the other group to achieve Demographic Parity. The criterion can, however, be justified, if we are looking at a <i> societal bias</i> we actively want to change. Imagine a case of young super figures getting admitted into an academy. Furthermore, assume that young male figures are less qualified than females. However, we want to enforce a policy of even acceptance rate, i.e. adjust for this skewness, since we believe it is a structural bias in society. (However, we then need to up qualify the males e.g. by extra classes in the beginning.) </p>
+   
+  <p> By playing with the superhero data from Kaggle and the classifier train to distinguish “hero” or “villain”, we can on the evaluation set, look at the difference in the positive rate for males and females for different threshold values for the classification. By choosing different threshold values, you can achieve parity for the positive rate and discover how it affects other measures in this case:
   </p>
-  <h4> The preference for human or algorithmic judgement is subject to change</h4>
+   
+   <figure>
+    <div id="interactive-dp" ></div>
+    <figcaption> [BESKRIVELSE]  </figcaption>
+  </figure>
+   
+  <h4> <b>Equalized Opportunities</b> </h4>
+  <p>Equalized Opportunities and Equalized Odds is proposed by <d-cite key="hardt2016equality"></d-cite> to be an alternative criterion to Demographic Parity. The idea behind Equalized Opportunities is that people who in fact should receive a positive outcome have an equal chance of receiving it independent of their group membership. It is a relaxation of the Equalized Odds criteria, which can be formalized for a binary predictor and in the case of binary group membership as, </p>
+  <d-math block="">
+  P(\hat{Y} =1|Y=y,G=0)=P(\hat{Y}=1 |Y=y,G=1),
+  </d-math block="">
+    <p>where <d-math> y \in \{0,1\} </d-math> is the true class, <d-math> \hat{Y} \in \{0,1 \}  </d-math> is the the predictor’s outcome and <d-math> G \in \{0,1 \}  </d-math> is the group membership (the protected group variable). Relaxing the formulation to <d-math> y =1</d-math>, where a value of 1 represents the positive class, defines the criterion of Equalized Opportunities. This can also be formulated as requiring equal <i>True Positive Rate </i> (TPR), which is calculated as</p>
+  <d-math block="">
+  TPR = \frac{TP}{TP+FN} .
+  </d-math block="">
+  
+  <p>  In our super figure example, this means that the chance of getting accepted to the party when you in fact are a hero should be the same for both males and females. You can verify your own understanding of Equalized Opportunity as well as see the response from the participants in the surveys with the following questions: </p>
+    <div id="tester-target-13" ></div>
+    <div id="tester-target-14" ></div>
+    <div id="tester-target-15" ></div>
+   <p>Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the True Positive Rate by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier. As the question also asked, you can in this example see, that you can achive Demograhic Opportunity without achieving Demograhic parity:   </p>
+  
+  <figure>
+    <div id="interactive-eq" ></div>
+    <figcaption> [BESKRIVELSE ]  </figcaption>
+  </figure>
+  
+  <h4> <b>Predictive parity</b> </h4>
   <p>
- Human or machine - which would people prefer to be assessed by in different settings. This question was also raised by Harrison et. al  <d-cite key="harrison2020empirical"></d-cite> who found a slight preference towards human judgment over a machine learning model. In our survey we investigated people’s opinion about using algorithmic or human judgement in the superhero setting, and explored how additional information can influence people’s opinion using the following three questions (the first question is replicated in [FIG X]): : </p>
-
-  <div id="questionnaire-target-2" ></div>
-
-  <div id="questionnaire-target-3" ></div>
-
-
-
-<p> The answers show that, initially, the majority (77%) of participants preferred the option of a ‘human judgment supported by an algorithm’ when it is assumed that both the algorithm and the human act reasonably. However, this changes with the extra information that occasionally the human is biased against one sex. Under this assumption the majority (56%) of participants preferred the algorithm, even though it is still, in general, assumed that both are acting reasonably. The third question assumes that the algorithm is  much more accurate than the human but also biased. This shifts the preference of the majority (71%) back to preferring 'human judgment with algorithmic support'. Our survey consists  of a small sample size and the representativeness is not accounted for. Nevertheless it is  interesting how relatively easy people’s opinion can be changed by adding some vague information about the system. In fact, 54% of the participants changed their choice throughout the three questions. </p>
- 
-<h4> Participants are not consistent throughout their answers </h4>
-<p> In addition to people’s preference for human or algorithmic judgement, the survey also asked a more high-level question (see [FIG X]) regarding whether it is fair to use “a system that uses data and statistics” in the superhero setting. To this question, 22 out of 92 participants answered a clear “no”, but when asked about if they preferred human or algorithmic judgement, only 6 out of the 22 choose to solely trust the human. This number further decreased to 3 out of 22 when asked the question in [fig x]. Although it can be argued that this does not reflect inconsistency depending on how the formulations are understood, it might point towards that people are easily affected by the formulation of the question. However, an actual logical inconsistency is found when people are asked to rank the three fairness criteria discussed previously. First, the participants are asked to rank the three criteria formulated as rules shown in the answer-options in [fig x] according to importance for achieving fairness. Immediately thereafter they are asked to rank what would be the worst case of unfairness that could occur (see [fig x]). Here, the options are formulated as cases that  do not comply  or contradict with one of the three criteria – all three disadvantaging the same sex.</p>
-
-  <div id="questionnaire-target-6" ></div>
-
-
-<p>We expect that the ranking of the three criteria should be the same for each participant between the two questions. However, 57% of the participants do not keep the same ranking between the three criteria, when they are formulated in different ways. We observed no significant difference between the comprehension of participants who rank consistently versus the group of participants who rank inconsistently (p=0.061), despite a slightly higher comprehension of the consistent group (mean on 0.75 vs mean on 0.68 ). </p>
-
-<h1>The challenges ahead </h1>
-<h3>Leaving the superhero universe</h3>
-<p>
-… and zooming of the academic sphere of mathematical formulations to look at the fairness challenges in industry. The fairness literature is focussing static settings which often does not resemble the challenges faced by practitioners and industry <d-cite key="holstein2019improving "></d-cite>, <d-cite key=" chouldechova2020snapshot "></d-cite>.  Summarizing, for example,  some points from <d-cite key="holstein2019improving "></d-cite>: 1) It is often assumed that the dataset is static and fairness can only be achieved  by changing the model, but in practice data collection can be changed at many practitioners point towards the idea of investigating bias already at that step. 2) The debiasing methods and metrics often do not apply in an actual context, e.g. because sensitive attributes can not be accessed  on an individual level. </p>
-<p> In general, the problems in practice usually include dynamic scenarios instead of one-shot classification tasks, like web search, chatbots and systems that employ online learning, reinforcement learning or bandit problems <d-cite key="holstein2019improving "></d-cite>, <d-cite key=" chouldechova2020snapshot "></d-cite>. This shows the need for more methods to audit and monitor complex dynamic systems. One idea, proposed for models in an NLP setting  is an analogy to “software testing”, or more precisely behaviour testing or black-box testing <d-cite key=" ribeiro2020beyond "></d-cite>. The idea is to examine the model’s behaviour by providing a set of input-output tests without having access to the model itself. This can be used to check for fairness in different scenarios without the need of metrics but instead focusing on concrete example cases. For example, one could imagine a scenario where a text classification model for sentiment unwantedly associates specific names with the sentiment [REF?].
-</p>
-
-<h3> To be continued </h3>
-<p>
-… since every movie must come to an end and so does our article. We have provided an overview of different ways to evaluate and define algorithmic fairness, as well as, different methods to achieve fairness. We then discussed challenges with the currently proposed approaches with respect to people’s comprehension and perception, and application in practice. As seen in the previous section [link], the work on algorithmic fairness is far from down. As it is with superhero movies, one movie seldom comes alone. 
-</p>
-
-<div id="ml-cycle" class="subgrid"></div>
+  Predictive parity also described as outcome test is a statistical measure which requires that the probability of a correct prediction (constrained to prediction as the positive class) is the same for all groups <d-cite key="chouldechova2017fair"></d-cite>. For a binary predictor it can be defined as </p>
+  <d-math block="">
+  P(Y =1|\hat{Y} =1,G=0)=P(Y=1 |\hat{Y}=1,G=1),
+  </d-math block="">
+    <p> <d-math> \hat{Y} \in \{0,1 \}  </d-math> is the the predictor’s outcome ,<d-math> G \in \{0,1 \}  </d-math> is the group membership (the protected group variable) and <d-math> Y </d-math> is the true class, where a value of 1 indicates the positive class. It can also be thought of as achieving the same <i>Positive Predicted Value </i> (PPV) between the groups, which is calculated as</p>
+  <d-math block="">
+  PPV =  \frac{TP}{TP+FP}  .
+  </d-math block="">
+  <p>For our super figure examples, this means that the chance of a correct prediction for figures allowed into the party should be the same for both males and females. Once again, you can try verifying your understanding and see people’s opinion with the following questions:</p>
+  
+    <div id="tester-target-16" ></div>
+     <div id="tester-target-17" ></div>
+    <div id="questionnaire-target-4" ></div>
+    <div id="questionnaire-target-4.1" ></div>
+    <div id="interactive-pp" ></div>
+    <figcaption> [BESKRIVELSE Note, in the data example, “villain” is treated as the positive outcome; who wants a borrowing party?]  </figcaption>
+  </figure>
+  
+   
+  <h3> The hero’s path</h3>
+  <p>
+  … is not going to be easy. In the previous section, we see that it is not possible to simultaneously achieve demographic parity, equalized opportunities and predictive parity in the super figure example. This is not a special case. It is proven that, except in trivial cases, many common known notions of fairness are incompatible with each other and furthermore conflict with optimizing accuracy <d-cite key=" kleinberg2016inherent "></d-cite> <d-cite key=" chouldechova2017fair "></d-cite> <d-cite key=" berk2018fairness "></d-cite>. Others criticize that the statistical approach only gives guarantees for the average of a group and not for individuals or even <i>subgroups</i> <d-cite key=" kearns2018preventing "></d-cite>. Imagine a case where we only accept female figures from the DC Comics and males from the Marvel universe Here, we could set up the scenario such that we comply with a fairness criterion for females versus males or DC figures versus Marvel figures, but without having a fair treatment for males from DC Comics or females from the Marvel universe. This problem is showcases by <d-cite key=" kearns2018preventing "></d-cite> both in from of a toy example (like here) and in form of a real case. The authors suggest a framework to learn a fair classifier for a rich set of subgroups to alleviate the problem. However, it does not overcome the fact that a division of people into groups is required. Others have raised criticism of these statistical for being too static [REF the FAT* article with simulation]. <d-cite key=" liu2018delayed "></d-cite> made one step simulations for a lending scenario and revealed that complying with Demographic Parity or Equalised Opportunities could lead the protected group to be worse off with respect to their underlying <i> credit scores </i> one step into the future. At the same time, a policy of unconstrained maximization of profit for the “leading company”  would never lead to a scenario where the protected group was worse off one step in the future. Yet another critic comes from <d-cite key=" carey2020blog "></d-cite> which demonstrate that fairness metrics cannot be used to distinguish if a model is stereotyping members of a group, or if it is fitting on reasonable attributes, like income, and the bias is not apparent in the model but introduced elsewhere in society, e.g. that women receive lower income than men (see subsection Another dimension [link]). </p>
+  <p>
+    Despite its caveats, the strength of statistical measures of fairness is the easy way to check for a disparity, and if applicable they are also easy to achieve, e.g. by adjusting the classifier threshold. Both the verification and adjustment does not require assumptions of the data, in contrast to  individual fairness and counterfactual fairness. However, choosing and interpreting  any disparity metric requires understanding the bias occurrence and a discussion of whether adjustment of the model to meet the parity is the desired outcome.     
+   </p>
+   <p>  We will return to the three statistical metrics worked with through this section to examine the perceptions of them and investigate the comprehension based on the survey results in the section Perceived Algorithmic Fairness. But first, the next paragraphs will show a process for mitigating biases.   </p>
+  <h3>Circularize an orbit</h3>
+  <p>… to defend it with all our superhero weapons. Until now this paper has  <a href="#criteria-box">listed different ways of defining fairness</a>  and specially, there has been a focus on statistical measures in the form of three parity metrics. But now it is time to show the weapons for mitigating and monitoring biases. In the <a href="#ml-cycle">circle below</a>, we illustrate a process of developing a machine learning system with phases of where there can be intervened to mitigate biases. By clicking on the different phases, references are shown for dealing with biases at the current stages. Notice that the process is circular. Even though a system is in production and hence in the Model Monitoring phase, it might be beneficial to revisit the Data Gathering's phase to better deal with unwanted behaviour. 
+  </p>
+  <div id="ml-cycle" class="subgrid"></div>
+  <p>
+  </p>
+  
+   
+  <h1>Perceived algorithmic fairness</h1>
+  <h3>What is you favourite super power</h3>
+  <p> … or in other words, which is your favourite fairness criterion?   
+  </p>
+  <div id="questionnaire-target-5" ></div>
+  <p>
+  The question of which statistical fairness measure people perceive as more fair has previously been addressed in the literature. The main bulk of studies in this regard have been motivated by the COMPAS debate between Equalized Opportunities and accuracy, as mentioned in section [SECTION]. In <d-cite key="srivastava2019mathematical "></d-cite> an Amazon Turk survey showed that Demographic Parity was perceived as most fair compared to metrics like Equalized Opportunity and Predictive Parity (in the paper presented as False Negative Rate and Discovery Rate). However, the survey was conducted by showing the participants ten figures together with the true label and the predicted label of two different algorithms, asking them to choose the most discriminating one. The question can be raised whether the participants fully understood the implications of the different “algorithms”, and whether ten example figures are enough to generalize to a systematic bias. In <d-cite key=" harrison2020empirical"></d-cite> an Amazon Turk survey comparing the perception of different fairness measures was evaluated through a different design. Here, they showed participants histograms of two measures for two different models where one measure was equalized in one model and the other measure in the other model. Then participants were asked to choose between the models. The authors found a slight preference towards the False Positive Rate over accuracy in a criminal assessment setting. The other pairwise comparisons between different measures did not show any significant  preferences. However, again the same question can be asked, whether the participants fully understood the implication of the parity in the models. The question about people’s comprehension of fairness metrics is addressed by <d-cite key="saha2019measuring "></d-cite>, which showed that comprehension can be measured through a multiple-choice survey. They found that in a hiring scenario Equalized Opportunity was harder to understand than Demographic Parity, and that in general comprehension was correlated with the education level of the participants. An interesting finding was a tendency of people with low comprehension score to express less negative sentiment towards a criterion. This survey’s design where criteria are expressed as rules and where questions are asked through multiple-choice, has inspired the survey conducted in this paper. The survey of this paper aims at  both measuring the comprehension and to compare people’s perception of different criteria. The following sections present the results of the survey. </p>
+  <h4> A measure of comprehension</h4>
+    <p> To measure the participants comprehension of each criterion a score is computed as the percentage of correct answers to the comprehension questions. This yields an indication of the participant's understanding of the fairness criterion and it allows for a comparison of the comprehension between the three criteria. Figure [fig nr] shows distributions of the participants comprehension score on each fairness criterion. </p>
+  <figure>
+    <div class="row">
+      <div class="column">
+        <img src="./images/boxplot_comprehention_score.svg" alt="boxplot_comprehension_score" style="width:100%">
+     
+  </div>
+      <div class="column">
+        <img src="./images/boxplot_raported_score.svg" alt="boxplot_raported_score"style="width:100%">
+     
+  </div>
+   
+  </div>
+   
+  <figcaption style="text-align: left;"> <b> Figure x.</b> Figure nr. Boxplots showing both distribution over participants calculated and self-reported comprehension on each criterion. Using a Mann-Whitney U test to test the null hypothesis that the pairwise distribution of perception scores are equal yield for the calculated score the following p-values: DP-EO<d-math>0.020 \less 0.05</d-math>, DP-PP <d-math> 0.007   \less 0.05</d-math> EO-PP <d-math>0.305  \nless 0.05</d-math>. Hence, with a significant level of 0.05, we can reject the null hypothesis and conclude that DP is easier to understand than both OE and PP. We uses the same test statistic to test differences in distributions for the self-reported comprehension scores and get the following p-values: DP-EO<d-math>0.010 \less 0.05</d-math>, DP-PP <d-math> 0.000   \less 0.05</d-math> EO-PP <d-math>0.008  \less 0.05</d-math> . Hence, the difference is significant for all pairs.   </figcaption>
+  </figure>
+   <p> The distributions indicate that participants found Demographic Parity easiest to understand. A pairwise performed Mann-Whitney U test <d-cite key="mann1947test"></d-cite> reveals that the difference is significant between Demographic Parity and the two other criteria (p=0.020 for Equalized Opportunity and p=0.007 for Predictive Parity), but not between Equalized Opportunity and Predictive Parity. We can therefore conclude that Demographic Parity is easier to understand than both Equalized Opportunity and Predictive Parity in this survey.
+  
+  This supports the finding in <d-cite key="saha2019measuring "></d-cite> that Equalized Opportunity is harder to understand than Demographic Parity, albeit the different setting. </p>
+  <p> We also asked the participants to self-report their understanding of each criterion after answering the comprehension questions using a five-point Likert-scale (see example in [fig x]). Each point is assigned a numeric value where a higher value indicates a higher self-reported understanding. The distribution over the self-reported understanding is presented as boxplots in [Fig nr].  The pairwise comparisons all show a significant difference between self-reported comprehension (DP-EQ: p=0.010, DP-PP: p=0.000, EQ-PP: p=0.008), meaning that people report different levels of understanding for the three measures. Similar to the computed comprehension scores, the self-reported comprehension has the following order: 1) Demographic Parity, 2) Equalized Opportunities 3) Predictive Parity.  Figure [FIG] shows the average self-reported score plotted  against  the average computed comprehension score. A calculation of the Spearman correlation <d-cite key="spearman1987proof"></d-cite> (<d-math> \rho=0.198</d-math>) and the associated p-value (<d-math>0.058</d-math>) do not show a strong correlation between the self-reported and computed comprehension score (see Appendix A). Hence, we can not conclude a significant association between how people perceive their understanding and how well they actually understand the criteria. One would expect a strong correlation and the results show that it is difficult to discuss fairness if people are not aware of their own understanding. No clear trend towards over- or underrating oneself was found in the data. </p>
+   
+    <h4> The opinion towards the criteria </h4>
+  <p>After the comprehension questions of each criterion, the participants were asked to state how fair they perceive the criterion on a five-point Likert-scale (see example in [fig X]), i.e. they were asked to evaluate the fairness of each criterion independent of the other criteria. The Likert-scale is transformed to numeric values, and the boxplots in [fig x] shows the different distributions. The fairness assessment resulted significantly in the following ranking: 1.) Equalized Opportunity, 2.) Predictive Parity, 3.) Demographic Parity.  </p>
+  <figure 
+  style="text-align: left;">
+      <img src="./images/boxplot_fair_score.svg" alt=" boxplot_fair_score" style="width:75%";>
+      <figcaption style="text-align: left;">Figure nr. Boxplots showing distribution over participants reported opinion on each criterion when asked on a 5-point Likert-scale whether they think the criterion was fair to use. Using a Mann whitney U test to test the null hypothesis that the pairwise distribution of perception scores are equal yield for DP-EO a p-value on<d-math>0.000 \less 0.05</d-math>, DP-PP a p-value on <d-math>0.001 \less 0.05</d-math> and for EO-PP a p-value on <d-math>0.022 \less 0.05</d-math>. With a significant level of 0.05, it can be concluded for alle pairs that the distribution of perception scores are different.    </figcaption>
+    </figure>
+  
+  
+  <p>In <d-cite key="saha2019measuring"></d-cite>, Saha et al. found in their survey that people with low comprehension tend to have less negative opinion towards a fairness criterion. To investigate if the same trend is visible in the survey conducted here, we calculate the Spearman's correlation between perception and the computed comprehension score per criteria: </p>
+  
+  <figure>
+    <figcaption>
+      <b>Table 2</b>: Spearman correlation between comprehension and perception scores for three different statistical fairness criteria.
+    </figcaption>
+    <div id="spearman-correlation"></div>
+    <figcaption style="text-align: center;"> *Significant correlation with a <i>p</i>-value below 0.05. </figcaption>
+  </figure>
+  
+  <p> For Demographic Parity we can see a significant, negative correlation between comprehension and perception, i.e.  the better people understand the criterion the less they perceive it as fair (see Table x). This is in accordance with the results from Saha et al <d-cite key="saha2019measuring "></d-cite>. A weaker negative correlation can be also seen for Predictive Parity, but it is not significant (p=0.177). In contrast, for Equalized Opportunity there is a small positive correlation between comprehension and perception  (not significant with p=0.248), i.e. people who understand the criterion seem to like it more. </p>
+   
+   
+   
+  <h3>Superheroes live in a multiverse</h3>
+    <p>
+    … and so it seems to be the case with algorithmic fairness. Instead of only looking at which statistical measure is perceived as most fair, we need to broaden our understanding of the fairness universe. 
+  For example, <d-cite key="grgic2018beyond, grgic2016case"></d-cite> suggests shifting the focus from looking at distributive fairness to <i> procedural fairness</i>, which instead of looking at the outcome focusses on the process that leads to an outcome. They operationalise a part of the idea by examining which input features people perceive as fair when used in different scenarios. In our super figure example, we could easily imagine that this has a great impact on what is perceived as fair. Here, it is probably perceived fair to look at superpowers, since we do not want a dangerous cocktail. However, “weight” and “height” would seem less relevant and therefore discriminating to use, despite the fact that it could increase the model's accuracy. Nevertheless, procedural fairness still requires trade-offs. As we discussed earlier, bias can be introduced in the step of interacting with the system, and hence the interaction with the system can also affect the perceived fairness of the system. In general, there seems to be more to fairness than mathematical formulations. In this section, we, therefore, touch on some more high-level questions of perceived fairness and we show through survey results that logical consistency is not necessarily present.  
+    </p>
+    <h4> The preference for human or algorithmic judgement is subject to change</h4>
+    <p>
+   Human or machine - which would people prefer to be assessed by in different settings. This question was also raised by Harrison et. al  <d-cite key="harrison2020empirical"></d-cite> who found a slight preference towards human judgment over a machine learning model. In our survey we investigated people’s opinion about using algorithmic or human judgement in the superhero setting, and explored how additional information can influence people’s opinion using the following three questions (the first question is replicated in [FIG X]): : </p>
+   
+    <div id="questionnaire-target-2" ></div>
+  
+    <div id="questionnaire-target-3" ></div>
+  
+  
+  <p> The answers show that, initially, the majority (77%) of participants preferred the option of a ‘human judgment supported by an algorithm’ when it is assumed that both the algorithm and the human act reasonably. However, this changes with the extra information that occasionally the human is biased against one sex. Under this assumption the majority (56%) of participants preferred the algorithm, even though it is still, in general, assumed that both are acting reasonably. The third question assumes that the algorithm is  much more accurate than the human but also biased. This shifts the preference of the majority (71%) back to preferring 'human judgment with algorithmic support'. Our survey consists  of a small sample size and the representativeness is not accounted for. Nevertheless it is  interesting how relatively easy people’s opinion can be changed by adding some vague information about the system. In fact, 54% of the participants changed their choice throughout the three questions. </p>
+   
+  <h4> Participants are not consistent throughout their answers </h4>
+  <p> In addition to people’s preference for human or algorithmic judgement, the survey also asked a more high-level question (see [FIG X]) regarding whether it is fair to use “a system that uses data and statistics” in the superhero setting. To this question, 22 out of 92 participants answered a clear “no”, but when asked about if they preferred human or algorithmic judgement, only 6 out of the 22 choose to solely trust the human. This number further decreased to 3 out of 22 when asked the question in [fig x]. Although it can be argued that this does not reflect inconsistency depending on how the formulations are understood, it might point towards that people are easily affected by the formulation of the question. However, an actual logical inconsistency is found when people are asked to rank the three fairness criteria discussed previously. First, the participants are asked to rank the three criteria formulated as rules shown in the answer-options in [fig x] according to importance for achieving fairness. Immediately thereafter they are asked to rank what would be the worst case of unfairness that could occur (see [fig x]). Here, the options are formulated as cases that  do not comply  or contradict with one of the three criteria – all three disadvantaging the same sex.</p>
+  
+    <div id="questionnaire-target-6" ></div>
+  
+  <p>We expect that the ranking of the three criteria should be the same for each participant between the two questions. However, 57% of the participants do not keep the same ranking between the three criteria, when they are formulated in different ways. We observed no significant difference between the comprehension of participants who rank consistently versus the group of participants who rank inconsistently (p=0.061), despite a slightly higher comprehension of the consistent group (mean on 0.75 vs mean on 0.68 ). </p>
+  
+  <h1>The challenges ahead </h1>
+  <h3>Leaving the superhero universe</h3>
+  <p>
+  … and zooming of the academic sphere of mathematical formulations to look at the fairness challenges in industry. The fairness literature is focussing static settings which often does not resemble the challenges faced by practitioners and industry <d-cite key="holstein2019improving "></d-cite>, <d-cite key=" chouldechova2020snapshot "></d-cite>.  Summarizing, for example,  some points from <d-cite key="holstein2019improving "></d-cite>: 1) It is often assumed that the dataset is static and fairness can only be achieved  by changing the model, but in practice data collection can be changed at many practitioners point towards the idea of investigating bias already at that step. This is illustrated in the <a href="#ml-cycle">machine learning circle</a>  2) The debiasing methods and metrics often do not apply in an actual context, e.g. because sensitive attributes can not be accessed  on an individual level. </p>
+  <p> In general, the problems in practice usually include dynamic scenarios instead of one-shot classification tasks, like web search, chatbots and systems that employ online learning, reinforcement learning or bandit problems <d-cite key="holstein2019improving "></d-cite>, <d-cite key=" chouldechova2020snapshot "></d-cite>. This shows the need for more methods to audit and monitor complex dynamic systems. One idea, proposed for models in an NLP setting  is an analogy to “software testing”, or more precisely behaviour testing or black-box testing <d-cite key=" ribeiro2020beyond "></d-cite>. The idea is to examine the model’s behaviour by providing a set of input-output tests without having access to the model itself. This can be used to check for fairness in different scenarios without the need of metrics but instead focusing on concrete example cases. For example, one could imagine a scenario where a text classification model for sentiment unwantedly associates specific names with the sentiment [REF?].
+  </p>
+  <h3> To be continued </h3>
+  <p>
+  … since every movie must come to an end and so does our article. We have provided an overview of different ways to evaluate and define algorithmic fairness, as well as, different methods to achieve fairness. We then discussed challenges with the currently proposed approaches with respect to people’s comprehension and perception, and application in practice. As seen in the previous section [link], the work on algorithmic fairness is far from down. As it is with superhero movies, one movie seldom comes alone. 
+  </p>
+  
 
 </d-article>
 
