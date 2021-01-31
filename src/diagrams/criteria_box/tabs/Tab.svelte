@@ -31,7 +31,7 @@
 
 	.selected {
 		color: black;
-		border-bottom: 3px solid #e88f1c;
+		border-bottom: 3px solid var(--first-color);
 	}
 
 </style>

@@ -91,10 +91,8 @@ Both dimensions of understanding types of biases through either the impact or th
 <p>
 … the data, the algorithm, and the user interactions <d-cite key=" mehrabi2019survey "></d-cite>. Data is usually the first suspect of bias introduced into a model, but all three inflict each other. To list some of the “offences” by data: 1) a skew in the data collections, 2) missingness in attributes, 3) a skew in human annotations or 4) an imbalance in examples. To stay in the super figure setting, one could imagine the case where the police historically have examined more male figures than females and therefore have found more villains among men, which then will be reinforced over time. Another case could be picturing missingness in self-reported attributes, where they could be missing for a reason related to a protected attribute like gender. Discrimination can also be induces into the data by human annotations. Or an unbalanced training data can introduce a skew into a model. In our super figure example data data from Kaggle, we have in fact an unbalanced dataset with fewer females than males [see Figure X], making it potentially harder for a model to generalise well on the classifications of females villains.
 </p>
-<figure  style="text-align: center;">
-  <img src="./images/countplot_gender.svg" alt="unbalanced data" style="width:500px;height:300px";>
-  <figcaption> [TEKST] There is an imbalance in the representation of males and females in the example dataset </figcaption>
-</figure>
+
+<div id="hero-villain-bar-figure" ></div>
 
 <p>
 An undesired skew can also be introduced into the model by the choice of the algorithm: imagine that one type of decision boundary is more suited for one group than the other. Last but not least, how the model is set into production and how users interact with it can in itself be a source of bias, e.g. following the models' suggestions in a skewed way <d-cite key="selbst2019fairness "></d-cite>, <d-cite key=" green2019disparate "></d-cite>. Knowing the different sources of bias and imagine you are a super figure wanting to go to the party, we invite you to take a stand on the following question:
@@ -127,34 +125,19 @@ Nonetheless, the main challenge remains to identify and define bias in the first
 … aka defining mathematical fairness criteria. Mathematical fairness criteria with respect to classification where a certain treatment or outcomes are the desired output can be grouped together in different ways. In the following box we will highlight five ideas on formalizing fairness partly based on <d-cite key=" gajane2017formalizing, verma2018fairness, mitchell2018prediction, mehrabi2019survey"></d-cite> :
 </p>
 <div id="criteria-box" class="subgrid"></div>
+
 <h3> Batman begins</h3>
 <p>… is by the way a great movie, and like Batman every super figure needs to learn to master their powers in the beginning. We will therefore start by understanding the first, and most known statistical measure of fairness, before we discuss the advantages and disadvantages of the statistical approach.  </p>
 <p> As described in <a href="#criteria-box">the box above</a>, statistical measures are derived from the so called confusion matrix. The confusion matrix is a way to sort all examples in a dataset according to their true class and predicted class in a binary classification setting. The following table shows a confusion matrix and its components and describes the terminology needed for the definition of the specific statistical fairness criteria: </p>
-<style type="text/css">
-  .tg  {border:none;border-collapse:collapse;border-spacing:0;border-radius: 25px;}
-  .tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
-    padding:10px 5px;word-break:normal; }
-  .tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
-    overflow:hidden;padding:10px 5px;word-break:normal;}
-  .tg .tg-ez6v{background-color: rgb(203, 222, 243);border-color:inherit;text-align:center;vertical-align:top;border-radius: 0 15px 0 0;}
-  .tg .tg-ez7v{background-color: rgb(203, 222, 243);border-color:inherit;text-align:center;vertical-align:top;border-radius:  0 0 0 15px;}
-  .tg .tg-0u52{background-color: rgb(235, 184, 137);border-color:inherit;text-align:center;vertical-align:top;border-radius: 15px 0 0 0;}
-  .tg .tg-0u72{background-color: rgb(235, 184, 137);border-color:inherit;text-align:center;vertical-align:top;border-radius: 0 0 15px 0;}
-  </style>
-  <table class="tg">
-  <thead>
-    <tr>
-      <th class="tg-0u52"><span style="font-weight:bold">True positive (TP):</span> <br>Cases where both the predicted and actual outcome is positive   <br></th>
-      <th class="tg-ez6v"><span style="font-weight:bold">False Positive (FP):</span><br>Cases where the predicted outcome is positive, but the actual outcome is negative<br></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="tg-ez7v"><span style="font-weight:bold">False Negative (FN):</span><br>Cases where the predicted outcome is negative, but the actual outcome is positive<br></td>
-      <td class="tg-0u72"><span style="font-weight:bold">True Negative (TN):</span><br>Cases where both the predicted and the actual outcome is negative<br></td>
-    </tr>
-  </tbody>
-  </table>
+
+<figure>
+  <figcaption align="justify">
+    <b>Table 1:</b> Confusion matrix for a binary classification problem with a positive (typically defined as 1) and
+    a negative (typically defined as 0) outcome. Hover or click on a particular cell to get a more detailed
+    explanation of the corresponding term.
+  </figcaption>
+  <div id="confusion-matrix"></div>
+</figure>
 
 <h4><b>Demographic parity </b></h4>
 <p>Demographic parity also called group fairness or statistical parity (<d-cite key=" verma2018fairness "></d-cite>, <d-cite key=" hardt2016equality"></d-cite>,  <d-cite key="dwork2012fairness "></d-cite>) incorporates the idea, that non-discrimination between groups is achieved if the chance of getting a positive outcome is equalized acrossed groups. Given a binary classification task and two groups this can mathematically formalized as: </p>
@@ -342,52 +325,14 @@ style="text-align: left;">
 <p>In <d-cite key="saha2019measuring"></d-cite>, Saha et al. found in their survey that people with low comprehension tend to have less negative opinion towards a fairness criterion. To investigate if the same trend is visible in the survey conducted here, we calculate the Spearman's correlation between perception and the computed comprehension score per criteria:
 
 </p>
+
 <figure>
-  <style type="text/css">
-    .tg2  {border-collapse:collapse;border-spacing:0;   margin-left: auto;
-  margin-right: auto;}
-    .tg2 td{border-color:#ffffff;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
-      overflow:hidden;padding:10px 5px;word-break:normal;}
-    .tg2 th{border-color:#ffffff;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
-      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-    .tg2 .tg2-cbmx{background-color:rgb(203, 222, 243);text-align:center;vertical-align:top}
-    .tg2 .tg2-32u0{background-color:rgb(203, 222, 243);font-weight:bold;text-align:left;vertical-align:top; border-radius: 15px 0 0 0;}
-    .tg2 .tg2-32u01{background-color:rgb(203, 222, 243);font-weight:bold;text-align:left;vertical-align:top;}
-    .tg2 .tg2-v90m{background-color:rgb(203, 222, 243);font-weight:bold;text-align:center;vertical-align:top; border-radius: 0 15px 0 0;}
-    .tg2 .tg2-v90m1{background-color:rgb(203, 222, 243);font-weight:bold;text-align:center;vertical-align:top;}
-    .tg2 .tg2-msxt{background-color:rgb(235, 184, 137);font-weight:bold;text-align:left;vertical-align:top;}
-    .tg2 .tg2-msxt1{background-color:rgb(235, 184, 137);font-weight:bold;text-align:left;vertical-align:top; border-radius: 0 0 0 15px;}
-    .tg2 .tg2-6vnk{background-color:rgb(235, 184, 137);text-align:center;vertical-align:top;}
-    .tg2 .tg2-6vnk1{background-color:rgb(235, 184, 137);text-align:center;vertical-align:top;border-radius: 0 0 15px 0;}
-    </style>
-    <table class="tg2">
-    <thead>
-      <tr>
-        <th class="tg2-32u0"></th>
-        <th class="tg2-v90m1"> Spearman correlation  </th>
-        <th class="tg2-v90m">p-value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="tg2-msxt">Demographic Parity</td>
-        <td class="tg2-6vnk">-0.417</td>
-        <td class="tg2-6vnk">0.000</td>
-      </tr>
-      <tr>
-        <td class="tg2-32u01">Equalized Opportunity</td>
-        <td class="tg2-cbmx">0.122</td>
-        <td class="tg2-cbmx">0.248</td>
-      </tr>
-      <tr>
-        <td class="tg2-msxt1">Predictive Parity</td>
-        <td class="tg2-6vnk">-0.142</td>
-        <td class="tg2-6vnk1">0.177</td>
-      </tr>
-    </tbody>
-    </table>
-    <figcaption style="text-align: left;">Figure nr. Spearman correlation between comprehension and perception scores. It is only the association between comprehension and perception sore for Demographic parity with a  p-value over 0.05 that is significant.  </figcaption>
-  </figure>
+  <figcaption>
+    <b>Table 2</b>: Spearman correlation between comprehension and perception scores for three different statistical fairness criteria.
+  </figcaption>
+  <div id="spearman-correlation"></div>
+  <figcaption style="text-align: center;"> *Significant correlation with a <i>p</i>-value below 0.05. </figcaption>
+</figure>
 
 <p> For Demographic Parity we can see a significant, negative correlation between comprehension and perception, i.e.  the better people understand the criterion the less they perceive it as fair (see Table x). This is in accordance with the results from Saha et al <d-cite key="saha2019measuring "></d-cite>. A weaker negative correlation can be also seen for Predictive Parity, but it is not significant (p=0.177). In contrast, for Equalized Opportunity there is a small positive correlation between comprehension and perception  (not significant with p=0.248), i.e. people who understand the criterion seem to like it more. </p>
 

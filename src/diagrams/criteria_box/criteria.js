@@ -48,13 +48,15 @@ export const criteriaData = [
         },
         {
           "title": "Tutorial: 21 fairness definitions and their politics",
-          "caption": `Recording of the FAT* 2018 turotial on fairness definitions [REF].`,
+          "caption": `Recording of the FAT* 2018 turotial on fairness definitions
+          <d-cite key='narayanan2018translation'></d-cite>.`,
           "url": "https://www.youtube.com/watch?v=jIXIuYdnyyk",
           "image": "fairness21.jpg",
         },
         {
           "title": "Fairness and machine learning, Chapter 2",
-          "caption": `Chapter 2 of the fairness and machine learning book about classification [REF].`,
+          "caption": `Chapter 2 of the fairness and machine learning book about classification
+          <d-cite key='barocas-hardt-narayanan'></d-cite>.`,
           "url": "https://fairmlbook.org/classification.html",
           "image": "fairmlbook.png",
         },
@@ -143,7 +145,7 @@ export const criteriaData = [
         },
         {
           "title": "From Parity to Preference-based Notions of Fairness in Classification",
-          "caption": `Recording of a KDD 2017 talk of the main author from
+          "caption": `Youtube video of a recording of the KDD 2017 talk by the main author from
           <d-cite key='zafar2017parity'></d-cite>.`,
           "url": "https://www.youtube.com/watch?v=Zz8iqVWdD_g",
           "image": "kdd_pref_fairness.jpg",
@@ -194,6 +196,20 @@ export const criteriaData = [
         },
       ],
       resources: [
+        {
+          "title": "Counterfactual Fairness",
+          "caption": `Youtube video of a recorded speed by M. Kusner about the idea of counterfactual fairness
+          <d-cite key='kusner2017counterfactual'></d-cite>.`,
+          "url": "https://www.youtube.com/watch?v=psA4U6nhZ70",
+          "image": "cf_fairness.jpg",
+        },
+        {
+          "title": "Fair Inference On Outcomes",
+          "caption": `Github repository accompanying the paper by R. Nabi and I. Shpitser
+          <d-cite key='Nabi2018'></d-cite>.`,
+          "url": "https://github.com/raziehna/fair-inference-on-outcomes",
+          "image": "inference.png",
+        },
       ],
     },
     {
@@ -219,6 +235,13 @@ export const criteriaData = [
         },
       ],
       resources: [
+        {
+          "title": "Explaining Measures of Fairness",
+          "caption": `Blogpost by S. Lundberg on Towards Datascience about how to use SHAP to explain features
+          impact on fairness measures <d-cite key='lundberg2020blog'></d-cite>.`,
+          "url": "https://towardsdatascience.com/explaining-measures-of-fairness-f0e419d4e0d7",
+          "image": "xai_fairness.png",
+        },
       ],
     },
 ];

@@ -114,9 +114,9 @@
     margin-bottom: 1rem;
     padding: 1rem;
     padding-bottom: 0;
-    border: 1px solid hsla(0, 0%, 0%, 0.1);
+    border: 1px solid var(--box-border);
     border-radius: 5px;
-    background-color: hsl(0, 0%, 97%);
+    background-color: var(--box-color);
   }
   @media(max-width: 768px) {
     .ml-cycle {
@@ -142,9 +142,9 @@
 
   button {
     padding: 0.5em;
-		border: 1px solid #e88f1c;
+		border: 1px solid var(--first-color);
 		border-radius: 5px;
-		background-color: #e88f1c;
+		background-color: var(--first-color);
     color: white;
     cursor: pointer;
     margin: auto;
@@ -155,7 +155,7 @@
     height: 100%;
   }
   button:hover  {
-    color: #e88f1c;
+    color: var(--first-color);
     background-color: white;
   }
   button:focus {
@@ -163,7 +163,7 @@
   }
 
   .selected {
-    color: #e88f1c;
+    color: var(--first-color);
     background-color: white;
   }
 

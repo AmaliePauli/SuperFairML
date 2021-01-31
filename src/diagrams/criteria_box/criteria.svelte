@@ -97,7 +97,7 @@
 	img {
 		width: 100%;
 		height: auto;
-		border: 1px solid hsla(0, 0%, 0%, 0.1);
+		border: 1px solid var(--box-border);
 	}
 	.resource > a {
 		border-bottom: none;
