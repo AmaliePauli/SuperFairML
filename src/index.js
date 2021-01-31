@@ -8,6 +8,9 @@ import SurveyInfo from './diagrams/survey_info.svelte';
 import ThresholdFigure from './diagrams/threshold_figure.svelte';
 import Question from './diagrams/survey_questions.svelte';
 import { questions } from './diagrams/surveys.js';
+import ConfusionMatrix from './diagrams/confusion_matrix.svelte';
+import SpearmanTable from './diagrams/spearman_correlation.svelte';
+import HeroVillainBar from './diagrams/hero_villain_bar.svelte';
 
 new SurveyInfo ({
 	target: document.getElementById("survey-info"),
@@ -20,7 +23,7 @@ new CriteriaBox({
 new MLCycle ({
 	target: document.getElementById("ml-cycle"),
 	props: {}
-}); 
+});
 
 new ThresholdFigure ({
 	target: document.getElementById("interactive-dp"),
@@ -54,3 +57,14 @@ for (let i = 0; i < questions.length; i++) {
 	});
 };
 
+new ConfusionMatrix({
+	target: document.getElementById('confusion-matrix')
+});
+
+new SpearmanTable({
+	target: document.getElementById('spearman-correlation')
+});
+
+new HeroVillainBar({
+	target: document.getElementById('hero-villain-bar-figure')
+});

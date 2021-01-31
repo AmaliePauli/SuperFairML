@@ -7,6 +7,8 @@
   --second-color-weak:#cbdef3;
   --second-color-bg:#edf5ff;
   --second-color-button-hover:#7abaff;
+  --box-color: hsl(0, 0%, 97%);
+  --box-border: hsla(0, 0%, 0%, 0.1);
 }
 
 .subgrid {

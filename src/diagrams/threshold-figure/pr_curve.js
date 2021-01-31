@@ -60,12 +60,12 @@ export function createPRChart(data) {
 
   var prCurveTooltip = function(tooltipModel) {
               // Tooltip Element
-              var tooltipEl = document.getElementById('chartjs-tooltip');
+              var tooltipEl = document.getElementById('pr-curve-tooltip');
 
               // Create element on first render
               if (!tooltipEl) {
                   tooltipEl = document.createElement('div');
-                  tooltipEl.id = 'chartjs-tooltip';
+                  tooltipEl.id = 'pr-curve-tooltip';
                   const table_style = 'table-layout: fixed; margin-right: auto; margin-left: auto; border-collapse: separate;';
                   tooltipEl.innerHTML = '<table style="' + table_style + '"></table>';
                   document.body.appendChild(tooltipEl);

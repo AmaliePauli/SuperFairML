@@ -14,13 +14,13 @@
   <tbody>
     <tr>
       <td class="heading"> Actual superhero </td>
-      <td> {confusionMatrix.tp}    </td> 
-      <td> {confusionMatrix.fn}  </td> 
+      <td> {confusionMatrix.tp} </td>
+      <td> {confusionMatrix.fn} </td>
     </tr>
     <tr>
       <td class="heading"> Actual villain </td>
-      <td> {confusionMatrix.fp}  </td> 
-      <td> {confusionMatrix.tn}  </td> 
+      <td> {confusionMatrix.fp} </td>
+      <td> {confusionMatrix.tn} </td>
     </tr>
   </tbody>
 </table>
