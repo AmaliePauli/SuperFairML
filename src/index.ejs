@@ -53,10 +53,9 @@
   Data from the Kaggle superhero dataset <d-footnote id="d-footnote 1"> https://www.kaggle.com/claudiodavi/superhero-set </d-footnote> is used during the article as an example. The Kaggle dataset is a collection of information about super figures extracted from the Superhero Database <d-footnote id="d-footnote shdb">https://www.superherodb.com/</d-footnote>. A simple classification model has been trained on the dataset to distinguish between villains and heroes where features such as superpowers, names, publisher, height and weight have been accessible. Read more about pre-processing, feature selection and model training in Appendix B.
   The interactive illustrations and questionnaires are to invite the reader to take a stand on the fairness questions during the read. You can start with the following:
   </p>
-  <figure>
+  
   <div id="questionnaire-target-0" ></div>
-    <figcaption> [BESKRIVELSE] </figcaption>
-  </figure>
+ 
    </p>
   <p>The main contributions of this paper are two-folded. First, it is to summarize the current state of fairness in machine learning through a literature review presented as an interactive paper encouraging people to think about the issues and challenges with algorithmic fairness.  Second, it demonstrates through a survey people’s comprehension and perception of different fairness criteria in the superhero setting. The survey results also point towards people being sensitive to formulations when giving opinion about fairness, and in some questions to a degree which demonstrates inconsistency in answers. Further, the survey results did not prove a statistical significance in association between peoples self-reported understanding and what could be measured through their answers to comprehension questions. This points to the need of being careful in the debate about fairness since formulations and wrongly estimated self understanding may skew it.   
   The paper is divided into four main sections. The first section focuses on understanding the notion of bias. The second, on definition of fairness and methods to mitigate bias. Here, we will focus on three mathematical fairness criteria. The third section discusses the perception of fairness with a starting point in the three criteria as well as highlighting results from the survey. The last section sums up the remaining challenges and concludes the main points of this paper.   
@@ -95,10 +94,9 @@
   <p>
   An undesired skew can also be introduced into the model by the choice of the algorithm: imagine that one type of decision boundary is more suited for one group than the other. Last but not least, how the model is set into production and how users interact with it can in itself be a source of bias, e.g. following the models' suggestions in a skewed way <d-cite key="selbst2019fairness "></d-cite>, <d-cite key=" green2019disparate "></d-cite>. Knowing the different sources of bias and imagine you are a super figure wanting to go to the party, we invite you to take a stand on the following question:
   </p>
-  <figure>
+
   <div id="questionnaire-target-1" ></div>
-    <figcaption> [BESKRIVELSE] </figcaption>
-  </figure>
+ 
    
   <h3> Joining the Justice League</h3>
   <p>
@@ -158,26 +156,13 @@ PR = \frac{TP+FP}{TP+FP+FN+FP} .
 
 <p>In our super figure example this means that the fraction of females and the fraction of males getting accepted to the party should be equalized, or in practice, be similar. In the survey we investigated people’s comprehension of this fairness criterion. You can check your own understanding as well: </p>
 
-<figure>
+
   <div id="tester-target-10" ></div>
-  <figcaption>
-    The question is verifying the understanding of demographic parity by asking to calculate the amount of females that ought to get accepted under the described conditions.The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the reds are wrong. After submitting your answer you can read the explanation.
-  </figcaption>
-</figure>
 
-<figure>
   <div id="tester-target-11" ></div>
-  <figcaption>
-    This true/false question is asking to derive an implication of using the fairness criterion demographic parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
- </figcaption>
-</figure>
 
-<figure>
   <div id="tester-target-12" ></div>
-  <figcaption>
-    This true/false question is asking to derive an implication of using the fairness criterion demographic parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
-  </figcaption>
-</figure>
+
 
 <p> The last question points to the critique to Demographic Parity by <d-cite key=" hardt2016equality"></d-cite>, where it is pointed out that the metric does not account for a case where the true outcome (true hero or villain) is correlated with the protected group. Such a case could force us to accept not-qualified figures in one group or dismiss qualified figures in the other group to achieve Demographic Parity. The criterion can, however, be justified, if we are looking at a <i> societal bias</i> we actively want to change. Imagine a case of young super figures getting admitted into an academy. Furthermore, assume that young male figures are less qualified than females. However, we want to enforce a policy of even acceptance rate, i.e. adjust for this skewness, since we believe it is a structural bias in society. (However, we then need to up qualify the males e.g. by extra classes in the beginning.) </p>
 
@@ -202,26 +187,13 @@ TPR = \frac{TP}{TP+FN} .
 
 <p>  In our super figure example, this means that the chance of getting accepted to the party when you in fact are a hero should be the same for both males and females. You can verify your own understanding of Equalized Opportunity as well as see the response from the participants in the surveys with the following questions: </p>
 
-<figure>
+
   <div id="tester-target-13" ></div>
-  <figcaption>
-    The question is verifying the understanding of equalized opportunities by asking to calculate the amount of females that ought to get accepted under the described conditions.The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the reds are wrong. After submitting your answer you can read the explanation.
-  </figcaption>
-</figure>
 
-<figure>
   <div id="tester-target-14" ></div>
-  <figcaption>
-    This true/false question is asking to derive an implication of using the fairness criterion equalized opportunities. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
-  </figcaption>
-<figure>
 
-<figure>
   <div id="tester-target-15" ></div>
- 	<figcaption>
-    This true/false question is asking to derive an implication of using the fairness criterion equalized opportunities. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
-  </figcaption>
-</figure>
+
 
 
 <p>Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the True Positive Rate by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier. As the question also asked, you can in this example see, that you can achive Demograhic Opportunity without achieving Demograhic parity:   </p>
@@ -242,31 +214,17 @@ P(Y =1|\hat{Y} =1,G=0)=P(Y=1 |\hat{Y}=1,G=1),
 <d-math block="">
 PPV =  \frac{TP}{TP+FP}  .
 </d-math block="">
-For our super figure examples, this means that the chance of a correct prediction for figures allowed into the party should be the same for both males and females. Once again, you can try verifying your understanding and see people’s opinion with the following questions:
+<p>For our super figure examples, this means that the chance of a correct prediction for figures allowed into the party should be the same for both males and females. Once again, you can try verifying your understanding and see people’s opinion with the following questions:
+</p>
 
-<figure>
   <div id="tester-target-16" ></div>
-  <figcaption>
-    This true/false question is asking to derive an implication of using the fairness criterion predictive parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
- </figcaption>
-</figure>
 
-<figure>
   <div id="tester-target-17" ></div>
-  <figcaption>
-    This true/false question is asking to derive an implication of using the fairness criterion predictive parity. The percentage in the results bars are showing the divisions of answers collected in the survey. Hence the answer the reader of this paper gives is not saved. The green colored answer is the correct one, and the red one is wrong. After submitting your answer you can read the explanation.
-  </figcaption>
-</figure>
 
-<figure>
   <div id="questionnaire-target-4" ></div>
-  <figcaption>
-    <b> Figure x.</b> Opinion-question: Similar questions asking to report ones own understanding were asked in the survey after the comprehension questions of each fairness criteria.
-  </figcaption>
+
   <div id="questionnaire-target-4.1" ></div>
-	<figcaption><b> Figure x.</b> Opinion-question: Similar questions were asked in the survey after the comprehension questions of each fairness criteria.
-  </figcaption>
-</figure>
+
 
 <p> Looking at our superhero classifier´s performance on the evaluation set, we can experiment with satisfying the parity of the Positive Predictive Value by setting a different threshold value for the two groups. In <d-cite key=" hardt2016equality"></d-cite>  they formalized it as an optimization problem. This approach is an example of a post-processing algorithm to achieve fairness as described earlier.</p>
 
@@ -299,10 +257,9 @@ For our super figure examples, this means that the chance of a correct predictio
 <h3>What is you favourite super power</h3>
 <p> … or in other words, which is your favourite fairness criterion?   
 </p>
-<figure>
+
 <div id="questionnaire-target-5" ></div>
-  <figcaption>[BESKRIVELSE]  </figcaption>
-</figure>
+
 <p>
 The question of which statistical fairness measure people perceive as more fair has previously been addressed in the literature. The main bulk of studies in this regard have been motivated by the COMPAS debate between Equalized Opportunities and accuracy, as mentioned in section [SECTION]. In <d-cite key="srivastava2019mathematical "></d-cite> an Amazon Turk survey showed that Demographic Parity was perceived as most fair compared to metrics like Equalized Opportunity and Predictive Parity (in the paper presented as False Negative Rate and Discovery Rate). However, the survey was conducted by showing the participants ten figures together with the true label and the predicted label of two different algorithms, asking them to choose the most discriminating one. The question can be raised whether the participants fully understood the implications of the different “algorithms”, and whether ten example figures are enough to generalize to a systematic bias. In <d-cite key=" harrison2020empirical"></d-cite> an Amazon Turk survey comparing the perception of different fairness measures was evaluated through a different design. Here, they showed participants histograms of two measures for two different models where one measure was equalized in one model and the other measure in the other model. Then participants were asked to choose between the models. The authors found a slight preference towards the False Positive Rate over accuracy in a criminal assessment setting. The other pairwise comparisons between different measures did not show any significant  preferences. However, again the same question can be asked, whether the participants fully understood the implication of the parity in the models. The question about people’s comprehension of fairness metrics is addressed by <d-cite key="saha2019measuring "></d-cite>, which showed that comprehension can be measured through a multiple-choice survey. They found that in a hiring scenario Equalized Opportunity was harder to understand than Demographic Parity, and that in general comprehension was correlated with the education level of the participants. An interesting finding was a tendency of people with low comprehension score to express less negative sentiment towards a criterion. This survey’s design where criteria are expressed as rules and where questions are asked through multiple-choice, has inspired the survey conducted in this paper. The survey of this paper aims at  both measuring the comprehension and to compare people’s perception of different criteria. The following sections present the results of the survey. </p>
 <h4> A measure of comprehension</h4>
@@ -399,22 +356,20 @@ For example, <d-cite key="grgic2018beyond, grgic2016case"></d-cite> suggests shi
   <h4> The preference for human or algorithmic judgement is subject to change</h4>
   <p>
  Human or machine - which would people prefer to be assessed by in different settings. This question was also raised by Harrison et. al  <d-cite key="harrison2020empirical"></d-cite> who found a slight preference towards human judgment over a machine learning model. In our survey we investigated people’s opinion about using algorithmic or human judgement in the superhero setting, and explored how additional information can influence people’s opinion using the following three questions (the first question is replicated in [FIG X]): : </p>
-  <figure>
+
   <div id="questionnaire-target-2" ></div>
 
   <div id="questionnaire-target-3" ></div>
 
-</figure>
+
 
 <p> The answers show that, initially, the majority (77%) of participants preferred the option of a ‘human judgment supported by an algorithm’ when it is assumed that both the algorithm and the human act reasonably. However, this changes with the extra information that occasionally the human is biased against one sex. Under this assumption the majority (56%) of participants preferred the algorithm, even though it is still, in general, assumed that both are acting reasonably. The third question assumes that the algorithm is  much more accurate than the human but also biased. This shifts the preference of the majority (71%) back to preferring 'human judgment with algorithmic support'. Our survey consists  of a small sample size and the representativeness is not accounted for. Nevertheless it is  interesting how relatively easy people’s opinion can be changed by adding some vague information about the system. In fact, 54% of the participants changed their choice throughout the three questions. </p>
  
 <h4> Participants are not consistent throughout their answers </h4>
 <p> In addition to people’s preference for human or algorithmic judgement, the survey also asked a more high-level question (see [FIG X]) regarding whether it is fair to use “a system that uses data and statistics” in the superhero setting. To this question, 22 out of 92 participants answered a clear “no”, but when asked about if they preferred human or algorithmic judgement, only 6 out of the 22 choose to solely trust the human. This number further decreased to 3 out of 22 when asked the question in [fig x]. Although it can be argued that this does not reflect inconsistency depending on how the formulations are understood, it might point towards that people are easily affected by the formulation of the question. However, an actual logical inconsistency is found when people are asked to rank the three fairness criteria discussed previously. First, the participants are asked to rank the three criteria formulated as rules shown in the answer-options in [fig x] according to importance for achieving fairness. Immediately thereafter they are asked to rank what would be the worst case of unfairness that could occur (see [fig x]). Here, the options are formulated as cases that  do not comply  or contradict with one of the three criteria – all three disadvantaging the same sex.</p>
-  <figure>
+
   <div id="questionnaire-target-6" ></div>
-    <figcaption><b> Figure x.</b> Opinion-question: In the survey the participants were asked to rank the statements after what they found to be the worst scenario that could occur</figcaption>
-  </figure>
-  <p>
+
 
 <p>We expect that the ranking of the three criteria should be the same for each participant between the two questions. However, 57% of the participants do not keep the same ranking between the three criteria, when they are formulated in different ways. We observed no significant difference between the comprehension of participants who rank consistently versus the group of participants who rank inconsistently (p=0.061), despite a slightly higher comprehension of the consistent group (mean on 0.75 vs mean on 0.68 ). </p>
 
