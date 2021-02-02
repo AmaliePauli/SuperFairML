@@ -99,6 +99,7 @@
         {section.title}
       </button>
     {/each}
+    <div class="circle"></div>
   </div>
   <div class="text">
     <p> <b>{title.slice(3)}</b> {@html infotext} </p>
@@ -115,7 +116,7 @@
 <style>
 
   .ml-cycle {
-    grid-column: page;
+    grid-column: text;
     margin-bottom: 1rem;
     padding: 1rem;
     padding-bottom: 0;
@@ -135,7 +136,7 @@
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
     grid-column-gap: 2em;
-    grid-row-gap: 2em;
+    grid-row-gap: 1em;
     grid-template-areas:
     ". top-left top-left top-right top-right ."
     ". top-left top-left top-right top-right ."
@@ -158,6 +159,7 @@
     font-size: 1rem;
     width: 100%;
     height: 100%;
+    justify-self: center;
   }
   button:hover  {
     color: var(--first-color);
@@ -172,6 +174,14 @@
     background-color: white;
   }
 
+  .circle {
+    grid-area: middle;
+    justify-self: center;
+    width: 100px;
+    background-size: 100% 100%;
+    border: none;
+    background: url(../../images/circle.svg);
+  }
 
   #monitoring {
     grid-area: top-left;
