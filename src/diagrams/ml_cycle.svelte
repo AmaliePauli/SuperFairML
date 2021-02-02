@@ -2,54 +2,59 @@
   let sections = [
     {
       id: "gathering",
-      title: "Data gathering",
+      title: "1. Data gathering",
       text: `Chen et al. propose to mitigate bias through data collection, e.g. by
       increasing the training data or gathering additional features <d-cite key="Chen2018"></d-cite>.`,
     },
     {
       id: "preparation",
-      title: "Data preparation",
-      text: `Discrimination or bias can be mitigating as part of the data preparation (also called pre-processing
-      <d-cite key="bellamy2018ai"></d-cite>), e.g. by reweighting datapoints
-      <d-cite key="kamiran2012data, SaraHajian2013, cesaro2019measuring"></d-cite> or learning a
-      representation or transformations of the data to omit information of protected attributes
-      <d-cite key="zemel2013learning, Feldman2015, Louizos2015, Calmon2017, Moyer2018"></d-cite>.`,
+      title: "2. Data preparation",
+      text: `Discrimination or bias can be mitigated as part of the data preparation (also called pre-processing
+      <d-cite key="bellamy2018ai"></d-cite>), e.g. by reweighting data points
+      <d-cite key="kamiran2012data, SaraHajian2013, cesaro2019measuring"></d-cite>, learning a
+      representation of the data to omit information of protected attributes
+      <d-cite key="zemel2013learning, Feldman2015, Louizos2015, Calmon2017, Moyer2018"></d-cite>
+      or leveraging information from a causal model to remove unfair effects <d-cite key="kusner2017counterfactual, Chiappa2019"></d-cite>.`,
     },
     {
       id: "training",
-      title: "Model training",
+      title: "3. Model training",
       text: `Bias can also be mitigated during training of the model through so called in-processing
       algorithms <d-cite key="bellamy2018ai"></d-cite>. This can be achieved
       by specifically designed training algorithms or models, e.g. using adversarial learning
       <d-cite key="Zhang2018, Lahoti2020"></d-cite>, fairness specific regularization techniques
       <d-cite key="Kamishima2012, Berk2017, hickey2020fairness, Stefano2020"></d-cite>, a modified hyperparameter tuning
       <d-cite key="Perrone2020"></d-cite>, reformulating the optimization problem
-      <d-cite key="Woodworth2017, Agarwal2018a, Goel2018, kearns2018preventing, Zafar2019"></d-cite> or re-weighting of datapoints during
-      training <d-cite key="Amini2019"></d-cite>.`,
+      <d-cite key="dwork2012fairness, Woodworth2017, GalYona2018, Nabi2018, Agarwal2018a, Goel2018, kearns2018preventing, Jung2019, Zafar2019, Kim2019, Ruoss2020"></d-cite> or
+      re-weighting of data points during training <d-cite key="Amini2019"></d-cite>.`,
     },
     {
       id: "test",
-      title: "Model evaluation",
-      text: `Agarwal et al. propose a framework to test a model's discrimination through automatically
-      generating test inputs <d-cite key="Agarwal2018"></d-cite>. Furthermore, a bias can be introduced during
-      the evaluation process (see <d-cite key="Suresh2019"></d-cite> for mitigation approaches).`,
+      title: "4. Model evaluation",
+      text: `Different approaches have been proposed to assess a model's bias or discrimination. For example through comparing
+      two models with respect to their (individual) fairness <d-cite key="Speicher2018"></d-cite>, automatically generating
+      test inputs <d-cite key="Agarwal2018"></d-cite>, creating a transparency report based on a FlipTest
+      <d-cite key="Black2020"></d-cite> or using a causal framework <d-cite key="JunzheZhang2018"></d-cite>.
+      Note, that a bias can be introduced during the evaluation process (see <d-cite key="Suresh2019"></d-cite> for
+      mitigation approaches).`,
     },
     {
       id: "deploy",
-      title: "Model implementation",
+      title: "5. Model implementation",
       text: `Before implementing a trained model a potential bias can be mitigated through post-processing steps,
       e.g. by adjusting the output labels by optimizing after a defined metric
-      <d-cite key="hardt2016equality, Woodworth2017, Pleiss2017"></d-cite>. In addition, one should be aware of a
-      so called deployment bias when the model is used different from the initial, intential use
+      <d-cite key="hardt2016equality, Woodworth2017, Pleiss2017, kim2018fairness"></d-cite>. In addition, one should be aware of a
+      so called deployment bias when the model is used different from its intentional use
       case <d-cite key="Suresh2019"></d-cite>.`,
     },
     {
       id: "monitoring",
-      title: "Model monitoring",
+      title: "6. Model monitoring",
       text: `A model can, for example, be monitored for bias by logging and observing statistical
-      fairness measures or other fairness definitions (see <a href="#criteria-box">the criteria box.</a>). There
-      exist different libraries for meausring discrimination of a model, e.g. AI Fairness 360 [FOOTNOTE]
-      <d-cite key="bellamy2018ai"></d-cite>, Fairlearn [FOOTNOTE] or LiFT [FOOTNOTE].`,
+      fairness measures or other fairness definitions (see <a href="#criteria-box">the box</a> describing
+      different fairness definitions). There exist different libraries for meausring discrimination of
+      a model, e.g. <a href=https://aif360.mybluemix.net/>AI Fairness 360 </a>,
+      <a href=https://fairlearn.github.io/>Fairlearn</a> or <a href=https://github.com/linkedin/LiFT>LiFT</a>.`,
     },
   ];
 
@@ -96,7 +101,7 @@
     {/each}
   </div>
   <div class="text">
-    <p> <b>{title}</b> {@html infotext} </p>
+    <p> <b>{title.slice(3)}</b> {@html infotext} </p>
   </div>
 </div>
 
