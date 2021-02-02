@@ -69,7 +69,4 @@
 	<div class="tabs interactive-container">
 		<slot></slot>
 	</div>
-	<figcaption style="grid-column: page; text-align: center;">
-		[TODO]
-	</figcaption>
 </figure>
