@@ -13,8 +13,8 @@
   const female_color = getComputedStyle(document.documentElement).getPropertyValue("--second-color");
 
   // Male and female numbers
-  const males = [197, 101];
-  const females = [88, 24];
+  const males = [204, 107];
+  const females = [91, 27];
 
   var barChartData = {
     labels: ['Hero', 'Villain'],
