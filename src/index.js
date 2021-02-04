@@ -27,17 +27,26 @@ new MLCycle ({
 
 new ThresholdFigure ({
 	target: document.getElementById("interactive-dp"),
-	props: { "fairness_criteria": "demographic parity"}
+	props: {
+		"fairness_criteria": "Demographic Parity",
+		"parity_thresholds": {"male": 0.61, "female": 0.67},
+	}
 });
 
 new ThresholdFigure ({
 	target: document.getElementById("interactive-eq"),
-	props: { "fairness_criteria": "equal opportunity"}
+	props: {
+		"fairness_criteria": "Equalized Opportunity",
+		"parity_thresholds": {"male": 0.61, "female": 0.62},
+	}
 });
 
 new ThresholdFigure ({
 	target: document.getElementById("interactive-pp"),
-	props: { "fairness_criteria": "predictive parity"}
+	props: {
+		"fairness_criteria": "Predictive Parity",
+		"parity_thresholds": {"male": 0.81, "female": 0.6},
+	}
 });
 
 // Question- / survey-boxes

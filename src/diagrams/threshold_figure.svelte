@@ -12,6 +12,7 @@ import { male_color, male_color_weak, male_bar_background, female_color, female_
 import data from '../data/superhero_classification.json';
 // Props passed from the host script
 export let fairness_criteria;
+export let parity_thresholds;
 
 // Variables for the super figure bar charts
 let bar_height = 150;
@@ -51,25 +52,25 @@ let secondaryBarSettings = {
 
 // Construct a list with titles based on the fairness criteria
 let fairness_criteria_text = "";
-if (fairness_criteria === "demographic parity") {
+if (fairness_criteria === "Demographic Parity") {
   fairness_criteria_text = ["Positive Rate"];
 }
-else if (fairness_criteria === "equal opportunity") {
+else if (fairness_criteria === "Equalized Opportunity") {
   fairness_criteria_text = ["True Positive Rate", "Positive Rate"];
 }
-else if (fairness_criteria === "predictive parity") {
+else if (fairness_criteria === "Predictive Parity") {
   fairness_criteria_text = ["Positive Predictive Value", "True Positive Rate", "Positive Rate"];
 }
 // Construct a list with percentages based on the fairness criteria
 var choose_percs = function(fairness_criteria, pr, tpr, ppv) {
   let perc = [];
-  if (fairness_criteria === "demographic parity") {
+  if (fairness_criteria === "Demographic Parity") {
     perc = [pr];
   }
-  else if (fairness_criteria === "equal opportunity") {
+  else if (fairness_criteria === "Equalized Opportunity") {
     perc = [tpr, pr];
   }
-  else if (fairness_criteria === "predictive parity") {
+  else if (fairness_criteria === "Predictive Parity") {
     perc = [ppv, tpr, pr];
   }
   return perc;
@@ -131,7 +132,7 @@ $: icons = choose_icons(percs,
 
 </script>
 
-<table>
+<figure><table class="figure">
   <thead>
     <tr>
       <th style="font-size: 1rem;"> Male figures </th>
@@ -155,6 +156,7 @@ $: icons = choose_icons(percs,
               <SuperheroBar title={fairness_criteria_text[0]} barSettings={barSettings} gender={gender} perc={percs[gender][0]} icon={icons[0]} />
             {:else if row_type === "secondary_bar"}
               <table border="0">
+                <tbody>
                 <tr>
                   {#each fairness_criteria_text as title, i}
                     {#if i > 0}
@@ -163,14 +165,14 @@ $: icons = choose_icons(percs,
                       </td>
                     {/if}
                   {/each}
-                </tr>
+                </tr> </tbody>
               </table>
             {/if}
           </td>
         {/each}
       </tr>
     {/each}
-    {#if fairness_criteria === "predictive parity"}
+    {#if fairness_criteria === "Predictive Parity"}
     <tr>
       <td colspan="2">
         <PRCurve thresholds={thresholds} tprs={tprs} ppvs={ppvs} />
@@ -179,6 +181,37 @@ $: icons = choose_icons(percs,
     {/if}
   </tbody>
 </table>
+<figcaption>
+  In this illustration inspired by Wattenberg and others'
+  <a href="http://research.google.com/bigpicture/attacking-discrimination-in-ml/">interactive article</a>,
+  you can choose different thresholds for the female and male group respectively using the slider in the top.
+  The threshold determines the value of the score the model needs to produce for a super figure to be let
+  into the club, i.e. so that the super figure is seen as a superhero. When changing the threshold you can
+  observe how the performance of the system (how many villains and superheroes are let in) and the
+  corresponding confusion matrix changes. The big super figures show the {fairness_criteria_text[0]} for
+  each group. Try to find two thresholds with reasonable performance where the {fairness_criteria_text[0]}
+  is similar for both males and females to achieve {fairness_criteria}. You will see the two super figures
+  raise their arms in cheers, when {fairness_criteria} is reached (difference of <d-math>\leq 3\%</d-math>).
+  {#if fairness_criteria === "Predictive Parity"}
+    In our example you will find it very difficult to find reasonable thresholds for achieving {fairness_criteria}.
+  {/if}
+  Try, for example a threshold of {parity_thresholds["male"]} and {parity_thresholds["female"]} for males
+  and females respectively. Note that choosing the same thereshold for both groups seldomly leads to the
+  same {fairness_criteria_text[0]} unless you choose extreme values like 0 or 1 as the threshold, in
+  which case the use of the system as doormen is useless.
+  {#if fairness_criteria != "Demographic Parity"}
+    The previously introduced fairness criteria are shown with small super figures that also reach their arms
+    when achieving parity. Note that it will be difficult to find thresholds were multiple or all parity conditions
+    are fulfilled.
+  {/if}
+  {#if fairness_criteria === "Predictive Parity"}
+    <b>Bottom:</b> The precision-recall curve plots the True Positive Rate (Recall) against the Positive Predictive
+    Value (Precision) for each group. Hovering the chart will reveal the precision, recall and corresponding threshold
+    for each point on the graph. The points for your chosen thresholds are shown in a weaker color. Note that in this case
+    there is no point where both the precision and recall are the same for both groups.
+  {/if}
+</figcaption>
+</figure>
 
 <style>
 
@@ -189,6 +222,9 @@ table {
   margin-left: auto;
   border-collapse: separate;
   border: none;
+}
+table.figure {
+  margin-bottom: 0.5rem;
 }
 
 table td, table th {
