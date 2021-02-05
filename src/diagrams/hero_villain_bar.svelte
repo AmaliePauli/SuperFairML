@@ -34,62 +34,6 @@
     ]
   };
 
-  var barTooltip = function(tooltipModel) {
-    // Tooltip Element
-    var tooltipEl = document.getElementById('bar-tooltip');
-
-    // Create element on first render
-    if (!tooltipEl) {
-        tooltipEl = document.createElement('div');
-        tooltipEl.id = 'bar-tooltip';
-        tooltipEl.innerHTML = '';
-        document.body.appendChild(tooltipEl);
-    }
-
-    // Hide if no tooltip
-    if (tooltipModel.opacity === 0) {
-        tooltipEl.style.opacity = 0;
-        return;
-    }
-
-    // Set caret Position
-    tooltipEl.classList.remove('above', 'below', 'no-transform');
-    if (tooltipModel.yAlign) {
-        tooltipEl.classList.add(tooltipModel.yAlign);
-    } else {
-        tooltipEl.classList.add('above');
-    }
-
-    // Set Text
-    if (tooltipModel.body) {
-
-        let innerHtml = "";
-        tooltipModel.dataPoints.forEach(function(item, i) {
-            innerHtml += item.value + "<br>";
-        });
-        // Remove last <br>
-        innerHtml = innerHtml.slice(0, -4);
-        tooltipEl.innerHTML = innerHtml;
-    }
-
-    // `this` will be the overall tooltip
-    var position = this._chart.canvas.getBoundingClientRect();;
-
-    // Display, position, and set styles for font
-    tooltipEl.style.opacity = 1.0;
-    tooltipEl.style.color = 'black';
-    tooltipEl.style.border = 'none';
-    tooltipEl.style.position = 'absolute';
-    tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX - (0.5 * font_size) + 'px';
-    tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY - (1.5 * font_size) - 3 + 'px';
-    tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
-    tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
-    tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
-    tooltipEl.style.fontWeight = "bold";
-    tooltipEl.style.padding = 0;
-    tooltipEl.style.pointerEvents = 'none';
-	};
-
   const createBarChart = function() {
     let canvas = document.getElementById('hero-villain-barchart');
     let ctx = canvas.getContext('2d');
@@ -99,10 +43,7 @@
       data: barChartData,
       options: {
         tooltips: {
-          mode: 'point',
-          intersect: true,
           enabled: false,
-          custom: barTooltip,
         },
         responsive: true,
         scales: {
@@ -143,7 +84,26 @@
              },
              position: "top",
              align: "end",
-         }
+         },
+         hover: {
+           animationDuration: 0
+         },
+         animation: {
+          duration: 0,
+          onComplete: function () {
+            // render the value of the chart above the bar
+            var ctx = this.chart.ctx;
+            ctx.fillStyle = this.chart.config.options.defaultFontColor;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            this.data.datasets.forEach(function (dataset) {
+              for (var i = 0; i < dataset.data.length; i++) {
+                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model;
+                ctx.fillText(dataset.data[i], model.x, model.y - 3);
+              }
+            });
+          }
+        }
       }
     });
   }
