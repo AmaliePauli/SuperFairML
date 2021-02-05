@@ -37,13 +37,6 @@
     margin-bottom: 0;
   }
 
-  table tr:hover {
-    background-color: var(--first-color-bg);
-  }
-  tr.header:hover {
-    background-color: var(--box-color);
-  }
-
   .heading {
     font-weight: bold;
     text-align: left;
