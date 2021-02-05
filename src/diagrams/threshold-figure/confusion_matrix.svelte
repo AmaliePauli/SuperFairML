@@ -7,19 +7,19 @@
   <thead>
     <tr>
       <th> &nbsp; </th>
-      <th class="heading"> Predicted superhero </th>
-      <th class="heading"> Predicted villain </th>
+      <th class="heading"> Actual superhero </th>
+      <th class="heading"> Actual villain </th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="heading"> Actual superhero </td>
+      <td class="heading"> Predicted superhero </td>
       <td> {confusionMatrix.tp} </td>
-      <td> {confusionMatrix.fn} </td>
+      <td> {confusionMatrix.fp} </td>
     </tr>
     <tr>
-      <td class="heading"> Actual villain </td>
-      <td> {confusionMatrix.fp} </td>
+      <td class="heading"> Predicted villain </td>
+      <td> {confusionMatrix.fn} </td>
       <td> {confusionMatrix.tn} </td>
     </tr>
   </tbody>
