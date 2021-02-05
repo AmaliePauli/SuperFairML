@@ -25,18 +25,18 @@ export const questions = [
   {
     type: "opinion",
     id: "1",
-    question: "Imagine that you can choose to either be assessed by a person at the door or by an algorithm.  You know nothing about how well they do it but in general, you expect both are acting reasonably. Which scenario do you prefer?",
+    question: "Imagine that you can choose to either be assessed by a person at the door or by an algorithm. You know nothing about how well they perform but you expect both are acting reasonably. Which scenario do you prefer?",
     answers: [
       {
-        answer: "I trust that the person will make the best and most fair decision",
+        answer: "I trust that the person will make the best and most fair decision.",
         percentage: 10
       },
       {
-        answer: "I trust that the algorithm will make the best and most fair decision",
+        answer: "I trust that the algorithm will make the best and most fair decision.",
         percentage: 13
       },
       {
-        answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
+        answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call.",
         percentage: 77
       },
     ]
@@ -44,18 +44,18 @@ export const questions = [
   {
     type: "opinion",
     id: "2",
-    question: "Imagine you can choose to either be assessed by a person at the door or by an algorithm. You know nothing about how well they do it, but in general you expect both are acting reasonably. However, imagine that you now know that some days the person is just really angry and therefore judges one specific sex harder than the other. Which would you then prefer?",
+    question: "Imagine you can choose to either be assessed by a person at the door or by an algorithm. You know nothing about how well each performs, but in general you expect both are acting reasonably. However, imagine that you now know that some days the person is just really angry and therefore judges one specific sex harder than the other. Which would you then prefer?",
     answers: [
       {
-        answer: "I trust that the person will make the best and most fair decision",
+        answer: "I trust that the person will make the best and most fair decision.",
         percentage: 4
       },
       {
-        answer: "I trust that the algorithm will make the best and most fair decision",
+        answer: "I trust that the algorithm will make the best and most fair decision.",
         percentage: 56
       },
       {
-        answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
+        answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call.",
         percentage: 40
       },
     ]
@@ -66,15 +66,15 @@ export const questions = [
     question: "Now, imagine that you know that on average the algorithm’s assessments are much more accurate than the person’s. However, the algorithm is at the same time accused of being a bit harder on assessing one specific sex than the other. Which would you then prefer?",
     answers: [
       {
-        answer: "I trust that the person will make the best and most fair decision",
+        answer: "I trust that the person will make the best and most fair decision.",
         percentage: 9
       },
       {
-        answer: "I trust that the algorithm will make the best and most fair decision",
+        answer: "I trust that the algorithm will make the best and most fair decision.",
         percentage: 20
       },
       {
-        answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call",
+        answer: "I trust that the best and most fair decision is if the algorithm makes a suggestion to the person, but the person makes the final call.",
         percentage: 71
       },
     ]
@@ -82,7 +82,7 @@ export const questions = [
   {
     type: "opinion",
     id: "4",
-    question: "Please state you own opinion on the following statement 'I think Predictive parity is fair to use in this setting'",
+    question: 'Please state you own opinion on the following statement "I think Predictive Parity is fair to use in the super figure setting".',
     answers: [
       {
         answer: "Strongly disagree",
@@ -109,7 +109,7 @@ export const questions = [
   {
     type: "opinion",
     id: "4.1",
-    question: "Please state you own opinion on the following statement 'I find it difficult to understand preditive parity and the questions about it",
+    question: 'Please state you own opinion on the following statement "I find it difficult to understand Preditive Parity and the questions about it".',
     answers: [
       {
         answer: "Strongly disagree",
@@ -136,18 +136,18 @@ export const questions = [
   {
     type: "opinion",
     id: "5",
-    question: "Which of the following statements do you find most important to comply with to achieve fairness in the  play setting about superfigures wanting to go to a party?",
+    question: "Which of the following statements do you find most important to achieve fairness in the play setting about super figures wanting to go to a party?",
     answers: [
       {
-        answer: "The chance of getting accepted to the party should be the same for both males and of females",
+        answer: "The chance of getting accepted to the party should be the same for both males and of females.",
         percentage: 15
       },
       {
-        answer: "The chance of a correct prediction when you are allowed into the party should be the same for both males and females",
+        answer: "The chance of a correct prediction whether you are allowed into the party should be the same for both males and females.",
         percentage: 21
       },
       {
-        answer: "The chance of getting accepted to the party when you, in fact, are a hero should be the same for both males and females",
+        answer: "The chance of getting accepted to the party when you, in fact, are a hero should be the same for both males and females.",
         percentage: 54
       }
     ]
@@ -155,18 +155,18 @@ export const questions = [
   {
     type: "opinion",
     id: "6",
-    question: "Which of the following statements of what you think is the worst case that could occur and which results in unfairness in the  play setting about superfigures wanting to go to a party?",
+    question: "Which of the following statements do you think is the worst case that could occur and lead to unfairness in the play setting about super figures wanting to go to a party?",
     answers: [
       {
-        answer: "Female figures that are true heroes are rejected more often than male figures that are true heroes",
+        answer: "Female figures that are true heroes are rejected more often than male figures that are true heroes.",
         percentage: 68
       },
       {
-        answer: "There are more males at the party who are wrongly accepted than females who are wrongly accepted",
+        answer: "There are more males at the party who are wrongly accepted than females who are wrongly accepted.",
         percentage: 17
       },
       {
-        answer: "Male figures have a higher chance of getting accepted to the party than females",
+        answer: "Male figures have a higher chance of getting accepted to the party than females.",
         percentage: 15
       }
     ]
@@ -174,7 +174,7 @@ export const questions = [
   {
     type: "check",
     id: "10",
-    question: "Under Demographic Parity: If we look at 200 male super figures and 100 female super figures, and we accepted 50 male figures, how many female figures should we accept to achieve the above criterion?",
+    question: "Under Demographic Parity: If we look at 200 male super figures and 100 female super figures, and we accepted 50 male figures, how many female figures should we accept to achieve Demographic Parity?",
     answers: [
       {
         answer: "25",
@@ -197,7 +197,10 @@ export const questions = [
         right: false,
       },
     ],
-    explanation: "The criterion requires equal acceptance rates, and since the acceptance rate for the male group is <d-math>50/200=0.25</d-math>, we also need to accept 25% of the females figures trying to get into the party which would yield that <d-math>100*0.25=25</d-math> females should get accepted.",
+    explanation: `The criterion requires equal acceptance rates. Since the
+    acceptance rate for the male group is <d-math>50/200=0.25</d-math>, we also
+    need to accept 25% of the female figures trying to get into the party. This
+    yields that <d-math>100 \\cdot 0.25=25</d-math> females should get accepted.`,
   },
   {
     type: "check",
@@ -215,7 +218,12 @@ export const questions = [
         right: true
       },
     ],
-    explanation: "The correct answer is false. Under this criterion we are forced to have an equal acceptance rate between the two groups no matter the underlying distribution of heroes and villains in the two groups. This is an important implication of this criterion that even though there is a smaller percentage of heroes in one group than in the other we are forced to accept the same percentage in each group.",
+    explanation: `The correct answer is false. Under Demographic Parity we are
+    forced to have an equal acceptance rate between the two groups no matter the
+    underlying distribution of heroes and villains in the two groups. This is an
+    important implication of this criterion, forcing us to accept the same
+    percentage in each group even though there is a smaller percentage of heroes
+    in one group than in the other.`,
   },
   {
     type: "check",
@@ -233,7 +241,11 @@ export const questions = [
         right: false
       },
     ],
-    explanation: "The correct answer is true. The criterion is requiring equal acceptance rates between the groups no matter the underlying distribution of heroes and villains and therefore even though we do not deliberately seek it, we could be forced to reject a higher fraction of true heroes in one group than in the other to achieve the parity.",
+    explanation: `The correct answer is true. Demographic Parity requires equal
+    acceptance rates between the groups no matter the underlying distribution of
+    heroes and villains. Therefore, even though we do not deliberately seek it,
+    we could be forced to reject a higher fraction of true heroes in one group
+    than in the other to achieve the parity.`,
   },
   {
     type: "check",
@@ -261,7 +273,12 @@ export const questions = [
         right: false
       },
     ],
-    explanation: "The criterion requires us to accept the same fraction of the true heroes in both groups. In the male group we have 150 who are truly heroes and we accept 100 of these which give a true positive rate of  <d-math> 100/150=\\frac{2}{3} </d-math>. Hence we need to accept <d-math> \\frac{2}{3} </d-math> of the true heros in the female group: <d-math>75*\\frac{2}{3}=50</d-math>.",
+    explanation: `Equalized Opportunity requires us to accept the same fraction
+    of true heroes in both groups. In the male group we have 150 who are truly
+    heroes and we accept 100 of these, which gives a true positive rate of&nbsp;
+    <d-math> 100/150=\\frac{2}{3} </d-math>. Hence, we need to accept
+    <d-math> \\frac{2}{3} </d-math> of the true heros in the female group:
+    <d-math>75\\cdot\\frac{2}{3}=50</d-math>.`,
   },
   {
     type: "check",
@@ -279,7 +296,10 @@ export const questions = [
         right: false
       },
     ],
-    explanation: "The correct answer is true. We are not restricted to have equal acceptance rates, and in fact the number example in the question above is revealing different acceptance rates between the groups, hence we do not necessarily fulfill demographic parity.",
+    explanation: `The correct answer is true. We are not restricted to have
+    equal acceptance rates or Demographic Parity. In the example in the question
+    above, we in fact have different acceptance rates between the groups, and
+    hence do not achieve Demographic Parity together with Equalized Opportunity.`,
   },
   {
     type: "check",
@@ -297,7 +317,11 @@ export const questions = [
         right: false
       },
     ],
-    explanation: "The correct answer is true. Under this criterion, we do not take into account the fraction of correct predictions we make of the figures we accept. We are only looking at the set of true heroes. Therefore an extreme case could be that we in addition to the equal fraction of accepting true heroes  that we in one of the group accepted all the villains as heroes as well.",
+    explanation: `The correct answer is true. Under Equalized Opportunity, we do not
+    take into account the fraction of correct predictions we make of the figures
+    we accept. We are only looking at the set of true heroes. Therefore, an
+    extreme case can occur where in one group all villains are accpeted as heroes,
+    even though we achieve an equal fraction of accepting true heroes between groups.`,
   },
   {
     type: "check",
@@ -315,7 +339,9 @@ export const questions = [
         right: true
       },
     ],
-    explanation: "The correct answer is false. The criterion requires us to have an equal rate of correct predictions of the figures we accept and the rate of misqualified figures we accept is given with 1 minus this rate.",
+    explanation: `The correct answer is false. Predictive Parity requires us to have
+    an equal rate of correct predictions among the figures we accept and the rate
+    of villains we wrongly accept is given by 1 minus this rate.`,
   },
   {
     type: "check",
@@ -333,6 +359,9 @@ export const questions = [
         right: false
       },
     ],
-    explanation: "The correct answer is true. In this criterion we are looking at the fraction of true heroes out of the set of figures we predict to be heroes, but it is not restricting us on the numbers of true heroes we reject which is the case in equalized opportunities which looks at the fraction of predicted heroes out of the set of true heros.",
+    explanation: `The correct answer is true. With Predictive Parity we are looking
+    at the fraction of true heroes out of the set of figures we predict to be
+    heroes. However we are not restricted by the numbers of true heroes we reject,
+    which is the case in Equalized Opportunity.`,
   },
 ];
