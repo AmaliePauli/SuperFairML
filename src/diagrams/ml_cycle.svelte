@@ -124,11 +124,6 @@
     border-radius: 5px;
     background-color: var(--box-color);
   }
-  @media(max-width: 768px) {
-    .ml-cycle {
-      grid-column: text;
-    }
-  }
 
   .cycle {
     display: grid;
@@ -158,8 +153,13 @@
     font-weight: bold;
     font-size: 1rem;
     width: 100%;
-    height: 100%;
+    height: 80px;
     justify-self: center;
+  }
+  @media(max-width: 768px) {
+    button {
+      font-size: 12px;
+    }
   }
   button:hover  {
     color: var(--first-color);
@@ -177,10 +177,18 @@
   .circle {
     grid-area: middle;
     justify-self: center;
-    width: 100px;
-    background-size: 100% 100%;
+    width: 112px;
+    height: 114px;
+    background-size: auto auto;
     border: none;
     background: url(../../images/circle.svg);
+    background-repeat: no-repeat;
+  }
+  @media(max-width: 256px) {
+    .circle {
+      width: 100%;
+      height: auto;
+    }
   }
 
   #monitoring {
