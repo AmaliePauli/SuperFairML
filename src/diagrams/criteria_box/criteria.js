@@ -168,10 +168,10 @@ export const criteriaData = [
       description: `<p> Using causal models <d-cite key='Pearl2000'></d-cite> to achieve fairness is for example suggested by
       Kusner et al., where they define the idea of <i>counter-factual fairness</i> <d-cite key='kusner2017counterfactual'></d-cite>:
       individuals of a protected group should receive the same outcome as if the group membership was flipped in a
-      counterfactual setting. In our example it means that a male version of a female super figure should receive the same outcome.
-      This requires building a (causal) model that learns the relations between attributes, such that we know how the other
-      attributes would change with regard to the “gender swap”. For example, property attributes such as <i>weight</i>
-      and <i>height</i> should be adjusted for a male version. <br>
+      counterfactual setting (see also <d-cite key="barocas-hardt-narayanan"></d-cite> for an in-depth description). In our example it means that a male
+      version of a female super figure should receive the same outcome. This requires building a (causal) model that learns
+      the relations between attributes, such that we know how the other attributes would change with regard to the “gender swap”.
+      For example, property attributes such as <i>weight</i> and <i>height</i> should be adjusted for a male version. <br>
       The idea of causal fairness was later extended to distinguish between fair and unfair pathways of the sensitive attribute in
       the causal graph <d-cite key='Kilbertus2017, Nabi2018, Chiappa2019'></d-cite>. The main problem of counterfactual fairness is,
       that it is not necessarily easy to accurately build a causal model or to well define the counterfactual setting
