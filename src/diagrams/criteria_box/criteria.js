@@ -74,8 +74,8 @@ export const criteriaData = [
       However, the main shortcoming of this approach is the non-trivial question of defining a similarity measure between
       individuals <d-cite key='chouldechova2020snapshot, kim2018fairness'></d-cite>. Take the example of how to compare
       years of superhero experience with the diploma from a superhero academy? Work has been done to try to relax the
-      criterion e.g. by looking at subpopulations <d-cite key='kim2018fairness'></d-cite> or to ensure that a randomly
-      picked pair of individuals receives the same outcome if they are similar <d-cite key='GalYona2018'></d-cite>.
+      criterion, e.g. by looking at subpopulations <d-cite key='kim2018fairness'></d-cite> or to ensure that a randomly
+      picked pair of individuals receive the same outcome if they are similar <d-cite key='GalYona2018'></d-cite>.
       Others define similarity based on a learned latent space in which individuals are compared
       <d-cite key='Ruoss2020'></d-cite>. Recent work has shown that individual fairness and group fairness, i.e. parity,
       can be combined in a common framework <d-cite key="Speicher2018"></d-cite> and that the two definitions are more
@@ -131,7 +131,7 @@ export const criteriaData = [
       might be incompatible with improving accuracy, i.e. model performance. In our super figure case,
       we could train a separate classifier for males and females, and optimise performance for both models,
       as long as there is no super figure that would “prefer” the outcome of the other group’s classifier.
-      In this example preference will probably be defined by the fact whether a super figure is let into
+      In this example, preference will probably be defined by the fact whether a super figure is let into
       the club or not. However, it is not always easy to calculate a “preference” way of allocation in all
       domains <d-cite key='gajane2017formalizing'></d-cite>. </p>`,
 
@@ -166,14 +166,14 @@ export const criteriaData = [
     {
       title: "Counterfactual and Causal Fairness",
       description: `<p> Using causal models <d-cite key='Pearl2000'></d-cite> to achieve fairness is for example suggested by
-      Kusner et al., where they define the idea of <i>counter-factual fairness</i> <d-cite key='kusner2017counterfactual'></d-cite>:
+      Kusner et al., where they define the idea of <i>counterfactual fairness</i> <d-cite key='kusner2017counterfactual'></d-cite>:
       individuals of a protected group should receive the same outcome as if the group membership was flipped in a
-      counterfactual setting (see also <d-cite key="barocas-hardt-narayanan"></d-cite> for an in-depth description). In our example it means that a male
+      counterfactual setting (see also <d-cite key="barocas-hardt-narayanan"></d-cite> for an in-depth description). In our example, it means that a male
       version of a female super figure should receive the same outcome. This requires building a (causal) model that learns
       the relations between attributes, such that we know how the other attributes would change with regard to the “gender swap”.
       For example, property attributes such as <i>weight</i> and <i>height</i> should be adjusted for a male version. <br>
       The idea of causal fairness was later extended to distinguish between fair and unfair pathways of the sensitive attribute in
-      the causal graph <d-cite key='Kilbertus2017, Nabi2018, Chiappa2019'></d-cite>. The main problem of counterfactual fairness is,
+      the causal graph <d-cite key='Kilbertus2017, Nabi2018, Chiappa2019'></d-cite>. The main problem of counterfactual fairness is
       that it is not necessarily easy to accurately build a causal model or to well define the counterfactual setting
       <d-cite key='mitchell2018prediction, KohlerHausmann2019'></d-cite>. Lastly, counterfactual reasoning can lead to types of biases,
       e.g. wrong evaluation of the model's decision when outcomes are already known <d-cite key='gajane2017formalizing'></d-cite>. </p>`,
@@ -236,7 +236,7 @@ export const criteriaData = [
       a training algorithm for mitigating potential bias using feature attributions. Note, this idea about accessing fairness by examining
       what features a black-box model fits on is not restricted to harms of allocation problems. It could also be used on a text classifier
       for sentiment analysis to ensure that the model is not fitting on words which reflect a meaning of racial or gender belongings instead
-      of the looked for sentimental meaning. <p>`,
+      of words of sentimental meaning. <p>`,
 
 
       examples: [

@@ -19,7 +19,7 @@
     {
       id: "training",
       title: "3. Model training",
-      text: `Bias can also be mitigated during training of the model through so called in-processing
+      text: `Bias can also be mitigated during training of the model through so-called in-processing
       algorithms <d-cite key="bellamy2018ai"></d-cite>. This can be achieved
       by specifically designed training algorithms or models, e.g. using adversarial learning
       <d-cite key="Zhang2018, Lahoti2020"></d-cite>, fairness specific regularization techniques
@@ -44,7 +44,7 @@
       text: `Before implementing a trained model a potential bias can be mitigated through post-processing steps,
       e.g. by adjusting the output labels by optimizing after a defined metric
       <d-cite key="hardt2016equality, Woodworth2017, Pleiss2017, kim2018fairness"></d-cite>. In addition, one should be aware of a
-      so called deployment bias when the model is used different from its intentional use
+      so-called deployment bias when the model is used differently from its intended use
       case <d-cite key="Suresh2019"></d-cite>.`,
     },
     {
@@ -52,7 +52,7 @@
       title: "6. Model monitoring",
       text: `A model can, for example, be monitored for bias by logging and observing statistical
       fairness measures or other fairness definitions (see <a href="#criteria-box">the box</a> describing
-      different fairness definitions). There exist different libraries for meausring discrimination of
+      different fairness definitions). There exist different libraries for measuring discrimination of
       a model, e.g. <a href=https://aif360.mybluemix.net/>AI Fairness 360 </a>,
       <a href=https://fairlearn.github.io/>Fairlearn</a> or <a href=https://github.com/linkedin/LiFT>LiFT</a>.`,
     },
