@@ -193,10 +193,10 @@ $: icons = choose_icons(percs,
   is similar for both males and females to achieve {fairness_criteria}. You will see the two super figures
   raise their arms in cheers, when {fairness_criteria} is reached (difference of <d-math>\leq 3\%</d-math>).
   {#if fairness_criteria === "Predictive Parity"}
-    In our example you will find it very difficult to find reasonable thresholds for achieving {fairness_criteria}.
+    In our example, you will find it very difficult to find reasonable thresholds for achieving {fairness_criteria}.
   {/if}
-  Try, for example a threshold of {parity_thresholds["male"]} and {parity_thresholds["female"]} for males
-  and females respectively. Note that choosing the same thereshold for both groups seldomly leads to the
+  Try, for example, a threshold of {parity_thresholds["male"]} and {parity_thresholds["female"]} for males
+  and females respectively. Note that choosing the same threshold for both groups seldomly leads to the
   same {fairness_criteria_text[0]} unless you choose extreme values like 0 or 1 as the threshold, in
   which case the use of the system as doormen is useless.
   {#if fairness_criteria != "Demographic Parity"}
@@ -207,7 +207,7 @@ $: icons = choose_icons(percs,
   {#if fairness_criteria === "Predictive Parity"}
     <b>Bottom:</b> The precision-recall curve plots the True Positive Rate (Recall) against the Positive Predictive
     Value (Precision) for each group. Hovering the chart will reveal the precision, recall and corresponding threshold
-    for each point on the graph. The points for your chosen thresholds are shown in a weaker color. Note that in this case
+    for each point on the graph. The points for your chosen thresholds are shown in a weaker colour. Note that in this case
     there is no point where both the precision and recall are the same for both groups.
   {/if}
 </figcaption>
