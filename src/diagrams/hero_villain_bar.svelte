@@ -119,7 +119,7 @@
      <p>Barchart showing number of superheroes and villains for each gender.</p>
   </canvas>
   <figcaption style="text-align: left;">
-    <b>Figure [Number]:</b> Barchart showing number of superheroes and villains for each gender.
+    <b>Figure 1:</b> Barchart showing number of superheroes and villains for each gender.
     There is both an imbalance between superheroes ({males[0]+females[0]}) and villains ({males[1]+females[1]}),
     and males ({males[0]+males[1]}) and females ({females[0]+females[1]}) in the example dataset.
   </figcaption>
