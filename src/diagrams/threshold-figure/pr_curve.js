@@ -132,8 +132,8 @@ export function createPRChart(data) {
               tooltipEl.style.border = 'none';
               tooltipEl.style.borderRadius = '10px';
               tooltipEl.style.position = 'absolute';
-              tooltipEl.style.left = position.left + window.pageXOffset + (position.width * 0.7) + tooltipModel.xPadding + 'px';
-              tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.yPadding - 20 + 'px';
+              tooltipEl.style.left = position.left + (position.width * 0.09) + tooltipModel.xPadding + 'px';
+              tooltipEl.style.top = position.top + window.pageYOffset + (position.height * 0.25) + tooltipModel.yPadding + 'px';
               tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
               tooltipEl.style.fontSize = tooltipModel.bodyFontSize + 'px';
               tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
