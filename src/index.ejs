@@ -33,14 +33,22 @@
           <div><a href="#bias-notion">The notion of bias</a></div>
           <div><a href="#fairness-definition">Defining fairness</a></div>
           <ul>
-            <li><a href="#superpowers">Listing the super powers</a></li>
             <li><a href="#dp">Demographic Parity</a></li>
             <li><a href="#eo">Equalized Opportunity</a></li>
-            <li><a href="#pp">Predictive Parity</a></li>
-            <li><a href="#circulate">Circulate the planet</a></li>
+            <li><a href="#pp">Predictive Parity</a></li>            
           </ul>
           <div><a href="#perceived-section">Perceived algorithmic fairness</a></div>
+          <ul>
+            <li><a href="#comprehension">A measure of comprehension</a></li>
+            <li><a href="#opinion">Fairness perception</a></li>
+            <li><a href="#preference">Changing preferences</a></li>   
+ <li><a href="#consistent">Inconsistency in answers</a></li>            
+          </ul>
           <div><a href="#challenges-ahead">The challenges ahead </a></div>
+          <h3></h3>
+          <h3>Shortcuts</h3>
+          <div><a href="#superpowers">Fairness definitions</a></div>
+         <div><a href="#circulate">Process of bias mitigation</a></div>
         </nav>
       </d-contents>
       
@@ -220,7 +228,7 @@
   <p>
   The question of which statistical fairness measure people perceive as more fair has previously been addressed in the literature. A large bulk of studies in this regard have been motivated by the COMPAS debate between Equalized Opportunity and accuracy. Srivastava et al. <d-cite key="srivastava2019mathematical "></d-cite> showed through an Amazon Turk survey that Demographic Parity was perceived as most fair compared to metrics like Equalized Opportunity and Predictive Parity (in the paper presented as False Negative Rate and False Discovery Rate) in two different scenarios. However, the survey was conducted by showing the participants ten figures together with the true label and the predicted label of two different algorithms, asking the participants to choose the most discriminating one. The question can be raised whether the participants fully understood the implications of the different “algorithms” and whether ten example figures are enough to generalise to a systematic bias. In Harrison et al. <d-cite key=" harrison2020empirical"></d-cite>, an Amazon Turk survey comparing the perception of different fairness measures was evaluated through a different design. Here, they showed participants histograms of two measures in two different models, where one measure was equalised in one of the models and the other measure in the other model. Then participants were asked to choose between the models. Again, the same question can be raised, whether the participants fully understood the implication of the parity in the models. </p> 
   <p> The question about people’s comprehension of fairness metrics is addressed by Saha et al. <d-cite key="saha2019measuring "></d-cite>, which showed that comprehension can be measured through a multiple-choice survey. They found that in a hiring scenario, Equalized Opportunity was harder to understand than Demographic Parity, and that in general, comprehension was correlated with the participants’ education level. An interesting finding was a tendency of people with low comprehension score to express less negative sentiment towards a criterion. This survey’s design, where criteria are expressed as rules and questions are asked through multiple-choice, has inspired the survey conducted in this paper. The objectives were to measure the comprehension and link it to the perception of fairness, and to examine the consistency in the answers and people´s self-reported understanding. In the following we present the results of the survey. </p>
-  <h4 class="no-caps"> A measure of comprehension</h4>
+  <h4 id="comprehension" class="no-caps"> A measure of comprehension</h4>
   
   <p> To measure the participants’ comprehension of each criterion, a score is computed as the percentage of correct answers to the comprehension questions (four questions per criterion). This yields an indication of the participants' understanding of the fairness criterion and it allows for a comparison of the comprehension between the three criteria. <a href="#comprehension-boxplot">Figure 2</a> shows the distributions of the participants’ comprehension score on each fairness criterion. </p>
   
@@ -248,7 +256,7 @@
   <p> We examined whether there is an association between the average self-reported and the average computed comprehension score. A calculation of the Spearman correlation <d-cite key="spearman1987proof"></d-cite> (<d-math> \rho=0.198</d-math>) and the associated <i>p</i>-value (<d-math>0.058</d-math>) does not show a strong correlation between the self-reported and computed comprehension score (see also <a href="#Appendix-A"> Appendix A</a>). Hence, we can not conclude a significant association between how people perceive their understanding and how well they actually understand the criteria. No clear trend towards over- or underrating oneself was found in the data. The result indicates that it is difficult to discuss fairness if people are not aware of their own understanding. </p>
   
    
-    <h4 class="no-caps"> The opinion towards the criteria </h4>
+    <h4 id="opinion" class="no-caps"> The opinion towards the criteria </h4>
   <p>After the comprehension questions of each criterion, the participants were asked to state how fair they perceive the criterion on a five-point Likert-scale (see an example of the formulation in <a href="#questionnaire-target-4">this question</a>), i.e. they were asked to evaluate the fairness of each criterion independent of the other criteria. The Likert-scale is transformed to numeric values, and the boxplots in <a href="#perception-boxplot">Figure 3</a> shows the different distributions. The fairness assessment resulted in the following ranking: 1.) Equalized Opportunity, 2.) Predictive Parity, 3.) Demographic Parity.  </p>
   
   <figure id="perception-boxplot" style="text-align: left;">
@@ -278,7 +286,7 @@
   <p> Along the same lines of looking at people’s fairness perception of the decision-making process, work has been conducted to examine how different automatic generated explanation styles of machine learning models impact the perception <d-cite key="binns2018s, dodge2019explaining"></d-cite>. One thing is an automatically generated explanation for a model or a model's output, another how actual formulations may impact opinions about fairness. In the next section, we will touch on some more high-level concepts of perceived fairness.
    </p>
   
-     <h4 class="no-caps"> The preference for human or algorithmic judgement is subject to change</h4>
+     <h4 id="preference" class="no-caps"> The preference for human or algorithmic judgement is subject to change</h4>
     <p>
    Human or machine, what would people prefer to be assessed by in different settings? This question was also raised by Harrison et al., who found a slight preference towards human judgment over a machine learning model <d-cite key="harrison2020empirical"></d-cite>. In our survey we investigated people’s opinion about using algorithmic or human judgement in the super figure setting, and explored how additional information can influence people’s opinion using the following three questions (the first question is replicated in <a href="#questionnaire-target-1">this question</a> and the two others are shown below): </p>
    
@@ -288,7 +296,7 @@
   
   <p> The answers show that, initially, the majority (77%) of participants preferred the option of a “human judgment supported by an algorithm” when it is assumed that both the algorithm and the human act reasonably (see <a href="#questionnaire-target-1">this question</a>). However, this changes with the extra information that occasionally the human is biased against one sex. Under this assumption, the majority (56%) of participants preferred the algorithm, even though it is still, in general, assumed that both are acting reasonably. The third question assumes that the algorithm is much more accurate than the human but also biased. This shifts the preference of the majority (71%) back to preferring “human judgment with algorithmic support”. Our survey consists of a small sample size, and the representativeness is not accounted for. Nevertheless, it is interesting how relatively easy people’s opinion can be changed by adding some weak information about the system. In fact, 54% of the participants changed their choice throughout the three questions. One reason could be the human cognitive bias to weight weak information, to which we have an emotional positive or negative feeling (here the humans or algorithms “bias”), higher than objective information (here the humans or algorithms accuracy) <d-cite key="Kahneman2011"></d-cite>. </p>
    
-  <h4 class="no-caps"> Participants are not consistent throughout their answers </h4>
+  <h4 id="consistent" class="no-caps"> Participants are not consistent throughout their answers </h4>
   <p> In addition to people’s preference for human or algorithmic judgement, the survey also asked a more high-level question (see <a href="#questionnaire-target-0">this question</a>) regarding whether it is fair to use “a system that uses data and statistics” in the super figure setting. To this question, 22 out of 92 participants answered a clear “no”. But when asked about whether they preferred human or algorithmic judgement, only 6 out of the 22 choose to solely trust the human. This number further decreased to 3 out of 22 when asked <a href="#questionnaire-target-2">this question</a>, where we informed participants that at some day the human was biased against one sex. Although it can be argued that this does not reflect inconsistency, depending on how the formulations are understood, it might point towards that people are easily affected by the formulation of the questions. </p> 
   <p> An actual logical inconsistency is found when people are asked to rank the three fairness criteria discussed previously. First, the participants are asked to rank the three criteria formulated as rules shown in the answer-options in <a href="#questionnaire-target-5">this  question</a> according to importance for achieving fairness. Immediately thereafter, they are asked to rank what would be the worst case of unfairness that could occur (see the<a href="#questionnaire-target-6"> question</a> below). Here, the options are formulated as cases that do not comply or contradict with one of the three criteria – all three discriminating the same sex.</p>
   
