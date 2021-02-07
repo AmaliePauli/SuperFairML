@@ -25,11 +25,30 @@
     </d-title>
    
     <d-article>
+
+      <d-contents class="toc">
+        <nav class="figcaption">
+          <h3>Contents</h3>
+          <div><a href="#prologue">Prologue</a></div>
+          <div><a href="#bias-notion">The notion of bias</a></div>
+          <div><a href="#fairness-definition">Defining fairness</a></div>
+          <ul>
+            <li><a href="#superpowers">Listing the super powers</a></li>
+            <li><a href="#dp">Demographic Parity</a></li>
+            <li><a href="#eo">Equalized Opportunity</a></li>
+            <li><a href="#pp">Predictive Parity</a></li>
+            <li><a href="#circulate">Circulate the planet</a></li>
+          </ul>
+          <div><a href="#perceived-section">Perceived algorithmic fairness</a></div>
+          <div><a href="#challenges-ahead">The challenges ahead </a></div>
+        </nav>
+      </d-contents>
+      
   <p>
    Machine learning models should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or rather, how do we ensure models to be fair and just in their outcome when they have an impact on humans — like every other superhero movie, the goal is to save humanity. This paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing results from a small survey conducted about people’s perception and comprehension of algorithmic fairness. We use 'superheroes' as an illustrative analogue for fair models and a  <a href="https://www.kaggle.com/claudiodavi/superhero-set">superhero dataset</a> from Kaggle as an example throughout the paper. The aim is to provide an overview of current work in fair machine learning and make the reader aware of trade-offs and challenges, such as to know when and how fairness in machine learning is an essential concern. The paper, therefore, uses interactive illustrations to invite the reader to take a stand and check their comprehension about fairness in algorithms.            
     </p>
    
-  <h1>Prologue</h1>
+  <h1 id="prologue">Prologue</h1>
   <h3>Please introduce us </h3>
   <p>
      ... to this new universe of fairness. Data-driven models like machine learning (ML) models are more and more applied in society <d-footnote id="ai-registry">See for example the city of <a href="https://ai.hel.fi/en/ai-register/">Helsinki's</a> and <a href="https://algoritmeregister.amsterdam.nl/en/ai-register/">Amsterdam's AI registry</a>, where they show how AI systems are used within their municipality.</d-footnote> within a range of different areas and tasks from recommender systems and web search <d-cite key="Beutel2019, Geyik2019"></d-cite>, over hiring <d-cite key=" raghavan2020mitigating, mahmoud2019performance"></d-cite> to criminal courts  <d-cite key=" dressel2018accuracy,dieterich2016compas,angwin2016machine "></d-cite> and also in health care <d-cite key="Obermeyer2019"></d-cite>. With the rise of machine learning models, there has been an increased focus of fairness and transparency within the field <d-cite key="chouldechova2020snapshot, lepri2018fair, Veale2018, mitchell2018prediction, holstein2019improving, mehrabi2019survey,selbst2019fairness"></d-cite>. Several cases of unfair algorithms have also been debated in the media. One example is a United States criminal risk assessment system, COMPAS, used in courts for parole decisions. The system assigns a risk score of recidivism, i.e. the likelihood that a person will recommit a new crime. It was discovered by ProPublica in 2016 that black people, who truly would not commit a new crime, were more likely to get wrongly assigned a higher risk score than white people, and thereby getting a lesser chance of parole <d-cite key=" angwin2016machine "></d-cite>. Another example showed an underrepresentation of women and gender stereotypes in occupations in image search <d-cite key="kay2015unequal"></d-cite>. It also became a case in the <a href="https://www.theverge.com/tldr/2015/4/9/8378745/i-see-white-people">news</a>, where the first female to appear in a Google Image search on 'CEO'  in 2015 was a barbie doll dressed in a suit appearing after several rows of white males. Other cases debated in the news are e.g. the case of racial image cropping on Twitter in 2020 <d-footnote id=”twitter”> For example shown in <a href="https://www.theguardian.com/technology/2020/sep/21/twitter-apologises-for-racist-image-cropping-algorithm"> The Guardian</a> and <a href="https://www.bbc.com/news/technology-54234822"> BBC News</a>. </d-footnote> or gender bias in recruitment <d-footnote id=”recruitment”> See articles on <a href="https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G"> Reuters</a> and <a href="https://thenextweb.com/neural/2020/12/02/study-shows-how-ai-exacerbates-recruitment-bias-against-women/">The next web</a>.</d-footnote>.  
@@ -42,17 +61,16 @@
   <p>
     … of this paper will circulate the question of what a fair model is by presenting an illustrative introduction to fairness in machine learning. The first scenes in the prologue have already introduced the theme, and from here, the storyline will take us through why bias occurs, how fairness can be defined and bias mitigated, all the way to perceived algorithmic fairness. The main contributions of this paper are two-folded. First, it summarises the current state of fairness in machine learning through a literature review presented as an interactive paper that encourages people to think about the issues and challenges with algorithmic fairness. Second, it examines through a survey people’s comprehension, self-reported understanding and perception of different fairness criteria in a superhero setting and touches upon how different formulations impact people’s opinions. </p>
   
-  <p> We will focus on explaining the following three mathematical fairness criteria: 1) Demographic Parity (DP), 2) Equalized Opportunity (EO) and 3) Predictive Parity (PP). These criteria are also used in the survey’s examination of  both comprehension and  perception of fairness. Questions from the survey will also be presented to the reader throughout the paper. The survey details are outlined further in <a href="#Appendix-A">Appendix A</a>. The infobox below summarises some brief details about the survey and introduces the interactive questions in the paper: </p>
+  <p> We will focus on explaining the following three mathematical fairness criteria: 1) Demographic Parity (DP), 2) Equalized Opportunity (EO) and 3) Predictive Parity (PP). These criteria are also used in the survey’s examination of  both comprehension and  perception of fairness. Questions from the survey will be presented to the reader throughout the paper. The survey details are outlined further in <a href="#Appendix-A">Appendix A</a> and the infobox below summarises some brief details about it and introduces the interactive questions in the paper: </p>
   <div id="survey-info" class="subgrid"></div>
   We invite you to take a stand on algorithmic fairness during the read by answering the questions. You can start with the following:
   </p>
   <div id="questionnaire-target-0" ></div>
   <p>The survey, like this paper, uses a setting about super figures as an example. We chose this fictional setting both to give a story easy to relate to and to avoid a true or realistic case to which people might be biased from the beginning, such that the essence can be algorithmic fairness in general and not focused on the actual case. The setting is formulated along the lines of a set of super figures, who can be either heroes or villains, all wanting to go to a party. They are assessed at the door, e.g. by an algorithm, since only the figures who are “believed” to be heroes are allowed in. The focal question is how to ensure that both the group of male and female figures are treated fair, as well as what fairness means in this setting. </p>
   
-  <p>Data for an example case was extracted from the<a href="https://www.kaggle.com/claudiodavi/superhero-set"> Kaggle superhero dataset</a> and used in the paper for illustrative purposes. A simple classification model was trained on the dataset to distinguish between villains and heroes where features such as superpowers, names, height and weight are used. Read more about pre-processing, feature selection and model training in <a href="#Appendix-B"> Appendix B</a>.</p>
+  <p>Data for an example case was extracted from the <a href="https://www.kaggle.com/claudiodavi/superhero-set">Kaggle superhero dataset</a> and used in the paper for illustrative purposes. A simple classification model was trained on the dataset to distinguish between villains and heroes where features such as superpowers, names, height and weight are used. Read more about pre-processing, feature selection and model training in <a href="#Appendix-B"> Appendix B</a>.</p>
   
-  <p> From hereon, the paper is divided into four main sections. The first section focuses on understanding the <a href="#bias-notion">notion of bias</a>, <a href="#fairness-definition">the second</a> describes definitions of fairness and methods to mitigate bias. The third section discusses the <a href="#perceived-section">perception of fairness</a> and highlights results from the survey. <a href="#challenges-ahead">The last section</a> sums up the remaining challenges and concludes the main points of this paper.  </p>
-   
+  <p> From hereon, the paper is divided into four main sections. The <a href="#bias-notion">first section</a> focuses on understanding the notion of bias, the <a href="#fairness-definition">second section</a> describes definitions of fairness and methods to mitigate bias. The<a href="#perceived-section"> third section</a> discusses the perception of fairness and highlights results from the survey. The <a href="#challenges-ahead">last section</a> sums up the remaining challenges and concludes the main points of this paper.  </p>
   <h1 id="bias-notion" >The notion of bias</h1>
   <h3>It is the suit</h3>
   <p>
@@ -96,7 +114,7 @@
   These two examples illustrate the challenge in defining and deciding what a fair model is. Clear definitions of biases are essential to be able to spot and identify biases in the first place — without it, it is not clear what to look for when examining systems for potential biases. Especially in the cases of representational harm, it can be hard to discover undesired model behaviour and defining a more righteous behaviour. Nevertheless, several attempts regarding identifying and removing stereotypes in word embeddings have been made, e.g. <d-cite key="bolukbasi2016man, basta2019evaluating, zhao2018learning, brunet2019understanding"></d-cite>. In <d-cite key="bolukbasi2016man"></d-cite> the authors compared occupational stereotypes in word embeddings with human perception of occupational stereotypes through an Amazon Turk survey and made an attempt to mitigate the model’s bias accordingly. However, it is not feasible to perform a perception survey for every model, so it is not a method that scales in practice. Furthermore it does not remain robust through time and cultural change, as perceptions may change.</p> 
   <p> Regarding outcome fairness, a lot of work has been conducted on formalising fairness mathematically <d-cite key="gajane2017formalizing, verma2018fairness, mitchell2018prediction"></d-cite>. In the literature over 70 different metrics have been defined, see e.g. <a href="https://aif360.mybluemix.net/">IBM’s AI Fairness 360 library</a>. In the following, we will look into mathematical fairness criteria for allocation problems and their trade-offs.  
   </p>
-  <h3> Listing the superpowers</h3>
+  <h3 id="superpowers"> Listing the superpowers</h3>
   <p>
   … of mathematical fairness. Mathematical fairness criteria with respect to classification problems, where a certain treatment or outcomes are the desired output, can be grouped together in different ways. In the following <a href="#criteria-box">box</a> we will highlight five ideas on formalizing algorithmic fairness partly based on <d-cite key=" gajane2017formalizing, verma2018fairness, mitchell2018prediction, mehrabi2019survey"></d-cite>:
   </p>
@@ -119,7 +137,7 @@
     </ul>
   </p>
   
-  <h4 class="no-caps">Demographic Parity</h4>
+  <h4 id="dp" class="no-caps">Demographic Parity</h4>
   <p>Demographic Parity (DP) also called group fairness or statistical parity <d-cite key="dwork2012fairness, zliobaite2015, verma2018fairness"></d-cite> incorporates the idea that non-discrimination between groups is achieved when the chance of getting a positive outcome is equalized acrossed groups. Given a binary classification task and two groups this can mathematically be formalized as: </p>
   <d-math block="">
   P(\hat{Y} |G=0)=P(\hat{Y} |G=1).
@@ -142,7 +160,7 @@
    
   <div id="interactive-dp" ></div>
    
-  <h4 class="no-caps"> Equalized Opportunity </h4>
+  <h4 id="eo" class="no-caps"> Equalized Opportunity </h4>
   <p>Equalized Opportunity (EO) and Equalized Odds is proposed by Hardt et al. <d-cite key="hardt2016equality"></d-cite> as an alternative to Demographic Parity. The idea behind Equalized Opportunity is that people who in fact should receive a positive outcome have an equal chance of receiving it independent of their group membership. It is a relaxation of the Equalized Odds criteria, which can be formalized for a binary predictor and in the case of binary group membership as, </p>
   <d-math block="">
   P(\hat{Y} =1|Y=y,G=0)=P(\hat{Y}=1 |Y=y,G=1).
@@ -160,7 +178,7 @@
   
   <div id="interactive-eq" ></div>
   
-  <h4 class="no-caps"> Predictive Parity </h4>
+  <h4 id="pp" class="no-caps"> Predictive Parity </h4>
   <p>
   Predictive Parity (PP), also described as outcome test, is a statistical measure which requires that the probability of a correct prediction of the positive class is the same for all groups <d-cite key="chouldechova2017fair"></d-cite>. For a binary predictor it can be defined as </p>
   <d-math block="">
@@ -179,7 +197,7 @@
   <div id="interactive-pp" ></div>
   
    
-  <h3> The hero’s path</h3>
+  <h3> The hero's path</h3>
   <p>
   … is not going to be easy. In the previous section, we saw that it is not possible to simultaneously achieve Demographic Parity, Equalized Opportunity and Predictive Parity in the super figure example, unless we almost let no one into the club. This is not a special case. It is proven that, except in trivial cases, many common known notions of fairness are incompatible with each other and furthermore conflict with optimising accuracy <d-cite key=" kleinberg2016inherent, chouldechova2017fair "></d-cite>. </p> 
   <p> Others criticize that the statistical approach only gives guarantees for the average of a group and not for individuals or even <i>subgroups</i> <d-cite key=" kearns2018preventing "></d-cite>. Imagine a case where we only accept female figures from the DC Comics and males from the Marvel universe. Here, we could set up the scenario such that we comply with a fairness criterion for females versus males and DC figures versus Marvel figures, but without having a fair treatment for males from DC Comics or females from the Marvel universe. This problem is showcased by <d-cite key=" kearns2018preventing "></d-cite> both in form of a toy example and in the form of a real case. The authors suggest a framework to learn a fair classifier for a rich set of subgroups to alleviate the problem. However, it does not overcome the fact that a division of people into groups is required. </p> 
@@ -188,7 +206,7 @@
   <p>Despite its caveats, the strength of statistical measures of fairness is the ease of computing them and if applicable, they are also easy to achieve, e.g. by adjusting the classifier’s threshold. Both the verification and adjustment do not require assumptions of the data, in contrast to for example individual and counterfactual fairness. However, choosing and interpreting any disparity metric requires understanding the bias occurrence and a discussion of whether an adjustment of the model to meet the parity is the desired outcome. </p>
    <p>  We will return to the three statistical metrics in the section  <a href="#perceived-section">Perceived Algorithmic Fairness </a> to examine how people perceive them and investigate people’s comprehension based on the survey results. But first, let us look at methods for mitigating biases. </p>
   <h3>Circulate the planet</h3>
-  <p>… to defend the it with all our superhero powers. Until now this paper has listed <a href="#criteria-box">different ways of defining fairness</a> and especially, there has been a focus on statistical measures in the form of three parity metrics. But now it is time to show the weapons for mitigating and monitoring biases. In the <a href="#ml-cycle">interactive diagram below</a>, we illustrate the life-cycle of a machine learning system with its different phases and highlight methods to intervene or mitigate biases, which is revealed when clicking on a phase. A similar approach was presented by Suresh and Guttag, where they assign six types of biases and their mitigation approaches to different phases in the ML life-cycle <d-cite key="Suresh2019"></d-cite> or Bellamy et al. where algorithms are divided into pre-, in- and postprocessing algorithms <d-cite key="bellamy2018ai"></d-cite>. Mehrabi et al. also present a review of different mitigation approaches <d-cite key="mehrabi2019survey"></d-cite> and Friedler et al. provide a comparison <d-cite key="friedler2019comparative"></d-cite>. Note, that the typical life-cycle is circular and even though a system is in production, i.e. in the “Model Monitoring'' phase, it might be necessary to revisit other phases to deal with unwanted behaviour or model drift. 
+  <p>… to defend it with all our superhero powers. Until now this paper has listed <a href="#criteria-box">different ways of defining fairness</a> and especially, there has been a focus on statistical measures in the form of three parity metrics. But now it is time to show the weapons for mitigating and monitoring biases. In the <a href="#ml-cycle">interactive diagram below</a>, we illustrate the life-cycle of a machine learning system with its different phases and highlight methods to intervene or mitigate biases, which is revealed when clicking on a phase. A similar approach was presented by Suresh and Guttag, where they assign six types of biases and their mitigation approaches to different phases in the ML life-cycle <d-cite key="Suresh2019"></d-cite> or Bellamy et al. where algorithms are divided into pre-, in- and postprocessing algorithms <d-cite key="bellamy2018ai"></d-cite>. Mehrabi et al. also present a review of different mitigation approaches <d-cite key="mehrabi2019survey"></d-cite> and Friedler et al. provide a comparison <d-cite key="friedler2019comparative"></d-cite>. Note, that the typical life-cycle is circular and even though a system is in production, i.e. in the “Model Monitoring'' phase, it might be necessary to revisit other phases to deal with unwanted behaviour or model drift. 
   </p>
   <div id="ml-cycle" class="subgrid"></div>
   <p>
@@ -280,7 +298,7 @@
   <div id="questionnaire-target-6" ></div>
   
   <h3 id="survey_results">What just happened?</h3>
-  <p>... We all know the feeling of missing some point in Marvel’s The Infinity Saga, so let us take a recap. Based on the survey results, we can conclude that people prefer the criterion Equalized Opportunity in the super figure setting. But even though this might seem like a concrete answer to the question of fairness, it still does not seem to satisfy it completely. More generally, the survey results point towards people being sensitive to formulations of fairness and unfairness, and in some questions even to a degree that demonstrates inconsistency in their answers. In addition, the survey results did not prove a statistical significance in the association between people's self-reported understanding and their comprehension measured through their answers to comprehension questions. In summary, the results point to the need of being careful in the debate about fairness, since formulations and wrongly estimated self-understanding may skew it.  </p>
+  <p>... we all know the feeling of missing some point in Marvel’s The Infinity Saga, so let us take a recap. Based on the survey results, we can conclude that people prefer the criterion Equalized Opportunity in the super figure setting. But even though this might seem like a concrete answer to the question of fairness, it still does not seem to satisfy it completely. More generally, the survey results point towards people being sensitive to formulations of fairness and unfairness, and in some questions even to a degree that demonstrates inconsistency in their answers. In addition, the survey results did not prove a statistical significance in the association between people's self-reported understanding and their comprehension measured through their answers to comprehension questions. In summary, the results point to the need of being careful in the debate about fairness, since formulations and wrongly estimated self-understanding may skew it.  </p>
   
   <h1 id="challenges-ahead">The challenges ahead </h1>
   <h3>Leaving the superhero universe</h3>
@@ -292,7 +310,7 @@
   
   <h3> To be continued </h3>
   <p>
-  … as every movie must come to an end so does our article. We have provided an overview of different ways to evaluate and define algorithmic fairness and bias, as well as different methods of mitigating bias throughout the ML life-cycle. We then discussed challenges with the currently proposed approaches with respect to people’s comprehension and perception, and application of fairness mitigating methods in practice. As seen in the previous <a href="#challenges-ahead">section</a>, the work on algorithmic fairness is far from done. We, therefore, expect more work on algorithmic fairness in the future and hope that this article will inspire new research in the field. Like it is with superhero movies, the next one is usually already waiting around the corner.
+  … as every movie must come to an end so does our article. We have provided an overview of different ways to evaluate and define algorithmic fairness and bias, as well as different methods of mitigating bias throughout the ML life-cycle. We then discussed challenges with the currently proposed approaches with respect to people’s comprehension and perception, and application of fairness mitigating methods in practice. As discussed in the previous <a href="#challenges-ahead">section</a>, the work on algorithmic fairness is far from done. We, therefore, expect more work on algorithmic fairness in the future and hope that this article will inspire new research in the field. Like it is with superhero movies, the next one is usually already waiting around the corner.
   </p>
   
   
@@ -306,21 +324,17 @@
 <d-appendix>
   <h3>Acknowledgments</h3>
   <p>
-    We are deeply grateful to Marie Rørdam Fenger for believing in and supporting us in this work. We would also like to thank Anders Ringsborg Hansen for his work on the article's interactive questions. For help with the survey in the form of feedback or distribution, we would like to thank Kasper Fænø Bay Noer, Julie Rasmussen, Kristian Tølbøl Sørensen, Mads Schaarup Andersen, Bente Larsen and Lisa Lorentzen. We are indeed also thankful to all the people who took the time to participate in the survey.   </p>
+    We are grateful to Marie Rørdam Fenger for believing in and supporting us in this work. We would also like to thank Anders Ringsborg Hansen for his work on the article's interactive questions. For help with the survey in the form of feedback or distribution, we would like to thank Kasper Fænø Bay Noer, Julie Rasmussen, Kristian Tølbøl Sørensen, Mads Schaarup Andersen, Bente Larsen and Lisa Lorentzen. We are indeed also thankful to all the people who took the time to participate in the survey.   </p>
 
   <p>This research is partly supported by a performance contract allocated to the Alexandra Insitute by the Danish Ministry of Higher Education and Science. </p>
 
   <p>
-    The <a href="#criteria-box">interactive box listing fairness definitions </a> is inspirated and based on this <a href="https://github.com/distillpub/post--communicating-with-interactive-articles">distil article</a>. 
+    The <a href="#criteria-box">interactive box listing fairness definitions </a> is inspirated and based on this <a href="https://github.com/distillpub/post--communicating-with-interactive-articles">distill article</a>. 
   </p>
 
   <h3>Author Contributions</h3>
   <p>
     Both authors contributed equally.
-  </p>
-
-  <p>
-    <b>Writing & Diagrams:</b> The text was initially drafted by...
   </p>
 
   <h3  id="Appendix-A">Appendix A: The survey</h3>
