@@ -42,7 +42,7 @@
       id: "deploy",
       title: "5. Model implementation",
       text: `Before implementing a trained model a potential bias can be mitigated through post-processing steps,
-      e.g. by adjusting the output labels by optimizing after a defined metric
+      e.g. by adjusting the output labels by optimising after a defined metric
       <d-cite key="hardt2016equality, Woodworth2017, Pleiss2017, kim2018fairness"></d-cite>. In addition, one should be aware of a
       so-called deployment bias when the model is used differently from its intended use
       case <d-cite key="Suresh2019"></d-cite>.`,

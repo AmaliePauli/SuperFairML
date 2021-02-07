@@ -20,7 +20,7 @@
   grid-row-gap: inherit;
 }
 
-h4no-caps {
+h4.no-caps {
   font-weight: bold;
   text-transform: none;
   font-size: 1.06rem;
