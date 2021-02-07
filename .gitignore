@@ -65,3 +65,7 @@ typings/
 
 # notebook checkpoints
 */.ipynb_checkpoints
+
+# survey files
+survey.html
+survey_files/
