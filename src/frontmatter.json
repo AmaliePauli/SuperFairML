@@ -4,8 +4,13 @@
 	"password": "prove",
 	"authors": [
 		{
-			"author": "Amalie Broggaard Pauli, Niklas Kasenburg",
-			"affiliation": "The Alexandra Institute, The Alexandra Institute",
+			"author": "Amalie Broggaard Pauli",
+			"affiliation": "The Alexandra Institute",
+			"affiliationURL": "https://alexandra.dk/about-the-alexandra-institute/"
+		},
+		{
+			"author": "Niklas Kasenburg",
+			"affiliation": "The Alexandra Institute",
 			"affiliationURL": "https://alexandra.dk/about-the-alexandra-institute/"
 		}
 	],
