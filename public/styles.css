@@ -7,6 +7,8 @@
   --second-color-weak:#cbdef3;
   --second-color-bg:#edf5ff;
   --second-color-button-hover:#7abaff;
+  --box-color: hsl(0, 0%, 97%);
+  --box-border: hsla(0, 0%, 0%, 0.1);
 }
 
 .subgrid {
@@ -16,6 +18,12 @@
   grid-template-rows: inherit;
   grid-column-gap: inherit;
   grid-row-gap: inherit;
+}
+
+h4.no-caps {
+  font-weight: bold;
+  text-transform: none;
+  font-size: 1.06rem;
 }
 
 d-figure.base-grid {
@@ -76,4 +84,78 @@ d-figure > figure {
   content: "";
   clear: both;
   display: table;
+}
+
+
+/* table of contents */
+
+@media (min-width: 1000px) {
+  d-contents.toc {
+    justify-self: end;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding-right: 3em;
+    padding-left: 1em;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 1000px) {
+  d-contents.toc {
+    align-self: start;
+    justify-self: start;
+    grid-column: page;
+    padding-right: 0;
+    margin-bottom: 2em;
+    padding-left: 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+d-contents nav h3 {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+d-contents nav a {
+  color: rgba(0, 0, 0, 0.8);
+  border-bottom: none;
+  text-decoration: none;
+}
+
+d-contents li {
+  list-style-type: none;
+}
+
+d-contents ul {
+  padding-left: 1em;
+}
+
+d-contents nav ul li {
+  margin-bottom: 0.25em;
+}
+
+d-contents nav a:hover {
+  text-decoration: underline solid black;
+}
+
+d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+d-contents nav > div {
+  display: block;
+  outline: none;
+  margin-bottom: 0.5em;
+}
+
+d-contents nav > div > a {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+d-contents nav > div > a:hover, d-contents nav > ul > li > a:hover {
+  text-decoration: none;
 }
