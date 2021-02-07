@@ -26,7 +26,7 @@
   var onClick = function(event) {
     let cur_id = event.target.id;
     for (var id in clicked) {
-      if (id === cur_id) {
+      if (id === cur_id && !clicked[id]) { 
         clicked[id] = true;
         text[id] = full_text[id];
       }
