@@ -105,7 +105,7 @@
       the reader to test her own understanding and to build her own opinion of different issues regarding fair ML.
       There are two types of questions: 1) Opinion questions and 2) Comprehension questions.
       The opinion questions ask the reader about his opinion, while the comprehension questions check the reader's
-      understanding of different fairness definitions. Both types are shown below with dummy examples.
+      understanding of different fairness definitions. Both types are shown below with examples.
       Once an answer is chosen, the percentage of survey participants is revealed for each option. For the comprehension questions,
       wrong answers are marked in grey and an explanation for the correct answer is shown.
     </p>
