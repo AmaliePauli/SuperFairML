@@ -126,7 +126,7 @@ $: percs = {
 // Decimal number in next line decides what difference is considered as reaching the fairness criteria
 // Remember to put preserveAspectRatio="none" into the svg file (to level svg tag)
 $: icons = choose_icons(percs,
-  {"up": "../../images/superhero_hands_up.svg", "down": "../../images/superhero_hands_down.svg"},
+  {"up": "images/superhero_hands_up.svg", "down": "images/superhero_hands_down.svg"},
   0.03
 );
 

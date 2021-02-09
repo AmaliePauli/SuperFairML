@@ -181,7 +181,7 @@
     height: 114px;
     background-size: auto auto;
     border: none;
-    background: url(../../images/circle.svg);
+    background: url(images/circle.svg);
     background-repeat: no-repeat;
   }
   @media(max-width: 256px) {
