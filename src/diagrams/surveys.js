@@ -13,7 +13,7 @@ export const questions = [
         percentage: 24
       },
       {
-        answer: "Maybe. It depends mostly on the risk to other people if not using this information from system.",
+        answer: "Maybe. It depends mostly on the risk to other people if not using this information from the system.",
         percentage: 13
       },
       {
@@ -139,7 +139,7 @@ export const questions = [
     question: "Which of the following statements do you find most important to achieve fairness in the play setting about super figures wanting to go to a party?",
     answers: [
       {
-        answer: "The chance of getting accepted to the party should be the same for both males and of females.",
+        answer: "The chance of getting accepted to the party should be the same for both males and females.",
         percentage: 15
       },
       {
