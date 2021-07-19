@@ -47,8 +47,8 @@
       </d-contents>
 
  <p>
-  Machine learning models should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or rather, how do we ensure models to be fair and just in their outcome when they have an impact on humans — like every other superhero movie, the goal is to save humanity. This paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing results from a small survey conducted about people’s perception and comprehension of algorithmic fairness. We use 'superheroes' as an illustrative analogue for fair models and uses interactive illustrations to invite the reader to take a stand and check their comprehension about fairness in algorithms. 
-  </p>  
+  Machine learning models should ideally be perceived more as righteous superheroes than as unjust villains. But how do we ensure that our models are being classified and represented as such? Or rather, how do we ensure models to be fair and just in their outcome when they have an impact on humans — like every other superhero movie, the goal is to save humanity. This paper gives a broad introduction to the concepts, aspects and challenges of fair machine learning, as well as discussing results from a small survey conducted about people’s perception and comprehension of algorithmic fairness. We use 'superheroes' as an illustrative analogue for fair models. Through interactive illustrations we invite the reader to take a stand and check their comprehension about fairness in algorithms. 
+  </p>
   <h1 id="prologue">Prologue</h1>
   <h3>Please introduce us </h3>
   <p>
@@ -69,7 +69,7 @@
   <p>Data for an example case was extracted from the <a href="https://www.kaggle.com/claudiodavi/superhero-set">Kaggle superhero dataset</a> and used in the paper for illustrative purposes. A simple classification model was trained on the dataset to distinguish between villains and heroes where features such as superpowers, names, height and weight are used. Read more about pre-processing, feature selection and model training in <a href="#Appendix-B"> Appendix B</a>.</p>
 
   <p> From hereon, the paper is divided into four main sections. The <a href="#bias-notion">first section</a> focuses on understanding the notion of bias, the <a href="#fairness-definition">second section</a> describes definitions of fairness and methods to mitigate bias. The<a href="#perceived-section"> third section</a> discusses the perception of fairness and highlights results from the survey. The <a href="#challenges-ahead">last section</a> sums up the remaining challenges and concludes the main points of this paper.  </p>
-  
+
   <h1 id="bias-notion" >The notion of bias</h1>
   <h3>It is the suit</h3>
   <p>
@@ -269,7 +269,7 @@
 
 
 
-  
+
   <h3>Superheroes live in a multiverse</h3>
   <p>
   … and so it seems to be the case with algorithmic fairness. Instead of only looking at which statistical measure is perceived as most fair, we need to broaden our understanding of the fairness universe. As we discussed earlier, bias can be introduced when interacting with the system, and hence the interaction with the system can in turn also affect the perceived fairness of the system. In general, there seems to be more to fairness than mathematical formulations, e.g. <d-cite key=" lee2019procedural , grgic2018beyond, grgic2018human, grgic2016case, wang2020factors, saxena2019fairness "></d-cite>. For example, Grgić-Hlača et al. <d-cite key="grgic2018beyond, grgic2018human, grgic2016case"></d-cite> suggest shifting the focus from looking at distributive fairness to <i> procedural fairness</i>, which instead of looking at the outcome focusses on the process that leads to an outcome. They operationalise a part of the idea by examining which input features people perceive as fair when used in different scenarios. In our super figure example, we could easily imagine that this has a great impact on what is perceived as fair. Here, it is probably perceived fair to look at superpowers, since we do not want a dangerous cocktail. However, <i>weight</i> and <i>height</i> would seem less relevant and therefore perceived as discriminating to use, despite the fact that it could increase the model's accuracy. The study of Wang et al.   <d-cite key="wang2020factors"></d-cite> also consider the development procedure. They examined how different factors affected the perceptions of fairness such as development procedure, the outcome for the individual and bias at a group level.  They found that people are more sensitive to getting a favoured outcome themselves than weighting bias against a group. From Saxena et al. <d-cite key="saxena2019fairness"></d-cite> it sems that historical bias could influence perception. To sum up, group bias in a model, development procedure, personal position, historical influence - all sems to be some of the factors that influence the perception of fairness in a system. In addition, the survey of this paper looks upon how actual <i> formulations</i>  may impact opinions about fairness. In the next section, we will discuss some of the results from the survey which looks at some of the other factors then statistical measures which may impact fairness perception. </p>
