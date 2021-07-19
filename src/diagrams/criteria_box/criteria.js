@@ -57,7 +57,7 @@ export const criteriaData = [
         },
         {
           "title": "Fairness and machine learning, Chapter 2",
-          "caption": `Chapter 2 about classification of the fairness and machine learning book
+          "caption": `Chapter 2 about classification in the fairness and machine learning book
           <d-cite key='barocas-hardt-narayanan'></d-cite>.`,
           "url": "https://fairmlbook.org/classification.html",
           "image": "fairmlbook.png",
@@ -73,7 +73,7 @@ export const criteriaData = [
       the outcome of the classifier should be the same regardless of whether you are male or female.
       However, the main shortcoming of this approach is the non-trivial question of defining a similarity measure between
       individuals <d-cite key='chouldechova2020snapshot, kim2018fairness'></d-cite>. Take the example of how to compare
-      years of superhero experience with the diploma from a superhero academy? Work has been done to try to relax the
+      years of superhero experience with the diploma from a superhero academy. Work has been done to try to relax the
       criterion, e.g. by looking at subpopulations <d-cite key='kim2018fairness'></d-cite> or to ensure that a randomly
       picked pair of individuals receive the same outcome if they are similar <d-cite key='GalYona2018'></d-cite>.
       Others define similarity based on a learned latent space in which individuals are compared
@@ -230,7 +230,7 @@ export const criteriaData = [
       description: `<p> Another approach to detecting possible biases is to compare model explanations, like feature attributions,
       for different groups. The framework SHAP <d-cite key='lundberg2017unified'></d-cite> uses Shapley values to measure the marginal
       contribution of a feature’s impact on a prediction. This can be used to decompose the differences in a statistical fairness
-      measure down to input features to understand better what generates the differences <d-cite key='lundberg2020blog'></d-cite>.
+      measure for each input feature, and thereby understand better what generates the differences <d-cite key='lundberg2020blog'></d-cite>.
       It can also be used to detect if a model fits on the protected attribute for a group by looking at a “global” contribution on a
       test dataset <d-cite key='cesaro2019measuring'></d-cite>. Hickey et al. <d-cite key='hickey2020fairness'></d-cite> further suggest
       a training algorithm for mitigating potential bias using feature attributions. Note, this idea about accessing fairness by examining
