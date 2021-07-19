@@ -45,7 +45,7 @@
       e.g. by adjusting the output labels by optimising after a defined metric
       <d-cite key="hardt2016equality, Woodworth2017, Pleiss2017, kim2018fairness"></d-cite>. In addition, one should be aware of a
       so-called deployment bias when the model is used differently from its intended use
-      case <d-cite key="Suresh2019"></d-cite>.`,
+      case <nobr><d-cite key="Suresh2019"></d-cite>.</nobr>`,
     },
     {
       id: "monitoring",
