@@ -25,7 +25,7 @@
       <d-cite key="Zhang2018, Lahoti2020"></d-cite>, fairness specific regularization techniques
       <d-cite key="Kamishima2012, Berk2017, hickey2020fairness, Stefano2020"></d-cite>, a modified hyperparameter tuning
       <d-cite key="Perrone2020"></d-cite>, reformulating the optimization problem
-      <d-cite key="dwork2012fairness, Woodworth2017, GalYona2018, Nabi2018, Agarwal2018a, Goel2018, kearns2018preventing, Jung2019, Zafar2019, Kim2019, Ruoss2020"></d-cite> or
+      <d-cite key="dwork2012fairness, Woodworth2017, GalYona2018, Nabi2018, Agarwal2018a, Goel2018, kearns2018preventing, Jung2019, Zafar2019, Kim2019, Ruoss2020, wang2021fair"></d-cite> or
       re-weighting of data points during training <d-cite key="Amini2019"></d-cite>.`,
     },
     {
