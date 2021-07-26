@@ -11,13 +11,15 @@ export const criteriaData = [
       and wrongly predicted positive and negative examples are written in a so-called <a href="#confusion-matrix">confusion matrix</a>.
       Using terms derived from the confusion matrix, different metrics can be calculated with the aim of achieving fairness between groups,
       e.g. separated by race or gender. The requirements for fairness with such statistical measures is to (approximately) achieve a
-      parity, i.e. equality, between groups for a defined measure. We will look at different metrics in more detail
+      parity, i.e. equality, between groups for a defined measure. Using statistical parity as fairness criterium has been discussed with respect
+      to the moral justification <d-cite key="hertweck2021moral"></d-cite> and other factors <d-cite key="raz2021group"></d-cite>.
+      We will look at different metrics in more detail
       <a href='#fairness-criteria'>in the next section</a>. </p>`,
 
       examples: [
         {
           name: "Demographic Parity",
-          references: ["dwork2012fairness", "zliobaite2015","raz2021group", "hertweck2021moral"],
+          references: ["dwork2012fairness", "zliobaite2015"],
         },
         {
           name: "Equalized Opportunities",
@@ -173,8 +175,8 @@ export const criteriaData = [
       the relations between attributes, such that we know how the other attributes would change with regard to the “gender swap”.
       For example, property attributes such as <i>weight</i> and <i>height</i> should be adjusted for a male version. <br>
       The idea of causal fairness was later extended to distinguish between fair and unfair pathways of the sensitive attribute in
-      the causal graph <d-cite key='Kilbertus2017, Nabi2018, Chiappa2019'></d-cite>. In some decision scenarios e.g. in risk assessment, 
-      it might be relevant to look at the counterfactual decision instead of the counterfactual sensitive attributes 
+      the causal graph <d-cite key='Kilbertus2017, Nabi2018, Chiappa2019'></d-cite>. In some decision scenarios e.g. in risk assessment,
+      it might be relevant to look at the counterfactual decision instead of the counterfactual sensitive attributes
       <d-cite key='coston2020counterfactual, mishler2021fairness'></d-cite>.
        For example, by investigating what would have happened to a super figure if she was invited to the party. The main problem of counterfactual fairness is
       that it is not necessarily easy to accurately build a causal model or to well define the counterfactual setting
