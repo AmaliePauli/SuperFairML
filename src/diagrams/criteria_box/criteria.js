@@ -17,7 +17,7 @@ export const criteriaData = [
       examples: [
         {
           name: "Demographic Parity",
-          references: ["dwork2012fairness", "zliobaite2015"],
+          references: ["dwork2012fairness", "zliobaite2015","raz2021group", "hertweck2021moral"],
         },
         {
           name: "Equalized Opportunities",
