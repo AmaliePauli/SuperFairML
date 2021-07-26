@@ -173,7 +173,10 @@ export const criteriaData = [
       the relations between attributes, such that we know how the other attributes would change with regard to the “gender swap”.
       For example, property attributes such as <i>weight</i> and <i>height</i> should be adjusted for a male version. <br>
       The idea of causal fairness was later extended to distinguish between fair and unfair pathways of the sensitive attribute in
-      the causal graph <d-cite key='Kilbertus2017, Nabi2018, Chiappa2019'></d-cite>. The main problem of counterfactual fairness is
+      the causal graph <d-cite key='Kilbertus2017, Nabi2018, Chiappa2019'></d-cite>. In some decision scenarios e.g. in risk assessment, 
+      it might be relevant to look at the counterfactual decision instead of the counterfactual sensitive attributes 
+      <d-cite key='coston2020counterfactual, mishler2021fairness'></d-cite>.
+       For example, by investigating what would have happened to a super figure if she was invited to the party. The main problem of counterfactual fairness is
       that it is not necessarily easy to accurately build a causal model or to well define the counterfactual setting
       <d-cite key='mitchell2018prediction, KohlerHausmann2019'></d-cite>. Lastly, counterfactual reasoning can lead to types of biases,
       e.g. wrong evaluation of the model's decision when outcomes are already known <d-cite key='gajane2017formalizing'></d-cite>. </p>`,
@@ -206,6 +209,10 @@ export const criteriaData = [
         {
           name: "Controlled Direct Effect",
           references: ["Stefano2020"],
+        },
+        {
+          name: "Counterfactual Equalized Odds",
+          references: ["mishler2021fairness"],
         },
       ],
       resources: [
